@@ -1,4 +1,4 @@
-// Deep Cut Hoops — prompt + answer database
+// Tipoff Trivia — prompt + answer database
 // Each prompt: id, d (easy|medium|hard), q (question), p (true = people, enables last-name matching),
 // t: five tiers [Layup 10, Mid-Range 30, Three Ball 60, Deep Cut 85, Half Court 100].
 // RULE: Half Court (last tier) holds exactly ONE super-niche answer per prompt.
