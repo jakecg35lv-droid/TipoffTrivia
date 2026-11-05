@@ -447,7 +447,7 @@ main{max-width:var(--w-max);margin:0 auto;padding:var(--s6) var(--s4) var(--s8)}
    ===================================================================== */
 dialog{border:0;padding:0;background:transparent;color:var(--c-text);max-width:min(560px,calc(100vw - 32px));width:100%}
 dialog::backdrop{background:rgba(3,5,10,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-dialog[open] .card{animation:dlgIn .35s var(--ease)}
+dialog[open]{animation:dlgIn .35s var(--ease)}
 @keyframes dlgIn{from{opacity:0;transform:translateY(16px) scale(.98)}}
 .dlg{padding:var(--s6);box-shadow:var(--sh-3)}
 .dlg-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--s4)}
@@ -769,7 +769,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
   <p class="lb-note">A global leaderboard needs an online backend. These rankings only include games played in this browser.</p>
 </main>
 
-<footer class="site"><span>Tipoff Trivia · from the makers of <a href="https://app.tipofffantasy.com" style="color:var(--c-brand-tag);text-decoration:none">Tipoff Fantasy</a></span><span>Answer tiers hand-curated · Not affiliated with the NCAA</span></footer>
+<footer class="site"><span>Tipoff Trivia · from the makers of <a href="https://tipofffantasy.com" style="color:var(--c-brand-tag);text-decoration:none">Tipoff Fantasy</a></span><span>Answer tiers hand-curated · Not affiliated with the NCAA</span></footer>
 
 <nav class="bottomnav" aria-label="Primary">
   <button data-nav="home"><svg class="i"><use href="#i-home"/></svg>Home</button>
