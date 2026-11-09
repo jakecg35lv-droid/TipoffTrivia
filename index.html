@@ -56,8 +56,10 @@
   /* type */
   --f-display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
   --f-body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --fs-xs:11.5px; --fs-sm:13.5px; --fs-md:15.5px; --fs-lg:18px; --fs-xl:22px;
-  --fs-2xl:36px; --fs-3xl:56px; --fs-hero:clamp(56px,8.4vw,104px); --fs-score:clamp(104px,18vw,150px);
+  /* type scale: 12 / 14 / 16 / 18 / 22 / 28 / 40 / hero / score */
+  --fs-xs:12px; --fs-sm:14px; --fs-md:16px; --fs-lg:18px; --fs-xl:22px;
+  --fs-2xl:28px; --fs-3xl:40px; --fs-hero:clamp(48px,6.4vw,84px); --fs-score:clamp(88px,13vw,124px);
+  --lh-tight:1.15; --lh-body:1.55;
 
   /* space (4pt scale) */
   --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s7:32px; --s8:48px; --s9:64px;
@@ -88,7 +90,6 @@
    ===================================================================== */
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0}
-html{scroll-behavior:smooth}
 body{
   background:var(--c-bg);color:var(--c-text);font-family:var(--f-body);font-size:var(--fs-md);line-height:1.5;
   min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;
@@ -110,10 +111,11 @@ a{color:inherit}
 svg.i{width:20px;height:20px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* type helpers */
-.display{font-family:var(--f-display);font-weight:900;letter-spacing:.4px;line-height:.9;text-transform:uppercase}
-.eyebrow{font-size:12px;font-weight:700;letter-spacing:.91px;text-transform:uppercase;color:var(--c-text-3)}
+.display{font-family:var(--f-display);font-weight:800;letter-spacing:.01em;line-height:.92;text-transform:uppercase}
+.card-title{margin:2px 0 0;font-family:var(--f-display);font-weight:800;font-size:24px;line-height:1;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap}
+.eyebrow{font-size:var(--fs-xs);font-weight:700;letter-spacing:.08em;line-height:1.2;text-transform:uppercase;color:var(--c-text-3)}
 .tagline{font-size:13px;font-weight:500;letter-spacing:3.64px;text-transform:uppercase;color:rgba(242,107,33,.75)}
-.num{font-family:var(--f-display);font-weight:900;font-variant-numeric:tabular-nums;line-height:.95;letter-spacing:.3px}
+.num{font-family:var(--f-display);font-weight:800;font-variant-numeric:tabular-nums;line-height:.95;letter-spacing:.01em}
 .k1{color:var(--t1)}.k2{color:var(--t2)}.k3{color:var(--t3)}.k4{color:var(--t4)}.k5{color:var(--t5)}
 .b1{background:var(--t1)}.b2{background:var(--t2)}.b3{background:var(--t3)}.b4{background:var(--t4)}.b5{background:var(--t5)}
 .g1{background:rgba(179,187,214,.13);color:var(--t1)}.g2{background:rgba(74,168,255,.14);color:var(--t2)}
@@ -124,27 +126,40 @@ svg.i{width:20px;height:20px;flex:none;stroke:currentColor;fill:none;stroke-widt
    COMPONENTS
    ===================================================================== */
 .card{border-color:var(--c-card-line)!important;background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01)),rgba(12,27,46,.88);border:1px solid var(--c-line);border-radius:var(--r-lg);box-shadow:var(--sh-2)}
+/* Buttons — one system: sizes sm 36 / md 44 / lg 52; variants primary / secondary / ghost */
 .btn{
-  font-family:var(--f-body);
-  display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);
-  height:52px;padding:0 var(--s7);border-radius:var(--r-sm);
-  font-weight:700;font-size:16px;letter-spacing:.32px;white-space:nowrap;
-  transition:transform var(--dur-1) var(--ease), filter var(--dur-1), background var(--dur-1), border-color var(--dur-1), box-shadow var(--dur-2);
+  --btn-h:44px;
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:var(--btn-h);padding:0 18px;border-radius:10px;border:1px solid transparent;
+  font-family:var(--f-body);font-size:15px;font-weight:600;letter-spacing:-.005em;line-height:1;white-space:nowrap;
+  cursor:pointer;user-select:none;-webkit-user-select:none;text-decoration:none;
+  transition:background-color .15s ease,border-color .15s ease,color .15s ease,box-shadow .2s ease,transform .12s ease;
 }
-.btn:active{transform:translateY(1px) scale(.985)}
+.btn .i{width:18px;height:18px;stroke-width:2.2}
+.btn:focus{outline:none}
+.btn:focus-visible{box-shadow:0 0 0 3px rgba(242,107,33,.45)}
+.btn:active{transform:translateY(1px)}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.btn-sm{--btn-h:36px;padding:0 12px;font-size:14px;border-radius:8px}
+.btn-lg{--btn-h:52px;padding:0 24px;font-size:16px;border-radius:12px}
 .btn-block{width:100%}
-.btn-lg{height:60px;font-size:var(--fs-lg);padding:0 var(--s7)}
-.btn-primary{background:var(--grad-primary);color:#fff;box-shadow:var(--sh-brand)}
-.btn-primary:hover{filter:brightness(1.06);box-shadow:0 6px 24px rgba(242,107,33,.4)}
-.btn-secondary{background:transparent;border:1px solid var(--c-line-2);color:var(--c-text-2);font-weight:600;letter-spacing:.64px}
-.btn-secondary:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.2);color:var(--c-text)}
-.btn-ghost{color:var(--c-text-2);height:44px;padding:0 var(--s3)}
-.btn-ghost:hover{color:var(--c-text);background:rgba(255,255,255,.04)}
-.btn .arrow{transition:transform var(--dur-2) var(--ease)}
-.btn:hover .arrow{transform:translateX(3px)}
+.btn-primary{
+  color:#fff;background:linear-gradient(180deg,#f57b35 0%,#ee6415 100%);border-color:#e05a0d;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 1px 2px rgba(0,0,0,.35),0 8px 20px -10px rgba(242,107,33,.7);
+}
+.btn-primary:hover{background:linear-gradient(180deg,#f8874a 0%,#f06c1f 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 1px 2px rgba(0,0,0,.35),0 10px 24px -10px rgba(242,107,33,.85)}
+.btn-primary:active{background:#e05a0d;box-shadow:inset 0 2px 4px rgba(0,0,0,.25)}
+.btn-primary:focus-visible{box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 0 3px rgba(242,107,33,.45)}
+.btn-secondary{color:var(--c-text);background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)}
+.btn-secondary:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+.btn-secondary:active{background:rgba(255,255,255,.06)}
+.btn-ghost{color:var(--c-text-2);background:transparent}
+.btn-ghost:hover{color:var(--c-text);background:rgba(255,255,255,.06)}
+.btn .arrow{transition:transform .2s var(--ease)}
+.btn:hover .arrow{transform:translateX(2px)}
 
 .seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;background:var(--c-bg);border:1px solid var(--c-line);border-radius:var(--r-md);padding:var(--s1);gap:2px}
-.seg button{height:36px;border-radius:var(--r-sm);font-size:var(--fs-sm);font-weight:700;color:var(--c-text-3);transition:background var(--dur-1),color var(--dur-1)}
+.seg button{height:34px;border-radius:7px;font-size:var(--fs-sm);font-weight:600;color:var(--c-text-3);transition:background var(--dur-1),color var(--dur-1)}
 .seg button:hover{color:var(--c-text)}
 .seg button[aria-pressed="true"]{background:var(--c-surface-3);color:var(--c-text);box-shadow:inset 0 0 0 1px var(--c-line-2)}
 
@@ -168,9 +183,9 @@ svg.i{width:20px;height:20px;flex:none;stroke:currentColor;fill:none;stroke-widt
 .brand:hover .brand-mark{transform:translateY(-2px) scale(1.05)}
 .brand-name{font-family:var(--f-display);font-weight:900;font-size:28px;letter-spacing:1.2px;line-height:1;white-space:nowrap;text-transform:uppercase}
 .brand-name em{font-style:normal;color:var(--c-brand)}
-.navcta{display:flex;align-items:center;gap:6px;height:40px;padding:0 var(--s4);border-radius:var(--r-sm);background:var(--grad-primary);color:#fff;font-size:var(--fs-sm);font-weight:700;text-decoration:none;box-shadow:var(--sh-brand);white-space:nowrap}
-.navcta:hover{filter:brightness(1.06)}
-.navcta img{width:18px;height:18px}
+.navcta{display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:var(--c-text-2);font-size:var(--fs-sm);font-weight:600;text-decoration:none;white-space:nowrap;transition:background-color .15s,border-color .15s,color .15s}
+.navcta:hover{background:rgba(255,255,255,.07);border-color:rgba(242,107,33,.5);color:var(--c-text)}
+.navcta img{width:20px;height:20px}
 .navlinks{display:flex;gap:var(--s1)}
 .navlink{white-space:nowrap;display:flex;align-items:center;gap:var(--s2);height:40px;padding:0 var(--s3);border-radius:var(--r-sm);font-size:var(--fs-sm);font-weight:700;color:var(--c-text-2);transition:color var(--dur-1),background var(--dur-1)}
 .navlink:hover{color:var(--c-text);background:rgba(255,255,255,.05)}
@@ -200,23 +215,33 @@ svg.i{width:20px;height:20px;flex:none;stroke:currentColor;fill:none;stroke-widt
    LAYOUT + SCREEN TRANSITIONS
    ===================================================================== */
 main{max-width:var(--w-max);margin:0 auto;padding:var(--s6) var(--s4) var(--s8)}
-.screen{animation:screenIn var(--dur-3) var(--ease)}
-@keyframes screenIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.screen{animation:screenIn .32s var(--ease) both}
+@keyframes screenIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* View Transitions (Chrome/Edge/Safari 18+): crossfade screens, keep nav still */
+.topnav{view-transition-name:topnav}
+.bottomnav{view-transition-name:bottomnav}
+::view-transition-old(root){animation:vtOut .16s ease both}
+::view-transition-new(root){animation:vtIn .3s var(--ease) both}
+@keyframes vtOut{to{opacity:0;transform:translateY(-4px)}}
+@keyframes vtIn{from{opacity:0;transform:translateY(8px)}}
+/* staggered reveal */
+.rv{animation:rvIn .4s var(--ease) both;animation-delay:calc(var(--i,0) * 45ms)}
+@keyframes rvIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .section-hd{display:flex;align-items:end;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s4)}
-.section-hd h2{margin:0;font-size:var(--fs-2xl)}
+.section-hd h2{margin:0}
 
 /* =====================================================================
    HOME
    ===================================================================== */
 .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--s7);align-items:center;padding:var(--s6) 0 var(--s7)}
 .hero-copy .badge{margin-bottom:var(--s4)}
-.hero h1{margin:0 0 var(--s5);font-size:var(--fs-hero);line-height:.86}
+.hero h1{margin:0 0 var(--s5);font-size:var(--fs-hero);line-height:.9}
 .hero h1 .accent{display:block;background:var(--grad-primary);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .lede{margin:0 0 var(--s6);color:var(--c-text-2);font-size:var(--fs-lg);line-height:1.55;max-width:46ch}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center}
 .hero-meta{display:flex;gap:var(--s6);margin-top:var(--s6);padding-top:var(--s5);border-top:1px solid var(--c-line)}
 .hero-meta div{display:flex;flex-direction:column;gap:2px}
-.hero-meta .num{font-size:40px}
+.hero-meta .num{font-size:var(--fs-3xl)}
 .hero-meta span:last-child{font-size:var(--fs-sm);color:var(--c-text-3);font-weight:600}
 .hero-art{position:relative;padding:var(--s4)}
 .hero-art .card{padding:var(--s4);transform:perspective(1200px) rotateX(8deg) rotateY(-8deg);transition:transform .8s var(--ease)}
@@ -268,28 +293,29 @@ main{max-width:var(--w-max);margin:0 auto;padding:var(--s6) var(--s4) var(--s8)}
 .toast{position:absolute;inset:0 0 28% 0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;
   opacity:0;transform:scale(.7);transition:opacity var(--dur-2), transform .45s var(--ease-spring)}
 .toast.show{opacity:1;transform:scale(1)}
-.toast .tname{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(36px,7vw,58px);line-height:.9;letter-spacing:1px;text-shadow:0 6px 30px rgba(0,0,0,.85)}
+.toast .tname{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(32px,6vw,52px);line-height:.9;letter-spacing:1px;text-shadow:0 6px 30px rgba(0,0,0,.85)}
 .toast .tpts{font-family:var(--f-display);font-weight:800;font-size:24px;letter-spacing:1px}
 
 /* question card */
 .qcard{padding:var(--s6);position:relative;overflow:hidden}
 .qcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--c-brand),transparent)}
-.qcard.out{animation:qOut .22s var(--ease) forwards}
-.qcard.in{animation:qIn .38s var(--ease)}
-@keyframes qOut{to{opacity:0;transform:translateX(-24px)}}
-@keyframes qIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+.qcard.out{animation:qOut .18s ease forwards}
+.qcard.in{animation:qIn .34s var(--ease)}
+@keyframes qOut{to{opacity:0;transform:translateY(-6px)}}
+@keyframes qIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .qmeta{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);margin-bottom:var(--s3)}
 .qtext{font-size:clamp(20px,2.4vw,26px);font-weight:700;line-height:1.32;letter-spacing:-.4px;margin:0;min-height:2.6em}
 .qtext .cur{display:inline-block;width:2px;height:1em;background:var(--c-brand);vertical-align:-2px;margin-left:2px;animation:pulse .8s steps(2) infinite}
-.entry{margin-top:var(--s5)}
-.field{position:relative;display:flex;align-items:center;gap:var(--s2);background:var(--c-bg);border:2px solid var(--c-line-2);border-radius:var(--r-md);padding:6px;
+.entry{margin-top:var(--s5);transition:opacity .15s ease}
+.entry.leaving{opacity:.35}
+.field{position:relative;display:flex;align-items:center;gap:var(--s2);background:var(--c-bg);border:1.5px solid var(--c-line-2);border-radius:var(--r-md);padding:6px;
   transition:border-color var(--dur-1), box-shadow var(--dur-2)}
 .field:hover{border-color:rgba(255,255,255,.2)}
 .field:focus-within{border-color:var(--c-brand);box-shadow:0 0 0 5px rgba(255,106,20,.14)}
 .field .lead{color:var(--c-text-3);margin-left:var(--s2)}
-.field input{flex:1;min-width:0;background:none;border:0;outline:none;color:var(--c-text);font:inherit;font-size:19px;font-weight:600;height:52px;padding:0 var(--s2)}
+.field input{flex:1;min-width:0;background:none;border:0;outline:none;color:var(--c-text);font:inherit;font-size:18px;font-weight:500;height:46px;padding:0 var(--s2)}
 .field input::placeholder{color:var(--c-text-3);font-weight:500}
-.field .btn{height:52px;padding:0 var(--s5)}
+.field .btn{--btn-h:46px;padding:0 20px}
 .field.is-wrong{border-color:var(--c-bad);box-shadow:0 0 0 5px rgba(255,66,88,.14)}
 .field.is-right{border-color:var(--c-good);box-shadow:0 0 0 5px rgba(34,208,122,.16)}
 .entry-foot{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);min-height:40px;margin-top:var(--s2)}
@@ -388,14 +414,14 @@ main{max-width:var(--w-max);margin:0 auto;padding:var(--s6) var(--s4) var(--s8)}
 .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s5);align-items:start}
 .final{padding:var(--s7) var(--s6) var(--s6);text-align:center;position:relative;overflow:hidden}
 .final::after{content:"";position:absolute;inset:auto -20% -60% -20%;height:80%;background:radial-gradient(closest-side,rgba(255,106,20,.22),transparent);pointer-events:none}
-.final-score{font-size:var(--fs-score);color:var(--c-text);letter-spacing:-1px}
-.final-score small{font-size:.32em;color:var(--c-text-3);letter-spacing:0}
+.final-score{display:flex;align-items:baseline;justify-content:center;gap:.08em;font-size:var(--fs-score);color:var(--c-text);letter-spacing:-.01em;font-weight:900}
+.final-score small{font-size:.3em;color:var(--c-text-3);letter-spacing:0;font-weight:800}
 .final-rank{display:inline-flex;align-items:center;gap:var(--s2);margin-top:var(--s3);padding:8px 14px;border-radius:var(--r-pill);background:rgba(242,107,33,.14);border:1px solid rgba(242,107,33,.35);color:var(--c-brand-tag);font-weight:800;font-size:var(--fs-sm);letter-spacing:.5px;text-transform:uppercase}
 .final-msg{color:var(--c-text-2);margin:var(--s3) auto 0;max-width:38ch;font-size:var(--fs-md)}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s2);margin-top:var(--s6);position:relative;z-index:1}
 .stat{padding:var(--s4) var(--s2);border-radius:var(--r-md);background:var(--c-bg);border:1px solid var(--c-line)}
 .stat .num{font-size:36px}
-.stat .l{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--c-text-3);margin-top:6px}
+.stat .l{font-size:var(--fs-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--c-text-3);margin-top:6px}
 .stat .bar{height:4px;border-radius:99px;background:var(--c-surface-3);margin-top:var(--s2);overflow:hidden}
 .stat .bar i{display:block;height:100%;background:var(--c-good);width:0;transition:width 1.2s var(--ease)}
 .result-actions{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin-top:var(--s5);position:relative;z-index:1}
@@ -411,7 +437,7 @@ main{max-width:var(--w-max);margin:0 auto;padding:var(--s6) var(--s4) var(--s8)}
 .recap-row:first-child{border-top:0}
 .recap-row .n{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;color:#0b1022}
 .recap-row .n.miss{background:rgba(255,66,88,.18);color:var(--c-bad)}
-.recap-row .q{font-size:12px;color:var(--c-text-3);line-height:1.35;min-width:0}
+.recap-row .q{font-size:13px;color:var(--c-text-3);line-height:1.4;min-width:0}
 .recap-row .a{display:block;font-size:var(--fs-md);font-weight:700;color:var(--c-text);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .recap-row .a.none{color:var(--c-text-3);font-weight:500}
 .recap-row .pts{font-size:28px;text-align:right;min-width:40px}
@@ -508,15 +534,13 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
   .hero-art{order:0}
   .hint{display:none}
   .entry-foot{justify-content:space-between}
-  .hero h1{font-size:clamp(50px,14.5vw,72px);line-height:.86;margin-bottom:var(--s4)}
+  .hero h1{font-size:clamp(44px,12.4vw,60px);line-height:.9;margin-bottom:var(--s4)}
   .hero .lede{font-size:15.5px;line-height:1.6;margin-bottom:var(--s5)}
   .tagline{font-size:11.5px;letter-spacing:3px}
-  .hero-meta .num{font-size:34px}
+  .hero-meta .num{font-size:32px}
   .hero-meta span:last-child{font-size:12px}
-  .btn{height:54px;font-size:16px}
-  .btn-lg{height:56px;font-size:17px;padding:0 var(--s5)}
   .mode{padding:var(--s5)}
-  .mode h3{font-size:34px}
+  .mode h3{font-size:32px}
   .scorebar{padding:var(--s3) var(--s4)}
   .qtext{font-size:21px;line-height:1.3;min-height:2.6em}
   .qmeta{margin-bottom:var(--s2)}
@@ -524,7 +548,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
   .result-row .who{font-size:16px}
   .chip{font-size:13px;padding:7px 10px}
   .final{padding:var(--s6) var(--s4) var(--s5)}
-  .final-score{font-size:112px}
+  .final-score{font-size:96px}
   .stat .num{font-size:34px}
   .lb-head h2{font-size:48px}
   .dlg{padding:var(--s5)}
@@ -536,8 +560,8 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
   .tierstrip .d{display:none}
   .tierstrip .nm{font-size:10px}
   .qcard{padding:var(--s5) var(--s4)}
-  .field input{font-size:17px;height:48px}
-  .field .btn{height:48px;padding:0 var(--s4)}
+  .field input{font-size:17px;height:44px}
+  .field .btn{--btn-h:44px;padding:0 16px}
   .field .lead{display:none}
   .stats{grid-template-columns:repeat(2,1fr)}
   .lb-table .hide-sm{display:none}
@@ -565,6 +589,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
   <symbol id="i-redo" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.4-5.7M20 4v5h-5"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></symbol>
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 22c4 0 7-2.7 7-7 0-4-3-6-4-9-1 2-2 3-3 3 0-2-1-4-3-6 0 4-4 6-4 12 0 4.3 3 7 7 7z"/></symbol>
 </svg>
 
@@ -596,7 +621,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
       <h1 class="display">Anyone can name Duke.<span class="accent">Go deeper.</span></h1>
       <p class="lede">The college basketball trivia game that rewards the deep cuts. Seven prompts, a 25-second shot clock, and the more obscure your answer, the deeper the shot.</p>
       <div class="hero-ctas">
-        <button class="btn btn-primary btn-lg" id="playDaily">Play Now <span class="arrow">→</span></button>
+        <button class="btn btn-primary btn-lg" id="playDaily">Play Now <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
         <button class="btn btn-secondary btn-lg" data-nav="howto"><svg class="i"><use href="#i-help"/></svg>How to Play</button>
       </div>
       <div class="hero-meta">
@@ -626,7 +651,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
       <p>Same seven prompts for every player, every day. One attempt. Two easy, three medium, two hard.</p>
       <div class="status" id="dailyStatus"></div>
       <div class="foot">
-        <button class="btn btn-primary" id="playDaily2">Play today's game <span class="arrow">→</span></button>
+        <button class="btn btn-primary btn-lg" id="playDaily2">Play today's game <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
       </div>
     </article>
     <article class="card mode">
@@ -643,7 +668,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
         <button data-d="medium" aria-pressed="false">Medium</button>
         <button data-d="hard" aria-pressed="false">Hard</button>
       </div>
-      <div class="foot"><button class="btn btn-secondary btn-block" id="playUnl">Start unlimited game</button></div>
+      <div class="foot"><button class="btn btn-secondary btn-lg btn-block" id="playUnl">Start unlimited game</button></div>
     </article>
   </section>
 
@@ -723,14 +748,14 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
           <div class="entry-foot">
             <div class="err" id="msg" role="status"></div>
             <span class="hint" id="hintTxt">Last names work for players · <kbd>Enter</kbd> to shoot</span>
-            <button class="btn btn-ghost" id="skip" type="button">Pass</button>
+            <button class="btn btn-ghost btn-sm" id="skip" type="button">Pass</button>
           </div>
         </div>
 
         <div id="reveal" class="hidden">
           <div class="result-row" id="you"></div>
           <div class="answers" id="answers"></div>
-          <button class="btn btn-primary btn-block next" id="next">Next question <span class="arrow">→</span></button>
+          <button class="btn btn-primary btn-lg btn-block next" id="next">Next question <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
         </div>
       </section>
     </div>
@@ -763,8 +788,8 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
         </div>
         <div class="result-actions">
           <button class="btn btn-primary btn-lg" id="again"><svg class="i"><use href="#i-redo"/></svg>Play Again</button>
-          <button class="btn btn-secondary" id="share"><svg class="i"><use href="#i-share"/></svg>Copy result</button>
-          <button class="btn btn-secondary" id="toMenu"><svg class="i"><use href="#i-home"/></svg>Home</button>
+          <button class="btn btn-secondary btn-lg" id="share"><svg class="i"><use href="#i-share"/></svg>Copy result</button>
+          <button class="btn btn-secondary btn-lg" id="toMenu"><svg class="i"><use href="#i-home"/></svg>Home</button>
         </div>
         <div class="countdown" id="countdown"></div>
       </section>
@@ -777,14 +802,14 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
     </div>
     <div>
       <section class="card chartcard">
-        <div class="section-hd"><div><div class="eyebrow">Your shots</div><h2 class="display" style="font-size:26px">Shot Chart</h2></div></div>
+        <div class="section-hd"><div><div class="eyebrow">Your shots</div><h2 class="card-title">Shot Chart</h2></div></div>
         <div class="chart-wrap"><svg id="chart" viewBox="0 0 300 190" role="img" aria-label="Shot chart of your seven answers"></svg></div>
         <div class="chart-legend" id="legend"></div>
       </section>
       <section class="card chartcard" style="margin-top:var(--s4)">
         <div class="section-hd">
-          <div><div class="eyebrow">Your Record</div><h2 class="display" style="font-size:26px">Where this game ranks</h2></div>
-          <button class="btn btn-ghost" data-nav="record">View all →</button>
+          <div><div class="eyebrow">Your Record</div><h2 class="card-title">How it ranks</h2></div>
+          <button class="btn btn-ghost btn-sm" data-nav="record">View all <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
         </div>
         <div id="miniBoard"></div>
       </section>
@@ -833,7 +858,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
       <li><span class="sn">3</span><div><b>Go deep for more points</b><span>Obvious answers are layups. Obscure ones are shots from way out. Every prompt hides exactly one Half Court answer worth 100.</span></div></li>
     </ol>
     <div class="ladder" id="ladder"></div>
-    <button class="btn btn-primary btn-block" id="howtoPlay">Got it, let's play <span class="arrow">→</span></button>
+    <button class="btn btn-primary btn-lg btn-block" id="howtoPlay">Got it, let's play <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
   </div>
 </dialog>
 
@@ -980,11 +1005,16 @@ const total = () => G.res.reduce((s,r)=>s+ptsOf(r),0);
 const SCREENS = ["menu","game","results","record"];
 
 function show(id){
-  SCREENS.forEach(s=>{ const el=$(s); const on=s===id; el.classList.toggle("hidden",!on); if(on){ el.classList.remove("screen"); void el.offsetWidth; el.classList.add("screen"); } });
-  document.body.classList.toggle("in-game", id==="game");
-  const navKey = id==="menu" ? "home" : id==="record" ? "record" : (id==="game"||id==="results") ? "play" : "";
-  $$("[data-nav]").forEach(b=>{ if(b.closest(".navlinks,.bottomnav")) b.toggleAttribute("aria-current", b.dataset.nav===navKey); if(b.hasAttribute("aria-current")) b.setAttribute("aria-current","page"); });
-  window.scrollTo({top:0,behavior:reduceMotion?"auto":"smooth"});
+  const swap=()=>{
+    SCREENS.forEach(s=>$(s).classList.toggle("hidden", s!==id));
+    document.body.classList.toggle("in-game", id==="game");
+    const navKey = id==="menu" ? "home" : id==="record" ? "record" : (id==="game"||id==="results") ? "play" : "";
+    $$("[data-nav]").forEach(b=>{ if(b.closest(".navlinks,.bottomnav")){ if(b.dataset.nav===navKey) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current"); } });
+    window.scrollTo(0,0);
+  };
+  if (reduceMotion){ swap(); return; }
+  if (document.startViewTransition){ document.startViewTransition(swap); return; }
+  swap(); const el=$(id); el.classList.remove("screen"); void el.offsetWidth; el.classList.add("screen");
 }
 let tipTimers=[], tipRaf=null;
 function stopGameLoops(){ cancelAnimationFrame(timerId); cancelAnimationFrame(animId); clearInterval(typeId); tipTimers.forEach(clearTimeout); tipTimers=[]; cancelAnimationFrame(tipRaf); $("tipoff").classList.add("hidden"); $("tipoff").innerHTML=""; if(G && !G.finished) G.abandoned=true; }
@@ -1021,6 +1051,7 @@ function start(mode){
   if (mode==="daily"){ const saved = store.get("dch-daily-"+todayStr()); if (saved){ G=saved; G.finished=true; lastGameTs=saved.ts||null; return showResults(false); } }
   const list = mode==="daily" ? dailySet() : unlimitedSet(diff);
   G = { mode, diff, date: todayStr(), ids: list.map(p=>p.id), i:0, res:[], ts: Date.now() };
+  $("score").textContent="0"; $("bsScore").textContent="0";
   show("game"); renderBoxscore(); prepPrompt();
   tipoff(()=>loadPrompt());
 }
@@ -1078,9 +1109,14 @@ function renderPips(){
     return `<div class="pip ${i===G.i?"cur":""}"></div>`;
   }).join("");
 }
+function tweenNum(el,to){
+  const from=parseInt(el.textContent,10)||0; if(from===to||reduceMotion){ el.textContent=to; return; }
+  const t0=performance.now(), d=550;
+  (function f(now){ const t=Math.min(1,(now-t0)/d), e=1-Math.pow(1-t,3); el.textContent=Math.round(from+(to-from)*e); if(t<1) requestAnimationFrame(f); })(t0);
+}
 function renderBoxscore(){
   const s=total();
-  $("bsScore").textContent = s; $("score").textContent = s;
+  tweenNum($("bsScore"), s); tweenNum($("score"), s);
   $("bsMode").textContent = G.mode==="daily" ? `Daily #${dayNum()}` : `Unlimited · ${G.diff}`;
   $("bsQ").innerHTML = `${Math.min(G.i+1,PER_GAME)}<small>/${PER_GAME}</small>`;
   $("bsList").innerHTML = G.ids.map((id,i)=>{
@@ -1155,11 +1191,12 @@ function finishPrompt(ans, missText){
   $("toastName").style.color = ans ? TIERS[tier].color : "var(--c-bad)";
   $("toastPts").textContent = ans ? `+${TIERS[tier].pts}` : "+0";
   setTimeout(()=>{ $("toast").classList.add("show"); if (ans && tier===4) halfCourtParty(); }, landAt);
+  $("inputArea").classList.add("leaving");
   setTimeout(()=>{ renderPips(); renderBoxscore(); renderReveal(ans); }, landAt+350);
 }
 
 function renderReveal(ans){
-  $("inputArea").classList.add("hidden"); $("reveal").classList.remove("hidden");
+  $("inputArea").classList.add("hidden"); $("inputArea").classList.remove("leaving"); $("reveal").classList.remove("hidden");
   const row=$("you");
   if (ans){
     row.className="result-row ok";
@@ -1176,8 +1213,9 @@ function renderReveal(ans){
       list.map(a=>`<span class="chip ${ans&&ans.name===a.name?"mine":""}">${esc(a.name)}</span>`).join("")}</div></div>`;
   }
   $("answers").innerHTML = html; $("answers").scrollTop=0;
-  $("next").innerHTML = G.i===PER_GAME-1 ? `See final score <span class="arrow">→</span>` : `Next question <span class="arrow">→</span>`;
-  $("next").focus({preventScroll:true});
+  $("next").innerHTML = G.i===PER_GAME-1 ? `See final score <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg>` : `Next question <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg>`;
+  if (!reduceMotion) [row, ...$("answers").children, $("next")].forEach((el,k)=>{ el.classList.remove("rv"); void el.offsetWidth; el.style.setProperty("--i",k); el.classList.add("rv"); });
+  try { $("next").focus({preventScroll:true, focusVisible:false}); } catch(e){ $("next").focus({preventScroll:true}); }
 }
 $("next").onclick = ()=>{
   const qc=$("qcard");
@@ -1405,6 +1443,7 @@ function showResults(fresh){
   $("stAcc").textContent = st.acc+"%"; $("stMade").textContent = st.made; $("stMiss").textContent = st.miss; $("stHalf").textContent = st.half;
   $("stAccBar").style.width="0"; requestAnimationFrame(()=>requestAnimationFrame(()=>$("stAccBar").style.width=st.acc+"%"));
   renderShotChart(true);
+  if (!reduceMotion) [...document.querySelectorAll("#results .final-rank, #results .final-msg, #results .stat, #results .result-actions")].forEach((el,k)=>{ el.classList.remove("rv"); void el.offsetWidth; el.style.setProperty("--i",k+2); el.classList.add("rv"); });
   if (fresh && s>=450) Sound.crowd(s>=600);
   $("rlist").innerHTML = G.res.map((r,i)=>`<div class="recap-row">
     <span class="n ${r.tier<0?"miss":"b"+(r.tier+1)}">${r.tier<0?"✕":i+1}</span>
@@ -1494,12 +1533,12 @@ function refreshMenu(){
   if (saved){
     const s=saved.res.reduce((a,r)=>a+ptsOf(r),0);
     $("dailyStatus").textContent = `✓ Final: ${s}/700. Next one at midnight.`; $("dailyStatus").className="status done";
-    $("playDaily").innerHTML = `View today's result <span class="arrow">→</span>`;
-    $("playDaily2").innerHTML = `View your shot chart <span class="arrow">→</span>`;
+    $("playDaily").innerHTML = `View today's result <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg>`;
+    $("playDaily2").innerHTML = `View your shot chart <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg>`;
   } else {
     $("dailyStatus").textContent = ""; $("dailyStatus").className="status";
-    $("playDaily").innerHTML = `Play Now <span class="arrow">→</span>`;
-    $("playDaily2").innerHTML = `Play today's game <span class="arrow">→</span>`;
+    $("playDaily").innerHTML = `Play Now <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg>`;
+    $("playDaily2").innerHTML = `Play today's game <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg>`;
   }
 }
 function renderTierStrip(){
