@@ -1754,6 +1754,8 @@ function renderTierStrip(){
    which ONLY the stripeWebhook Cloud Function can write.
    ===================================================================== */
 const PAYWALL = {
+  // ⬇ false = "Coming soon" (no checkout). Flip to true once the LIVE link is in.
+  live: false,
   // ⬇ Paste your Stripe Payment Link (test link first, then live)
   paymentLink: "https://buy.stripe.com/test_5kQ14o7UR47V1ImbdUabK01",
   // ⬇ Optional: Stripe customer portal link so subscribers can cancel/manage
@@ -1803,13 +1805,14 @@ const Pay = {
   paint(){
     const b=$("unlBadge"), btn=$("playUnl"), a=$("acctBtn");
     if (this.entitled){ b.className="badge pro on"; b.innerHTML=`<svg class="i"><use href="#i-check"/></svg>Unlocked`; btn.textContent="Start unlimited game"; }
-    else { b.className="badge pro"; b.innerHTML=`<svg class="i"><use href="#i-lock"/></svg>Pro`; btn.innerHTML=`<svg class="i"><use href="#i-lock"/></svg>Unlock Unlimited · ${PAYWALL.price}`; }
+    else { b.className="badge pro"; b.innerHTML=`<svg class="i"><use href="#i-lock"/></svg>Pro`; btn.innerHTML= PAYWALL.live ? `<svg class="i"><use href="#i-lock"/></svg>Unlock Unlimited · ${PAYWALL.price}` : `<svg class="i"><use href="#i-lock"/></svg>Unlimited · Coming soon`; if(!PAYWALL.live) b.innerHTML=`<svg class="i"><use href="#i-lock"/></svg>Soon`; }
     a.classList.toggle("on", !!this.user && !this.entitled); a.classList.toggle("pro", this.entitled);
     a.setAttribute("aria-label", this.user ? `Account (${this.user.email})` : "Sign in");
   },
   open(view){ this.render(view || (this.entitled ? "account" : "pitch")); const d=$("paywall"); if(!d.open){ d.showModal ? d.showModal() : d.setAttribute("open",""); } },
   close(){ const d=$("paywall"); d.close ? d.close() : d.removeAttribute("open"); },
   checkout(){
+    if (!PAYWALL.live){ this.render("pitch"); return; }
     if (!this.user){ this.authMode="signup"; this.render("auth"); return; }
     if (PAYWALL.paymentLink.includes("REPLACE_WITH")){ this.render("pitch","Checkout isn't set up yet. The Stripe Payment Link still needs to be added."); return; }
     const url=new URL(PAYWALL.paymentLink);
@@ -1827,7 +1830,18 @@ const Pay = {
     this.view=view; const B=$("pwBody");
     const check=t=>`<li><svg class="i"><use href="#i-check"/></svg><span>${t}</span></li>`;
     if (this.offline && view!=="pitch"){ view="pitch"; msg=msg||"Accounts are unavailable right now. Try again in a bit."; }
-    if (view==="pitch"){
+    if (view==="pitch" && !PAYWALL.live && !this.entitled){
+      try{ window.posthog && posthog.capture("unlimited_interest", {signed_in: !!this.user}); }catch(e){}
+      B.innerHTML=`<div class="pw-hero"><div class="pw-flame"><svg class="i"><use href="#i-fire"/></svg></div><div><div class="eyebrow">Tipoff Trivia Pro</div><h2 class="display" id="pwTitle">Unlimited is coming</h2></div></div>
+        <p class="sub">The Daily is free forever. Unlimited is for when one game isn't enough, and it's almost here.</p>
+        <div class="pw-price"><span class="num">${PAYWALL.price}</span><span>${PAYWALL.per} · launching soon</span></div>
+        <ul class="pw-list">${check("Endless games, every difficulty")}${check("All 90+ prompts, no daily limit")}${check("Your record tracks every Unlimited game")}${check("Same login as Tipoff Fantasy")}</ul>
+        <button class="btn btn-primary btn-lg btn-block" id="pwGo">Play today's Daily <svg class="i arrow"><use href="#i-arrow"/></svg></button>
+        <p class="pw-fine">${this.user?`Signed in as ${esc(this.user.email)}. We'll let you know when it drops.`:`Have a Tipoff Fantasy account? <a href="#" id="pwSignin">Sign in</a>`}</p>`;
+      $("pwGo").onclick=()=>{ this.close(); start("daily"); };
+      const si=$("pwSignin"); if(si) si.onclick=e=>{ e.preventDefault(); this.authMode="signin"; this.render("auth"); };
+    }
+    else if (view==="pitch"){
       B.innerHTML=`<div class="pw-hero"><div class="pw-flame"><svg class="i"><use href="#i-fire"/></svg></div><div><div class="eyebrow">Tipoff Trivia Pro</div><h2 class="display" id="pwTitle">Unlock Unlimited</h2></div></div>
         <p class="sub">The Daily is free forever. Unlimited is for when one game isn't enough.</p>
         <div class="pw-price"><span class="num">${PAYWALL.price}</span><span>${PAYWALL.per}</span></div>
@@ -1870,7 +1884,7 @@ const Pay = {
         <div class="acct-card"><div class="acct-av">${esc((u.email||"?")[0].toUpperCase())}</div><div><b>${esc(u.email||"")}</b><span>${this.entitled?"Unlimited: active":"Unlimited: not active"}</span></div>
           <span class="badge pro ${this.entitled?"on":""}" style="margin-left:auto">${this.entitled?"Pro":"Free"}</span></div>
         <div class="stack" style="display:grid;gap:10px">
-          ${this.entitled?`<button class="btn btn-primary btn-lg btn-block" id="acPlay">Play Unlimited <svg class="i arrow"><use href="#i-arrow"/></svg></button>`:`<button class="btn btn-primary btn-lg btn-block" id="acUp">Unlock Unlimited · ${PAYWALL.price}</button>`}
+          ${this.entitled?`<button class="btn btn-primary btn-lg btn-block" id="acPlay">Play Unlimited <svg class="i arrow"><use href="#i-arrow"/></svg></button>`:`<button class="btn btn-primary btn-lg btn-block" id="acUp">${PAYWALL.live?`Unlock Unlimited · ${PAYWALL.price}`:"Unlimited · Coming soon"}</button>`}
           ${this.entitled&&PAYWALL.portalLink?`<a class="btn btn-secondary btn-lg btn-block" href="${PAYWALL.portalLink}" target="_blank" rel="noopener">Manage subscription</a>`:""}
           <button class="btn btn-ghost btn-block" id="acOut">Sign out</button>
         </div>`;
