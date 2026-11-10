@@ -511,6 +511,45 @@ dialog[open]{animation:dlgIn .32s var(--ease)}
 .ladder .bar{height:6px;border-radius:99px}
 .ladder .num{font-size:22px;text-align:right}
 
+/* ---------- paywall + account ---------- */
+.badge.pro{gap:5px;background:linear-gradient(90deg,rgba(248,198,80,.16),rgba(242,107,33,.14));color:var(--c-gold);box-shadow:inset 0 0 0 1px rgba(248,198,80,.3);text-transform:uppercase;letter-spacing:.08em}
+.badge.pro .i{width:12px;height:12px;stroke-width:2.6}
+.badge.pro.on{background:rgba(54,211,153,.12);color:var(--c-good);box-shadow:inset 0 0 0 1px rgba(54,211,153,.3)}
+.iconbtn.acct.on{border-color:rgba(54,211,153,.45);color:var(--c-good)}
+.iconbtn.acct.pro{border-color:rgba(248,198,80,.5);color:var(--c-gold);box-shadow:0 0 14px -4px rgba(248,198,80,.55)}
+.pw{padding:var(--s7) var(--s6) var(--s6)}
+.pw-close{position:absolute;top:var(--s4);right:var(--s4)}
+.pw-hero{display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s2)}
+.pw-flame{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--c-brand-soft);border:1px solid rgba(242,107,33,.3);box-shadow:0 0 24px -6px rgba(242,107,33,.6)}
+.pw-flame .i{width:22px;height:22px;color:var(--c-brand-2)}
+.pw h2{margin:0;font-size:34px}
+.pw .sub{margin:var(--s2) 0 var(--s5);color:var(--c-text-2);font-size:var(--fs-sm);line-height:1.6}
+.pw-price{display:flex;align-items:baseline;gap:8px;margin:0 0 var(--s4)}
+.pw-price .num{font-size:52px;background:var(--fire);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pw-price span{color:var(--c-text-3);font-size:var(--fs-sm);font-weight:600}
+.pw-list{list-style:none;margin:0 0 var(--s5);padding:0;display:grid;gap:10px}
+.pw-list li{display:flex;align-items:flex-start;gap:10px;font-size:var(--fs-sm);color:var(--c-text)}
+.pw-list .i{width:18px;height:18px;flex:none;color:var(--c-good);stroke-width:2.6;margin-top:1px}
+.pw-fine{margin-top:var(--s3);text-align:center;font-size:12px;color:var(--c-text-3)}
+.pw-fine a{color:var(--c-text-2)}
+.auth{display:grid;gap:var(--s3)}
+.auth label{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--c-text-2)}
+.auth input{height:46px;padding:0 14px;border-radius:var(--r-md);border:1.5px solid var(--c-line-2);background:var(--c-bg);color:var(--c-text);font:inherit;font-size:16px;outline:none;transition:border-color var(--dur-1),box-shadow var(--dur-2)}
+.auth input:focus{border-color:var(--c-brand);box-shadow:0 0 0 4px rgba(242,107,33,.14)}
+.auth .row{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);font-size:13px}
+.auth .link{color:var(--c-brand-tag);font-weight:600;background:none;padding:0}
+.auth .link:hover{text-decoration:underline}
+.auth .note{font-size:12.5px;color:var(--c-text-3);line-height:1.5}
+.auth-err{min-height:18px;font-size:13px;font-weight:600;color:#ff7b7b}
+.auth-ok{font-size:13px;font-weight:600;color:var(--c-good)}
+.acct-card{display:flex;align-items:center;gap:var(--s3);padding:var(--s4);margin:var(--s4) 0;border-radius:12px;background:var(--c-bg);border:1px solid var(--c-line)}
+.acct-av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--grad-primary);color:#fff;font-weight:800}
+.acct-card b{display:block;font-size:var(--fs-sm);word-break:break-all}
+.acct-card span{font-size:12px;color:var(--c-text-3)}
+.spinner{width:42px;height:42px;margin:var(--s5) auto;border-radius:50%;border:3px solid rgba(255,255,255,.1);border-top-color:var(--c-brand);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pw-center{text-align:center}
+
 /* ---------- footer ---------- */
 footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var(--s7);display:flex;justify-content:space-between;gap:var(--s4);border-top:1px solid var(--c-line);font-size:12px;color:var(--c-text-3)}
 
@@ -642,6 +681,8 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
   <symbol id="i-redo" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.4-5.7M20 4v5h-5"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></symbol>
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 22c4 0 7-2.7 7-7 0-4-3-6-4-9-1 2-2 3-3 3 0-2-1-4-3-6 0 4-4 6-4 12 0 4.3 3 7 7 7z"/></symbol>
 </svg>
@@ -661,6 +702,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
     </nav>
     <div class="daypill" id="daypill"></div>
     <a class="navcta" href="https://app.tipofffantasy.com" target="_blank" rel="noopener"><img src="https://app.tipofffantasy.com/logo-icon.png" alt="" aria-hidden="true"><span>Tipoff Fantasy</span></a>
+    <button class="iconbtn acct" id="acctBtn" aria-label="Account"><svg class="i"><use href="#i-user"/></svg></button>
     <button class="iconbtn" id="snd" aria-label="Mute sound"><svg class="i"><use href="#i-sound"/></svg></button>
   </div>
 </header>
@@ -714,6 +756,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
           <div class="eyebrow">Practice</div>
           <h3 class="display">Unlimited</h3>
         </div>
+        <span class="badge pro" id="unlBadge"><svg class="i"><use href="#i-lock"/></svg>Pro</span>
       </div>
       <p>Endless random games. Pick your difficulty and run it back as often as you want.</p>
       <div class="seg" id="diffs" role="group" aria-label="Difficulty">
@@ -916,9 +959,21 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
   </div>
 </dialog>
 
+<!-- ============ PAYWALL / ACCOUNT ============ -->
+<dialog id="paywall" aria-labelledby="pwTitle">
+  <div class="card dlg pw">
+    <button class="iconbtn pw-close" id="pwClose" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button>
+    <div id="pwBody"></div>
+  </div>
+</dialog>
+
 <div id="celebrate" class="hidden"></div>
 <div id="tipoff" class="tipoff hidden" aria-live="assertive"></div>
 
+<!-- Firebase (same project + accounts as Tipoff Fantasy) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="data.js"></script>
 <script>
 (() => {
@@ -1101,6 +1156,7 @@ $("howto").addEventListener("click",e=>{ if(e.target===$("howto")) closeHowTo();
    GAME FLOW
    ===================================================================== */
 function start(mode){
+  if (mode==="unlimited" && !Pay.entitled){ Pay.open(); return; }
   stopGameLoops(); Sound.init();
   if (mode==="daily"){ const saved = store.get("dch-daily-"+todayStr()); if (saved){ G=saved; G.finished=true; lastGameTs=saved.ts||null; return showResults(false); } }
   const list = mode==="daily" ? dailySet() : unlimitedSet(diff);
@@ -1692,6 +1748,155 @@ function renderTierStrip(){
   $("ladder").innerHTML = TIERS.map((t,i)=>`<div><span class="k${i+1}">${t.name}</span><span class="bar b${i+1}" style="width:${t.pts}%"></span><span class="num k${i+1}">${t.pts}</span></div>`).join("");
 }
 
+/* =====================================================================
+   PAYWALL — Firebase Auth (shared with Tipoff Fantasy) + Stripe
+   Unlimited unlocks when entitlements/{uid}.triviaUnlimited === true,
+   which ONLY the stripeWebhook Cloud Function can write.
+   ===================================================================== */
+const PAYWALL = {
+  // ⬇ Paste your Stripe Payment Link (test link first, then live)
+  paymentLink: "https://buy.stripe.com/REPLACE_WITH_YOUR_PAYMENT_LINK",
+  // ⬇ Optional: Stripe customer portal link so subscribers can cancel/manage
+  portalLink: "",
+  price: "$4.99",
+  per: "per month",           // e.g. "one-time" for a lifetime unlock
+};
+const FIREBASE_CONFIG = {
+  apiKey:            "AIzaSyDWLF8thu07J33Yzmda9Pu7AcEXLsYcq8s",
+  authDomain:        "mmapp-6b7ab.firebaseapp.com",
+  projectId:         "mmapp-6b7ab",
+  storageBucket:     "mmapp-6b7ab.firebasestorage.app",
+  messagingSenderId: "281245381393",
+  appId:             "1:281245381393:web:fa845963c58614222612b0"
+};
+
+const Pay = {
+  user:null, entitled:false, unsub:null, view:"pitch", authMode:"signin", waiting:false, ready:false,
+  init(){
+    try {
+      if (!window.firebase) throw new Error("Firebase SDK not loaded");
+      if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
+      this.auth=firebase.auth(); this.db=firebase.firestore();
+      this.auth.onAuthStateChanged(u=>this.onUser(u));
+    } catch(e){ console.warn("[paywall] accounts unavailable:", e.message); this.offline=true; this.ready=true; this.paint(); }
+    // returning from Stripe Checkout
+    const qs=new URLSearchParams(location.search);
+    if (qs.get("checkout")==="success"){ this.waiting=true; history.replaceState(null,"",location.pathname); this.open("waiting"); }
+    else if (qs.get("checkout")==="cancel"){ history.replaceState(null,"",location.pathname); }
+    $("pwClose").onclick=()=>this.close();
+    $("paywall").addEventListener("click",e=>{ if(e.target===$("paywall")) this.close(); });
+    $("acctBtn").onclick=()=>this.open(this.user?"account":"auth");
+  },
+  onUser(u){
+    this.user=u; this.ready=true;
+    if (this.unsub){ this.unsub(); this.unsub=null; }
+    if (!u){ this.setEntitled(false); return; }
+    this.unsub=this.db.collection("entitlements").doc(u.uid).onSnapshot(d=>{
+      this.setEntitled(!!(d.exists && d.data().triviaUnlimited===true));
+    }, err=>{ console.warn("[paywall] entitlement read failed:", err.code); this.setEntitled(false); });
+  },
+  setEntitled(v){
+    const was=this.entitled; this.entitled=v; this.paint();
+    if (v && !was && this.waiting){ this.waiting=false; this.render("unlocked"); }
+    else if ($("paywall").open) this.render(this.view==="auth"&&this.user ? "pitch" : this.view);
+  },
+  paint(){
+    const b=$("unlBadge"), btn=$("playUnl"), a=$("acctBtn");
+    if (this.entitled){ b.className="badge pro on"; b.innerHTML=`<svg class="i"><use href="#i-check"/></svg>Unlocked`; btn.textContent="Start unlimited game"; }
+    else { b.className="badge pro"; b.innerHTML=`<svg class="i"><use href="#i-lock"/></svg>Pro`; btn.innerHTML=`<svg class="i"><use href="#i-lock"/></svg>Unlock Unlimited · ${PAYWALL.price}`; }
+    a.classList.toggle("on", !!this.user && !this.entitled); a.classList.toggle("pro", this.entitled);
+    a.setAttribute("aria-label", this.user ? `Account (${this.user.email})` : "Sign in");
+  },
+  open(view){ this.render(view || (this.entitled ? "account" : "pitch")); const d=$("paywall"); if(!d.open){ d.showModal ? d.showModal() : d.setAttribute("open",""); } },
+  close(){ const d=$("paywall"); d.close ? d.close() : d.removeAttribute("open"); },
+  checkout(){
+    if (!this.user){ this.authMode="signup"; this.render("auth"); return; }
+    if (PAYWALL.paymentLink.includes("REPLACE_WITH")){ this.render("pitch","Checkout isn't set up yet. The Stripe Payment Link still needs to be added."); return; }
+    const url=new URL(PAYWALL.paymentLink);
+    url.searchParams.set("client_reference_id", this.user.uid);
+    if (this.user.email) url.searchParams.set("prefilled_email", this.user.email);
+    location.href=url.toString();
+  },
+  authError(code){
+    return ({ "auth/invalid-credential":"Wrong email or password.", "auth/wrong-password":"Wrong email or password.", "auth/user-not-found":"No account with that email. Create one below.",
+      "auth/email-already-in-use":"That email already has an account. Sign in instead.", "auth/weak-password":"Password needs at least 6 characters.",
+      "auth/invalid-email":"That email doesn't look right.", "auth/too-many-requests":"Too many tries. Wait a minute and try again.",
+      "auth/network-request-failed":"Network error. Check your connection." })[code] || "Something went wrong. Try again.";
+  },
+  render(view, msg){
+    this.view=view; const B=$("pwBody");
+    const check=t=>`<li><svg class="i"><use href="#i-check"/></svg><span>${t}</span></li>`;
+    if (this.offline && view!=="pitch"){ view="pitch"; msg=msg||"Accounts are unavailable right now. Try again in a bit."; }
+    if (view==="pitch"){
+      B.innerHTML=`<div class="pw-hero"><div class="pw-flame"><svg class="i"><use href="#i-fire"/></svg></div><div><div class="eyebrow">Tipoff Trivia Pro</div><h2 class="display" id="pwTitle">Unlock Unlimited</h2></div></div>
+        <p class="sub">The Daily is free forever. Unlimited is for when one game isn't enough.</p>
+        <div class="pw-price"><span class="num">${PAYWALL.price}</span><span>${PAYWALL.per}</span></div>
+        <ul class="pw-list">${check("Endless games, every difficulty")}${check("All 90+ prompts, no daily limit")}${check("Your record tracks every Unlimited game")}${check("Same login as Tipoff Fantasy")}</ul>
+        <div class="auth-err">${msg?esc(msg):""}</div>
+        <button class="btn btn-primary btn-lg btn-block" id="pwGo">${this.user?"Continue to checkout":"Create account & unlock"} <svg class="i arrow"><use href="#i-arrow"/></svg></button>
+        <p class="pw-fine">${this.user?`Signed in as ${esc(this.user.email)}`:`Have a Tipoff Fantasy account? <a href="#" id="pwSignin">Sign in</a>`} · Secure checkout by Stripe</p>`;
+      $("pwGo").onclick=()=>this.checkout();
+      const si=$("pwSignin"); if(si) si.onclick=e=>{ e.preventDefault(); this.authMode="signin"; this.render("auth"); };
+    }
+    else if (view==="auth"){
+      const up=this.authMode==="signup";
+      B.innerHTML=`<div class="pw-hero"><div class="pw-flame"><svg class="i"><use href="#i-user"/></svg></div><div><div class="eyebrow">Tipoff account</div><h2 class="display" id="pwTitle">${up?"Create account":"Sign in"}</h2></div></div>
+        <p class="sub">One login for Tipoff Trivia and Tipoff Fantasy.</p>
+        <form class="auth" id="authForm" novalidate>
+          <label>Email<input type="email" id="authEmail" autocomplete="email" required></label>
+          <label>Password<input type="password" id="authPass" autocomplete="${up?"new-password":"current-password"}" minlength="6" required></label>
+          <div class="auth-err" id="authErr" role="alert"></div>
+          <button class="btn btn-primary btn-lg btn-block" type="submit" id="authSubmit">${up?"Create account":"Sign in"}</button>
+          <div class="row"><button type="button" class="link" id="authSwap">${up?"Have an account? Sign in":"New here? Create an account"}</button>${up?"":`<button type="button" class="link" id="authReset">Forgot password?</button>`}</div>
+        </form>`;
+      const f=$("authForm");
+      setTimeout(()=>$("authEmail").focus(),50);
+      f.onsubmit=async e=>{
+        e.preventDefault(); const em=$("authEmail").value.trim(), pw=$("authPass").value, err=$("authErr"), sb=$("authSubmit");
+        if (!em||!pw){ err.textContent="Enter your email and password."; return; }
+        sb.disabled=true; sb.textContent=up?"Creating…":"Signing in…"; err.textContent="";
+        try { up ? await this.auth.createUserWithEmailAndPassword(em,pw) : await this.auth.signInWithEmailAndPassword(em,pw);
+              this.render(this.entitled?"account":"pitch"); }
+        catch(x){ err.textContent=this.authError(x.code); sb.disabled=false; sb.textContent=up?"Create account":"Sign in"; }
+      };
+      $("authSwap").onclick=()=>{ this.authMode=up?"signin":"signup"; this.render("auth"); };
+      const rs=$("authReset"); if(rs) rs.onclick=async()=>{ const em=$("authEmail").value.trim(), err=$("authErr");
+        if(!em){ err.textContent="Enter your email first, then tap Forgot password."; return; }
+        try{ await this.auth.sendPasswordResetEmail(em); err.className="auth-ok"; err.textContent="Reset link sent. Check your inbox."; }catch(x){ err.className="auth-err"; err.textContent=this.authError(x.code); } };
+    }
+    else if (view==="account"){
+      const u=this.user; if(!u){ this.render("auth"); return; }
+      B.innerHTML=`<div class="pw-hero"><div class="pw-flame"><svg class="i"><use href="#i-user"/></svg></div><div><div class="eyebrow">Tipoff account</div><h2 class="display" id="pwTitle">Your account</h2></div></div>
+        <div class="acct-card"><div class="acct-av">${esc((u.email||"?")[0].toUpperCase())}</div><div><b>${esc(u.email||"")}</b><span>${this.entitled?"Unlimited: active":"Unlimited: not active"}</span></div>
+          <span class="badge pro ${this.entitled?"on":""}" style="margin-left:auto">${this.entitled?"Pro":"Free"}</span></div>
+        <div class="stack" style="display:grid;gap:10px">
+          ${this.entitled?`<button class="btn btn-primary btn-lg btn-block" id="acPlay">Play Unlimited <svg class="i arrow"><use href="#i-arrow"/></svg></button>`:`<button class="btn btn-primary btn-lg btn-block" id="acUp">Unlock Unlimited · ${PAYWALL.price}</button>`}
+          ${this.entitled&&PAYWALL.portalLink?`<a class="btn btn-secondary btn-lg btn-block" href="${PAYWALL.portalLink}" target="_blank" rel="noopener">Manage subscription</a>`:""}
+          <button class="btn btn-ghost btn-block" id="acOut">Sign out</button>
+        </div>`;
+      const pl=$("acPlay"); if(pl) pl.onclick=()=>{ this.close(); start("unlimited"); };
+      const upb=$("acUp"); if(upb) upb.onclick=()=>this.checkout();
+      $("acOut").onclick=async()=>{ await this.auth.signOut(); this.close(); };
+    }
+    else if (view==="waiting"){
+      B.innerHTML=`<div class="pw-center"><div class="eyebrow">Payment received</div><h2 class="display" id="pwTitle" style="margin-top:6px">Unlocking…</h2>
+        <div class="spinner" aria-hidden="true"></div><p class="sub">Confirming with Stripe. This usually takes a few seconds.</p></div>`;
+      clearTimeout(this.waitT);
+      this.waitT=setTimeout(()=>{ if(this.waiting && this.view==="waiting"){ B.querySelector(".sub").innerHTML= this.user
+        ? "Still confirming. If this doesn't finish in a minute, refresh the page. Your payment is safe and Unlimited will unlock on its own."
+        : "Sign in with the account you paid with to finish unlocking."; if(!this.user){ this.authMode="signin"; setTimeout(()=>this.render("auth"),1200); } } }, 20000);
+    }
+    else if (view==="unlocked"){
+      B.innerHTML=`<div class="pw-center"><div class="pw-flame" style="margin:0 auto var(--s4)"><svg class="i"><use href="#i-fire"/></svg></div>
+        <div class="eyebrow">You're in</div><h2 class="display" id="pwTitle" style="margin:6px 0 0;font-size:44px">Unlimited <span class="fire-text">unlocked</span></h2>
+        <p class="sub">Play as many games as you want, at any difficulty.</p>
+        <button class="btn btn-primary btn-lg btn-block" id="ulPlay">Start an unlimited game <svg class="i arrow"><use href="#i-arrow"/></svg></button></div>`;
+      $("ulPlay").onclick=()=>{ this.close(); start("unlimited"); };
+      if (typeof halfCourtParty==="function" && !reduceMotion) Sound.crowd(true);
+    }
+  }
+};
+
 /* init */
 diff = store.get("dch-diff") || "mixed";
 $$("#diffs button").forEach(x=>x.setAttribute("aria-pressed", String(x.dataset.d===diff)));
@@ -1703,7 +1908,7 @@ $$("#diffs button").forEach(x=>x.setAttribute("aria-pressed", String(x.dataset.d
   }
   host.innerHTML=html;
 })();
-setSnd(); renderZoneCourt(); CourtShow.start(); renderTierStrip(); refreshMenu(); show("menu");
+Pay.init(); setSnd(); renderZoneCourt(); CourtShow.start(); renderTierStrip(); refreshMenu(); show("menu");
 })();
 </script>
 </body>
