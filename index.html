@@ -403,7 +403,7 @@ main{max-width:var(--w-max);margin:0 auto;padding:var(--s7) var(--s4) var(--s8)}
 .tipoff .ring .prog{filter:drop-shadow(0 0 10px rgba(255,122,42,.6))}
 .tipoff .cnum{position:absolute;font-family:var(--f-display);font-weight:900;font-size:min(120px,30vw);line-height:1;will-change:transform,opacity}
 .tipoff .cnum.tick{animation:tick 1s cubic-bezier(.2,.8,.2,1) both}
-.tipoff .cnum.go{font-size:min(84px,22vw);letter-spacing:.02em;background:var(--fire);-webkit-background-clip:text;background-clip:text;color:transparent;animation:goPop .6s cubic-bezier(.2,1.4,.4,1) both}
+.tipoff .cnum.go{font-size:min(54px,14vw);white-space:nowrap;letter-spacing:.02em;background:var(--fire);-webkit-background-clip:text;background-clip:text;color:transparent;animation:goPop .6s cubic-bezier(.2,1.4,.4,1) both}
 @keyframes tick{0%{opacity:0;transform:scale(1.5);filter:blur(8px)}16%{opacity:1;transform:scale(1);filter:blur(0)}78%{opacity:1;transform:scale(.97)}100%{opacity:0;transform:scale(.8);filter:blur(3px)}}
 @keyframes goPop{0%{opacity:0;transform:scale(.6)}100%{opacity:1;transform:scale(1)}}
 .tipoff .lbl{position:absolute;bottom:-48px;left:50%;transform:translateX(-50%);white-space:nowrap}
@@ -1183,6 +1183,7 @@ function tipoff(done){
     if (t0===null) t0=now;
     const t=now-t0, p=Math.min(1,t/TOTAL);
     prog.style.strokeDashoffset = (C*p).toFixed(2);            // ring drains smoothly over 3s
+    if (p>=1) prog.style.opacity="0";                         // no leftover round-cap dot
     const idx=Math.min(N, Math.floor(t/STEP));
     if (idx!==shown){
       shown=idx;
