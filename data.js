@@ -2,10 +2,10 @@
 // Each prompt: id, d (easy|medium|hard), q (question), p (true = people, enables last-name matching),
 // t: five tiers [Layup 10, Mid-Range 30, Three Ball 60, Deep Cut 85, Half Court 100].
 // RULE: Half Court (last tier) holds exactly ONE super-niche answer per prompt.
+// RULE: player/roster prompts cover teams from 2010 onward.
 // Each answer: "Primary|alias|alias".
 
 window.PROMPTS = [
-  // ---------------- EASY ----------------
   { id: "champs", d: "easy", q: "Name a school that has won the NCAA men's national championship",
     t: [
       ["Duke", "Kentucky|UK", "North Carolina|UNC|Carolina|Tar Heels", "UCLA|Bruins", "Kansas|KU|Jayhawks"],
@@ -86,7 +86,6 @@ window.PROMPTS = [
       ["Tennessee State", "Texas Southern"],
       ["Pacific"]
     ] },
-  // ---------------- MEDIUM ----------------
   { id: "wooden", d: "medium", p: true, q: "Name a Wooden Award winner (National Player of the Year, 1977–2025)",
     t: [
       ["Larry Bird", "Michael Jordan", "Kevin Durant", "Zion Williamson|Zion", "Cooper Flagg", "Tim Duncan", "Anthony Davis", "Blake Griffin"],
@@ -135,14 +134,6 @@ window.PROMPTS = [
       ["IU Indianapolis|IU Indy|IUPUI"],
       ["Southern Indiana|USI"]
     ] },
-  { id: "fabfive", d: "medium", p: true, q: "Name a member of Michigan's Fab Five",
-    t: [
-      ["Chris Webber|C-Webb", "Jalen Rose"],
-      ["Juwan Howard"],
-      [],
-      ["Jimmy King"],
-      ["Ray Jackson"]
-    ] },
   { id: "arenas", d: "medium", q: "Name a college basketball home arena (power conference or Big East)",
     t: [
       ["Cameron Indoor Stadium|Cameron Indoor|Cameron", "Allen Fieldhouse|Phog", "Rupp Arena|Rupp", "Pauley Pavilion|Pauley", "Dean Smith Center|Dean Dome|Smith Center", "Madison Square Garden|MSG|The Garden"],
@@ -167,7 +158,6 @@ window.PROMPTS = [
       ["North Carolina|UNC"],
       ["San Francisco|USF"]
     ] },
-  // ---------------- HARD ----------------
   { id: "texas", d: "hard", q: "Name a Division I basketball school in the state of Texas",
     t: [
       ["Texas|UT", "Houston", "Baylor", "Texas Tech", "Texas A&M|TAMU"],
@@ -216,14 +206,6 @@ window.PROMPTS = [
       ["Solo Ball"],
       ["Jaylin Stewart"]
     ] },
-  { id: "gators07", d: "hard", p: true, q: "Name a player from Florida's back-to-back title teams (2006 & 2007)",
-    t: [
-      ["Joakim Noah", "Al Horford", "Corey Brewer"],
-      ["Taurean Green", "Lee Humphrey"],
-      [],
-      ["Chris Richard"],
-      ["Walter Hodge"]
-    ] },
   { id: "uk2010", d: "hard", p: true, q: "Name a Kentucky player picked in the 1st round of the 2010 NBA Draft",
     t: [
       ["John Wall", "DeMarcus Cousins|Boogie Cousins|Boogie"],
@@ -232,14 +214,6 @@ window.PROMPTS = [
       ["Patrick Patterson"],
       ["Daniel Orton"]
     ] },
-  { id: "iu76", d: "hard", p: true, q: "Name a starter from Indiana's undefeated 1976 title team",
-    t: [
-      ["Scott May", "Quinn Buckner", "Kent Benson"],
-      [],
-      [],
-      ["Bobby Wilkerson"],
-      ["Tom Abernethy"]
-    ] },
   { id: "gators25", d: "hard", p: true, q: "Name a player from Florida's 2025 national championship team",
     t: [
       ["Walter Clayton Jr.|Walter Clayton"],
@@ -247,12 +221,7 @@ window.PROMPTS = [
       ["Thomas Haugh", "Rueben Chinyelu", "Denzel Aberdeen"],
       ["Micah Handlogten"],
       ["Urban Klavzar"]
-    ] }
-];
-
-// ================= EXPANSION PACK (added Nov 2026) =================
-window.PROMPTS.push(
-  // ---------------- EASY ----------------
+    ] },
   { id: "b1gchamps", d: "easy", q: "Name a current Big Ten school that has won a men's national title",
     t: [
       ["Indiana|IU", "Michigan State|MSU", "UCLA"],
@@ -281,7 +250,8 @@ window.PROMPTS.push(
     t: [
       ["UConn|Connecticut", "Villanova"],
       ["Georgetown"],
-      [], [],
+      [],
+      [],
       ["Marquette"]
     ] },
   { id: "ff2426", d: "easy", q: "Name a team that made the men's Final Four from 2024 to 2026",
@@ -336,7 +306,8 @@ window.PROMPTS.push(
     t: [
       ["Kentucky|UK"],
       ["Memphis", "Arkansas"],
-      [], [],
+      [],
+      [],
       ["UMass|Massachusetts"]
     ] },
   { id: "pitino", d: "easy", q: "Name a college Rick Pitino has been head coach at",
@@ -351,11 +322,10 @@ window.PROMPTS.push(
     t: [
       ["Indiana|IU"],
       ["Texas Tech"],
-      [], [],
+      [],
+      [],
       ["Army|West Point"]
     ] },
-
-  // ---------------- MEDIUM ----------------
   { id: "golden", d: "medium", q: "Name a D-I school whose nickname starts with 'Golden'",
     t: [
       ["Marquette", "Minnesota"],
@@ -384,7 +354,8 @@ window.PROMPTS.push(
     t: [
       ["UConn|Connecticut"],
       ["Rhode Island|URI"],
-      [], [],
+      [],
+      [],
       ["Wagner"]
     ] },
   { id: "pearl", d: "medium", q: "Name a college Bruce Pearl has been head coach at",
@@ -399,7 +370,8 @@ window.PROMPTS.push(
     t: [
       ["Kansas|KU"],
       ["UCLA"],
-      [], [],
+      [],
+      [],
       ["SMU|Southern Methodist"]
     ] },
   { id: "ffcoach", d: "medium", p: true, q: "Name a head coach who took a team to the Final Four from 2021 to 2025",
@@ -414,14 +386,16 @@ window.PROMPTS.push(
     t: [
       ["George Mason|GMU", "VCU|Virginia Commonwealth", "Loyola Chicago|Loyola"],
       ["UCLA", "NC State|North Carolina State"],
-      [], [],
+      [],
+      [],
       ["LSU"]
     ] },
   { id: "ivywins", d: "medium", q: "Name an Ivy League school that won an NCAA tournament game from 2010 to 2025",
     t: [
       ["Princeton"],
       ["Yale", "Harvard"],
-      [], [],
+      [],
+      [],
       ["Cornell"]
     ] },
   { id: "ohio", d: "medium", q: "Name a Division I basketball school in the state of Ohio",
@@ -496,8 +470,6 @@ window.PROMPTS.push(
       ["Zach Hahn", "Shawn Vanzant"],
       ["Avery Jukes"]
     ] },
-
-  // ---------------- HARD ----------------
   { id: "nc", d: "hard", q: "Name a Division I basketball school in North Carolina",
     t: [
       ["Duke", "North Carolina|UNC", "NC State|North Carolina State", "Wake Forest"],
@@ -522,22 +494,6 @@ window.PROMPTS.push(
       ["Albany|UAlbany", "Binghamton", "Niagara", "Canisius", "Colgate", "LIU|Long Island", "Wagner"],
       ["Le Moyne"]
     ] },
-  { id: "unc05", d: "hard", p: true, q: "Name a player from North Carolina's 2005 national championship team",
-    t: [
-      ["Sean May", "Raymond Felton", "Rashad McCants", "Marvin Williams"],
-      ["Jawad Williams"],
-      ["Jackie Manuel", "Melvin Scott"],
-      [],
-      ["David Noel"]
-    ] },
-  { id: "unc09", d: "hard", p: true, q: "Name a player from North Carolina's 2009 national championship team",
-    t: [
-      ["Tyler Hansbrough|Psycho T", "Ty Lawson", "Wayne Ellington", "Danny Green"],
-      ["Deon Thompson", "Ed Davis"],
-      ["Tyler Zeller"],
-      [],
-      ["Bobby Frasor"]
-    ] },
   { id: "unc17", d: "hard", p: true, q: "Name a player from North Carolina's 2017 national championship team",
     t: [
       ["Joel Berry II|Joel Berry", "Justin Jackson"],
@@ -553,30 +509,6 @@ window.PROMPTS.push(
       ["Lance Thomas", "Miles Plumlee"],
       [],
       ["Andre Dawkins"]
-    ] },
-  { id: "duke92", d: "hard", p: true, q: "Name a player from Duke's 1991 or 1992 national title teams",
-    t: [
-      ["Christian Laettner", "Grant Hill", "Bobby Hurley"],
-      ["Thomas Hill"],
-      ["Brian Davis", "Antonio Lang", "Cherokee Parks"],
-      ["Bill McCaffrey", "Marty Clark"],
-      ["Greg Koubek"]
-    ] },
-  { id: "uk96", d: "hard", p: true, q: "Name a player from Kentucky's 1996 'Untouchables' title team",
-    t: [
-      ["Antoine Walker", "Tony Delk"],
-      ["Ron Mercer", "Walter McCarty", "Derek Anderson", "Mark Pope"],
-      ["Jeff Sheppard", "Wayne Turner", "Nazr Mohammed"],
-      [],
-      ["Anthony Epps"]
-    ] },
-  { id: "uk98", d: "hard", p: true, q: "Name a player from Kentucky's 1998 'Comeback Cats' title team",
-    t: [
-      ["Jeff Sheppard"],
-      ["Scott Padgett", "Nazr Mohammed", "Wayne Turner"],
-      ["Jamaal Magloire", "Heshimu Evans", "Allen Edwards"],
-      ["Saul Smith"],
-      ["Cameron Mills"]
     ] },
   { id: "uconn11", d: "hard", p: true, q: "Name a player from UConn's 2011 national championship team",
     t: [
@@ -602,22 +534,6 @@ window.PROMPTS.push(
       [],
       ["Stephan Van Treese|Van Treese"]
     ] },
-  { id: "ku88", d: "hard", p: true, q: "Name a player from Kansas's 1988 'Danny and the Miracles' title team",
-    t: [
-      ["Danny Manning"],
-      [],
-      ["Milt Newton", "Kevin Pritchard"],
-      ["Chris Piper", "Jeff Gueldner", "Lincoln Minor"],
-      ["Scooter Barry"]
-    ] },
-  { id: "ku08", d: "hard", p: true, q: "Name a player from Kansas's 2008 national championship team",
-    t: [
-      ["Mario Chalmers"],
-      ["Brandon Rush", "Darrell Arthur", "Sherron Collins"],
-      ["Russell Robinson", "Darnell Jackson", "Cole Aldrich"],
-      [],
-      ["Sasha Kaun"]
-    ] },
   { id: "ku22", d: "hard", p: true, q: "Name a player from Kansas's 2022 national championship team",
     t: [
       ["Ochai Agbaji"],
@@ -625,14 +541,6 @@ window.PROMPTS.push(
       ["Remy Martin", "Dajuan Harris Jr.|Dajuan Harris"],
       ["Mitch Lightfoot", "KJ Adams|K.J. Adams", "Joseph Yesufu"],
       ["Jalen Coleman-Lands|Coleman-Lands"]
-    ] },
-  { id: "nova85", d: "hard", p: true, q: "Name a player from Villanova's 1985 national championship team",
-    t: [
-      ["Ed Pinckney"],
-      ["Dwayne McClain", "Gary McLain"],
-      ["Harold Pressley"],
-      [],
-      ["Harold Jensen"]
     ] },
   { id: "nova16", d: "hard", p: true, q: "Name a player from Villanova's 2016 national championship team",
     t: [
@@ -658,85 +566,6 @@ window.PROMPTS.push(
       ["Jonathan Tchamwa Tchatchoua|Tchamwa Tchatchoua"],
       ["Flo Thamba"]
     ] },
-  { id: "mich89", d: "hard", p: true, q: "Name a player from Michigan's 1989 national championship team",
-    t: [
-      ["Glen Rice"],
-      ["Rumeal Robinson"],
-      ["Terry Mills", "Loy Vaught"],
-      ["Sean Higgins"],
-      ["Mark Hughes"]
-    ] },
-  { id: "unlv90", d: "hard", p: true, q: "Name a player from UNLV's 1990 national championship team",
-    t: [
-      ["Larry Johnson|LJ"],
-      ["Stacey Augmon", "Greg Anthony"],
-      ["Anderson Hunt"],
-      ["Moses Scurry"],
-      ["David Butler"]
-    ] },
-  { id: "ark94", d: "hard", p: true, q: "Name a player from Arkansas's 1994 national championship team",
-    t: [
-      ["Corliss Williamson|Big Nasty"],
-      ["Scotty Thurman"],
-      ["Corey Beck", "Clint McDaniel"],
-      ["Alex Dillard"],
-      ["Dwight Stewart"]
-    ] },
-  { id: "ucla95", d: "hard", p: true, q: "Name a player from UCLA's 1995 national championship team",
-    t: [
-      ["Ed O'Bannon"],
-      ["Tyus Edney", "Toby Bailey"],
-      ["Charles O'Bannon", "George Zidek"],
-      ["Cameron Dollar"],
-      ["J.R. Henderson|JR Henderson"]
-    ] },
-  { id: "cuse03", d: "hard", p: true, q: "Name a player from Syracuse's 2003 national championship team",
-    t: [
-      ["Carmelo Anthony|Melo"],
-      ["Gerry McNamara|G-Mac", "Hakim Warrick"],
-      ["Kueth Duany", "Craig Forth", "Billy Edelin"],
-      ["Josh Pace"],
-      ["Jeremy McNeil"]
-    ] },
-  { id: "md02", d: "hard", p: true, q: "Name a player from Maryland's 2002 national championship team",
-    t: [
-      ["Juan Dixon"],
-      ["Steve Blake", "Lonny Baxter", "Chris Wilcox"],
-      ["Byron Mouton", "Drew Nicholas"],
-      ["Tahj Holden"],
-      ["Ryan Randle"]
-    ] },
-  { id: "zona97", d: "hard", p: true, q: "Name a player from Arizona's 1997 national championship team",
-    t: [
-      ["Mike Bibby", "Jason Terry|JET"],
-      ["Miles Simon", "Michael Dickerson"],
-      ["A.J. Bramlett|AJ Bramlett"],
-      [],
-      ["Bennett Davison"]
-    ] },
-  { id: "ncst83", d: "hard", p: true, q: "Name a player from NC State's 1983 'Cardiac Pack' title team",
-    t: [
-      ["Lorenzo Charles", "Dereck Whittenburg"],
-      ["Thurl Bailey", "Sidney Lowe"],
-      ["Cozell McQueen"],
-      [],
-      ["Terry Gannon"]
-    ] },
-  { id: "iu87", d: "hard", p: true, q: "Name a player from Indiana's 1987 national championship team",
-    t: [
-      ["Steve Alford", "Keith Smart"],
-      ["Dean Garrett", "Daryl Thomas"],
-      [], [],
-      ["Rick Calloway"]
-    ] },
-  { id: "gmu06", d: "hard", p: true, q: "Name a player or coach from George Mason's 2006 Final Four team",
-    t: [
-      ["Jim Larranaga|Jim Larrañaga"],
-      ["Jai Lewis", "Lamar Butler"],
-      ["Tony Skinn", "Folarin Campbell", "Will Thomas"],
-      ["Sammy Hernandez"],
-      ["Gabe Norwood"]
-    ] },
   { id: "prince23", d: "hard", p: true, q: "Name a player or coach from Princeton's 2023 Sweet 16 team",
     t: [
       ["Mitch Henderson"],
@@ -744,5 +573,917 @@ window.PROMPTS.push(
       ["Blake Peters", "Matt Allocco", "Caden Pierce"],
       ["Xaivian Lee"],
       ["Keeshawn Kellman"]
+    ] },
+  { id: "wvu10", d: "hard", p: true, q: "Name a player or coach from West Virginia's 2010 Final Four team",
+    t: [
+      ["Da'Sean Butler|Da Sean Butler|Dasean Butler", "Bob Huggins"],
+      ["Devin Ebanks", "Kevin Jones", "Joe Mazzulla", "Truck Bryant|Darryl Bryant"],
+      ["Wellington Smith", "John Flowers", "Deniz Kilicli"],
+      ["Cam Thoroughman", "Dalton Pepper"],
+      ["Casey Mitchell"]
+    ] },
+  { id: "msu10", d: "hard", p: true, q: "Name a player or coach from Michigan State's 2010 Final Four team",
+    t: [
+      ["Tom Izzo", "Draymond Green", "Kalin Lucas"],
+      ["Durrell Summers", "Raymar Morgan", "Korie Lucious"],
+      ["Delvon Roe", "Chris Allen", "Derrick Nix"],
+      ["Austin Thornton", "Garrick Sherman"],
+      ["Mike Kebler"]
+    ] },
+  { id: "uk11", d: "hard", p: true, q: "Name a player from Kentucky's 2011 Final Four team",
+    t: [
+      ["Brandon Knight", "Terrence Jones"],
+      ["Doron Lamb", "DeAndre Liggins", "Darius Miller", "Josh Harrellson"],
+      ["Eloy Vargas", "Stacey Poole"],
+      ["Jon Hood", "Jarrod Polson"],
+      ["Twany Beckham"]
+    ] },
+  { id: "butler11", d: "hard", p: true, q: "Name a player or coach from Butler's 2011 national runner-up team",
+    t: [
+      ["Brad Stevens", "Shelvin Mack", "Matt Howard"],
+      ["Ronald Nored", "Andrew Smith", "Shawn Vanzant"],
+      ["Khyle Marshall", "Chase Stigall", "Zach Hahn"],
+      ["Garrett Butcher", "Chrishawn Hopkins"],
+      ["Emerson Kampen"]
+    ] },
+  { id: "vcu11", d: "hard", p: true, q: "Name a player or coach from VCU's 2011 First Four-to-Final Four team",
+    t: [
+      ["Shaka Smart"],
+      ["Jamie Skeen", "Joey Rodriguez", "Bradford Burgess", "Brandon Rozzell"],
+      ["Ed Nixon", "Juvonte Reddic", "Darius Theus"],
+      ["Rob Brandenberg", "Toby Veal"],
+      ["D.J. Haley|DJ Haley"]
+    ] },
+  { id: "osu12", d: "hard", p: true, q: "Name a player from Ohio State's 2012 Final Four team",
+    t: [
+      ["Jared Sullinger", "Aaron Craft"],
+      ["Deshaun Thomas", "William Buford", "Lenzelle Smith Jr.|Lenzelle Smith"],
+      ["Sam Thompson", "Evan Ravenel", "Amir Williams", "Shannon Scott"],
+      ["LaQuinton Ross", "Jordan Sibert"],
+      ["J.D. Weatherspoon|JD Weatherspoon"]
+    ] },
+  { id: "ku12", d: "hard", p: true, q: "Name a player or coach from Kansas's 2012 national runner-up team",
+    t: [
+      ["Thomas Robinson", "Tyshawn Taylor", "Bill Self"],
+      ["Jeff Withey", "Elijah Johnson", "Travis Releford"],
+      ["Conner Teahan", "Kevin Young"],
+      ["Naadir Tharpe", "Justin Wesley"],
+      ["Jordan Juenemann"]
+    ] },
+  { id: "lou12", d: "hard", p: true, q: "Name a player or coach from Louisville's 2012 Final Four team",
+    t: [
+      ["Rick Pitino", "Peyton Siva", "Russ Smith", "Gorgui Dieng"],
+      ["Chane Behanan", "Kyle Kuric", "Chris Smith"],
+      ["Wayne Blackshear", "Elisha Justice"],
+      [],
+      ["Stephan Van Treese"]
+    ] },
+  { id: "mich13", d: "medium", p: true, q: "Name a player from Michigan's 2013 national runner-up team",
+    t: [
+      ["Trey Burke", "Tim Hardaway Jr.|Tim Hardaway"],
+      ["Mitch McGary", "Glenn Robinson III|Glenn Robinson", "Nik Stauskas"],
+      ["Spike Albrecht", "Jordan Morgan", "Caris LeVert"],
+      ["Jon Horford", "Max Bielfeldt"],
+      ["Josh Bartelstein"]
+    ] },
+  { id: "wichita13", d: "hard", p: true, q: "Name a player or coach from Wichita State's 2013 Final Four team",
+    t: [
+      ["Gregg Marshall", "Fred VanVleet", "Cleanthony Early"],
+      ["Ron Baker", "Malcolm Armstead", "Carl Hall"],
+      ["Tekele Cotton", "Demetric Williams", "Ehimen Orukpe"],
+      ["Chadrack Lufile", "Jake White"],
+      ["Nick Wiggins"]
+    ] },
+  { id: "uk14", d: "medium", p: true, q: "Name a player from Kentucky's 2014 national runner-up team",
+    t: [
+      ["Julius Randle", "Aaron Harrison", "Andrew Harrison"],
+      ["James Young", "Willie Cauley-Stein|Cauley-Stein", "Alex Poythress"],
+      ["Dakari Johnson", "Marcus Lee", "Jarrod Polson"],
+      ["Dominique Hawkins", "Derek Willis"],
+      ["Jon Hood"]
+    ] },
+  { id: "uf14", d: "hard", p: true, q: "Name a player or coach from Florida's 2014 Final Four team",
+    t: [
+      ["Billy Donovan", "Scottie Wilbekin", "Patric Young"],
+      ["Casey Prather", "Michael Frazier II|Michael Frazier", "Dorian Finney-Smith|Finney-Smith", "Will Yeguete"],
+      ["Kasey Hill", "Chris Walker"],
+      ["DeVon Walker"],
+      ["Jacob Kurtz"]
+    ] },
+  { id: "uk15", d: "medium", p: true, q: "Name a player from Kentucky's 38-1 team (2014–15)",
+    t: [
+      ["Karl-Anthony Towns|Karl Anthony Towns|KAT", "Devin Booker", "Willie Cauley-Stein|Cauley-Stein"],
+      ["Andrew Harrison", "Aaron Harrison", "Trey Lyles", "Tyler Ulis"],
+      ["Dakari Johnson", "Alex Poythress", "Marcus Lee"],
+      ["Dominique Hawkins"],
+      ["Derek Willis"]
+    ] },
+  { id: "wisc15", d: "medium", p: true, q: "Name a player or coach from Wisconsin's 2015 national runner-up team",
+    t: [
+      ["Frank Kaminsky", "Sam Dekker", "Bo Ryan"],
+      ["Nigel Hayes", "Bronson Koenig", "Josh Gasser"],
+      ["Traevon Jackson", "Duje Dukan"],
+      ["Zak Showalter", "Vitto Brown"],
+      ["Jordan Hill"]
+    ] },
+  { id: "msu15", d: "hard", p: true, q: "Name a player or coach from Michigan State's 2015 Final Four team",
+    t: [
+      ["Tom Izzo", "Denzel Valentine", "Travis Trice"],
+      ["Branden Dawson", "Matt Costello", "Lourawls Nairn|Tum Tum Nairn"],
+      ["Gavin Schilling", "Marvin Clark Jr.|Marvin Clark", "Javon Bess"],
+      ["Alvin Ellis III|Alvin Ellis"],
+      ["Colby Wollenman"]
+    ] },
+  { id: "cuse16", d: "hard", p: true, q: "Name a player or coach from Syracuse's 2016 Final Four team (a 10 seed)",
+    t: [
+      ["Jim Boeheim", "Malachi Richardson", "Michael Gbinije"],
+      ["Tyler Lydon", "Trevor Cooney", "Tyler Roberson"],
+      ["Dajuan Coleman", "Frank Howard"],
+      ["Mike Hopkins"],
+      ["Chinonso Obokoh"]
+    ] },
+  { id: "ou16", d: "hard", p: true, q: "Name a player or coach from Oklahoma's 2016 Final Four team",
+    t: [
+      ["Buddy Hield", "Lon Kruger"],
+      ["Isaiah Cousins", "Jordan Woodard", "Ryan Spangler"],
+      ["Khadeem Lattin", "Christian James", "Dante Buford"],
+      ["Rashard Odomes", "Akolda Manyang"],
+      ["Dinjiyl Walker"]
+    ] },
+  { id: "ku17", d: "medium", p: true, q: "Name a player or coach from Kansas's 2016–17 team (Frank Mason's Player of the Year season)",
+    t: [
+      ["Frank Mason III|Frank Mason", "Josh Jackson", "Bill Self"],
+      ["Devonte' Graham|Devonte Graham", "Landen Lucas", "Svi Mykhailiuk|Sviatoslav Mykhailiuk"],
+      ["Lagerald Vick", "Carlton Bragg", "Udoka Azubuike"],
+      ["Mitch Lightfoot", "Dwight Coleby"],
+      ["Tyler Self"]
+    ] },
+  { id: "uk17", d: "medium", p: true, q: "Name a player from Kentucky's 2016–17 team (Fox, Monk & Bam)",
+    t: [
+      ["De'Aaron Fox|DeAaron Fox", "Malik Monk", "Bam Adebayo|Edrice Adebayo"],
+      ["Isaiah Briscoe", "Derek Willis", "Wenyen Gabriel"],
+      ["Dominique Hawkins", "Sacha Killeya-Jones", "Mychal Mulder"],
+      ["Isaac Humphries", "Tai Wynyard"],
+      ["Brad Calipari"]
+    ] },
+  { id: "gonzaga17", d: "medium", p: true, q: "Name a player or coach from Gonzaga's 2017 national runner-up team",
+    t: [
+      ["Mark Few", "Nigel Williams-Goss|Williams-Goss", "Przemek Karnowski"],
+      ["Zach Collins", "Jordan Mathews", "Johnathan Williams", "Josh Perkins"],
+      ["Killian Tillie", "Silas Melson"],
+      ["Rui Hachimura", "Jeremy Jones"],
+      ["Ryan Edwards"]
+    ] },
+  { id: "oregon17", d: "hard", p: true, q: "Name a player or coach from Oregon's 2017 Final Four team",
+    t: [
+      ["Dana Altman", "Dillon Brooks", "Tyler Dorsey", "Jordan Bell"],
+      ["Chris Boucher", "Payton Pritchard"],
+      ["Dylan Ennis", "Casey Benson"],
+      ["Keith Smith", "Kavell Bigby-Williams"],
+      ["Roman Sorkin"]
+    ] },
+  { id: "sc17", d: "hard", p: true, q: "Name a player or coach from South Carolina's 2017 Final Four team",
+    t: [
+      ["Frank Martin", "Sindarius Thornwell"],
+      ["PJ Dozier|P.J. Dozier", "Chris Silva", "Duane Notice"],
+      ["Maik Kotsar", "Rakym Felder"],
+      ["Hassani Gravett", "Justin McKie"],
+      ["Sedee Keita"]
+    ] },
+  { id: "ku18", d: "hard", p: true, q: "Name a player from Kansas's 2018 Final Four team",
+    t: [
+      ["Devonte' Graham|Devonte Graham", "Svi Mykhailiuk|Sviatoslav Mykhailiuk"],
+      ["Malik Newman", "Udoka Azubuike", "Lagerald Vick"],
+      ["Silvio De Sousa", "Marcus Garrett", "Mitch Lightfoot"],
+      ["Clay Young", "Sam Cunliffe"],
+      ["Chris Teahan"]
+    ] },
+  { id: "mich18", d: "medium", p: true, q: "Name a player from Michigan's 2018 national runner-up team",
+    t: [
+      ["Moritz Wagner", "Charles Matthews"],
+      ["Muhammad-Ali Abdur-Rahkman|Abdur-Rahkman", "Zavier Simpson", "Duncan Robinson"],
+      ["Jordan Poole", "Isaiah Livers", "Jon Teske"],
+      ["Eli Brooks", "Ibi Watson"],
+      ["Jaaron Simmons"]
+    ] },
+  { id: "uva18", d: "hard", p: true, q: "Name a player or coach from the 2017–18 Virginia team that lost to UMBC",
+    t: [
+      ["Tony Bennett", "Kyle Guy", "De'Andre Hunter|DeAndre Hunter"],
+      ["Ty Jerome", "Devon Hall", "Isaiah Wilkins"],
+      ["Mamadi Diakite", "Jack Salt", "Nigel Johnson"],
+      ["Jay Huff", "Marco Anthony"],
+      ["Francesco Badocchi"]
+    ] },
+  { id: "duke19", d: "medium", p: true, q: "Name a Duke teammate of Zion Williamson (2018–19)",
+    t: [
+      ["RJ Barrett|R.J. Barrett", "Cam Reddish"],
+      ["Tre Jones", "Marques Bolden", "Javin DeLaurier"],
+      ["Jack White", "Alex O'Connell", "Jordan Goldwire"],
+      ["Joey Baker", "Antonio Vrankovic"],
+      ["Mike Buckmire"]
+    ] },
+  { id: "ttu19", d: "hard", p: true, q: "Name a player or coach from Texas Tech's 2019 national runner-up team",
+    t: [
+      ["Jarrett Culver", "Chris Beard"],
+      ["Matt Mooney", "Davide Moretti", "Tariq Owens"],
+      ["Norense Odiase", "Brandone Francis", "Kyler Edwards"],
+      ["Deshawn Corprew", "Avery Benson"],
+      ["Andrei Savrasov"]
+    ] },
+  { id: "auburn19", d: "hard", p: true, q: "Name a player or coach from Auburn's 2019 Final Four team",
+    t: [
+      ["Bruce Pearl", "Bryce Brown", "Jared Harper"],
+      ["Chuma Okeke", "Anfernee McLemore", "Samir Doughty"],
+      ["Malik Dunbar", "Horace Spencer", "Austin Wiley"],
+      ["Danjel Purifoy"],
+      ["J'Von McCormick|JVon McCormick"]
+    ] },
+  { id: "msu19", d: "hard", p: true, q: "Name a player or coach from Michigan State's 2019 Final Four team",
+    t: [
+      ["Tom Izzo", "Cassius Winston"],
+      ["Nick Ward", "Xavier Tillman", "Matt McQuaid", "Kenny Goins"],
+      ["Aaron Henry", "Gabe Brown", "Joshua Langford"],
+      ["Kyle Ahrens", "Foster Loyer"],
+      ["Thomas Kithier"]
+    ] },
+  { id: "tenn19", d: "hard", p: true, q: "Name a player or coach from Tennessee's 2018–19 team (Grant Williams era)",
+    t: [
+      ["Grant Williams", "Admiral Schofield", "Rick Barnes"],
+      ["Jordan Bone", "Lamonte Turner", "Jordan Bowden", "Kyle Alexander"],
+      ["Yves Pons", "John Fulkerson"],
+      ["Jalen Johnson"],
+      ["Derrick Walker"]
+    ] },
+  { id: "zags21", d: "medium", p: true, q: "Name a player or coach from Gonzaga's 2021 team (31–0 before the title game)",
+    t: [
+      ["Jalen Suggs", "Drew Timme", "Corey Kispert", "Mark Few"],
+      ["Joel Ayayi", "Andrew Nembhard"],
+      ["Anton Watson", "Aaron Cook"],
+      ["Julian Strawther", "Dominick Harris"],
+      ["Oumar Ballo"]
+    ] },
+  { id: "hou21", d: "hard", p: true, q: "Name a player or coach from Houston's 2021 Final Four team",
+    t: [
+      ["Kelvin Sampson", "Quentin Grimes", "Marcus Sasser"],
+      ["DeJon Jarreau", "Justin Gorham", "Fabian White Jr.|Fabian White"],
+      ["Tramon Mark", "Reggie Chaney", "Brison Gresham"],
+      ["J'Wan Roberts|JWan Roberts", "Jamal Shead"],
+      ["Cameron Tyson"]
+    ] },
+  { id: "ucla21", d: "hard", p: true, q: "Name a player or coach from UCLA's 2021 First Four-to-Final Four team",
+    t: [
+      ["Johnny Juzang", "Mick Cronin", "Jaime Jaquez Jr.|Jaime Jaquez"],
+      ["Tyger Campbell", "Jules Bernard", "Cody Riley"],
+      ["Jaylen Clark", "Kenneth Nwuba", "Mac Etienne"],
+      ["David Singleton"],
+      ["Jake Kyman"]
+    ] },
+  { id: "iowa21", d: "hard", p: true, q: "Name a player or coach from Iowa's 2020–21 team (Luka Garza's Player of the Year season)",
+    t: [
+      ["Luka Garza", "Fran McCaffery"],
+      ["Joe Wieskamp", "Jordan Bohannon", "CJ Fredrick|C.J. Fredrick", "Keegan Murray"],
+      ["Jack Nunge", "Connor McCaffery", "Joe Toussaint", "Patrick McCaffery"],
+      ["Ahron Ulis", "Tony Perkins"],
+      ["Josh Ogundele"]
+    ] },
+  { id: "oru21", d: "hard", p: true, q: "Name a player or coach from Oral Roberts' 2021 Sweet 16 team (a 15 seed)",
+    t: [
+      ["Max Abmas"],
+      ["Kevin Obanor", "Paul Mills"],
+      ["DeShang Weaver", "Elijah Lufile"],
+      ["R.J. Glasper|RJ Glasper", "Carlos Jurgens"],
+      ["Francis Lacis"]
+    ] },
+  { id: "duke22", d: "medium", p: true, q: "Name a player or coach from Duke's 2022 Final Four team (Coach K's last)",
+    t: [
+      ["Paolo Banchero", "Mike Krzyzewski|Coach K"],
+      ["Mark Williams", "AJ Griffin|A.J. Griffin", "Wendell Moore Jr.|Wendell Moore", "Jeremy Roach", "Trevor Keels"],
+      ["Theo John", "Joey Baker"],
+      ["Bates Jones", "Jaylen Blakes"],
+      ["Keenan Worthington"]
+    ] },
+  { id: "unc22", d: "medium", p: true, q: "Name a player or coach from North Carolina's 2022 national runner-up team",
+    t: [
+      ["Armando Bacot", "Caleb Love", "Hubert Davis"],
+      ["RJ Davis|R.J. Davis", "Brady Manek", "Leaky Black"],
+      ["Puff Johnson", "Dontrez Styles"],
+      ["Kerwin Walton", "Justin McKoy"],
+      ["D'Marco Dunn|DMarco Dunn"]
+    ] },
+  { id: "nova22", d: "hard", p: true, q: "Name a player or coach from Villanova's 2022 Final Four team",
+    t: [
+      ["Collin Gillespie", "Jay Wright"],
+      ["Justin Moore", "Jermaine Samuels", "Eric Dixon", "Caleb Daniels"],
+      ["Brandon Slater", "Jordan Longino"],
+      ["Chris Arcidiacono", "Bryan Antoine"],
+      ["Trey Patterson"]
+    ] },
+  { id: "sdsu23", d: "hard", p: true, q: "Name a player or coach from San Diego State's 2023 national runner-up team",
+    t: [
+      ["Lamont Butler", "Brian Dutcher", "Matt Bradley"],
+      ["Darrion Trammell", "Jaedon LeDee", "Nathan Mensah", "Keshad Johnson"],
+      ["Adam Seiko", "Micah Parrish", "Aguek Arop"],
+      ["Elijah Saunders"],
+      ["Jay Pal"]
+    ] },
+  { id: "fau23", d: "hard", p: true, q: "Name a player or coach from Florida Atlantic's 2023 Final Four team",
+    t: [
+      ["Dusty May", "Johnell Davis"],
+      ["Alijah Martin", "Vladislav Goldin", "Michael Forrest"],
+      ["Nick Boyd", "Bryan Greenlee", "Giancarlo Rosado"],
+      ["Jalen Gaffney"],
+      ["Brenen Lorient"]
+    ] },
+  { id: "miami23", d: "hard", p: true, q: "Name a player or coach from Miami's 2023 Final Four team",
+    t: [
+      ["Jim Larranaga|Jim Larrañaga", "Isaiah Wong", "Nijel Pack"],
+      ["Jordan Miller", "Norchad Omier", "Wooga Poplar"],
+      ["Bensley Joseph", "Anthony Walker"],
+      ["A.J. Casey|AJ Casey"],
+      ["Harlond Beverly"]
+    ] },
+  { id: "fdu23", d: "hard", p: true, q: "Name a player or coach from Fairleigh Dickinson's 2023 team that beat No. 1 Purdue",
+    t: [
+      ["Tobin Anderson"],
+      ["Grant Singleton", "Demetre Roberts", "Sean Moore"],
+      ["Ansley Almonor", "Joe Munden Jr.|Joe Munden"],
+      ["Heru Bligen"],
+      ["Cameron Tweedy"]
+    ] },
+  { id: "ncst24", d: "medium", p: true, q: "Name a player or coach from NC State's 2024 Final Four team (an 11 seed)",
+    t: [
+      ["DJ Burns|D.J. Burns", "Kevin Keatts", "DJ Horne|D.J. Horne"],
+      ["Michael O'Connell", "Mohamed Diarra", "Jayden Taylor"],
+      ["Casey Morsell", "Ben Middlebrooks"],
+      ["Dennis Parker Jr.|Dennis Parker", "MJ Rice|M.J. Rice"],
+      ["Breon Pass"]
+    ] },
+  { id: "purdue24", d: "medium", p: true, q: "Name a player or coach from Purdue's 2024 national runner-up team",
+    t: [
+      ["Zach Edey", "Braden Smith", "Matt Painter"],
+      ["Fletcher Loyer", "Lance Jones", "Trey Kaufman-Renn|Kaufman-Renn"],
+      ["Mason Gillis", "Camden Heide", "Caleb Furst"],
+      ["Myles Colvin", "Ethan Morton"],
+      ["Will Berg"]
+    ] },
+  { id: "bama24", d: "hard", p: true, q: "Name a player or coach from Alabama's 2024 Final Four team",
+    t: [
+      ["Mark Sears", "Nate Oats", "Grant Nelson"],
+      ["Rylan Griffen", "Aaron Estrada", "Jarin Stevenson"],
+      ["Latrell Wrightsell Jr.|Latrell Wrightsell", "Nick Pringle", "Mohamed Wague"],
+      ["Davin Cosby", "Sam Walters"],
+      ["Mouhamed Dioubate"]
+    ] },
+  { id: "duke25", d: "medium", p: true, q: "Name a player or coach from Duke's 2025 Final Four team",
+    t: [
+      ["Cooper Flagg", "Jon Scheyer", "Kon Knueppel"],
+      ["Khaman Maluach", "Tyrese Proctor", "Sion James"],
+      ["Maliq Brown", "Isaiah Evans", "Mason Gillis"],
+      ["Caleb Foster", "Patrick Ngongba II|Patrick Ngongba"],
+      ["Darren Harris"]
+    ] },
+  { id: "hou25", d: "hard", p: true, q: "Name a player or coach from Houston's 2025 national runner-up team",
+    t: [
+      ["Kelvin Sampson", "LJ Cryer|L.J. Cryer", "J'Wan Roberts|JWan Roberts"],
+      ["Emanuel Sharp", "Milos Uzan", "Joseph Tugler"],
+      ["Ja'Vier Francis|JaVier Francis"],
+      ["Mylik Wilson", "Terrance Arceneaux"],
+      ["Mercy Miller"]
+    ] },
+  { id: "auburn25", d: "hard", p: true, q: "Name a player or coach from Auburn's 2025 Final Four team",
+    t: [
+      ["Johni Broome", "Bruce Pearl"],
+      ["Chad Baker-Mazara|Baker-Mazara", "Denver Jones", "Tahaad Pettiford", "Miles Kelly"],
+      ["Dylan Cardwell", "Chaney Johnson"],
+      ["Jahki Howard"],
+      ["Ja'Heim Hudson|JaHeim Hudson"]
+    ] },
+  { id: "ukoad", d: "medium", p: true, q: "Name a Kentucky freshman taken in the 1st round of the NBA Draft under Calipari (2010–2024)",
+    t: [
+      ["Anthony Davis", "John Wall", "Karl-Anthony Towns|Karl Anthony Towns|KAT", "Devin Booker", "De'Aaron Fox|DeAaron Fox"],
+      ["Jamal Murray", "Bam Adebayo", "Shai Gilgeous-Alexander|Gilgeous-Alexander|SGA", "Tyrese Maxey", "DeMarcus Cousins", "Julius Randle", "Brandon Knight", "Reed Sheppard"],
+      ["Kevin Knox", "Malik Monk", "Michael Kidd-Gilchrist|Kidd-Gilchrist|MKG", "Nerlens Noel", "Tyler Herro", "Trey Lyles", "Rob Dillingham", "Cason Wallace", "Keldon Johnson", "Skal Labissiere", "James Young"],
+      ["Eric Bledsoe", "Marquis Teague", "Archie Goodwin", "TyTy Washington"],
+      ["Daniel Orton"]
+    ] },
+  { id: "dukeoad", d: "medium", p: true, q: "Name a Duke freshman taken in the 1st round of the NBA Draft (2011–2025)",
+    t: [
+      ["Zion Williamson", "Kyrie Irving", "Jayson Tatum", "Paolo Banchero", "Cooper Flagg"],
+      ["RJ Barrett|R.J. Barrett", "Brandon Ingram", "Jabari Parker", "Marvin Bagley III|Marvin Bagley", "Wendell Carter Jr.|Wendell Carter", "Jahlil Okafor", "Kon Knueppel"],
+      ["Cam Reddish", "Justise Winslow", "Tyus Jones", "Dereck Lively II|Dereck Lively", "Jared McCain", "Khaman Maluach"],
+      ["Austin Rivers", "Harry Giles", "Jalen Johnson", "AJ Griffin|A.J. Griffin"],
+      ["Dariq Whitehead"]
+    ] },
+  { id: "no2pick", d: "medium", p: true, q: "Name a college player taken #2 overall in the NBA Draft (2010–2025)",
+    t: [
+      ["Ja Morant", "Lonzo Ball", "Brandon Ingram", "Chet Holmgren"],
+      ["Marvin Bagley III|Marvin Bagley", "Jabari Parker", "Victor Oladipo", "D'Angelo Russell|DAngelo Russell", "Brandon Miller", "Dylan Harper"],
+      ["Michael Kidd-Gilchrist|Kidd-Gilchrist|MKG", "James Wiseman"],
+      ["Evan Turner"],
+      ["Derrick Williams"]
+    ] },
+  { id: "wooden10s", d: "medium", p: true, q: "Name a Wooden Award winner from the 2010s (2010–2019)",
+    t: [
+      ["Zion Williamson", "Anthony Davis"],
+      ["Jimmer Fredette", "Buddy Hield", "Jalen Brunson"],
+      ["Doug McDermott", "Frank Kaminsky", "Trey Burke"],
+      ["Frank Mason III|Frank Mason"],
+      ["Evan Turner"]
+    ] },
+  { id: "naismith20s", d: "hard", p: true, q: "Name a Naismith Player of the Year from 2020 to 2025",
+    t: [
+      ["Cooper Flagg", "Zach Edey"],
+      ["Luka Garza"],
+      ["Oscar Tshiebwe"],
+      [],
+      ["Obi Toppin"]
+    ] },
+  { id: "ff10s", d: "medium", q: "Name a school that reached the men's Final Four from 2010 to 2019",
+    t: [
+      ["Duke", "Kentucky|UK", "North Carolina|UNC", "Kansas|KU", "Villanova|Nova"],
+      ["Michigan State|MSU", "UConn|Connecticut", "Gonzaga|Zags", "Virginia|UVA", "Louisville", "Michigan", "Syracuse", "Wisconsin", "Florida|UF"],
+      ["Butler", "Ohio State|OSU", "Oregon", "Oklahoma|OU", "Texas Tech", "Auburn", "Loyola Chicago|Loyola"],
+      ["VCU|Virginia Commonwealth", "Wichita State", "South Carolina"],
+      ["West Virginia|WVU"]
+    ] },
+  { id: "titleloss", d: "medium", q: "Name a team that lost the men's national title game from 2010 to 2025",
+    t: [
+      ["Gonzaga|Zags", "North Carolina|UNC", "Kentucky|UK"],
+      ["Butler", "Michigan", "Kansas|KU", "Purdue", "Houston"],
+      ["Wisconsin"],
+      ["Texas Tech"],
+      ["San Diego State|SDSU"]
+    ] },
+  { id: "statesff", d: "hard", q: "Name a school with 'State' in its name that made the men's Final Four from 2010 to 2025",
+    t: [
+      ["Michigan State|MSU"],
+      ["Ohio State|OSU", "San Diego State|SDSU"],
+      ["NC State|North Carolina State"],
+      [],
+      ["Wichita State"]
+    ] },
+  { id: "betourney", d: "hard", q: "Name a Big East tournament champion from 2010 to 2025",
+    t: [
+      ["Villanova|Nova", "UConn|Connecticut"],
+      ["Louisville", "Marquette", "St. John's|Saint Johns|St Johns"],
+      ["Seton Hall", "Providence"],
+      ["Georgetown"],
+      ["West Virginia|WVU"]
+    ] },
+  { id: "sectourney", d: "medium", q: "Name an SEC tournament champion from 2010 to 2025",
+    t: [
+      ["Kentucky|UK"],
+      ["Alabama|Bama", "Auburn", "Florida|UF"],
+      ["Tennessee|Vols"],
+      ["Vanderbilt|Vandy"],
+      ["Ole Miss|Mississippi"]
+    ] },
+  { id: "acctourney", d: "medium", q: "Name an ACC tournament champion from 2010 to 2025",
+    t: [
+      ["Duke"],
+      ["Virginia|UVA", "North Carolina|UNC"],
+      ["Notre Dame", "Miami", "Florida State|FSU"],
+      ["NC State|North Carolina State", "Virginia Tech"],
+      ["Georgia Tech"]
+    ] },
+  { id: "b1gtourney", d: "medium", q: "Name a Big Ten tournament champion from 2010 to 2025",
+    t: [
+      ["Michigan State|MSU", "Michigan"],
+      ["Ohio State|OSU", "Wisconsin", "Purdue"],
+      ["Illinois"],
+      [],
+      ["Iowa"]
+    ] },
+  { id: "b12tourney", d: "medium", q: "Name a Big 12 tournament champion from 2010 to 2025",
+    t: [
+      ["Kansas|KU"],
+      ["Iowa State|ISU", "Texas|UT"],
+      ["Houston"],
+      [],
+      ["Missouri|Mizzou"]
+    ] },
+  { id: "pac12tourney", d: "hard", q: "Name a Pac-12 tournament champion from 2012 to 2024",
+    t: [
+      ["Arizona", "Oregon"],
+      ["UCLA"],
+      ["Colorado"],
+      [],
+      ["Oregon State"]
+    ] },
+  { id: "ffcoach23", d: "hard", p: true, q: "Name a head coach from the 2023 men's Final Four",
+    t: [
+      ["Dan Hurley"],
+      ["Jim Larranaga|Jim Larrañaga"],
+      ["Dusty May"],
+      [],
+      ["Brian Dutcher"]
+    ] },
+  { id: "titlegamecoach", d: "medium", p: true, q: "Name a head coach who coached in a men's national title game from 2010 to 2025",
+    t: [
+      ["Mike Krzyzewski|Coach K", "John Calipari", "Roy Williams", "Jay Wright", "Bill Self", "Dan Hurley"],
+      ["Mark Few", "Tony Bennett", "Brad Stevens", "Rick Pitino", "Jim Calhoun", "Scott Drew", "John Beilein", "Matt Painter"],
+      ["Bo Ryan", "Kevin Ollie", "Chris Beard", "Hubert Davis", "Kelvin Sampson", "Todd Golden"],
+      [],
+      ["Brian Dutcher"]
+    ] },
+  { id: "wcc", d: "medium", q: "Name a West Coast Conference member in the 2025–26 season",
+    t: [
+      ["Gonzaga|Zags", "Saint Mary's|St Marys|Saint Marys"],
+      ["San Francisco|USF", "Santa Clara", "Pepperdine", "Loyola Marymount|LMU"],
+      ["Portland", "San Diego|USD", "Pacific"],
+      ["Washington State|Wazzu", "Oregon State"],
+      ["Seattle U|Seattle|Seattle University"]
+    ] },
+  { id: "mwc", d: "hard", q: "Name a Mountain West member in the 2025–26 season",
+    t: [
+      ["San Diego State|SDSU"],
+      ["Boise State", "Utah State", "New Mexico", "UNLV", "Nevada"],
+      ["Colorado State", "Fresno State", "Wyoming"],
+      ["Air Force", "San Jose State"],
+      ["Grand Canyon|GCU"]
+    ] },
+  { id: "a10", d: "hard", q: "Name an Atlantic 10 member in the 2025–26 season",
+    t: [
+      ["Dayton", "VCU|Virginia Commonwealth"],
+      ["Saint Louis|SLU", "Saint Joseph's|St Josephs|Saint Josephs", "Loyola Chicago|Loyola", "Davidson"],
+      ["George Mason", "Richmond", "Rhode Island|URI", "St. Bonaventure|St Bonaventure|Saint Bonaventure", "Duquesne"],
+      ["George Washington|GW", "Fordham"],
+      ["La Salle"]
+    ] },
+  { id: "patriot", d: "hard", q: "Name a Patriot League basketball school",
+    t: [
+      ["Navy", "Army"],
+      ["Bucknell", "Colgate", "Lehigh"],
+      ["Boston University|BU", "Holy Cross", "American"],
+      ["Lafayette"],
+      ["Loyola Maryland|Loyola MD|Loyola (MD)"]
+    ] },
+  { id: "horizon", d: "hard", q: "Name a Horizon League member in the 2025–26 season",
+    t: [
+      ["Wright State", "Milwaukee|UW-Milwaukee"],
+      ["Oakland", "Northern Kentucky|NKU", "Green Bay|UW-Green Bay", "Cleveland State"],
+      ["Youngstown State", "Detroit Mercy|Detroit", "Robert Morris"],
+      ["Purdue Fort Wayne|PFW|Fort Wayne"],
+      ["IU Indy|IU Indianapolis|IUPUI"]
+    ] },
+  { id: "eagles", d: "easy", q: "Name a Division I school nicknamed the Eagles",
+    t: [
+      ["Boston College|BC", "Florida Gulf Coast|FGCU"],
+      ["Eastern Washington", "Eastern Michigan", "Georgia Southern", "Winthrop"],
+      ["American", "Morehead State"],
+      ["North Carolina Central|NC Central|NCCU"],
+      ["Coppin State"]
+    ] },
+  { id: "bears", d: "easy", q: "Name a Division I school nicknamed the Bears",
+    t: [
+      ["Baylor"],
+      ["Missouri State", "Mercer"],
+      ["Brown", "Northern Colorado"],
+      ["Central Arkansas"],
+      ["Morgan State"]
+    ] },
+  { id: "panthers", d: "easy", q: "Name a Division I school nicknamed the Panthers",
+    t: [
+      ["Pittsburgh|Pitt"],
+      ["Northern Iowa|UNI", "Georgia State"],
+      ["Milwaukee|UW-Milwaukee", "High Point"],
+      ["FIU|Florida International", "Eastern Illinois|EIU"],
+      ["Prairie View A&M|Prairie View"]
+    ] },
+  { id: "owls", d: "medium", q: "Name a Division I school nicknamed the Owls",
+    t: [
+      ["Temple"],
+      ["Florida Atlantic|FAU"],
+      ["Rice"],
+      [],
+      ["Kennesaw State"]
+    ] },
+  { id: "pirates", d: "medium", q: "Name a Division I school nicknamed the Pirates",
+    t: [
+      ["Seton Hall"],
+      ["East Carolina|ECU"],
+      [],
+      [],
+      ["Hampton"]
+    ] },
+  { id: "spartans", d: "easy", q: "Name a Division I school nicknamed the Spartans",
+    t: [
+      ["Michigan State|MSU"],
+      ["San Jose State"],
+      ["UNC Greensboro|UNCG"],
+      ["Norfolk State"],
+      ["USC Upstate"]
+    ] },
+  { id: "knights", d: "medium", q: "Name a Division I school nicknamed the Knights",
+    t: [
+      ["UCF|Central Florida"],
+      [],
+      ["Fairleigh Dickinson|FDU"],
+      [],
+      ["Bellarmine"]
+    ] },
+  { id: "hornets", d: "hard", q: "Name a Division I school nicknamed the Hornets",
+    t: [
+      ["Sacramento State|Sac State"],
+      [],
+      ["Alabama State"],
+      [],
+      ["Delaware State"]
+    ] },
+  { id: "bobcats", d: "medium", q: "Name a Division I school nicknamed the Bobcats",
+    t: [
+      ["Ohio"],
+      ["Montana State", "Texas State"],
+      [],
+      [],
+      ["Quinnipiac"]
+    ] },
+  { id: "mountaineers", d: "medium", q: "Name a Division I school nicknamed the Mountaineers",
+    t: [
+      ["West Virginia|WVU"],
+      ["Appalachian State|App State"],
+      [],
+      [],
+      ["Mount St. Mary's|Mount St Marys|Mount Saint Marys"]
+    ] },
+  { id: "lions", d: "hard", q: "Name a Division I school nicknamed the Lions (not Nittany Lions)",
+    t: [
+      ["Columbia"],
+      ["Loyola Marymount|LMU"],
+      ["Southeastern Louisiana"],
+      ["North Alabama"],
+      ["East Texas A&M|Texas A&M-Commerce|Texas A&M Commerce"]
+    ] },
+  { id: "hawks", d: "hard", q: "Name a Division I school nicknamed the Hawks",
+    t: [
+      ["Saint Joseph's|St Josephs|Saint Josephs"],
+      ["Monmouth"],
+      [],
+      [],
+      ["Maryland Eastern Shore|UMES"]
+    ] },
+  { id: "kentucky", d: "medium", q: "Name a Division I basketball school in Kentucky",
+    t: [
+      ["Kentucky|UK", "Louisville"],
+      ["Western Kentucky|WKU", "Murray State"],
+      ["Eastern Kentucky|EKU", "Northern Kentucky|NKU"],
+      ["Morehead State"],
+      ["Bellarmine"]
+    ] },
+  { id: "tennessee", d: "hard", q: "Name a Division I basketball school in Tennessee",
+    t: [
+      ["Tennessee|Vols", "Memphis", "Vanderbilt|Vandy"],
+      ["Belmont", "Middle Tennessee|MTSU", "East Tennessee State|ETSU", "Chattanooga|UTC"],
+      ["Austin Peay", "Lipscomb"],
+      ["Tennessee Tech", "Tennessee State"],
+      ["UT Martin|Tennessee-Martin|Tennessee Martin"]
+    ] },
+  { id: "florida", d: "medium", q: "Name a Division I basketball school in Florida",
+    t: [
+      ["Florida|UF", "Florida State|FSU", "Miami"],
+      ["UCF|Central Florida", "USF|South Florida", "Florida Atlantic|FAU", "Florida Gulf Coast|FGCU"],
+      ["FIU|Florida International", "Stetson", "North Florida|UNF", "Jacksonville"],
+      ["Florida A&M|FAMU"],
+      ["Bethune-Cookman|Bethune Cookman"]
+    ] },
+  { id: "pennsylvania", d: "hard", q: "Name a Division I basketball school in Pennsylvania",
+    t: [
+      ["Villanova|Nova", "Pittsburgh|Pitt", "Penn State|PSU", "Temple"],
+      ["Saint Joseph's|St Josephs|Saint Josephs", "La Salle", "Penn|Pennsylvania", "Drexel", "Duquesne"],
+      ["Bucknell", "Lehigh", "Robert Morris"],
+      ["Lafayette", "Saint Francis|St Francis|Saint Francis PA"],
+      ["Mercyhurst"]
+    ] },
+  { id: "virginia", d: "hard", q: "Name a Division I basketball school in Virginia",
+    t: [
+      ["Virginia|UVA", "Virginia Tech"],
+      ["VCU|Virginia Commonwealth", "George Mason", "Old Dominion|ODU", "Richmond", "James Madison|JMU"],
+      ["William & Mary|William and Mary", "Liberty", "Hampton", "Norfolk State"],
+      ["Radford", "Longwood"],
+      ["VMI|Virginia Military Institute"]
+    ] },
+  { id: "illinois", d: "hard", q: "Name a Division I basketball school in Illinois",
+    t: [
+      ["Illinois", "Northwestern", "Loyola Chicago|Loyola", "DePaul"],
+      ["Bradley", "Illinois State", "Southern Illinois|SIU", "UIC|Illinois-Chicago|Illinois Chicago"],
+      ["Northern Illinois|NIU", "Western Illinois", "Eastern Illinois"],
+      ["SIU Edwardsville|SIUE"],
+      ["Chicago State"]
+    ] },
+  { id: "michigan", d: "medium", q: "Name a Division I basketball school in Michigan",
+    t: [
+      ["Michigan", "Michigan State|MSU"],
+      ["Oakland"],
+      ["Western Michigan|WMU", "Central Michigan|CMU", "Eastern Michigan|EMU"],
+      [],
+      ["Detroit Mercy|Detroit"]
+    ] },
+  { id: "louisiana", d: "hard", q: "Name a Division I basketball school in Louisiana",
+    t: [
+      ["LSU"],
+      ["Tulane"],
+      ["Louisiana|Louisiana-Lafayette|UL Lafayette|Ragin Cajuns", "Louisiana Tech", "McNeese|McNeese State", "Louisiana-Monroe|ULM|Louisiana Monroe"],
+      ["Northwestern State", "Southeastern Louisiana", "Grambling|Grambling State", "Southern|Southern University", "New Orleans|UNO"],
+      ["Nicholls|Nicholls State"]
+    ] },
+  { id: "dc", d: "medium", q: "Name a Division I basketball school in Washington, D.C.",
+    t: [
+      ["Georgetown"],
+      ["George Washington|GW"],
+      [],
+      ["Howard"],
+      ["American"]
+    ] },
+  { id: "newjersey", d: "hard", q: "Name a Division I basketball school in New Jersey",
+    t: [
+      ["Seton Hall", "Princeton", "Rutgers"],
+      ["Saint Peter's|St Peters|Saint Peters"],
+      ["Fairleigh Dickinson|FDU", "Monmouth", "Rider"],
+      [],
+      ["NJIT|New Jersey Institute of Technology"]
+    ] },
+  { id: "utah", d: "medium", q: "Name a Division I basketball school in Utah",
+    t: [
+      ["Utah", "BYU|Brigham Young"],
+      ["Utah State", "Weber State"],
+      ["Southern Utah"],
+      ["Utah Valley"],
+      ["Utah Tech|Dixie State"]
+    ] },
+  { id: "missouri", d: "medium", q: "Name a Division I basketball school in Missouri",
+    t: [
+      ["Missouri|Mizzou"],
+      ["Saint Louis|SLU", "Missouri State"],
+      ["Southeast Missouri|SEMO|Southeast Missouri State"],
+      ["Kansas City|UMKC"],
+      ["Lindenwood"]
+    ] },
+  { id: "alabama", d: "hard", q: "Name a Division I basketball school in Alabama",
+    t: [
+      ["Alabama|Bama", "Auburn"],
+      ["UAB|Alabama-Birmingham", "South Alabama"],
+      ["Samford", "Troy", "Jacksonville State"],
+      ["North Alabama", "Alabama State"],
+      ["Alabama A&M"]
+    ] },
+  { id: "southcarolina", d: "hard", q: "Name a Division I basketball school in South Carolina",
+    t: [
+      ["South Carolina", "Clemson"],
+      ["Furman", "Wofford", "College of Charleston|Charleston"],
+      ["Winthrop", "The Citadel|Citadel", "Coastal Carolina"],
+      ["Presbyterian", "USC Upstate", "Charleston Southern"],
+      ["South Carolina State|SC State"]
+    ] },
+  { id: "massachusetts", d: "hard", q: "Name a Division I basketball school in Massachusetts",
+    t: [
+      ["UMass|Massachusetts", "Boston College|BC", "Harvard"],
+      ["Holy Cross", "Northeastern"],
+      ["Boston University|BU"],
+      ["Merrimack", "UMass Lowell"],
+      ["Stonehill"]
+    ] },
+  { id: "connecticut", d: "medium", q: "Name a Division I basketball school in Connecticut",
+    t: [
+      ["UConn|Connecticut", "Yale"],
+      ["Quinnipiac", "Fairfield"],
+      ["Sacred Heart"],
+      [],
+      ["Central Connecticut|CCSU|Central Connecticut State"]
+    ] },
+  { id: "wisconsin", d: "medium", q: "Name a Division I basketball school in Wisconsin",
+    t: [
+      ["Wisconsin", "Marquette"],
+      [],
+      ["Milwaukee|UW-Milwaukee"],
+      [],
+      ["Green Bay|UW-Green Bay"]
+    ] },
+  { id: "colorado", d: "medium", q: "Name a Division I basketball school in Colorado",
+    t: [
+      ["Colorado"],
+      ["Colorado State"],
+      ["Air Force"],
+      ["Denver"],
+      ["Northern Colorado|UNC"]
+    ] },
+  { id: "arizona", d: "medium", q: "Name a Division I basketball school in Arizona",
+    t: [
+      ["Arizona"],
+      ["Arizona State|ASU"],
+      ["Grand Canyon|GCU"],
+      [],
+      ["Northern Arizona|NAU"]
+    ] },
+  { id: "maryland", d: "hard", q: "Name a Division I basketball school in Maryland",
+    t: [
+      ["Maryland"],
+      ["UMBC", "Towson", "Navy"],
+      ["Loyola Maryland|Loyola MD", "Mount St. Mary's|Mount St Marys|Mount Saint Marys"],
+      ["Morgan State", "Coppin State"],
+      ["Maryland Eastern Shore|UMES"]
+    ] },
+  { id: "sampson", d: "medium", q: "Name a college Kelvin Sampson has been head coach at",
+    t: [
+      ["Houston"],
+      ["Oklahoma|OU", "Indiana|IU"],
+      ["Washington State|Wazzu"],
+      [],
+      ["Montana Tech"]
+    ] },
+  { id: "larranaga", d: "hard", q: "Name a college Jim Larrañaga was head coach at",
+    t: [
+      ["Miami"],
+      ["George Mason"],
+      ["Bowling Green"],
+      [],
+      ["American International|AIC"]
+    ] },
+  { id: "barnes", d: "medium", q: "Name a college Rick Barnes has been head coach at",
+    t: [
+      ["Texas|UT", "Tennessee|Vols"],
+      ["Clemson"],
+      ["Providence"],
+      [],
+      ["George Mason"]
+    ] },
+  { id: "kruger", d: "hard", q: "Name a college Lon Kruger was head coach at",
+    t: [
+      ["Oklahoma|OU", "UNLV"],
+      ["Kansas State|K-State", "Florida|UF", "Illinois"],
+      [],
+      [],
+      ["Texas-Pan American|UTPA|Pan American"]
+    ] },
+  { id: "tubby", d: "medium", q: "Name a college Tubby Smith was head coach at",
+    t: [
+      ["Kentucky|UK"],
+      ["Minnesota", "Georgia|UGA", "Tulsa"],
+      ["Texas Tech", "Memphis"],
+      [],
+      ["High Point"]
+    ] },
+  { id: "alford", d: "medium", q: "Name a college Steve Alford has been head coach at",
+    t: [
+      ["UCLA", "Iowa"],
+      ["New Mexico", "Nevada"],
+      ["Missouri State|Southwest Missouri State"],
+      [],
+      ["Manchester"]
+    ] },
+  { id: "beard", d: "hard", q: "Name a college Chris Beard has been head coach at",
+    t: [
+      ["Texas Tech", "Texas|UT"],
+      ["Ole Miss|Mississippi"],
+      ["Little Rock|Arkansas-Little Rock|UALR"],
+      ["Angelo State"],
+      ["McMurry"]
+    ] },
+  { id: "weber", d: "medium", q: "Name a college Bruce Weber was head coach at",
+    t: [
+      ["Illinois", "Kansas State|K-State"],
+      [],
+      [],
+      [],
+      ["Southern Illinois|SIU"]
+    ] },
+  { id: "lefty", d: "hard", q: "Name a college Lefty Driesell was head coach at",
+    t: [
+      ["Maryland"],
+      ["Davidson"],
+      ["James Madison|JMU"],
+      [],
+      ["Georgia State"]
+    ] },
+  { id: "lute", d: "medium", q: "Name a college Lute Olson was head coach at",
+    t: [
+      ["Arizona"],
+      ["Iowa"],
+      [],
+      [],
+      ["Long Beach State"]
+    ] },
+  { id: "fmartin", d: "medium", q: "Name a college Frank Martin has been head coach at",
+    t: [
+      ["South Carolina"],
+      ["Kansas State|K-State"],
+      [],
+      [],
+      ["UMass|Massachusetts"]
+    ] },
+  { id: "holtmann", d: "hard", q: "Name a college Chris Holtmann has been head coach at",
+    t: [
+      ["Ohio State|OSU"],
+      ["Butler", "DePaul"],
+      [],
+      [],
+      ["Gardner-Webb|Gardner Webb"]
+    ] },
+  { id: "moser", d: "hard", q: "Name a college Porter Moser has been head coach at",
+    t: [
+      ["Loyola Chicago|Loyola"],
+      ["Oklahoma|OU"],
+      ["Illinois State"],
+      [],
+      ["Little Rock|Arkansas-Little Rock|UALR"]
     ] }
-);
+];
