@@ -1156,7 +1156,7 @@ $("howto").addEventListener("click",e=>{ if(e.target===$("howto")) closeHowTo();
    GAME FLOW
    ===================================================================== */
 function start(mode){
-  if (mode==="unlimited" && !Pay.entitled){ Pay.open(); return; }
+  if (mode==="unlimited" && !Pay.entitled){ if (PAYWALL.live) Pay.open(); return; }
   stopGameLoops(); Sound.init();
   if (mode==="daily"){ const saved = store.get("dch-daily-"+todayStr()); if (saved){ G=saved; G.finished=true; lastGameTs=saved.ts||null; return showResults(false); } }
   const list = mode==="daily" ? dailySet() : unlimitedSet(diff);
@@ -1652,6 +1652,7 @@ function showResults(fresh){
     <div class="q">${esc(P(r.id).q)}<span class="a ${r.ans?"":"none"}">${r.ans?esc(r.ans):"No answer"}</span></div>
     <span class="num pts ${r.tier>=0?"k"+(r.tier+1):""}" style="${r.tier<0?"color:var(--c-text-3)":""}">${ptsOf(r)}</span></div>`).join("");
   $("again").innerHTML = `<svg class="i"><use href="#i-redo"/></svg>${G.mode==="daily" ? "Play Unlimited" : "Play Again"}`;
+  $("again").style.display = (!PAYWALL.live && !Pay.entitled) ? "none" : "";
   $("miniBoard").innerHTML = boardHTML(sortedGames("all").slice(0,5), G.ts, true);
   updateCountdown();
 }
@@ -1806,6 +1807,7 @@ const Pay = {
     const b=$("unlBadge"), btn=$("playUnl"), a=$("acctBtn");
     if (this.entitled){ b.className="badge pro on"; b.innerHTML=`<svg class="i"><use href="#i-check"/></svg>Unlocked`; btn.textContent="Start unlimited game"; }
     else { b.className="badge pro"; b.innerHTML=`<svg class="i"><use href="#i-lock"/></svg>Pro`; btn.innerHTML= PAYWALL.live ? `<svg class="i"><use href="#i-lock"/></svg>Unlock Unlimited · ${PAYWALL.price}` : `<svg class="i"><use href="#i-lock"/></svg>Unlimited · Coming soon`; if(!PAYWALL.live) b.innerHTML=`<svg class="i"><use href="#i-lock"/></svg>Soon`; }
+    const soon=!PAYWALL.live && !this.entitled; btn.disabled=soon; btn.setAttribute("aria-disabled", soon?"true":"false");
     a.classList.toggle("on", !!this.user && !this.entitled); a.classList.toggle("pro", this.entitled);
     a.setAttribute("aria-label", this.user ? `Account (${this.user.email})` : "Sign in");
   },
