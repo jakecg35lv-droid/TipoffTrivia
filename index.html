@@ -8,9 +8,8 @@
 <meta name="theme-color" content="#060f1c">
 <link rel="icon" type="image/png" sizes="32x32" href="https://app.tipofffantasy.com/favicon-32.png">
 <link rel="apple-touch-icon" href="https://app.tipofffantasy.com/apple-touch-icon.png">
-<link rel="preload" href="fonts/bigshoulders-900.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/jakarta-500.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/jakarta-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/geist-var.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 /* =====================================================================
    TIPOFF TRIVIA — Stylesheet v6
@@ -647,6 +646,149 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
   *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .embers{display:none}
 }
+/* =================== SCORING BOARD (signature) =================== */
+.hero{grid-template-columns:1fr;justify-items:center;text-align:center;gap:0;padding:var(--s7) 0 var(--s6)}
+.hero-copy{display:flex;flex-direction:column;align-items:center}
+.hero .tagline{margin-left:auto;margin-right:auto}
+.hero h1{font-size:clamp(40px,7.4vw,96px)}
+.hero-ctas{justify-content:center}
+.hero-meta{justify-content:center;width:min(520px,100%)}
+.hero-meta div{align-items:center}
+
+.board{position:relative;margin:0 0 var(--s8)}
+.board-head{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s4)}
+.board-head h2{margin:6px 0 0;font-size:clamp(28px,3.4vw,40px)}
+.board-head p{margin:0;max-width:34ch;color:var(--c-text-3);font-size:var(--fs-sm);line-height:1.5;text-align:right}
+.bstage{position:relative;overflow:hidden;border-radius:22px;aspect-ratio:800/420;isolation:isolate;
+  background:radial-gradient(120% 90% at 50% 0%,#141d31 0%,#0a0f1b 55%,#06080e 100%);
+  border:1px solid var(--c-line-2);box-shadow:var(--sh-pop),0 40px 120px -60px rgba(242,107,33,.45)}
+.bstage::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(6,8,14,.55) 0%,transparent 22%,transparent 70%,rgba(6,8,14,.7) 100%)}
+.bstage::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 0 1px rgba(255,255,255,.02)}
+#bcourt{position:absolute;inset:0;width:100%;height:100%;display:block}
+.bband{transition:fill-opacity .5s var(--ease)}
+.bband.on{fill-opacity:.2}
+.bband.blaze{animation:blaze 1.6s ease-out}
+@keyframes blaze{0%{fill-opacity:.55}100%{fill-opacity:.11}}
+#btrail.hot{filter:drop-shadow(0 0 6px rgba(255,150,50,.9))}
+.bpts{font-family:var(--f-display);font-weight:900;font-stretch:70%;letter-spacing:.02em}
+.hc-mode #bcourt{filter:saturate(1.15) contrast(1.05)}
+
+/* broadcast score bug */
+.bbug{position:absolute;z-index:4;top:16px;left:16px;display:flex;align-items:stretch;height:44px;max-width:calc(100% - 32px);
+  border-radius:10px;overflow:hidden;background:rgba(8,11,19,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--c-line-2);box-shadow:0 10px 30px -12px rgba(0,0,0,.8);transition:box-shadow .5s,border-color .5s}
+.bbug .logo{display:grid;place-items:center;padding:0 12px;background:var(--grad-primary);font-family:var(--f-display);font-weight:900;font-stretch:70%;font-size:18px;letter-spacing:.02em;color:#fff}
+.bbug .q{display:flex;flex-direction:column;justify-content:center;padding:0 14px;min-width:0;border-right:1px solid var(--c-line)}
+.bbug .q small{font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--c-text-3)}
+.bbug .q span{font-size:13px;font-weight:600;color:var(--c-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:360px}
+.bbug .sc{display:flex;align-items:center;gap:8px;padding:0 14px;background:rgba(255,255,255,.03)}
+.bbug .sc small{font-size:9.5px;font-weight:700;letter-spacing:.14em;color:var(--c-text-3)}
+.bbug .sc .num{font-size:28px;min-width:2.2ch;text-align:right;color:#fff;transition:color .4s}
+.bbug .sc.bump .num{animation:bump .5s var(--ease-spring)}
+@keyframes bump{40%{transform:scale(1.18)}}
+.bbug.gold{border-color:rgba(248,198,80,.55);box-shadow:0 0 0 1px rgba(248,198,80,.25),0 0 40px -6px rgba(248,198,80,.55)}
+.bbug.gold .sc .num{color:var(--c-gold)}
+
+/* lower third */
+.bl3{position:absolute;z-index:4;left:16px;bottom:16px;display:flex;align-items:stretch;min-width:min(380px,calc(100% - 32px));
+  border-radius:10px;overflow:hidden;background:rgba(8,11,19,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--c-line-2);opacity:0;transform:translateX(-14px);transition:opacity .35s var(--ease),transform .45s var(--ease)}
+.bl3.show{opacity:1;transform:none}
+.bl3 .chip{width:5px;background:var(--tc)}
+.bl3 .body{flex:1;padding:9px 14px;min-width:0}
+.bl3 .tier{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--tc)}
+.bl3 .ans{font-family:var(--f-display);font-weight:900;font-stretch:70%;font-size:22px;line-height:1.05;text-transform:uppercase;letter-spacing:.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bl3 .pts{display:grid;place-items:center;padding:0 16px;font-family:var(--f-display);font-weight:900;font-stretch:70%;font-size:26px;color:var(--tc);background:rgba(255,255,255,.03);border-left:1px solid var(--c-line)}
+.bl3.hot{border-color:rgba(248,198,80,.5)}
+.bl3.pend .ans{color:var(--c-text-3)}
+.bl3.pend .pts{color:var(--c-text-3)}
+.bl3.pend.hot .ans{animation:pendPulse 1s ease-in-out infinite}
+@keyframes pendPulse{50%{opacity:.45}}
+.bl3.hot .pts{background:linear-gradient(180deg,rgba(248,198,80,.18),rgba(242,107,33,.12))}
+
+/* half-court payoff */
+.bflash{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;background:radial-gradient(60% 60% at 50% 30%,#fff6dc 0%,rgba(255,190,90,.6) 40%,transparent 75%)}
+.bflash.go{animation:bflash .9s ease-out}
+@keyframes bflash{0%{opacity:0}8%{opacity:.85}100%{opacity:0}}
+.bslam{position:absolute;inset:0;z-index:6;display:grid;place-items:center;align-content:center;pointer-events:none;text-align:center}
+.bslam b{display:block;font-family:var(--f-display);font-weight:900;font-stretch:70%;text-transform:uppercase;line-height:.85;font-size:clamp(46px,10vw,124px);letter-spacing:-.01em;
+  background:var(--fire);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 28px rgba(255,140,50,.65)) drop-shadow(0 6px 0 #6b2a05);opacity:0}
+.bslam span{display:block;margin-top:10px;font-family:var(--f-display);font-weight:900;font-stretch:70%;font-size:clamp(16px,2.4vw,26px);letter-spacing:.32em;color:#fff;opacity:0}
+.bslam.go b{animation:slamIn 3.1s cubic-bezier(.2,1.3,.3,1) forwards}
+.bslam.go span{animation:slamSub 3.1s ease forwards}
+@keyframes slamIn{0%{opacity:0;transform:scale(2.4);letter-spacing:.2em}12%{opacity:1;transform:scale(.96);letter-spacing:-.01em}18%{transform:scale(1)}80%{opacity:1;transform:scale(1.04)}100%{opacity:0;transform:scale(1.1)}}
+@keyframes slamSub{0%,14%{opacity:0;transform:translateY(8px)}24%,80%{opacity:1;transform:none}100%{opacity:0}}
+
+/* tier rail */
+.brail{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:10px}
+.brail button{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:12px 14px 14px;text-align:left;border-radius:12px;
+  background:var(--c-surface);border:1px solid var(--c-line);transition:border-color .35s,background-color .35s,transform .25s var(--ease)}
+.brail button:hover{border-color:var(--c-line-2);transform:translateY(-1px)}
+.brail .bar{position:relative;display:block;width:100%;height:3px;border-radius:3px;background:rgba(255,255,255,.06);overflow:hidden;margin-bottom:8px}
+.brail .bar i{position:absolute;inset:0;transform:scaleX(0);transform-origin:left;background:var(--tc);transition:transform .6s var(--ease)}
+.brail button.done .bar i{transform:scaleX(1);opacity:.55}
+.brail button.on .bar i{transform:scaleX(1)}
+.brail .num{font-size:30px;color:var(--tc)}
+.brail .nm{font-size:12px;font-weight:700;color:var(--c-text);white-space:nowrap}
+.brail .ds{font-size:11.5px;color:var(--c-text-3);line-height:1.35}
+.brail button.on{border-color:color-mix(in srgb,var(--tc) 45%,transparent);background:linear-gradient(180deg,color-mix(in srgb,var(--tc) 9%,transparent),transparent 70%),var(--c-surface)}
+.brail button:last-child.on{box-shadow:0 0 0 1px rgba(248,198,80,.25),0 14px 34px -16px rgba(248,198,80,.6)}
+
+@media (max-width:760px){
+  .hero{padding:var(--s4) 0 var(--s5)}
+  .board{margin-bottom:var(--s7)}
+  .board-head{flex-direction:column;align-items:flex-start;gap:6px}
+  .board-head p{text-align:left}
+  .bstage{aspect-ratio:4/3.3;border-radius:16px}
+  .bbug{top:10px;left:10px;height:38px;max-width:calc(100% - 20px)}
+  .bbug .logo{font-size:15px;padding:0 9px}
+  .bbug .q{padding:0 10px}
+  .bbug .q span{font-size:11.5px;max-width:52vw}
+  .bbug .sc{padding:0 10px}
+  .bbug .sc small{display:none}
+  .bbug .sc .num{font-size:22px}
+  .bl3{left:10px;bottom:10px;right:10px;min-width:0}
+  .bl3 .ans{font-size:18px}
+  .bl3 .pts{font-size:22px;padding:0 12px}
+  .brail{gap:5px}
+  .brail button{padding:9px 8px 10px;align-items:center;text-align:center;border-radius:10px}
+  .brail .num{font-size:22px}
+  .brail .nm{font-size:9.5px;letter-spacing:.02em}
+  .brail .ds{display:none}
+}
+@media (prefers-reduced-motion:reduce){ .bslam,.bflash{display:none} }
+
+/* =================== refinement layer: one system, fewer effects =================== */
+.card{border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.022),rgba(255,255,255,0) 120px),var(--c-surface)}
+.eyebrow{letter-spacing:.12em}
+.btn{transition:background-color var(--dur-1) ease,border-color var(--dur-1) ease,color var(--dur-1) ease,box-shadow var(--dur-2) ease,transform .18s var(--ease)}
+.btn:active{transform:scale(.97)}
+.qcard::before{background:var(--c-brand);width:3px}
+.qtext{font-weight:650;letter-spacing:-.02em}
+.result-row.ok{background:rgba(54,211,153,.07)}
+.result-row.no{background:rgba(242,87,87,.07)}
+.mode{border-radius:22px}
+.mode-daily{background:radial-gradient(520px 240px at 100% 0,rgba(242,107,33,.11),transparent 70%),var(--c-surface)}
+.mode .foot .btn{min-width:200px}
+.final{border-radius:24px}
+.navlink{border-radius:9px}
+@media (hover:hover){
+  .mode:hover{transform:translateY(-3px);box-shadow:var(--sh-pop)}
+  .stat:hover,.lb-row:hover{border-color:var(--c-line-2)}
+}
+.hero-copy .badge{margin:var(--s3) 0 var(--s5)}
+.hero .tagline{margin-bottom:var(--s2)!important}
+.hero-meta{border-top-color:transparent;position:relative}
+.hero-meta::before{content:"";position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--c-line-2),transparent)}
+@media (max-width:760px){
+  .board-head p{display:none}
+  .board-head h2{font-size:28px}
+  .mode .foot .btn{min-width:0;flex:1}
+  .card{border-radius:18px}
+}
+
 </style>
   <!-- PostHog analytics (same project as app.tipofffantasy.com) -->
   <script>
@@ -736,13 +878,21 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
         <div><span class="num k5">700</span><span>max score</span></div>
       </div>
     </div>
-    <div class="hero-art">
-      <div class="glow"></div>
-      <div class="card">
-        <svg class="zonecourt" id="zonecourt" viewBox="0 0 300 200" role="img" aria-label="Half court showing five scoring zones, deeper zones score more"></svg>
-        <div class="art-caption"><span><b style="color:var(--c-text)">Deeper answer, deeper shot.</b> More points the farther out you go.</span><span class="k5" style="white-space:nowrap">🔥 1 Half Court per prompt</span></div>
-      </div>
+  </section>
+
+  <section class="board" id="board" aria-label="How scoring works">
+    <div class="board-head">
+      <div><div class="eyebrow">The Scoring Board</div><h2 class="display">Deeper answer. Deeper shot.</h2></div>
+      <p>Every answer is a shot. The rarer it is, the farther out you shoot. One hidden Half Court answer per prompt.</p>
     </div>
+    <div class="bstage" id="bstage">
+      <svg id="bcourt" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+      <div class="bbug" id="bbug"><div class="logo">TT</div><div class="q"><small>Prompt</small><span id="bbugQ"></span></div><div class="sc"><small>PTS</small><span class="num" id="bbugScore">0</span></div></div>
+      <div class="bl3" id="bl3"><div class="chip"></div><div class="body"><div class="tier" id="bl3Tier"></div><div class="ans" id="bl3Ans"></div></div><div class="pts" id="bl3Pts"></div></div>
+      <div class="bflash" id="bflash"></div>
+      <div class="bslam" id="bslam"><b>Half Court</b><span>+100 · Nothing but net</span></div>
+    </div>
+    <div class="brail" id="brail" role="tablist" aria-label="Scoring tiers"></div>
   </section>
 
   <section class="modes" id="modes">
@@ -779,7 +929,6 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
     </article>
   </section>
 
-  <section class="tierstrip" id="tierstrip" aria-label="Scoring tiers"></section>
 </main>
 
 <!-- ============ GAME ============ -->
@@ -1602,6 +1751,313 @@ const CourtShow={
     txt.animate([{opacity:0,transform:"translateY(4px)"},{opacity:1,transform:"translateY(-4px)",offset:.25},{opacity:0,transform:"translateY(-16px)"}],{duration:hot?1300:950,easing:"ease-out",fill:"forwards"}).onfinish=()=>txt.remove();
   }
 };
+/* =====================================================================
+   SCORING BOARD — broadcast-camera half court. Each tier takes a real
+   3D shot (floor coords in feet, projected through a pinhole camera),
+   with ball shadow, trail, net swish and a running score bug.
+   The Half Court tier gets the full treatment: camera push-in, slow-mo,
+   fire trail, flash, shake, shockwave and a title slam.
+   ===================================================================== */
+const Board = (()=>{
+  const W=800, H=420, CAM={f:860, yc:92, zc:27, h0:-85, cx:400};
+  const HOOPF={x:0,y:5.25}, RIMZ=10, RIMR=.75;
+  const LIMITS=[0,6,22.15,28,36,60];               // tier bands in feet from the hoop
+  const SPOTS=[[2.6,7.6],[-11.5,15.5],[16.5,22.5],[-9.5,35],[8.5,45.5]];
+  const P=(x,y,z=0)=>{ const d=CAM.yc-y; return [CAM.cx+CAM.f*x/d, CAM.h0+CAM.f*(CAM.zc-z)/d]; };
+  const scaleAt=(y)=>CAM.f/(CAM.yc-y);
+  const f1=n=>n.toFixed(1);
+  const pts=a=>a.map(p=>f1(p[0])+","+f1(p[1])).join(" ");
+  const NS="http://www.w3.org/2000/svg";
+  const mk=(tag,attrs,parent)=>{ const e=document.createElementNS(NS,tag); for(const a in attrs) e.setAttribute(a,attrs[a]); if(parent) parent.appendChild(e); return e; };
+
+  // boundary of a tier band at radius r (the 3-point band follows the real corner lines)
+  function boundary(r, three){
+    const out=[];
+    for (let a=-120;a<=120;a+=3){
+      const t=a*Math.PI/180; let x=HOOPF.x+r*Math.sin(t), y=HOOPF.y+r*Math.cos(t);
+      if (three && Math.abs(x)>21.65) x=Math.sign(x)*21.65;
+      out.push(P(x,y));
+    }
+    return out;
+  }
+  function ringPath(r1,r2,three1,three2){
+    const o=boundary(r2,three2), d=["M"+o.map(p=>f1(p[0])+" "+f1(p[1])).join(" L")+" Z"];
+    if (r1>0){ const i=boundary(r1,three1).reverse(); d.push("M"+i.map(p=>f1(p[0])+" "+f1(p[1])).join(" L")+" Z"); }
+    return d.join(" ");
+  }
+  function arc(cx,cy,r,a0,a1,z=0,step=4){ const o=[]; for(let a=a0;a<=a1+.01;a+=step){ const t=a*Math.PI/180; o.push(P(cx+r*Math.sin(t), cy+r*Math.cos(t), z)); } return o; }
+
+  let svg, cam, fx, ballG, ballC, seams, shadow, trailG, trailSegs=[], netG, rimEl, bandEls=[], spotEl, beam;
+  let bug, bugQ, bugScore, l3, l3Tier, l3Ans, l3Pts, rail, flash, slam, stage;
+  let running=false, visible=true, raf=0, timer=0, step=0, score=0, shown=0, cycle=0, prompt=null, holdUntil=0;
+  let camS=1, camX=W/2, camY=H/2, shakeT=0;
+
+  function court(){
+    const C=[P(-25,0),P(25,0),P(25,47),P(-25,47)];
+    let s=`<defs>
+      <clipPath id="bclip"><polygon points="${pts(C)}"/></clipPath>
+      <linearGradient id="bfloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d1526"/><stop offset="1" stop-color="#16213a"/></linearGradient>
+      <radialGradient id="bball" cx=".36" cy=".3" r=".75"><stop offset="0" stop-color="#ffc07a"/><stop offset=".55" stop-color="#f06d12"/><stop offset="1" stop-color="#a8420a"/></radialGradient>
+      <radialGradient id="bfire" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff3c4"/><stop offset=".35" stop-color="#ffb347"/><stop offset="1" stop-color="#ff5a1f" stop-opacity="0"/></radialGradient>
+      <radialGradient id="bspot" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+      <linearGradient id="bbeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".22"/></linearGradient>
+      <filter id="bglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+    </defs>
+    <g id="bcam">
+      <polygon points="${pts(C)}" fill="url(#bfloor)"/>
+      <g clip-path="url(#bclip)">`;
+    for (let k=0;k<5;k++){
+      s+=`<path class="bband" data-k="${k}" d="${ringPath(LIMITS[k],LIMITS[k+1],k===2,k+1===2)}" fill-rule="evenodd" fill="${TIERS[k].color}" fill-opacity="${[.07,.07,.08,.09,.11][k]}"/>`;
+    }
+    // planks
+    for (let x=-25;x<=25;x+=2.5){ s+=`<line x1="${f1(P(x,0)[0])}" y1="${f1(P(x,0)[1])}" x2="${f1(P(x,47)[0])}" y2="${f1(P(x,47)[1])}" stroke="#fff" stroke-opacity=".025"/>`; }
+    s+=`</g><g fill="none" stroke="#fff" stroke-opacity=".38" stroke-width="1.4" stroke-linejoin="round">
+      <polygon points="${pts(C)}"/>
+      <polygon points="${pts([P(-8,0),P(8,0),P(8,19),P(-8,19)])}" fill="#f26b21" fill-opacity=".08"/>
+      <polyline points="${pts(arc(0,19,6,-90,90))}"/>
+      <polyline stroke-dasharray="4 5" points="${pts(arc(0,19,6,90,270))}"/>
+      <polyline points="${pts(arc(0,5.25,4,-90,90))}"/>
+      <polyline points="${pts([P(-21.65,0),P(-21.65,9.93)])}"/>
+      <polyline points="${pts([P(21.65,0),P(21.65,9.93)])}"/>
+      <polyline points="${pts(arc(0,5.25,22.15,-77.8,77.8,0,2))}"/>
+      <polyline points="${pts(arc(0,47,6,90,270))}"/>
+    </g>
+    <g id="bfx"></g>
+    <ellipse id="bshadow" rx="6" ry="2" fill="#000" opacity="0"/>
+    <g id="btrail"></g>
+    <g id="bspotg" opacity="0"><ellipse id="bspotring" fill="none" stroke-width="2"/><polygon id="bbeampoly" fill="url(#bbeam)"/></g>`;
+    // hoop: stanchion + backboard + rim + net
+    const bb=[P(-3,4,13.5),P(3,4,13.5),P(3,4,9.5),P(-3,4,9.5)];
+    const sq=[P(-1,4,11.5),P(1,4,11.5),P(1,4,10),P(-1,4,10)];
+    s+=`<polygon points="${pts([P(-.3,1,0),P(.3,1,0),P(.3,1,9.6),P(-.3,1,9.6)])}" fill="#2a3550"/>
+      <polygon points="${pts(bb)}" fill="#cfe0ff" fill-opacity=".1" stroke="#e8f0ff" stroke-opacity=".7" stroke-width="1.4"/>
+      <polygon points="${pts(sq)}" fill="none" stroke="#e8f0ff" stroke-opacity=".7" stroke-width="1.2"/>
+      <g id="bnet" stroke="#e8f0ff" stroke-opacity=".55" stroke-width=".9" fill="none"></g>
+      <polygon id="brim" points="${pts(arc(HOOPF.x,HOOPF.y,RIMR,0,360,RIMZ,20))}" fill="none" stroke="#ff6a1f" stroke-width="2.4"/>
+      <g id="bball"><circle r="5" fill="url(#bball)" stroke="#3a1606" stroke-width=".8"/><g id="bseams" stroke="#3a1606" stroke-width=".8" fill="none"><line x1="-5" y1="0" x2="5" y2="0"/><line x1="0" y1="-5" x2="0" y2="5"/><path d="M-3.6 -3.6 Q0 0 -3.6 3.6"/><path d="M3.6 -3.6 Q0 0 3.6 3.6"/></g></g>
+    </g>`;
+    return s;
+  }
+  function drawNet(stretch){
+    const top=[], bot=[]; const sy=1+stretch*.9, sx=1-stretch*.35;
+    for (let a=0;a<360;a+=30){ const t=a*Math.PI/180;
+      top.push(P(HOOPF.x+RIMR*Math.sin(t), HOOPF.y+RIMR*Math.cos(t), RIMZ));
+      bot.push(P(HOOPF.x+RIMR*.55*sx*Math.sin(t), HOOPF.y+RIMR*.55*sx*Math.cos(t), RIMZ-1.5*sy)); }
+    let s=""; top.forEach((p,i)=>{ const q=bot[(i+1)%bot.length], q2=bot[(i+bot.length-1)%bot.length];
+      s+=`<line x1="${f1(p[0])}" y1="${f1(p[1])}" x2="${f1(q[0])}" y2="${f1(q[1])}"/><line x1="${f1(p[0])}" y1="${f1(p[1])}" x2="${f1(q2[0])}" y2="${f1(q2[1])}"/>`; });
+    s+=`<polyline points="${pts(bot.concat([bot[0]]))}"/>`;
+    netG.innerHTML=s;
+  }
+
+  function pickPrompt(){
+    const pool=PROMPTS.filter(p=>p.p && p.t.every(l=>l.length));
+    const pref=["ukoad","dukeoad","zags21","uk15","mich13","duke19","ncst24"];
+    const ordered=pref.map(id=>pool.find(p=>p.id===id)).filter(Boolean);
+    const list=ordered.length?ordered:pool;
+    prompt=list[cycle%list.length];
+    bugQ.textContent=prompt.q;
+  }
+  const ansFor=k=>prompt.t[k][Math.floor(Math.random()*prompt.t[k].length)].split("|")[0];
+
+  function setCam(s,x,y){
+    const hw=W/2/s, hh=H/2/s;
+    x=Math.max(hw,Math.min(W-hw,x)); y=Math.max(hh,Math.min(H-hh,y));
+    let sx=0, sy=0;
+    if (shakeT>0){ const a=shakeT*9; sx=(Math.random()-.5)*a; sy=(Math.random()-.5)*a; }
+    cam.setAttribute("transform",`translate(${f1(W/2+sx)} ${f1(H/2+sy)}) scale(${s.toFixed(4)}) translate(${f1(-x)} ${f1(-y)})`);
+    camS=s; camX=x; camY=y;
+  }
+  function tweenCam(s,x,y,dur){
+    const s0=camS,x0=camX,y0=camY,t0=performance.now();
+    return new Promise(res=>{ const tick=now=>{ const u=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-u,3);
+      setCam(s0+(s-s0)*e, x0+(x-x0)*e, y0+(y-y0)*e); if(u<1) raf=requestAnimationFrame(tick); else res(); }; raf=requestAnimationFrame(tick); });
+  }
+  function count(to){
+    const from=shown, t0=performance.now(), dur=700;
+    const tick=now=>{ const u=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-u,4);
+      shown=Math.round(from+(to-from)*e); bugScore.textContent=shown; if(u<1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+    bugScore.parentElement.classList.remove("bump"); void bugScore.offsetWidth; bugScore.parentElement.classList.add("bump");
+  }
+  function setRail(k){
+    [...rail.children].forEach((b,i)=>{ b.classList.toggle("on",i===k); b.classList.toggle("done",i<k); b.setAttribute("aria-selected",i===k?"true":"false"); });
+    bandEls.forEach((b,i)=>b.classList.toggle("on",i===k));
+  }
+  function lowerThird(k,ans){
+    l3.classList.remove("show"); void l3.offsetWidth;
+    l3.style.setProperty("--tc",TIERS[k].color);
+    l3Tier.textContent=TIERS[k].name; l3Ans.textContent=ans; l3Pts.textContent="+"+TIERS[k].pts;
+    l3.classList.toggle("hot",k===4);
+    l3.classList.remove("pend");
+    l3.classList.add("show");
+  }
+
+  function pending(k){
+    l3.classList.remove("show"); void l3.offsetWidth;
+    l3.style.setProperty("--tc",TIERS[k].color);
+    l3Tier.textContent=k===4?"Half Court attempt":TIERS[k].name; l3Ans.textContent=k===4?"From the logo…":"In the air…"; l3Pts.textContent=TIERS[k].pts;
+    l3.classList.toggle("hot",k===4); l3.classList.add("show","pend");
+  }
+  function spotlight(x,y,color,on){
+    const [px,py]=P(x,y), r=scaleAt(y)*2.2;
+    const ring=svg.querySelector("#bspotring"), poly=svg.querySelector("#bbeampoly"), g=svg.querySelector("#bspotg");
+    ring.setAttribute("cx",f1(px)); ring.setAttribute("cy",f1(py)); ring.setAttribute("rx",f1(r)); ring.setAttribute("ry",f1(r*.32)); ring.setAttribute("stroke",color);
+    poly.setAttribute("points",pts([[px-r*.55,py-scaleAt(y)*9],[px+r*.55,py-scaleAt(y)*9],[px+r,py],[px-r,py]]));
+    g.animate([{opacity:g.getAttribute("opacity")||0},{opacity:on?1:0}],{duration:300,fill:"forwards"});
+    g.setAttribute("opacity",on?1:0);
+  }
+
+  function shoot(k){
+    return new Promise(res=>{
+      const hot=k===4, mirror=cycle%2?-1:1;
+      const [sx0,sy0]=SPOTS[k], sx=sx0*mirror, sy=sy0;
+      const color=TIERS[k].color, ans=ansFor(k);
+      const dist=Math.hypot(sx-HOOPF.x, sy-HOOPF.y);
+      const apex=hot?8:3.2+dist*.22, z0=7.6;
+      const dur=hot?2700:620+dist*32;
+      setRail(k);
+      spotlight(sx,sy,color,true);
+      pending(k);
+      // trail segments
+      trailG.innerHTML=""; trailSegs=[];
+      const N=hot?26:16;
+      for(let i=0;i<N;i++) trailSegs.push(mk("line",{stroke:hot?"#ffb347":color,"stroke-linecap":"round"},trailG));
+      trailG.classList.toggle("hot",hot);
+      const hist=[];
+      const begin=()=>{
+        const t0=performance.now();
+        ballG.style.opacity=1;
+        let spin=0;
+        const tick=now=>{
+          let t=Math.min(1,(now-t0)/dur);
+          const u= hot ? t+.62*Math.sin(2*Math.PI*t)/(2*Math.PI) : t;
+          const x=sx+(HOOPF.x-sx)*u, y=sy+(HOOPF.y-sy)*u, z=z0+(RIMZ+.4-z0)*u+4*apex*u*(1-u);
+          const [px,py]=P(x,y,z), r=Math.max(2.2,scaleAt(y)*.42);
+          spin+=hot?7:12;
+          ballG.setAttribute("transform",`translate(${f1(px)} ${f1(py)}) scale(${(r/5).toFixed(3)})`);
+          seams.setAttribute("transform",`rotate(${spin.toFixed(0)})`);
+          const [shx,shy]=P(x,y,0), sr=scaleAt(y)*.5*(1-Math.min(.6,z/40));
+          shadow.setAttribute("cx",f1(shx)); shadow.setAttribute("cy",f1(shy)); shadow.setAttribute("rx",f1(sr)); shadow.setAttribute("ry",f1(sr*.3));
+          shadow.setAttribute("opacity",(.55*(1-Math.min(.85,z/26))).toFixed(2));
+          hist.push([px,py]); if(hist.length>N+1) hist.shift();
+          for(let i=0;i<trailSegs.length;i++){ const a=hist[hist.length-2-i], b=hist[hist.length-1-i], L=trailSegs[i];
+            if(!a||!b){ L.setAttribute("opacity",0); continue; }
+            L.setAttribute("x1",f1(a[0])); L.setAttribute("y1",f1(a[1])); L.setAttribute("x2",f1(b[0])); L.setAttribute("y2",f1(b[1]));
+            L.setAttribute("opacity",((1-i/trailSegs.length)*(hot?.95:.7)).toFixed(2));
+            L.setAttribute("stroke-width",((1-i/trailSegs.length)*Math.min(hot?7:4,hot?r*1.3:r*.8)+.5).toFixed(1)); }
+          if (hot){
+            const [rx0,ry0]=P(HOOPF.x,HOOPF.y,RIMZ), tx=px*.55+rx0*.45, ty=py*.55+ry0*.45;
+            const zs = t<.5 ? 1.25-.22*(t/.5) : 1.03+.42*Math.pow((t-.5)/.5,2);
+            setCam(zs, camX+(tx-camX)*.16, camY+(ty-camY)*.16);
+            if (Math.random()<.75) spark(px,py,true);
+          }
+          if (t<1){ raf=requestAnimationFrame(tick); return; }
+          // drop through the net
+          const tD=performance.now();
+          const drop=now2=>{ const v=Math.min(1,(now2-tD)/220), zz=RIMZ+.4-v*3.2, [qx,qy]=P(HOOPF.x,HOOPF.y,zz);
+            ballG.setAttribute("transform",`translate(${f1(qx)} ${f1(qy)}) scale(${(Math.max(2.2,scaleAt(HOOPF.y)*.42)/5).toFixed(3)})`);
+            ballG.style.opacity=1-v*.9;
+            if(v<1) raf=requestAnimationFrame(drop); else { ballG.style.opacity=0; } };
+          raf=requestAnimationFrame(drop);
+          trailG.animate([{opacity:1},{opacity:0}],{duration:600,fill:"forwards"}).onfinish=()=>{ trailG.innerHTML=""; trailG.style.opacity=""; trailG.getAnimations().forEach(a=>a.cancel()); };
+          shadow.setAttribute("opacity",0);
+          make(k,hot,color);
+          lowerThird(k,ans);
+          score+=TIERS[k].pts; count(score);
+          spotlight(sx,sy,color,false);
+          if (hot) halfCourtPayoff().then(res); else setTimeout(res,1100);
+        };
+        raf=requestAnimationFrame(tick);
+      };
+      if (hot){
+        stage.classList.add("hc-mode");
+        const [px,py]=P(sx,sy,6);
+        tweenCam(1.25,px,py-30,700).then(()=>setTimeout(begin,250));
+      } else { begin(); }
+    });
+  }
+
+  function spark(x,y,fire){
+    const c=mk("circle",{cx:f1(x+(Math.random()-.5)*6),cy:f1(y+(Math.random()-.5)*6),r:(1+Math.random()*2).toFixed(1),fill:Math.random()<.5?"#ffe08a":"#ff7a2a"},fx);
+    c.animate([{opacity:1,transform:"translate(0,0)"},{opacity:0,transform:`translate(${f1((Math.random()-.5)*10)}px,${f1(6+Math.random()*12)}px)`}],{duration:520,easing:"ease-out",fill:"forwards"}).onfinish=()=>c.remove();
+  }
+  function make(k,hot,color){
+    const [rx,ry]=P(HOOPF.x,HOOPF.y,RIMZ), rr=scaleAt(HOOPF.y)*RIMR;
+    // net swish
+    const t0=performance.now();
+    const n=now=>{ const u=Math.min(1,(now-t0)/(hot?700:480)); drawNet(Math.sin(u*Math.PI)*(1-u*.4)); if(u<1) requestAnimationFrame(n); else drawNet(0); };
+    requestAnimationFrame(n);
+    rimEl.animate([{stroke:"#fff",strokeWidth:hot?4:3},{stroke:"#ff6a1f",strokeWidth:2.4}],{duration:hot?900:500,easing:"ease-out"});
+    const ring=(scale,dur,op,w,c)=>{ const e=mk("ellipse",{cx:f1(rx),cy:f1(ry),rx:f1(rr),ry:f1(rr*.35),fill:"none",stroke:c,"stroke-width":w,"vector-effect":"non-scaling-stroke"},fx);
+      e.style.transformOrigin=`${f1(rx)}px ${f1(ry)}px`;
+      e.animate([{transform:"scale(1)",opacity:op},{transform:`scale(${scale})`,opacity:0}],{duration:dur,easing:"cubic-bezier(.2,.8,.2,1)",fill:"forwards"}).onfinish=()=>e.remove(); };
+    ring(hot?9:5,hot?900:650,1,hot?3:2,color);
+    const t=mk("text",{x:f1(rx+(hot?40:26)),y:f1(ry-4),"text-anchor":"middle",class:"bpts",fill:hot?"#ffc35a":color,"font-size":hot?22:16},fx);
+    t.textContent="+"+TIERS[k].pts;
+    t.animate([{opacity:0,transform:"translateY(6px)"},{opacity:1,transform:"translateY(-4px)",offset:.2},{opacity:0,transform:"translateY(-22px)"}],{duration:hot?1500:1000,easing:"ease-out",fill:"forwards"}).onfinish=()=>t.remove();
+  }
+  function halfCourtPayoff(){
+    return new Promise(res=>{
+      const [rx,ry]=P(HOOPF.x,HOOPF.y,RIMZ);
+      flash.classList.remove("go"); void flash.offsetWidth; flash.classList.add("go");
+      shakeT=1; const s0=performance.now();
+      const shake=now=>{ shakeT=Math.max(0,1-(now-s0)/650); setCam(camS,camX,camY); if(shakeT>0) requestAnimationFrame(shake); };
+      requestAnimationFrame(shake);
+      // floor shockwaves
+      const [fx0,fy0]=P(HOOPF.x,HOOPF.y,0), base=scaleAt(HOOPF.y);
+      [0,140,280].forEach(d=>setTimeout(()=>{ const e=mk("ellipse",{cx:f1(fx0),cy:f1(fy0),rx:f1(base*2),ry:f1(base*.7),fill:"none",stroke:"#ffc35a","stroke-width":2.5,"vector-effect":"non-scaling-stroke"},fx);
+        e.style.transformOrigin=`${f1(fx0)}px ${f1(fy0)}px`;
+        e.animate([{transform:"scale(1)",opacity:.9},{transform:"scale(9)",opacity:0}],{duration:1100,easing:"cubic-bezier(.2,.8,.2,1)",fill:"forwards"}).onfinish=()=>e.remove(); },d));
+      // particle burst from the rim (screen space, gravity)
+      const parts=[]; for(let i=0;i<70;i++){ const a=Math.random()*Math.PI*2, v=1.5+Math.random()*4.5;
+        parts.push({x:rx,y:ry,vx:Math.cos(a)*v,vy:Math.sin(a)*v-2.5,el:mk("circle",{r:(.8+Math.random()*2).toFixed(1),fill:["#fff3c4","#ffc35a","#ff8a2a","#ff5a1f"][i%4]},fx)}); }
+      const p0=performance.now();
+      const pt=now=>{ const u=(now-p0)/1400; parts.forEach(p=>{ p.vy+=.12; p.vx*=.985; p.x+=p.vx; p.y+=p.vy; p.el.setAttribute("cx",f1(p.x)); p.el.setAttribute("cy",f1(p.y)); p.el.setAttribute("opacity",Math.max(0,1-u).toFixed(2)); });
+        if(u<1) requestAnimationFrame(pt); else parts.forEach(p=>p.el.remove()); };
+      requestAnimationFrame(pt);
+      bandEls[4].classList.add("blaze");
+      bug.classList.add("gold");
+      slam.classList.remove("go"); void slam.offsetWidth; slam.classList.add("go");
+      setTimeout(()=>{ tweenCam(1,W/2,H/2,900); stage.classList.remove("hc-mode"); }, 1500);
+      setTimeout(()=>{ slam.classList.remove("go"); bandEls[4].classList.remove("blaze"); res(); }, 3200);
+    });
+  }
+
+  async function loop(){
+    if (!running) return;
+    if (!canPlay()){ timer=setTimeout(loop,600); return; }
+    if (step===0){ score=0; shown=0; bugScore.textContent="0"; bug.classList.remove("gold"); pickPrompt(); l3.classList.remove("show"); }
+    await shoot(step);
+    step=(step+1)%5;
+    if (step===0){ cycle++; timer=setTimeout(loop,1600); }
+    else timer=setTimeout(loop, Math.max(350, holdUntil-performance.now()));
+  }
+  const canPlay=()=>visible && !document.hidden && !$("menu").classList.contains("hidden");
+
+  function staticState(){
+    pickPrompt(); setRail(4); score=285; bugScore.textContent="285";
+    lowerThird(4,ansFor(4)); ballG.style.opacity=0;
+  }
+
+  function init(){
+    stage=$("bstage"); svg=$("bcourt"); if(!svg) return;
+    svg.innerHTML=court();
+    cam=svg.querySelector("#bcam"); fx=svg.querySelector("#bfx"); ballG=svg.querySelector("#bball"); seams=svg.querySelector("#bseams");
+    shadow=svg.querySelector("#bshadow"); trailG=svg.querySelector("#btrail"); netG=svg.querySelector("#bnet"); rimEl=svg.querySelector("#brim");
+    bandEls=[...svg.querySelectorAll(".bband")];
+    bug=$("bbug"); bugQ=$("bbugQ"); bugScore=$("bbugScore"); l3=$("bl3"); l3Tier=$("bl3Tier"); l3Ans=$("bl3Ans"); l3Pts=$("bl3Pts");
+    rail=$("brail"); flash=$("bflash"); slam=$("bslam");
+    rail.innerHTML=TIERS.map((t,i)=>`<button role="tab" aria-selected="false" style="--tc:${t.color}" data-k="${i}"><span class="bar"><i></i></span><span class="num">${t.pts}</span><span class="nm">${t.name}</span><span class="ds">${t.desc}</span></button>`).join("");
+    drawNet(0); ballG.style.opacity=0; setCam(1,W/2,H/2);
+    if (reduceMotion){ staticState(); return; }
+    rail.addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return;
+      const k=+b.dataset.k; setRail(k); lowerThird(k,ansFor(k)); bandEls[k].animate([{fillOpacity:.35},{fillOpacity:bandEls[k].getAttribute("fill-opacity")}],{duration:900,easing:"ease-out"}); });
+    if ("IntersectionObserver" in window) new IntersectionObserver(es=>{ visible=es[0].isIntersecting; },{threshold:.25}).observe(svg);
+    running=true; pickPrompt(); timer=setTimeout(loop,900);
+  }
+  return {init};
+})();
+
 function renderShotChart(animate){
   let s=courtDefs("c")+courtBase("c",true);
   const angles=[-66,-44,-22,0,22,44,66];
@@ -1756,7 +2212,7 @@ function refreshMenu(){
   }
 }
 function renderTierStrip(){
-  $("tierstrip").innerHTML = TIERS.map((t,i)=>`<div class="t k${i+1}"><div class="num">${t.pts}</div><div class="nm">${t.name}</div><div class="d">${t.desc}</div></div>`).join("");
+  if ($("tierstrip")) $("tierstrip").innerHTML = TIERS.map((t,i)=>`<div class="t k${i+1}"><div class="num">${t.pts}</div><div class="nm">${t.name}</div><div class="d">${t.desc}</div></div>`).join("");
   $("ladder").innerHTML = TIERS.map((t,i)=>`<div><span class="k${i+1}">${t.name}</span><span class="bar b${i+1}" style="width:${t.pts}%"></span><span class="num k${i+1}">${t.pts}</span></div>`).join("");
 }
 
@@ -1935,7 +2391,7 @@ $$("#diffs button").forEach(x=>x.setAttribute("aria-pressed", String(x.dataset.d
   }
   host.innerHTML=html;
 })();
-Pay.init(); setSnd(); renderZoneCourt(); CourtShow.start(); renderTierStrip(); refreshMenu(); show("menu");
+Pay.init(); setSnd(); Board.init(); renderTierStrip(); refreshMenu(); show("menu");
 })();
 </script>
 </body>
