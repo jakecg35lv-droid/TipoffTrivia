@@ -1485,5 +1485,709 @@ window.PROMPTS = [
       ["Illinois State"],
       [],
       ["Little Rock|Arkansas-Little Rock|UALR"]
+    ] },
+  { id: "ukallstar", d: "easy", p: true, q: "Name a Kentucky player (2010 or later) who became an NBA All-Star",
+    t: [
+      ["Anthony Davis", "Devin Booker", "Karl-Anthony Towns|Karl Anthony Towns|KAT", "Shai Gilgeous-Alexander|Gilgeous-Alexander|SGA"],
+      ["De'Aaron Fox|DeAaron Fox", "Bam Adebayo|Edrice Adebayo", "John Wall", "Tyrese Maxey"],
+      ["DeMarcus Cousins", "Julius Randle"],
+      [],
+      ["Tyler Herro"]
+    ] },
+  { id: "uncnba", d: "easy", p: true, q: "Name a North Carolina player (2010 or later) who reached the NBA",
+    t: [
+      ["Harrison Barnes", "Coby White", "Cam Johnson"],
+      ["Cole Anthony", "Justin Jackson", "Tyler Zeller", "John Henson"],
+      ["Kendall Marshall", "Reggie Bullock", "Nassir Little", "Day'Ron Sharpe|DayRon Sharpe", "Theo Pinson"],
+      ["James Michael McAdoo"],
+      ["Brice Johnson"]
+    ] },
+  { id: "kunba", d: "easy", p: true, q: "Name a Kansas player (2010 or later) who reached the NBA",
+    t: [
+      ["Joel Embiid", "Andrew Wiggins"],
+      ["Kelly Oubre Jr.|Kelly Oubre", "Christian Braun", "Marcus Morris", "Markieff Morris", "Devonte' Graham|Devonte Graham", "Ochai Agbaji"],
+      ["Ben McLemore", "Thomas Robinson", "Josh Jackson", "Gradey Dick", "Svi Mykhailiuk|Sviatoslav Mykhailiuk", "Jalen Wilson"],
+      ["Frank Mason III|Frank Mason", "Cheick Diallo", "Wayne Selden", "Udoka Azubuike"],
+      ["Kevin McCullar Jr.|Kevin McCullar"]
+    ] },
+  { id: "duke2yr", d: "medium", p: true, q: "Name a Duke player (2010 or later) who stayed 2+ seasons and reached the NBA",
+    t: [
+      ["Grayson Allen", "Luke Kennard", "Mason Plumlee"],
+      ["Seth Curry", "Tre Jones", "Mark Williams", "Kyle Filipowski"],
+      ["Quinn Cook", "Miles Plumlee", "Wendell Moore Jr.|Wendell Moore"],
+      ["Ryan Kelly"],
+      ["Marques Bolden"]
+    ] },
+  { id: "novanba", d: "easy", p: true, q: "Name a Villanova player (2010 or later) who reached the NBA",
+    t: [
+      ["Jalen Brunson", "Mikal Bridges"],
+      ["Josh Hart", "Donte DiVincenzo", "Saddiq Bey"],
+      ["Eric Paschall", "Omari Spellman", "Collin Gillespie"],
+      [],
+      ["Ryan Arcidiacono"]
+    ] },
+  { id: "msunba", d: "easy", p: true, q: "Name a Michigan State player (2010 or later) who reached the NBA",
+    t: [
+      ["Draymond Green", "Jaren Jackson Jr.|Jaren Jackson"],
+      ["Miles Bridges", "Gary Harris", "Xavier Tillman", "Max Christie"],
+      ["Bryn Forbes", "Denzel Valentine", "Adreian Payne", "Deyonta Davis"],
+      ["Cassius Winston"],
+      ["Matt Costello"]
+    ] },
+  { id: "zonanba", d: "easy", p: true, q: "Name a Arizona player (2010 or later) who reached the NBA",
+    t: [
+      ["Deandre Ayton", "Aaron Gordon", "Lauri Markkanen"],
+      ["Bennedict Mathurin", "T.J. McConnell|TJ McConnell", "Derrick Williams", "Stanley Johnson"],
+      ["Rondae Hollis-Jefferson|Hollis-Jefferson", "Josh Green", "Zeke Nnaji", "Allonzo Trier", "Solomon Hill"],
+      ["Christian Koloko", "Dalen Terry", "Nick Johnson"],
+      ["Kadeem Allen"]
+    ] },
+  { id: "uconnnba", d: "easy", p: true, q: "Name a UConn player (2010 or later) who reached the NBA",
+    t: [
+      ["Kemba Walker", "Andre Drummond", "Stephon Castle", "Donovan Clingan"],
+      ["Shabazz Napier", "Jeremy Lamb", "Jordan Hawkins", "James Bouknight"],
+      ["Andre Jackson Jr.|Andre Jackson", "Cam Spencer", "Tristen Newton"],
+      ["Adama Sanogo"],
+      ["Daniel Hamilton"]
+    ] },
+  { id: "baylornba", d: "medium", p: true, q: "Name a Baylor player (2010 or later) who reached the NBA",
+    t: [
+      ["Davion Mitchell", "Jared Butler", "Keyonte George", "VJ Edgecombe|V.J. Edgecombe"],
+      ["Jeremy Sochan", "Taurean Prince"],
+      ["Perry Jones III|Perry Jones", "Ja'Kobe Walter|JaKobe Walter", "Kendall Brown"],
+      ["Quincy Miller"],
+      ["Johnathan Motley"]
+    ] },
+  { id: "texasnba", d: "easy", p: true, q: "Name a Texas player (2010 or later) who reached the NBA",
+    t: [
+      ["Myles Turner", "Jarrett Allen", "Tristan Thompson"],
+      ["Mo Bamba", "Avery Bradley", "Jaxson Hayes", "Cory Joseph"],
+      ["Tre Johnson", "Jordan Hamilton"],
+      ["Isaiah Taylor"],
+      ["Dexter Pittman"]
+    ] },
+  { id: "iunba", d: "easy", p: true, q: "Name a Indiana player (2010 or later) who reached the NBA",
+    t: [
+      ["Victor Oladipo", "OG Anunoby|O.G. Anunoby", "Cody Zeller"],
+      ["Trayce Jackson-Davis|Jackson-Davis", "Romeo Langford", "Thomas Bryant", "Noah Vonleh", "Yogi Ferrell"],
+      ["Jalen Hood-Schifino|Hood-Schifino", "Kel'el Ware|Kelel Ware"],
+      ["Troy Williams"],
+      ["Juwan Morgan"]
+    ] },
+  { id: "purduenba", d: "easy", p: true, q: "Name a Purdue player (2010 or later) who reached the NBA",
+    t: [
+      ["Zach Edey", "Jaden Ivey"],
+      ["Carsen Edwards", "Caleb Swanigan"],
+      ["E'Twaun Moore|ETwaun Moore", "Robbie Hummel"],
+      ["A.J. Hammons|AJ Hammons"],
+      ["JaJuan Johnson"]
+    ] },
+  { id: "ufnba", d: "easy", p: true, q: "Name a Florida player (2010 or later) who reached the NBA",
+    t: [
+      ["Bradley Beal"],
+      ["Chandler Parsons", "Dorian Finney-Smith|Finney-Smith", "Walter Clayton Jr.|Walter Clayton", "Andrew Nembhard", "Tre Mann"],
+      ["Will Richard", "Alijah Martin", "Keyontae Johnson"],
+      ["Colin Castleton"],
+      ["Erik Murphy"]
+    ] },
+  { id: "lounba", d: "easy", p: true, q: "Name a Louisville player (2010 or later) who reached the NBA",
+    t: [
+      ["Donovan Mitchell"],
+      ["Terry Rozier", "Montrezl Harrell"],
+      ["Gorgui Dieng", "Jordan Nwora", "Damion Lee"],
+      ["Peyton Siva", "Russ Smith"],
+      ["Ray Spalding"]
+    ] },
+  { id: "cusenba", d: "easy", p: true, q: "Name a Syracuse player (2010 or later) who reached the NBA",
+    t: [
+      ["Dion Waiters", "Michael Carter-Williams|Carter-Williams|MCW", "Jerami Grant"],
+      ["Wesley Johnson", "Tyler Ennis", "Oshae Brissett"],
+      ["Malachi Richardson", "Tyler Lydon", "Elijah Hughes", "Buddy Boeheim", "Chris McCullough"],
+      ["Fab Melo", "Kris Joseph"],
+      ["Rakeem Christmas"]
+    ] },
+  { id: "osunba", d: "easy", p: true, q: "Name a Ohio State player (2010 or later) who reached the NBA",
+    t: [
+      ["D'Angelo Russell|DAngelo Russell", "Evan Turner", "Jared Sullinger"],
+      ["Keita Bates-Diop|Bates-Diop", "E.J. Liddell|EJ Liddell", "Malaki Branham", "Jae'Sean Tate|JaeSean Tate"],
+      ["Brice Sensabaugh", "Deshaun Thomas"],
+      [],
+      ["Duane Washington Jr.|Duane Washington"]
+    ] },
+  { id: "michnba", d: "easy", p: true, q: "Name a Michigan player (2010 or later) who reached the NBA",
+    t: [
+      ["Franz Wagner", "Jordan Poole", "Caris LeVert", "Tim Hardaway Jr.|Tim Hardaway"],
+      ["Trey Burke", "Duncan Robinson", "Nik Stauskas", "Moritz Wagner", "Glenn Robinson III|Glenn Robinson"],
+      ["Isaiah Livers", "Mitch McGary", "D.J. Wilson|DJ Wilson", "Caleb Houstan", "Moussa Diabate", "Jett Howard", "Kobe Bufkin"],
+      ["Ignas Brazdeikis", "Darius Morris"],
+      ["Zavier Simpson"]
+    ] },
+  { id: "wiscnba", d: "medium", p: true, q: "Name a Wisconsin player (2010 or later) who reached the NBA",
+    t: [
+      ["Frank Kaminsky"],
+      ["Sam Dekker", "Johnny Davis", "Jon Leuer"],
+      ["Nigel Hayes", "John Tonje"],
+      ["Bronson Koenig"],
+      ["Micah Potter"]
+    ] },
+  { id: "tennnba", d: "easy", p: true, q: "Name a Tennessee player (2010 or later) who reached the NBA",
+    t: [
+      ["Tobias Harris", "Josh Richardson", "Dalton Knecht"],
+      ["Grant Williams", "Jaden Springer", "Keon Johnson", "Kennedy Chandler"],
+      ["Admiral Schofield", "Jarnell Stokes", "Julian Phillips"],
+      ["Jordan Bone", "Yves Pons"],
+      ["Scotty Hopson"]
+    ] },
+  { id: "aubnba", d: "easy", p: true, q: "Name a Auburn player (2010 or later) who reached the NBA",
+    t: [
+      ["Jabari Smith Jr.|Jabari Smith", "Walker Kessler"],
+      ["Isaac Okoro", "Chuma Okeke", "Sharife Cooper"],
+      ["Johni Broome"],
+      [],
+      ["Jared Harper"]
+    ] },
+  { id: "bamanba", d: "easy", p: true, q: "Name a Alabama player (2010 or later) who reached the NBA",
+    t: [
+      ["Brandon Miller", "Collin Sexton"],
+      ["Herb Jones|Herbert Jones", "Kira Lewis Jr.|Kira Lewis", "Keon Ellis"],
+      ["Joshua Primo", "Noah Clowney", "JD Davison|J.D. Davison"],
+      [],
+      ["Donta Hall"]
+    ] },
+  { id: "arknba", d: "easy", p: true, q: "Name a Arkansas player (2010 or later) who reached the NBA",
+    t: [
+      ["Bobby Portis", "Daniel Gafford", "Anthony Black"],
+      ["Moses Moody", "Isaiah Joe", "Jaylin Williams", "Nick Smith Jr.|Nick Smith"],
+      ["Jordan Walsh", "Ricky Council IV|Ricky Council", "Adou Thiero"],
+      [],
+      ["Mason Jones"]
+    ] },
+  { id: "lsunba", d: "easy", p: true, q: "Name a LSU player (2010 or later) who reached the NBA",
+    t: [
+      ["Ben Simmons", "Naz Reid", "Cam Thomas"],
+      ["Tari Eason", "Trendon Watford", "Jarell Martin"],
+      ["Skylar Mays", "Tremont Waters", "Johnny O'Bryant|Johnny OBryant"],
+      ["Darius Days", "Antonio Blakeney"],
+      ["Tim Quarterman"]
+    ] },
+  { id: "oregonnba", d: "medium", p: true, q: "Name a Oregon player (2010 or later) who reached the NBA",
+    t: [
+      ["Payton Pritchard", "Dillon Brooks"],
+      ["Chris Boucher", "Bol Bol", "Troy Brown Jr.|Troy Brown", "Jordan Bell"],
+      ["Tyler Dorsey", "Louis King", "Kel'el Ware|Kelel Ware"],
+      [],
+      ["Joseph Young"]
+    ] },
+  { id: "uclanba", d: "easy", p: true, q: "Name a UCLA player (2010 or later) who reached the NBA",
+    t: [
+      ["Zach LaVine", "Lonzo Ball", "Jaime Jaquez Jr.|Jaime Jaquez"],
+      ["Kyle Anderson", "Norman Powell", "Kevon Looney", "Aaron Holiday", "Peyton Watson"],
+      ["Shabazz Muhammad", "TJ Leaf|T.J. Leaf", "Moses Brown", "Jaylen Clark", "Adem Bona", "Johnny Juzang", "Amari Bailey"],
+      ["Jordan Adams", "Ike Anigbogu", "Travis Wear", "Thomas Welsh"],
+      ["Malcolm Lee"]
+    ] },
+  { id: "uscnba", d: "easy", p: true, q: "Name a USC player (2010 or later) who reached the NBA",
+    t: [
+      ["Evan Mobley", "Nikola Vucevic|Nikola Vučević", "Bronny James"],
+      ["Onyeka Okongwu", "De'Anthony Melton|DeAnthony Melton", "Kevin Porter Jr.|Kevin Porter"],
+      ["Isaiah Mobley", "Isaiah Collier"],
+      ["Chimezie Metu"],
+      ["Jordan McLaughlin"]
+    ] },
+  { id: "uwnba", d: "medium", p: true, q: "Name a Washington player (2010 or later) who reached the NBA",
+    t: [
+      ["Dejounte Murray", "Isaiah Thomas", "Markelle Fultz"],
+      ["Jaden McDaniels", "Matisse Thybulle", "Terrence Ross"],
+      ["Marquese Chriss", "Tony Wroten", "Quincy Pondexter"],
+      [],
+      ["C.J. Wilcox|CJ Wilcox"]
+    ] },
+  { id: "memnba", d: "medium", p: true, q: "Name a Memphis player (2010 or later) who reached the NBA",
+    t: [
+      ["Jalen Duren", "James Wiseman"],
+      ["Precious Achiuwa", "Will Barton"],
+      ["Emoni Bates", "Tarik Black"],
+      ["Elliot Williams", "Dedric Lawson"],
+      ["Lester Quinones"]
+    ] },
+  { id: "uvanba", d: "easy", p: true, q: "Name a Virginia player (2010 or later) who reached the NBA",
+    t: [
+      ["Malcolm Brogdon", "De'Andre Hunter|DeAndre Hunter", "Joe Harris"],
+      ["Ty Jerome", "Trey Murphy III|Trey Murphy", "Kyle Guy", "Sam Hauser"],
+      ["Justin Anderson", "Mike Scott", "Jay Huff", "Ryan Dunn"],
+      ["Mamadi Diakite", "London Perrantes", "Reece Beekman"],
+      ["Devon Hall"]
+    ] },
+  { id: "mdnba", d: "medium", p: true, q: "Name a Maryland player (2010 or later) who reached the NBA",
+    t: [
+      ["Kevin Huerter", "Alex Len"],
+      ["Jalen Smith", "Bruno Fernando", "Aaron Wiggins", "Derik Queen"],
+      ["Jake Layman", "Diamond Stone", "Greivis Vasquez"],
+      ["Jordan Williams"],
+      ["Robert Carter"]
+    ] },
+  { id: "isunba", d: "medium", p: true, q: "Name a Iowa State player (2010 or later) who reached the NBA",
+    t: [
+      ["Tyrese Haliburton", "Talen Horton-Tucker|Horton-Tucker"],
+      ["Monte Morris", "Georges Niang"],
+      ["Abdel Nader", "Matt Thomas", "Royce White"],
+      ["Naz Mitrou-Long", "Lindell Wigginton"],
+      ["Craig Brackins"]
+    ] },
+  { id: "ttunba", d: "medium", p: true, q: "Name a Texas Tech player (2010 or later) who reached the NBA",
+    t: [
+      ["Jarrett Culver"],
+      ["Zhaire Smith", "Mac McClung"],
+      ["Jahmi'us Ramsey|Jahmius Ramsey", "Terrence Shannon Jr.|Terrence Shannon"],
+      [],
+      ["Kevin McCullar Jr.|Kevin McCullar"]
+    ] },
+  { id: "uhnba", d: "medium", p: true, q: "Name a Houston player (2010 or later) who reached the NBA",
+    t: [
+      ["Jarace Walker", "Quentin Grimes", "Marcus Sasser"],
+      ["Jamal Shead"],
+      ["Danuel House"],
+      ["Armoni Brooks"],
+      ["Nate Hinton"]
+    ] },
+  { id: "creightonnba", d: "medium", p: true, q: "Name a Creighton player (2010 or later) who reached the NBA",
+    t: [
+      ["Doug McDermott"],
+      ["Baylor Scheierman", "Justin Patton", "Khyri Thomas"],
+      ["Ryan Kalkbrenner"],
+      [],
+      ["Ty-Shon Alexander|TyShon Alexander"]
+    ] },
+  { id: "marqnba", d: "medium", p: true, q: "Name a Marquette player (2010 or later) who reached the NBA",
+    t: [
+      ["Jimmy Butler", "Jae Crowder"],
+      ["Tyler Kolek", "Olivier-Maxence Prosper|Prosper", "Henry Ellenson"],
+      ["Sam Hauser", "Markus Howard", "Kam Jones"],
+      ["Vander Blue", "Darius Johnson-Odom"],
+      ["Justin Lewis"]
+    ] },
+  { id: "gtownnba", d: "medium", p: true, q: "Name a Georgetown player (2010 or later) who reached the NBA",
+    t: [
+      ["Otto Porter Jr.|Otto Porter", "Greg Monroe"],
+      ["Omer Yurtseven", "Mac McClung"],
+      ["Henry Sims"],
+      ["Marcus Derrickson"],
+      ["Chris Wright"]
+    ] },
+  { id: "ndnba", d: "medium", p: true, q: "Name a Notre Dame player (2010 or later) who reached the NBA",
+    t: [
+      ["Pat Connaughton", "Jerian Grant"],
+      ["Blake Wesley", "Demetrius Jackson"],
+      ["Bonzie Colson"],
+      [],
+      ["Luke Harangody"]
+    ] },
+  { id: "ncstnba", d: "medium", p: true, q: "Name a NC State player (2010 or later) who reached the NBA",
+    t: [
+      ["Dennis Smith Jr.|Dennis Smith", "T.J. Warren|TJ Warren"],
+      ["Omer Yurtseven"],
+      ["Lorenzo Brown", "Terquavion Smith"],
+      [],
+      ["Cat Barber|Anthony Barber"]
+    ] },
+  { id: "wakenba", d: "medium", p: true, q: "Name a Wake Forest player (2010 or later) who reached the NBA",
+    t: [
+      ["John Collins"],
+      ["Al-Farouq Aminu|Aminu", "Jake LaRavia", "Ish Smith"],
+      ["Olivier Sarr"],
+      [],
+      ["Alondes Williams"]
+    ] },
+  { id: "okstnba", d: "medium", p: true, q: "Name a Oklahoma State player (2010 or later) who reached the NBA",
+    t: [
+      ["Cade Cunningham", "Marcus Smart"],
+      ["Lindy Waters III|Lindy Waters"],
+      ["Jawun Evans", "Markel Brown"],
+      [],
+      ["James Anderson"]
+    ] },
+  { id: "ounba", d: "easy", p: true, q: "Name a Oklahoma player (2010 or later) who reached the NBA",
+    t: [
+      ["Trae Young", "Buddy Hield", "Austin Reaves"],
+      ["Jeremiah Fears"],
+      [],
+      ["Willie Warren"],
+      ["Tiny Gallon"]
+    ] },
+  { id: "illininba", d: "medium", p: true, q: "Name a Illinois player (2010 or later) who reached the NBA",
+    t: [
+      ["Ayo Dosunmu"],
+      ["Terrence Shannon Jr.|Terrence Shannon", "Meyers Leonard"],
+      ["Kasparas Jakucionis|Jakucionis", "Will Riley"],
+      [],
+      ["Brandon Paul"]
+    ] },
+  { id: "iowanba", d: "medium", p: true, q: "Name a Iowa player (2010 or later) who reached the NBA",
+    t: [
+      ["Keegan Murray"],
+      ["Kris Murray", "Luka Garza"],
+      ["Joe Wieskamp", "Devyn Marble"],
+      ["Tyler Cook"],
+      ["Jarrod Uthoff"]
+    ] },
+  { id: "fsunba", d: "easy", p: true, q: "Name a Florida State player (2010 or later) who reached the NBA",
+    t: [
+      ["Scottie Barnes", "Jonathan Isaac", "Devin Vassell"],
+      ["Malik Beasley", "Terance Mann", "Patrick Williams", "Dwayne Bacon"],
+      ["Mfiondu Kabengele", "Chris Singleton", "Trent Forrest"],
+      ["Bernard James", "Okaro White"],
+      ["RaiQuan Gray"]
+    ] },
+  { id: "miaminba", d: "medium", p: true, q: "Name a Miami player (2010 or later) who reached the NBA",
+    t: [
+      ["Bruce Brown", "Lonnie Walker IV|Lonnie Walker"],
+      ["Shane Larkin", "Kyshawn George"],
+      ["Davon Reed", "Jordan Miller", "Dewan Hernandez"],
+      ["Isaiah Wong"],
+      ["Sheldon McClellan"]
+    ] },
+  { id: "pittnba", d: "medium", p: true, q: "Name a Pitt player (2010 or later) who reached the NBA",
+    t: [
+      ["Steven Adams"],
+      ["Bub Carrington|Carlton Carrington"],
+      ["Brad Wanamaker", "Justin Champagnie"],
+      [],
+      ["Lamar Patterson"]
+    ] },
+  { id: "stanfordnba", d: "medium", p: true, q: "Name a Stanford player (2010 or later) who reached the NBA",
+    t: [
+      ["Ziaire Williams", "Dwight Powell"],
+      ["Landry Fields", "KZ Okpala|K.Z. Okpala", "Josh Huestis"],
+      ["Tyrell Terry", "Maxime Raynaud", "Anthony Brown"],
+      ["Chasson Randle"],
+      ["Spencer Jones"]
+    ] },
+  { id: "colonba", d: "medium", p: true, q: "Name a Colorado player (2010 or later) who reached the NBA",
+    t: [
+      ["Derrick White", "Spencer Dinwiddie"],
+      ["Alec Burks", "Andre Roberson", "Tristan da Silva|Tristan Da Silva"],
+      ["Jabari Walker", "Cody Williams"],
+      [],
+      ["McKinley Wright IV|McKinley Wright"]
+    ] },
+  { id: "xaviernba", d: "medium", p: true, q: "Name a Xavier player (2010 or later) who reached the NBA",
+    t: [
+      ["Naji Marshall"],
+      ["Edmond Sumner", "Colby Jones", "Jordan Crawford"],
+      ["Trevon Bluiett"],
+      ["J.P. Macura|JP Macura"],
+      ["Semaj Christon"]
+    ] },
+  { id: "sjunba", d: "medium", p: true, q: "Name a St. John's player (2010 or later) who reached the NBA",
+    t: [
+      ["Mo Harkless|Maurice Harkless"],
+      ["Julian Champagnie", "JaKarr Sampson"],
+      ["Shamorie Ponds"],
+      [],
+      ["Daniss Jenkins"]
+    ] },
+  { id: "cincynba", d: "medium", p: true, q: "Name a Cincinnati player (2010 or later) who reached the NBA",
+    t: [
+      ["Lance Stephenson"],
+      ["Jacob Evans", "Gary Clark"],
+      [],
+      [],
+      ["Sean Kilpatrick"]
+    ] },
+  { id: "top5", d: "medium", p: true, q: "Name a college player picked top 5 in the NBA Draft from 2020 to 2025",
+    t: [
+      ["Cooper Flagg", "Paolo Banchero", "Anthony Edwards", "Cade Cunningham", "Chet Holmgren"],
+      ["Evan Mobley", "Scottie Barnes", "Jalen Suggs", "Jaden Ivey", "Brandon Miller", "Dylan Harper", "Ace Bailey"],
+      ["Jabari Smith Jr.|Jabari Smith", "Keegan Murray", "Reed Sheppard", "Stephon Castle", "VJ Edgecombe|V.J. Edgecombe", "Kon Knueppel", "James Wiseman"],
+      ["Patrick Williams"],
+      ["Isaac Okoro"]
+    ] },
+  { id: "dukeffc", d: "easy", p: true, q: "Name a head coach who took Duke to a Final Four",
+    t: [
+      ["Mike Krzyzewski|Coach K"],
+      ["Jon Scheyer"],
+      ["Vic Bubas"],
+      [],
+      ["Bill Foster"]
+    ] },
+  { id: "uncffc", d: "easy", p: true, q: "Name a head coach who took North Carolina to a Final Four",
+    t: [
+      ["Roy Williams", "Dean Smith"],
+      ["Hubert Davis"],
+      ["Bill Guthridge"],
+      [],
+      ["Frank McGuire"]
+    ] },
+  { id: "iucoach", d: "easy", p: true, q: "Name an Indiana head coach since 2000 (interims count)",
+    t: [
+      ["Tom Crean", "Mike Woodson"],
+      ["Archie Miller", "Kelvin Sampson", "Bob Knight"],
+      ["Mike Davis", "Darian DeVries"],
+      [],
+      ["Dan Dakich"]
+    ] },
+  { id: "ukcoach", d: "easy", p: true, q: "Name a Kentucky head coach since 2000",
+    t: [
+      ["John Calipari", "Mark Pope"],
+      ["Tubby Smith"],
+      [],
+      [],
+      ["Billy Gillispie"]
+    ] },
+  { id: "loucoach", d: "medium", p: true, q: "Name a Louisville head coach since 2000 (interims count)",
+    t: [
+      ["Rick Pitino"],
+      ["Chris Mack", "Kenny Payne", "Pat Kelsey"],
+      ["Denny Crum"],
+      [],
+      ["David Padgett"]
+    ] },
+  { id: "michcoach", d: "medium", p: true, q: "Name a Michigan head coach since 2000 (interims count)",
+    t: [
+      ["John Beilein", "Juwan Howard", "Dusty May"],
+      ["Tommy Amaker"],
+      ["Brian Ellerbe"],
+      [],
+      ["Phil Martelli"]
+    ] },
+  { id: "osucoach", d: "medium", p: true, q: "Name an Ohio State head coach since 2000",
+    t: [
+      ["Thad Matta", "Chris Holtmann"],
+      ["Jake Diebler"],
+      [],
+      [],
+      ["Jim O'Brien|Jim OBrien"]
+    ] },
+  { id: "zonacoach", d: "medium", p: true, q: "Name an Arizona head coach since 2000 (interims count)",
+    t: [
+      ["Sean Miller", "Tommy Lloyd", "Lute Olson"],
+      [],
+      ["Russ Pennell"],
+      [],
+      ["Kevin O'Neill|Kevin ONeill"]
+    ] },
+  { id: "uclacoach", d: "medium", p: true, q: "Name a UCLA head coach since 2000",
+    t: [
+      ["Mick Cronin", "Ben Howland", "Steve Alford"],
+      [],
+      ["Steve Lavin"],
+      [],
+      ["Murry Bartow"]
+    ] },
+  { id: "unccoach", d: "easy", p: true, q: "Name a North Carolina head coach since 2000",
+    t: [
+      ["Roy Williams", "Hubert Davis"],
+      [],
+      ["Matt Doherty"],
+      [],
+      ["Bill Guthridge"]
+    ] },
+  { id: "mdcoach", d: "medium", p: true, q: "Name a Maryland head coach since 2000 (interims count)",
+    t: [
+      ["Gary Williams", "Mark Turgeon", "Kevin Willard"],
+      ["Buzz Williams"],
+      [],
+      [],
+      ["Danny Manning"]
+    ] },
+  { id: "gtowncoach", d: "medium", p: true, q: "Name a Georgetown head coach since 2000",
+    t: [
+      ["John Thompson III", "Patrick Ewing"],
+      ["Ed Cooley"],
+      [],
+      [],
+      ["Craig Esherick"]
+    ] },
+  { id: "novacoach", d: "medium", p: true, q: "Name a Villanova head coach since 2000",
+    t: [
+      ["Jay Wright"],
+      ["Kyle Neptune", "Kevin Willard"],
+      [],
+      [],
+      ["Steve Lappas"]
+    ] },
+  { id: "uconncoach", d: "medium", p: true, q: "Name a UConn head coach since 2000 (interims count)",
+    t: [
+      ["Jim Calhoun", "Dan Hurley"],
+      ["Kevin Ollie"],
+      [],
+      [],
+      ["George Blaney"]
+    ] },
+  { id: "b2b", d: "easy", q: "Name a school that has won back-to-back men's national titles",
+    t: [
+      ["Duke", "UConn|Connecticut", "Florida|UF"],
+      ["UCLA"],
+      ["Kentucky|UK"],
+      ["Cincinnati", "San Francisco|USF"],
+      ["Oklahoma State|Oklahoma A&M"]
+    ] },
+  { id: "champs00", d: "easy", q: "Name a men's national champion since 2000 (vacated titles count)",
+    t: [
+      ["UConn|Connecticut", "Duke", "North Carolina|UNC", "Kansas|KU"],
+      ["Florida|UF", "Villanova|Nova", "Kentucky|UK", "Virginia|UVA", "Baylor", "Michigan"],
+      ["Michigan State|MSU", "Syracuse", "Maryland"],
+      [],
+      ["Louisville"]
+    ] },
+  { id: "onechamps", d: "easy", q: "Name a #1 seed that won the men's national title from 2010 to 2025",
+    t: [
+      ["Duke", "Kentucky|UK", "UConn|Connecticut", "Kansas|KU"],
+      ["North Carolina|UNC", "Villanova|Nova", "Virginia|UVA", "Florida|UF"],
+      ["Baylor"],
+      [],
+      ["Louisville"]
+    ] },
+  { id: "mvpcollege", d: "easy", q: "Name a college attended by an NBA MVP from 2010 to 2025",
+    t: [
+      ["Kentucky|UK", "Davidson", "Texas|UT"],
+      ["Kansas|KU", "UCLA"],
+      ["Memphis"],
+      [],
+      ["Arizona State|ASU"]
+    ] },
+  { id: "no1college", d: "easy", q: "Name a college that produced a #1 overall NBA Draft pick (2010–2025)",
+    t: [
+      ["Duke", "Kentucky|UK"],
+      ["Kansas|KU", "Arizona", "LSU"],
+      ["Oklahoma State", "Georgia|UGA", "Washington|UW"],
+      [],
+      ["UNLV"]
+    ] },
+  { id: "coacharena", d: "medium", q: "Name a school whose home court or arena is named after a former coach",
+    t: [
+      ["Kentucky|UK", "Kansas|KU", "North Carolina|UNC"],
+      ["Duke", "Butler"],
+      ["Oklahoma State", "Arizona"],
+      [],
+      ["Western Kentucky|WKU"]
+    ] },
+  { id: "b1gff", d: "easy", q: "Name a current Big Ten school that made the men's Final Four since 2010",
+    t: [
+      ["Michigan State|MSU", "Michigan"],
+      ["Wisconsin", "Purdue"],
+      ["Ohio State|OSU", "Oregon"],
+      [],
+      ["UCLA"]
+    ] },
+  { id: "secff", d: "easy", q: "Name a current SEC school that made the men's Final Four since 2010",
+    t: [
+      ["Kentucky|UK", "Florida|UF"],
+      ["Auburn", "Alabama|Bama"],
+      ["South Carolina"],
+      [],
+      ["Oklahoma|OU"]
+    ] },
+  { id: "accff", d: "easy", q: "Name a current ACC school that made the men's Final Four since 2010",
+    t: [
+      ["Duke", "North Carolina|UNC"],
+      ["Virginia|UVA", "Syracuse"],
+      ["Miami", "NC State|North Carolina State"],
+      [],
+      ["Louisville"]
+    ] },
+  { id: "b12ff", d: "easy", q: "Name a current Big 12 school that made the men's Final Four since 2010",
+    t: [
+      ["Kansas|KU", "Baylor"],
+      ["Houston", "Texas Tech"],
+      [],
+      [],
+      ["West Virginia|WVU"]
+    ] },
+  { id: "beff", d: "easy", q: "Name a current Big East school that made the men's Final Four since 2010",
+    t: [
+      ["UConn|Connecticut", "Villanova|Nova"],
+      [],
+      [],
+      [],
+      ["Butler"]
+    ] },
+  { id: "pac12left", d: "easy", q: "Name a school that left the Pac-12 in 2024",
+    t: [
+      ["UCLA", "USC|Southern California", "Oregon", "Arizona"],
+      ["Washington|UW", "Utah", "Colorado", "Arizona State|ASU"],
+      ["California|Cal"],
+      [],
+      ["Stanford"]
+    ] },
+  { id: "s16_25", d: "medium", q: "Name a team that made the 2025 men's Sweet 16",
+    t: [
+      ["Duke", "Florida|UF", "Auburn", "Houston", "Kentucky|UK"],
+      ["Alabama|Bama", "Tennessee|Vols", "Michigan State|MSU", "Michigan", "Arizona", "Texas Tech", "Purdue", "Maryland"],
+      ["Arkansas", "BYU|Brigham Young"],
+      [],
+      ["Ole Miss|Mississippi"]
+    ] },
+  { id: "s16_24", d: "medium", q: "Name a team that made the 2024 men's Sweet 16",
+    t: [
+      ["UConn|Connecticut", "Purdue", "North Carolina|UNC", "Duke", "Houston"],
+      ["Alabama|Bama", "Tennessee|Vols", "Arizona", "Gonzaga|Zags", "Marquette", "Creighton", "Illinois", "Iowa State|ISU"],
+      ["NC State|North Carolina State", "San Diego State|SDSU"],
+      [],
+      ["Clemson"]
+    ] },
+  { id: "cardinals", d: "easy", q: "Name a Division I school nicknamed the Cardinals",
+    t: [
+      ["Louisville"],
+      ["Ball State"],
+      ["Incarnate Word|UIW"],
+      [],
+      ["Lamar"]
+    ] },
+  { id: "trojans", d: "easy", q: "Name a Division I school nicknamed the Trojans",
+    t: [
+      ["USC|Southern California"],
+      ["Troy"],
+      [],
+      [],
+      ["Little Rock|Arkansas-Little Rock|UALR"]
+    ] },
+  { id: "cowboys", d: "easy", q: "Name a Division I school nicknamed the Cowboys",
+    t: [
+      ["Oklahoma State|OSU"],
+      ["Wyoming"],
+      [],
+      [],
+      ["McNeese|McNeese State"]
+    ] },
+  { id: "broncos", d: "medium", q: "Name a Division I school nicknamed the Broncos",
+    t: [
+      ["Boise State"],
+      ["Western Michigan|WMU"],
+      [],
+      [],
+      ["Santa Clara"]
+    ] },
+  { id: "bison", d: "medium", q: "Name a Division I school nicknamed the Bison",
+    t: [
+      ["Howard"],
+      ["North Dakota State|NDSU"],
+      ["Bucknell"],
+      [],
+      ["Lipscomb"]
+    ] },
+  { id: "goldeneagles", d: "medium", q: "Name a Division I school nicknamed the Golden Eagles",
+    t: [
+      ["Marquette"],
+      ["Southern Miss|Southern Mississippi"],
+      ["Oral Roberts|ORU"],
+      [],
+      ["Tennessee Tech"]
+    ] },
+  { id: "rednick", d: "medium", q: "Name a Division I school with 'Red' in its nickname",
+    t: [
+      ["Texas Tech", "St. John's|St Johns|Saint Johns"],
+      ["Cornell", "Arkansas State"],
+      ["Miami (OH)|Miami Ohio|Miami of Ohio", "Seattle U|Seattle"],
+      [],
+      ["Southeast Missouri|SEMO|Southeast Missouri State"]
+    ] },
+  { id: "mississippi", d: "hard", q: "Name a Division I basketball school in Mississippi",
+    t: [
+      ["Ole Miss|Mississippi", "Mississippi State|Miss State"],
+      ["Southern Miss|Southern Mississippi"],
+      ["Jackson State", "Alcorn State|Alcorn"],
+      [],
+      ["Mississippi Valley State|MVSU"]
     ] }
 ];

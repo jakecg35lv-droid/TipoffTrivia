@@ -904,7 +904,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
         </div>
         <span class="badge live">Live</span>
       </div>
-      <p>Same seven prompts for every player, every day. One attempt. Two easy, three medium, two hard.</p>
+      <p>Same seven prompts for every player, every day. One attempt. Three easy, three medium, one hard.</p>
       <div class="status" id="dailyStatus"></div>
       <div class="foot">
         <button class="btn btn-primary btn-lg" id="playDaily2">Play today's game <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
@@ -1249,7 +1249,7 @@ const byD = d => PROMPTS.filter(p=>p.d===d);
 const P = id => PROMPTS.find(p=>p.id===id);
 function dailySet(){
   const r=rng("dch-"+todayStr());
-  return [...shuffle(byD("easy"),r).slice(0,2), ...shuffle(byD("medium"),r).slice(0,3), ...shuffle(byD("hard"),r).slice(0,2)];
+  return [...shuffle(byD("easy"),r).slice(0,3), ...shuffle(byD("medium"),r).slice(0,3), ...shuffle(byD("hard"),r).slice(0,1)];
 }
 let recent = store.get("dch-recent") || [];
 function unlimitedSet(diff){
