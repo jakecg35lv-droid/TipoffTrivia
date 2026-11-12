@@ -1247,10 +1247,32 @@ function rng(seedStr){ let h=1779033703^seedStr.length; for(let i=0;i<seedStr.le
 function shuffle(arr,r=Math.random){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 const byD = d => PROMPTS.filter(p=>p.d===d);
 const P = id => PROMPTS.find(p=>p.id===id);
-function dailySet(){
-  const r=rng("dch-"+todayStr());
-  return [...shuffle(byD("easy"),r).slice(0,3), ...shuffle(byD("medium"),r).slice(0,3), ...shuffle(byD("hard"),r).slice(0,1)];
+/* Daily rotation: a prompt used on a given day can't come back for 7 days
+   (used Monday -> eligible again next Monday). The schedule is rebuilt
+   deterministically from EPOCH, so every player gets the same 7 prompts. */
+const fmtDay = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const DAILY_GAP = 7, DAILY_MIX = [["easy",3],["medium",3],["hard",1]];
+function dailySetFor(dateStr){
+  const cache = dailySetFor.c || (dailySetFor.c = {});
+  if (cache[dateStr]) return cache[dateStr];
+  const end=new Date(dateStr+"T00:00:00"), hist=[], pools={};
+  DAILY_MIX.forEach(([diff])=>pools[diff]=byD(diff));
+  let set=null;
+  for (let d=new Date(EPOCH+"T00:00:00"); d<=end; d.setDate(d.getDate()+1)){
+    const ds=fmtDay(d), r=rng("dch-"+ds), used=new Set(hist.slice(-(DAILY_GAP-1)).flat());
+    set=[];
+    DAILY_MIX.forEach(([diff,n])=>{
+      const pool=pools[diff]; let fresh=pool.filter(p=>!used.has(p.id));
+      if (fresh.length<n) fresh=pool;
+      set.push(...shuffle(fresh,r).slice(0,n));
+    });
+    hist.push(set.map(p=>p.id));
+    cache[ds]=set;
+  }
+  if (!set){ const r=rng("dch-"+dateStr); set=[]; DAILY_MIX.forEach(([diff,n])=>set.push(...shuffle(byD(diff),r).slice(0,n))); }
+  return cache[dateStr]=set;
 }
+function dailySet(){ return dailySetFor(todayStr()); }
 let recent = store.get("dch-recent") || [];
 function unlimitedSet(diff){
   const pool = diff==="mixed" ? PROMPTS : byD(diff);
