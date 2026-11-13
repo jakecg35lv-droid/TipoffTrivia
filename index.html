@@ -1247,26 +1247,43 @@ function rng(seedStr){ let h=1779033703^seedStr.length; for(let i=0;i<seedStr.le
 function shuffle(arr,r=Math.random){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 const byD = d => PROMPTS.filter(p=>p.d===d);
 const P = id => PROMPTS.find(p=>p.id===id);
-/* Daily rotation: a prompt used on a given day can't come back for 7 days
-   (used Monday -> eligible again next Monday). The schedule is rebuilt
-   deterministically from EPOCH, so every player gets the same 7 prompts. */
+/* Daily rotation (see QUESTION_RULES.md):
+   - a prompt, or any prompt in the same topic group (g), can't return for 30 days
+   - approved prompts (ok:true) are used first; flagged ones only fill gaps
+   - no two prompts in one day share the same Half Court answer
+   If the pool can't satisfy the 30-day rule, the least-recently-used prompt is
+   taken and a warning is logged, rather than pretending it's fresh.
+   The schedule is rebuilt deterministically from EPOCH so every player matches. */
 const fmtDay = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-const DAILY_GAP = 7, DAILY_MIX = [["easy",3],["medium",3],["hard",1]];
+const DAILY_GAP = 30, DAILY_MIX = [["easy",3],["medium",3],["hard",1]];
+const grp = p => p.g || p.id;
+const halfKey = p => norm(p.t[4][0].split("|")[0]);
 function dailySetFor(dateStr){
   const cache = dailySetFor.c || (dailySetFor.c = {});
   if (cache[dateStr]) return cache[dateStr];
-  const end=new Date(dateStr+"T00:00:00"), hist=[], pools={};
-  DAILY_MIX.forEach(([diff])=>pools[diff]=byD(diff));
-  let set=null;
-  for (let d=new Date(EPOCH+"T00:00:00"); d<=end; d.setDate(d.getDate()+1)){
-    const ds=fmtDay(d), r=rng("dch-"+ds), used=new Set(hist.slice(-(DAILY_GAP-1)).flat());
+  const end=new Date(dateStr+"T00:00:00"), last={}; let set=null, day=0;
+  for (let d=new Date(EPOCH+"T00:00:00"); d<=end; d.setDate(d.getDate()+1), day++){
+    const ds=fmtDay(d), r=rng("dch-"+ds), order=shuffle(PROMPTS,r), taken=new Set(), halves=new Set();
+    const fresh = p => last[grp(p)]===undefined || day-last[grp(p)] >= DAILY_GAP;
+    const can = p => !taken.has(grp(p)) && !halves.has(halfKey(p));
+    const take = p => { taken.add(grp(p)); halves.add(halfKey(p)); set.push(p); };
     set=[];
+    const fill = (test, diff, n) => { for (const p of order){ if (n<=0) break; if ((!diff||p.d===diff) && can(p) && test(p)){ take(p); n--; } } return n; };
+    let short=0;
     DAILY_MIX.forEach(([diff,n])=>{
-      const pool=pools[diff]; let fresh=pool.filter(p=>!used.has(p.id));
-      if (fresh.length<n) fresh=pool;
-      set.push(...shuffle(fresh,r).slice(0,n));
+      n = fill(p=>p.ok && fresh(p), diff, n);
+      n = fill(p=>fresh(p), diff, n);
+      short += n;
     });
-    hist.push(set.map(p=>p.id));
+    if (short>0) short = fill(p=>p.ok && fresh(p), null, short);
+    if (short>0) short = fill(p=>fresh(p), null, short);
+    if (short>0){
+      const lru = PROMPTS.filter(can).sort((a,b)=>(last[grp(a)]??-1e9)-(last[grp(b)]??-1e9));
+      for (const p of lru){ if (short<=0) break; if (can(p)){ take(p); short--; } }
+      if (ds===dateStr) console.warn("[daily] not enough prompts for a 30-day gap; reused the least-recently-used ones");
+    }
+    const o={easy:0,medium:1,hard:2}; set.sort((a,b)=>o[a.d]-o[b.d]);
+    set.forEach(p=>last[grp(p)]=day);
     cache[ds]=set;
   }
   if (!set){ const r=rng("dch-"+dateStr); set=[]; DAILY_MIX.forEach(([diff,n])=>set.push(...shuffle(byD(diff),r).slice(0,n))); }
@@ -1873,7 +1890,7 @@ const Board = (()=>{
 
   function pickPrompt(){
     const pool=PROMPTS.filter(p=>p.p && p.t.every(l=>l.length));
-    const pref=["ukoad","dukeoad","zags21","uk15","mich13","duke19","ncst24"];
+    const pref=["wooden","mop","titlecoach"];
     const ordered=pref.map(id=>pool.find(p=>p.id===id)).filter(Boolean);
     const list=ordered.length?ordered:pool;
     prompt=list[cycle%list.length];

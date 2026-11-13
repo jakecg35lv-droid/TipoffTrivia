@@ -1,12 +1,12 @@
 // Tipoff Trivia — prompt + answer database
 // Each prompt: id, d (easy|medium|hard), q (question), p (true = people, enables last-name matching),
+// ok (true = meets QUESTION_RULES.md), g (topic group: prompts sharing a group count as the same question),
 // t: five tiers [Layup 10, Mid-Range 30, Three Ball 60, Deep Cut 85, Half Court 100].
 // RULE: Half Court (last tier) holds exactly ONE super-niche answer per prompt.
-// RULE: player/roster prompts cover teams from 2010 onward.
-// Each answer: "Primary|alias|alias".
+// Each answer: "Primary|alias|alias". See QUESTION_RULES.md before adding prompts.
 
 window.PROMPTS = [
-  { id: "champs", d: "easy", q: "Name a school that has won the NCAA men's national championship",
+  { id: "champs", d: "easy", ok: true, g: "title-schools", q: "Name a school that has won the NCAA men's national championship",
     t: [
       ["Duke", "Kentucky|UK", "North Carolina|UNC|Carolina|Tar Heels", "UCLA|Bruins", "Kansas|KU|Jayhawks"],
       ["UConn|Connecticut|Huskies", "Indiana|IU|Hoosiers", "Villanova|Nova", "Michigan State|MSU|Sparty", "Florida|UF|Gators", "Louisville", "Syracuse|Cuse", "Arizona", "Virginia|UVA", "Baylor", "Michigan"],
@@ -14,45 +14,45 @@ window.PROMPTS = [
       ["Oklahoma State|Oklahoma A&M", "Loyola Chicago|Loyola|Loyola-Chicago", "UTEP|Texas Western", "Oregon", "Stanford", "Utah", "San Francisco|USF", "Holy Cross", "La Salle", "Wyoming", "California|Cal"],
       ["CCNY|City College of New York|City College"]
     ] },
-  { id: "bigten", d: "easy", q: "Name a current Big Ten basketball school",
+  { id: "bigten", d: "easy", ok: true, g: "conf-b1g", q: "Name a school that has been a member of the Big Ten in men's basketball",
     t: [
       ["Indiana|IU", "Michigan", "Michigan State|MSU", "Purdue", "Ohio State|OSU", "UCLA"],
       ["Illinois", "Iowa", "Wisconsin", "Maryland", "Oregon", "USC|Southern California"],
       ["Minnesota", "Nebraska", "Washington|UW", "Northwestern"],
-      ["Penn State|PSU"],
-      ["Rutgers"]
+      ["Penn State|PSU", "Rutgers"],
+      ["Chicago|University of Chicago|UChicago"]
     ] },
-  { id: "sec", d: "easy", q: "Name a current SEC basketball school",
+  { id: "sec", d: "easy", ok: true, g: "conf-sec", q: "Name a school that has been a member of the SEC in men's basketball",
     t: [
       ["Kentucky|UK", "Florida|UF", "Tennessee|Vols", "Alabama|Bama", "Auburn"],
       ["Arkansas", "LSU", "Texas|UT", "Georgia|UGA", "Missouri|Mizzou", "Texas A&M|TAMU|A&M"],
-      ["Ole Miss|Mississippi", "Oklahoma|OU"],
-      ["Mississippi State|Miss State", "South Carolina"],
-      ["Vanderbilt|Vandy"]
+      ["Ole Miss|Mississippi", "Oklahoma|OU", "Mississippi State|Miss State", "South Carolina"],
+      ["Vanderbilt|Vandy", "Georgia Tech", "Tulane"],
+      ["Sewanee|University of the South"]
     ] },
-  { id: "acc", d: "easy", q: "Name a current ACC basketball school",
+  { id: "acc", d: "easy", ok: true, g: "conf-acc", q: "Name a school that has been a member of the ACC in men's basketball",
     t: [
       ["Duke", "North Carolina|UNC", "Virginia|UVA", "Syracuse", "Louisville"],
-      ["NC State|North Carolina State", "Wake Forest", "Miami", "Notre Dame", "Florida State|FSU", "Clemson"],
+      ["NC State|North Carolina State", "Wake Forest", "Miami", "Notre Dame", "Florida State|FSU", "Clemson", "Maryland"],
       ["Virginia Tech", "Pittsburgh|Pitt", "Georgia Tech", "Boston College|BC"],
-      ["Stanford", "California|Cal"],
-      ["SMU|Southern Methodist"]
+      ["Stanford", "California|Cal", "SMU|Southern Methodist"],
+      ["South Carolina"]
     ] },
-  { id: "big12", d: "easy", q: "Name a current Big 12 basketball school",
+  { id: "big12", d: "easy", ok: true, g: "conf-b12", q: "Name a school that has been a member of the Big 12 in men's basketball",
     t: [
-      ["Kansas|KU", "Houston", "Baylor", "Arizona"],
-      ["Iowa State|ISU", "Texas Tech", "West Virginia|WVU", "BYU|Brigham Young", "Kansas State|K-State", "Cincinnati"],
-      ["Oklahoma State", "Colorado", "Utah", "Arizona State|ASU"],
+      ["Kansas|KU", "Houston", "Baylor", "Arizona", "Texas|UT", "Oklahoma|OU"],
+      ["Iowa State|ISU", "Texas Tech", "West Virginia|WVU", "BYU|Brigham Young", "Kansas State|K-State", "Cincinnati", "Missouri|Mizzou", "Texas A&M|TAMU|A&M"],
+      ["Oklahoma State", "Colorado", "Utah", "Arizona State|ASU", "Nebraska"],
       ["TCU|Texas Christian"],
       ["UCF|Central Florida"]
     ] },
-  { id: "bigeast", d: "easy", q: "Name a current Big East basketball school",
+  { id: "bigeast", d: "easy", ok: true, g: "conf-be", q: "Name a school that has been a member of the Big East in men's basketball",
     t: [
-      ["UConn|Connecticut", "Villanova", "Georgetown"],
-      ["Marquette", "Creighton", "St. John's|St Johns", "Xavier", "Butler", "Providence"],
-      [],
-      ["Seton Hall"],
-      ["DePaul"]
+      ["UConn|Connecticut", "Villanova|Nova", "Georgetown", "Syracuse"],
+      ["Marquette", "Creighton", "St. John's|St Johns|Saint Johns", "Xavier", "Butler", "Providence", "Louisville", "Pittsburgh|Pitt", "Notre Dame", "West Virginia|WVU", "Seton Hall"],
+      ["Cincinnati", "Miami", "Boston College|BC", "Rutgers"],
+      ["DePaul", "Virginia Tech"],
+      ["South Florida|USF"]
     ] },
   { id: "ff2125", d: "easy", q: "Name a team that made the Final Four between 2021 and 2025",
     t: [
@@ -86,15 +86,15 @@ window.PROMPTS = [
       ["Tennessee State", "Texas Southern"],
       ["Pacific"]
     ] },
-  { id: "wooden", d: "medium", p: true, q: "Name a Wooden Award winner (National Player of the Year, 1977–2025)",
+  { id: "wooden", d: "medium", p: true, ok: true, g: "wooden", q: "Name a winner of the men's Wooden Award",
     t: [
-      ["Larry Bird", "Michael Jordan", "Kevin Durant", "Zion Williamson|Zion", "Cooper Flagg", "Tim Duncan", "Anthony Davis", "Blake Griffin"],
+      ["Larry Bird", "Michael Jordan", "Kevin Durant", "Zion Williamson|Zion", "Cooper Flagg", "Tim Duncan", "Anthony Davis", "Blake Griffin", "Cameron Boozer"],
       ["David Robinson", "Christian Laettner", "Shane Battier", "JJ Redick|J.J. Redick", "Tyler Hansbrough", "Jimmer Fredette|Jimmer", "Zach Edey", "Jalen Brunson", "Doug McDermott", "Buddy Hield", "Danny Manning", "Ralph Sampson", "Larry Johnson", "Kenyon Martin"],
       ["Chris Mullin", "Sean Elliott", "Elton Brand", "Antawn Jamison", "Marcus Camby", "Glenn Robinson|Big Dog", "Evan Turner", "Frank Kaminsky", "Trey Burke", "Andrew Bogut", "Luka Garza", "Ed O'Bannon", "Jason Williams|Jay Williams"],
       ["Danny Ainge", "Darrell Griffith", "Lionel Simmons", "Calbert Cheaney", "TJ Ford|T.J. Ford", "Jameer Nelson", "Frank Mason III|Frank Mason", "Obi Toppin", "Oscar Tshiebwe", "Walter Berry", "Marques Johnson"],
       ["Phil Ford"]
     ] },
-  { id: "titlecoach", d: "medium", p: true, q: "Name a head coach who won an NCAA men's national title",
+  { id: "titlecoach", d: "medium", p: true, ok: true, g: "title-coaches", q: "Name a head coach who won an NCAA men's national title",
     t: [
       ["Mike Krzyzewski|Coach K", "John Wooden", "Dean Smith", "Bob Knight|Bobby Knight", "Roy Williams", "Tom Izzo", "Bill Self", "John Calipari", "Rick Pitino", "Jim Calhoun", "Dan Hurley", "Jim Boeheim", "Jay Wright", "Adolph Rupp"],
       ["Billy Donovan", "Tony Bennett", "Scott Drew", "Todd Golden", "Jim Valvano|Jimmy V", "Jerry Tarkanian|Tark", "John Thompson", "Lute Olson", "Gary Williams", "Kevin Ollie", "Tubby Smith", "Nolan Richardson", "Dusty May", "Denny Crum", "Larry Brown"],
@@ -110,13 +110,13 @@ window.PROMPTS = [
       ["Anthony Bennett"],
       ["Andrew Bogut"]
     ] },
-  { id: "mop", d: "medium", p: true, q: "Name a Final Four Most Outstanding Player (2000–2026)",
+  { id: "mop", d: "medium", p: true, ok: true, g: "mop", q: "Name a men's Final Four Most Outstanding Player",
     t: [
-      ["Carmelo Anthony", "Anthony Davis", "Kemba Walker", "Shane Battier", "Joakim Noah"],
-      ["Shabazz Napier|Shabazz", "Mario Chalmers", "Tyus Jones", "Donte DiVincenzo", "Kyle Guy", "Juan Dixon", "Emeka Okafor", "Sean May", "Walter Clayton Jr.|Walter Clayton"],
-      ["Corey Brewer", "Kyle Singler", "Luke Hancock", "Ryan Arcidiacono", "Joel Berry II|Joel Berry", "Ochai Agbaji", "Adama Sanogo", "Tristen Newton", "Mateen Cleaves", "Elliot Cadeau"],
-      ["Jared Butler"],
-      ["Wayne Ellington"]
+      ["Carmelo Anthony", "Anthony Davis", "Kemba Walker", "Magic Johnson", "Christian Laettner", "Lew Alcindor|Kareem Abdul-Jabbar|Kareem", "Bill Walton", "Patrick Ewing", "Hakeem Olajuwon|Akeem Olajuwon", "Isiah Thomas", "Jerry West", "Wilt Chamberlain"],
+      ["Shane Battier", "Joakim Noah", "Shabazz Napier", "Mario Chalmers", "Tyus Jones", "Donte DiVincenzo", "Kyle Guy", "Juan Dixon", "Emeka Okafor", "Sean May", "Walter Clayton Jr.|Walter Clayton", "James Worthy", "Bill Russell", "Bill Bradley", "David Thompson", "Danny Manning", "Bobby Hurley", "Ed O'Bannon", "Elgin Baylor", "Jerry Lucas", "Glen Rice", "Richard Hamilton|Rip Hamilton", "Tony Delk", "Darrell Griffith", "Bob Kurland", "Clyde Lovellette", "Tom Gola"],
+      ["Corey Brewer", "Kyle Singler", "Luke Hancock", "Ryan Arcidiacono", "Joel Berry II|Joel Berry", "Ochai Agbaji", "Adama Sanogo", "Tristen Newton", "Mateen Cleaves", "Elliot Cadeau", "Wayne Ellington", "Jared Butler", "Keith Smart", "Pervis Ellison", "Corliss Williamson", "Miles Simon", "Jeff Sheppard", "Sidney Wicks", "Walt Hazzard", "Kent Benson", "Jack Givens", "Ed Pinckney", "Alex Groza", "Art Heyman", "Donald Williams", "Anderson Hunt", "Butch Lee", "Richard Washington"],
+      ["Jimmy Hull", "Marv Huffman", "John Kotz", "Howie Dallmar", "Ken Sailors", "George Kaftan", "Irwin Dambrot", "Bill Spivey", "B.H. Born|BH Born", "Hal Lear", "Paul Hogue", "Jerry Chambers", "Howard Porter"],
+      ["Arnie Ferrin"]
     ] },
   { id: "bulldogs", d: "medium", q: "Name a Division I school nicknamed the Bulldogs",
     t: [
@@ -134,7 +134,7 @@ window.PROMPTS = [
       ["IU Indianapolis|IU Indy|IUPUI"],
       ["Southern Indiana|USI"]
     ] },
-  { id: "arenas", d: "medium", q: "Name a college basketball home arena (power conference or Big East)",
+  { id: "arenas", d: "medium", ok: true, g: "arenas", q: "Name the home arena of a power-conference or Big East men's basketball program",
     t: [
       ["Cameron Indoor Stadium|Cameron Indoor|Cameron", "Allen Fieldhouse|Phog", "Rupp Arena|Rupp", "Pauley Pavilion|Pauley", "Dean Smith Center|Dean Dome|Smith Center", "Madison Square Garden|MSG|The Garden"],
       ["Assembly Hall|Simon Skjodt Assembly Hall", "Hinkle Fieldhouse|Hinkle", "Mackey Arena|Mackey", "Breslin Center|Breslin", "JMA Wireless Dome|Carrier Dome|JMA Dome", "KFC Yum! Center|Yum Center|KFC Yum Center", "McKale Center|McKale", "Kohl Center", "Gampel Pavilion|Gampel"],
@@ -1110,13 +1110,13 @@ window.PROMPTS = [
       ["George Washington|GW", "Fordham"],
       ["La Salle"]
     ] },
-  { id: "patriot", d: "hard", q: "Name a Patriot League basketball school",
+  { id: "patriot", d: "hard", ok: true, g: "conf-patriot", q: "Name a school that has been a member of the Patriot League in men's basketball",
     t: [
       ["Navy", "Army"],
       ["Bucknell", "Colgate", "Lehigh"],
       ["Boston University|BU", "Holy Cross", "American"],
-      ["Lafayette"],
-      ["Loyola Maryland|Loyola MD|Loyola (MD)"]
+      ["Lafayette", "Loyola Maryland|Loyola MD"],
+      ["Fordham"]
     ] },
   { id: "horizon", d: "hard", q: "Name a Horizon League member in the 2025–26 season",
     t: [
