@@ -86,7 +86,7 @@ window.PROMPTS = [
       ["Tennessee State", "Texas Southern"],
       ["Pacific"]
     ] },
-  { id: "wooden", d: "medium", p: true, ok: true, g: "wooden", q: "Name a winner of the men's Wooden Award",
+  { id: "wooden", d: "medium", p: true, ok: true, g: "npoy", q: "Name a winner of the men's Wooden Award",
     t: [
       ["Larry Bird", "Michael Jordan", "Kevin Durant", "Zion Williamson|Zion", "Cooper Flagg", "Tim Duncan", "Anthony Davis", "Blake Griffin", "Cameron Boozer"],
       ["David Robinson", "Christian Laettner", "Shane Battier", "JJ Redick|J.J. Redick", "Tyler Hansbrough", "Jimmer Fredette|Jimmer", "Zach Edey", "Jalen Brunson", "Doug McDermott", "Buddy Hield", "Danny Manning", "Ralph Sampson", "Larry Johnson", "Kenyon Martin"],
@@ -181,14 +181,6 @@ window.PROMPTS = [
       ["Hampton"],
       ["Coppin State", "Richmond"],
       ["Santa Clara"]
-    ] },
-  { id: "ffhost", d: "hard", q: "Name a city that hosted the men's Final Four from 2010–2026",
-    t: [
-      ["Indianapolis|Indy", "Houston", "New Orleans|NOLA", "San Antonio"],
-      ["Atlanta", "Glendale|Phoenix"],
-      [],
-      ["Minneapolis"],
-      ["Arlington|Dallas"]
     ] },
   { id: "duke15", d: "hard", p: true, q: "Name a player from Duke's 2015 national championship team",
     t: [
@@ -2189,5 +2181,77 @@ window.PROMPTS = [
       ["Jackson State", "Alcorn State|Alcorn"],
       [],
       ["Mississippi Valley State|MVSU"]
+    ] },
+  { id: "ffschools", d: "easy", ok: true, g: "ff-schools", q: "Name a school that has reached the men's Final Four (vacated trips count)",
+    t: [
+      ["North Carolina|UNC", "Kentucky|UK", "Duke", "UCLA", "Kansas|KU", "Michigan State|MSU", "UConn|Connecticut", "Villanova|Nova", "Indiana|IU", "Louisville", "Michigan", "Gonzaga|Zags", "Florida|UF"],
+      ["Ohio State|OSU", "Syracuse", "Arizona", "Houston", "Georgetown", "Illinois", "Oklahoma|OU", "Wisconsin", "Virginia|UVA", "Arkansas", "Cincinnati", "Oklahoma State|Oklahoma A&M", "Kansas State|K-State", "LSU", "UNLV", "Purdue", "Butler", "Baylor", "Auburn", "Texas Tech", "Memphis|Memphis State", "Maryland", "Texas|UT", "Marquette", "NC State|North Carolina State", "Oregon", "Alabama|Bama", "Loyola Chicago|Loyola"],
+      ["Utah", "California|Cal", "Iowa", "San Francisco|USF", "Bradley", "CCNY|City College of New York|City College", "Colorado", "DePaul", "Georgia Tech", "Holy Cross", "La Salle", "Oregon State", "Providence", "St. John's|St Johns|Saint Johns", "Stanford", "Temple", "USC|Southern California", "West Virginia|WVU", "Wichita State", "South Carolina", "San Diego State|SDSU", "Florida Atlantic|FAU", "Miami", "George Mason", "VCU|Virginia Commonwealth", "Notre Dame", "Florida State|FSU", "Seton Hall", "Wake Forest", "Pittsburgh|Pitt", "Penn State", "Mississippi State", "Indiana State", "UTEP|Texas Western", "Iowa State", "Georgia|UGA"],
+      ["Dartmouth", "NYU|New York University", "Charlotte|UNC Charlotte", "Dayton", "Drake", "Duquesne", "Jacksonville", "New Mexico State", "Penn|Pennsylvania", "Princeton", "Rutgers", "Santa Clara", "SMU|Southern Methodist", "St. Bonaventure|St Bonaventure|Saint Bonaventure", "Washington|UW", "Washington State", "Wyoming", "Minnesota", "UMass|Massachusetts", "Saint Joseph's|St Josephs|Saint Josephs", "Western Kentucky|WKU"],
+      ["Seattle|Seattle U|Seattle University"]
+    ] },
+  { id: "ffstate", d: "medium", ok: true, g: "ff-schools", q: "Name a school with 'State' in its name that has reached the men's Final Four",
+    t: [
+      ["Michigan State|MSU", "Ohio State|OSU", "NC State|North Carolina State"],
+      ["Oklahoma State|Oklahoma A&M", "Kansas State|K-State", "San Diego State|SDSU", "Florida State|FSU", "Wichita State"],
+      ["Iowa State", "Penn State", "Mississippi State", "Indiana State", "Oregon State"],
+      ["New Mexico State"],
+      ["Washington State"]
+    ] },
+  { id: "titlegame", d: "medium", ok: true, g: "title-game", q: "Name a school that has played in the men's national championship game",
+    t: [
+      ["Duke", "North Carolina|UNC", "Kentucky|UK", "UCLA", "Kansas|KU", "UConn|Connecticut", "Michigan", "Villanova|Nova", "Gonzaga|Zags"],
+      ["Indiana|IU", "Michigan State|MSU", "Ohio State|OSU", "Louisville", "Syracuse", "Arizona", "Florida|UF", "Georgetown", "Houston", "Virginia|UVA", "Baylor", "Butler", "Purdue", "Arkansas", "Marquette", "Maryland", "Wisconsin", "Illinois", "Texas Tech", "Cincinnati", "NC State|North Carolina State", "UNLV", "Memphis|Memphis State"],
+      ["Oklahoma|OU", "Oklahoma State|Oklahoma A&M", "Utah", "California|Cal", "Georgia Tech", "San Diego State|SDSU", "Seton Hall", "Indiana State", "Florida State|FSU", "Stanford", "Oregon", "Loyola Chicago|Loyola", "La Salle", "San Francisco|USF", "Holy Cross", "UTEP|Texas Western", "West Virginia|WVU", "Kansas State|K-State", "St. John's|St Johns|Saint Johns", "Bradley"],
+      ["Dartmouth", "NYU|New York University", "Wyoming", "CCNY|City College of New York|City College", "Iowa", "Dayton", "Jacksonville", "Washington State"],
+      ["Seattle|Seattle U|Seattle University"]
+    ] },
+  { id: "naismith", d: "medium", p: true, ok: true, g: "npoy", q: "Name a winner of the men's Naismith Player of the Year award",
+    t: [
+      ["Michael Jordan|MJ", "Larry Bird", "Kevin Durant", "Zion Williamson", "Cooper Flagg", "Tim Duncan", "Anthony Davis", "Blake Griffin", "Lew Alcindor|Kareem Abdul-Jabbar|Kareem", "Bill Walton", "Patrick Ewing", "Pete Maravich|Pistol Pete"],
+      ["David Robinson", "Christian Laettner", "Shane Battier", "JJ Redick|J.J. Redick", "Tyler Hansbrough", "Jimmer Fredette", "Zach Edey", "Jalen Brunson", "Doug McDermott", "Buddy Hield", "Danny Manning", "Ralph Sampson", "Larry Johnson", "Kenyon Martin", "David Thompson", "Cameron Boozer"],
+      ["Elton Brand", "Antawn Jamison", "Marcus Camby", "Glenn Robinson", "Evan Turner", "Frank Kaminsky", "Trey Burke", "Andrew Bogut", "Luka Garza", "Jason Williams|Jay Williams", "Johnny Dawkins", "Danny Ferry", "Mark Aguirre", "Austin Carr", "Scott May"],
+      ["Lionel Simmons", "Calbert Cheaney", "TJ Ford|T.J. Ford", "Jameer Nelson", "Frank Mason III|Frank Mason", "Obi Toppin", "Oscar Tshiebwe", "Joe Smith", "Marques Johnson"],
+      ["Butch Lee"]
+    ] },
+  { id: "nit", d: "medium", ok: true, g: "nit", q: "Name a school that has won the NIT",
+    t: [
+      ["Kentucky|UK", "North Carolina|UNC", "UCLA", "Indiana|IU", "Michigan", "UConn|Connecticut", "Ohio State|OSU", "Villanova|Nova"],
+      ["St. John's|St Johns|Saint Johns", "Bradley", "Dayton", "Memphis", "Stanford", "Virginia|UVA", "Minnesota", "Penn State", "South Carolina", "Xavier", "Seton Hall", "Texas|UT", "Baylor", "Purdue", "Maryland", "Marquette", "Louisville", "Wake Forest", "West Virginia|WVU", "Auburn", "Providence", "Temple"],
+      ["Tulsa", "Virginia Tech", "Wichita State", "California|Cal", "Nebraska", "Vanderbilt|Vandy", "Southern Miss|Southern Mississippi", "BYU|Brigham Young", "TCU|Texas Christian", "George Washington|GW", "North Texas", "Fresno State", "St. Bonaventure|St Bonaventure|Saint Bonaventure", "Princeton", "Southern Illinois", "Holy Cross", "La Salle", "San Francisco|USF", "Utah", "DePaul", "Colorado", "Duquesne", "Saint Louis|SLU"],
+      ["Chattanooga|UTC", "CCNY|City College of New York|City College"],
+      ["LIU|Long Island|Long Island University"]
+    ] },
+  { id: "ffhost", d: "medium", ok: true, g: "ff-hosts", q: "Name a city that has hosted the men's Final Four or national championship game",
+    t: [
+      ["Indianapolis", "New Orleans", "San Antonio", "Houston", "Atlanta", "Kansas City", "New York|New York City|NYC"],
+      ["Seattle", "Minneapolis", "Louisville", "St. Louis|Saint Louis", "Glendale", "Arlington", "Detroit", "Philadelphia", "Los Angeles|LA"],
+      ["Dallas", "Denver", "Charlotte", "Lexington", "Salt Lake City", "Albuquerque", "San Diego", "East Rutherford", "St. Petersburg|Saint Petersburg", "Greensboro"],
+      ["Portland", "College Park", "Evanston"],
+      ["Daly City"]
+    ] },
+  { id: "pac12ever", d: "easy", ok: true, g: "conf-pac12", q: "Name a school that has been a member of the Pac-12 (including its Pac-8 and Pac-10 eras) in men's basketball",
+    t: [
+      ["UCLA", "Arizona", "USC|Southern California", "Oregon"],
+      ["Stanford", "California|Cal", "Washington|UW", "Arizona State|ASU", "Colorado", "Utah"],
+      ["Oregon State"],
+      [],
+      ["Washington State|Wazzu"]
+    ] },
+  { id: "multititle", d: "medium", ok: true, g: "title-schools", q: "Name a school that has won multiple men's national titles",
+    t: [
+      ["Kentucky|UK", "North Carolina|UNC", "Duke", "UCLA", "UConn|Connecticut", "Kansas|KU"],
+      ["Indiana|IU", "Villanova|Nova", "Florida|UF", "Michigan State|MSU", "Louisville", "Michigan"],
+      ["NC State|North Carolina State", "Cincinnati"],
+      ["Oklahoma State|Oklahoma A&M"],
+      ["San Francisco|USF"]
+    ] },
+  { id: "multicoach", d: "hard", p: true, ok: true, g: "title-coaches", q: "Name a head coach who won more than one men's national title",
+    t: [
+      ["John Wooden", "Mike Krzyzewski|Coach K", "Roy Williams", "Dean Smith", "Bob Knight|Bobby Knight", "Bill Self", "Dan Hurley", "Jay Wright"],
+      ["Adolph Rupp", "Jim Calhoun", "Billy Donovan", "Rick Pitino"],
+      ["Denny Crum"],
+      ["Hank Iba", "Branch McCracken", "Phil Woolpert"],
+      ["Ed Jucker"]
     ] }
 ];

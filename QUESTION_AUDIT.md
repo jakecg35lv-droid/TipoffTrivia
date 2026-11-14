@@ -1,24 +1,35 @@
 # Tipoff Trivia — question audit
 
-Audited 273 prompts against QUESTION_RULES.md.
+Audited 281 prompts against QUESTION_RULES.md.
 
-**Approved: 11** · **Flagged: 262**
+**Approved: 20** (easy 8 · medium 10 · hard 2) · **Flagged: 261**
+
+Target for a clean 30-day Daily: 90 easy · 90 medium · 30 hard approved.
 
 ## Approved
 
-| id | difficulty | answers | question |
-|---|---|---|---|
-| champs | easy | 37 | Name a school that has won the NCAA men's national championship |
-| bigten | easy | 19 | Name a school that has been a member of the Big Ten in men's basketball |
-| sec | easy | 19 | Name a school that has been a member of the SEC in men's basketball |
-| acc | easy | 20 | Name a school that has been a member of the ACC in men's basketball |
-| big12 | easy | 21 | Name a school that has been a member of the Big 12 in men's basketball |
-| bigeast | easy | 22 | Name a school that has been a member of the Big East in men's basketball |
-| wooden | medium | 48 | Name a winner of the men's Wooden Award |
-| titlecoach | medium | 53 | Name a head coach who won an NCAA men's national title |
-| mop | medium | 81 | Name a men's Final Four Most Outstanding Player |
-| arenas | medium | 82 | Name the home arena of a power-conference or Big East men's basketball program |
-| patriot | hard | 11 | Name a school that has been a member of the Patriot League in men's basketball |
+| id | difficulty | group | answers | question |
+|---|---|---|---|---|
+| champs | easy | title-schools | 37 | Name a school that has won the NCAA men's national championship |
+| bigten | easy | conf-b1g | 19 | Name a school that has been a member of the Big Ten in men's basketball |
+| sec | easy | conf-sec | 19 | Name a school that has been a member of the SEC in men's basketball |
+| acc | easy | conf-acc | 20 | Name a school that has been a member of the ACC in men's basketball |
+| big12 | easy | conf-b12 | 21 | Name a school that has been a member of the Big 12 in men's basketball |
+| bigeast | easy | conf-be | 22 | Name a school that has been a member of the Big East in men's basketball |
+| wooden | medium | npoy | 48 | Name a winner of the men's Wooden Award |
+| titlecoach | medium | title-coaches | 53 | Name a head coach who won an NCAA men's national title |
+| mop | medium | mop | 81 | Name a men's Final Four Most Outstanding Player |
+| arenas | medium | arenas | 82 | Name the home arena of a power-conference or Big East men's basketball program |
+| patriot | hard | conf-patriot | 11 | Name a school that has been a member of the Patriot League in men's basketball |
+| ffschools | easy | ff-schools | 99 | Name a school that has reached the men's Final Four (vacated trips count) |
+| ffstate | medium | ff-schools | 15 | Name a school with 'State' in its name that has reached the men's Final Four |
+| titlegame | medium | title-game | 61 | Name a school that has played in the men's national championship game |
+| naismith | medium | npoy | 53 | Name a winner of the men's Naismith Player of the Year award |
+| nit | medium | nit | 56 | Name a school that has won the NIT |
+| ffhost | medium | ff-hosts | 30 | Name a city that has hosted the men's Final Four or national championship game |
+| pac12ever | easy | conf-pac12 | 12 | Name a school that has been a member of the Pac-12 (including its Pac-8 and Pac-10 eras) in men's basketball |
+| multititle | medium | title-schools | 16 | Name a school that has won multiple men's national titles |
+| multicoach | hard | title-coaches | 17 | Name a head coach who won more than one men's national title |
 
 ## Flagged
 
@@ -32,11 +43,10 @@ Audited 273 prompts against QUESTION_RULES.md.
 | bulldogs | medium | 15 | non-basketball criterion | Name a Division I school nicknamed the Bulldogs |
 | indiana | medium | 11 | non-basketball criterion | Name a Division I basketball school in the state of Indiana |
 | gonzaga | medium | 19 | NBA/pro criterion | Name a former Gonzaga player who reached the NBA |
-| unbeaten | medium | 4 | under 10 answers (4); only 7 qualifying schools | Name a school that went undefeated AND won the national title |
+| unbeaten | medium | 4 | under 10 answers (4) | Name a school that went undefeated AND won the national title |
 | texas | hard | 25 | non-basketball criterion | Name a Division I basketball school in the state of Texas |
 | hbcu | hard | 23 | non-basketball criterion | Name an HBCU with a Division I men's basketball program |
 | upsets | hard | 13 | time restriction; verify 2026 tournament results before approving | Name a 15 or 16 seed that won an NCAA tournament game (through 2025) |
-| ffhost | hard | 8 | under 10 answers (8); time restriction | Name a city that hosted the men's Final Four from 2010–2026 |
 | duke15 | hard | 8 | under 10 answers (8); time restriction; single-season roster | Name a player from Duke's 2015 national championship team |
 | uconn | hard | 14 | time restriction; single-season roster | Name a player from UConn's 2023 or 2024 national title team |
 | uk2010 | hard | 5 | under 10 answers (5); time restriction; NBA/pro criterion | Name a Kentucky player picked in the 1st round of the 2010 NBA Draft |
