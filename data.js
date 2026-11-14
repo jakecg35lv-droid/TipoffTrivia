@@ -1,6 +1,6 @@
 // Tipoff Trivia — prompt + answer database
 // Each prompt: id, d (easy|medium|hard), q (question), p (true = people, enables last-name matching),
-// ok (true = meets QUESTION_RULES.md), g (topic group: prompts sharing a group count as the same question),
+// c (category, max 2 per Daily), ok (true = meets QUESTION_RULES.md), g (topic group: prompts sharing a group count as the same question),
 // t: five tiers [Layup 10, Mid-Range 30, Three Ball 60, Deep Cut 85, Half Court 100].
 // RULE: Half Court (last tier) holds exactly ONE super-niche answer per prompt.
 // Each answer: "Primary|alias|alias". See QUESTION_RULES.md before adding prompts.
@@ -1894,7 +1894,7 @@ window.PROMPTS = [
       ["Patrick Williams"],
       ["Isaac Okoro"]
     ] },
-  { id: "dukeffc", d: "easy", p: true, q: "Name a head coach who took Duke to a Final Four",
+  { id: "dukeffc", d: "easy", p: true, g: "coaches-dukehc", c: "coach-history", q: "Name a head coach who took Duke to a Final Four",
     t: [
       ["Mike Krzyzewski|Coach K"],
       ["Jon Scheyer"],
@@ -1902,7 +1902,7 @@ window.PROMPTS = [
       [],
       ["Bill Foster"]
     ] },
-  { id: "uncffc", d: "easy", p: true, q: "Name a head coach who took North Carolina to a Final Four",
+  { id: "uncffc", d: "easy", p: true, g: "coaches-unchc", c: "coach-history", q: "Name a head coach who took North Carolina to a Final Four",
     t: [
       ["Roy Williams", "Dean Smith"],
       ["Hubert Davis"],
@@ -1910,7 +1910,7 @@ window.PROMPTS = [
       [],
       ["Frank McGuire"]
     ] },
-  { id: "iucoach", d: "easy", p: true, q: "Name an Indiana head coach since 2000 (interims count)",
+  { id: "iucoach", d: "easy", p: true, g: "coaches-iuhc", c: "coach-history", q: "Name an Indiana head coach since 2000 (interims count)",
     t: [
       ["Tom Crean", "Mike Woodson"],
       ["Archie Miller", "Kelvin Sampson", "Bob Knight"],
@@ -1918,7 +1918,7 @@ window.PROMPTS = [
       [],
       ["Dan Dakich"]
     ] },
-  { id: "ukcoach", d: "easy", p: true, q: "Name a Kentucky head coach since 2000",
+  { id: "ukcoach", d: "easy", p: true, g: "coaches-ukhc", c: "coach-history", q: "Name a Kentucky head coach since 2000",
     t: [
       ["John Calipari", "Mark Pope"],
       ["Tubby Smith"],
@@ -1926,7 +1926,7 @@ window.PROMPTS = [
       [],
       ["Billy Gillispie"]
     ] },
-  { id: "loucoach", d: "medium", p: true, q: "Name a Louisville head coach since 2000 (interims count)",
+  { id: "loucoach", d: "medium", p: true, g: "coaches-louhc", c: "coach-history", q: "Name a Louisville head coach since 2000 (interims count)",
     t: [
       ["Rick Pitino"],
       ["Chris Mack", "Kenny Payne", "Pat Kelsey"],
@@ -1934,7 +1934,7 @@ window.PROMPTS = [
       [],
       ["David Padgett"]
     ] },
-  { id: "michcoach", d: "medium", p: true, q: "Name a Michigan head coach since 2000 (interims count)",
+  { id: "michcoach", d: "medium", p: true, g: "coaches-michhc", c: "coach-history", q: "Name a Michigan head coach since 2000 (interims count)",
     t: [
       ["John Beilein", "Juwan Howard", "Dusty May"],
       ["Tommy Amaker"],
@@ -1942,7 +1942,7 @@ window.PROMPTS = [
       [],
       ["Phil Martelli"]
     ] },
-  { id: "osucoach", d: "medium", p: true, q: "Name an Ohio State head coach since 2000",
+  { id: "osucoach", d: "medium", p: true, g: "coaches-osuhc", c: "coach-history", q: "Name an Ohio State head coach since 2000",
     t: [
       ["Thad Matta", "Chris Holtmann"],
       ["Jake Diebler"],
@@ -1950,7 +1950,7 @@ window.PROMPTS = [
       [],
       ["Jim O'Brien|Jim OBrien"]
     ] },
-  { id: "zonacoach", d: "medium", p: true, q: "Name an Arizona head coach since 2000 (interims count)",
+  { id: "zonacoach", d: "medium", p: true, g: "coaches-zonahc", c: "coach-history", q: "Name an Arizona head coach since 2000 (interims count)",
     t: [
       ["Sean Miller", "Tommy Lloyd", "Lute Olson"],
       [],
@@ -1958,7 +1958,7 @@ window.PROMPTS = [
       [],
       ["Kevin O'Neill|Kevin ONeill"]
     ] },
-  { id: "uclacoach", d: "medium", p: true, q: "Name a UCLA head coach since 2000",
+  { id: "uclacoach", d: "medium", p: true, g: "coaches-uclahc", c: "coach-history", q: "Name a UCLA head coach since 2000",
     t: [
       ["Mick Cronin", "Ben Howland", "Steve Alford"],
       [],
@@ -1966,7 +1966,7 @@ window.PROMPTS = [
       [],
       ["Murry Bartow"]
     ] },
-  { id: "unccoach", d: "easy", p: true, q: "Name a North Carolina head coach since 2000",
+  { id: "unccoach", d: "easy", p: true, g: "coaches-unchc", c: "coach-history", q: "Name a North Carolina head coach since 2000",
     t: [
       ["Roy Williams", "Hubert Davis"],
       [],
@@ -1974,7 +1974,7 @@ window.PROMPTS = [
       [],
       ["Bill Guthridge"]
     ] },
-  { id: "mdcoach", d: "medium", p: true, q: "Name a Maryland head coach since 2000 (interims count)",
+  { id: "mdcoach", d: "medium", p: true, g: "coaches-mdhc", c: "coach-history", q: "Name a Maryland head coach since 2000 (interims count)",
     t: [
       ["Gary Williams", "Mark Turgeon", "Kevin Willard"],
       ["Buzz Williams"],
@@ -1982,7 +1982,7 @@ window.PROMPTS = [
       [],
       ["Danny Manning"]
     ] },
-  { id: "gtowncoach", d: "medium", p: true, q: "Name a Georgetown head coach since 2000",
+  { id: "gtowncoach", d: "medium", p: true, g: "coaches-gtownhc", c: "coach-history", q: "Name a Georgetown head coach since 2000",
     t: [
       ["John Thompson III", "Patrick Ewing"],
       ["Ed Cooley"],
@@ -1990,7 +1990,7 @@ window.PROMPTS = [
       [],
       ["Craig Esherick"]
     ] },
-  { id: "novacoach", d: "medium", p: true, q: "Name a Villanova head coach since 2000",
+  { id: "novacoach", d: "medium", p: true, g: "coaches-novahc", c: "coach-history", q: "Name a Villanova head coach since 2000",
     t: [
       ["Jay Wright"],
       ["Kyle Neptune", "Kevin Willard"],
@@ -1998,7 +1998,7 @@ window.PROMPTS = [
       [],
       ["Steve Lappas"]
     ] },
-  { id: "uconncoach", d: "medium", p: true, q: "Name a UConn head coach since 2000 (interims count)",
+  { id: "uconncoach", d: "medium", p: true, g: "coaches-uconnhc", c: "coach-history", q: "Name a UConn head coach since 2000 (interims count)",
     t: [
       ["Jim Calhoun", "Dan Hurley"],
       ["Kevin Ollie"],
@@ -2253,5 +2253,141 @@ window.PROMPTS = [
       ["Denny Crum"],
       ["Hank Iba", "Branch McCracken", "Phil Woolpert"],
       ["Ed Jucker"]
+    ] },
+  { id: "iuhc", d: "easy", p: true, ok: true, g: "coaches-iuhc", c: "coach-history", q: "Name a head coach of Indiana men's basketball",
+    t: [
+      ["Bob Knight|Bobby Knight", "Tom Crean", "Mike Woodson"],
+      ["Archie Miller", "Kelvin Sampson", "Mike Davis", "Darian DeVries", "Branch McCracken"],
+      ["Dan Dakich", "Lou Watson", "Everett Dean", "Jerry Oliver", "Harry C. Good|Harry Good"],
+      ["Leslie Mann|Les Mann", "George Levis", "Ewald O. Stiehm|Ewald Stiehm|Jumbo Stiehm", "Dana Evans", "Guy Lowman", "Allan Williford", "Arthur Berndt", "Arthur Powell", "James Kase", "Oscar Rackle", "John Georgen", "Robert Harris", "Ed Cook", "James M. Sheldon|James Sheldon", "Zora Clevenger", "Willis Coval", "Phelps Darby"],
+      ["James H. Horne|James Horne"]
+    ] },
+  { id: "ukhc", d: "easy", p: true, ok: true, g: "coaches-ukhc", c: "coach-history", q: "Name a head coach of Kentucky men's basketball",
+    t: [
+      ["Adolph Rupp", "John Calipari", "Rick Pitino", "Tubby Smith"],
+      ["Mark Pope", "Joe B. Hall|Joe Hall", "Eddie Sutton", "Billy Gillispie"],
+      ["John Mauer", "Basil Hayden"],
+      ["George Buchheit", "Ray Eklund", "Clarence Applegran", "Andrew Gill", "Stanley A. Boles|Stanley Boles", "William P. Tuttle|William Tuttle", "James Park", "Alpha Brumage", "John J. Tigert|John Tigert", "Edwin Sweetland", "Harold Iddings", "R.E. Spahr|RE Spahr"],
+      ["W. W. H. Mustaine|WWH Mustaine|Mustaine"]
+    ] },
+  { id: "dukehc", d: "easy", p: true, ok: true, g: "coaches-dukehc", c: "coach-history", q: "Name a head coach of Duke men's basketball",
+    t: [
+      ["Mike Krzyzewski|Coach K", "Jon Scheyer"],
+      ["Vic Bubas", "Bill Foster|Bill E. Foster", "Eddie Cameron"],
+      ["Bucky Waters", "Harold Bradley", "Gerry Gerard", "Pete Gaudet", "Neill McGeachy"],
+      ["George Buchheit", "Jessie Burbage", "James Baldwin", "Floyd Egan", "Walter Rothensies", "Henry Cole", "Charles Doak|Chick Doak", "Bob Doak", "Noble Clay", "Joseph Brinn"],
+      ["Wilbur Wade Card|Cap Card"]
+    ] },
+  { id: "unchc", d: "easy", p: true, ok: true, g: "coaches-unchc", c: "coach-history", q: "Name a head coach of North Carolina men's basketball",
+    t: [
+      ["Dean Smith", "Roy Williams", "Hubert Davis"],
+      ["Michael Malone|Mike Malone", "Frank McGuire", "Matt Doherty", "Bill Guthridge"],
+      ["Ben Carnevale", "Tom Scott", "Bill Lange"],
+      ["Walter Skidmore", "Bo Shepard", "James Ashmore", "Harlan Sanborn", "Monk McDonald", "Norman Shepard", "Fred Boye", "Howell Peacock", "Charles Doak|Chick Doak"],
+      ["Nat Cartmell"]
+    ] },
+  { id: "uclahc", d: "easy", p: true, ok: true, g: "coaches-uclahc", c: "coach-history", q: "Name a head coach of UCLA men's basketball",
+    t: [
+      ["John Wooden", "Mick Cronin", "Ben Howland", "Steve Alford", "Larry Brown"],
+      ["Jim Harrick", "Steve Lavin", "Gene Bartow", "Walt Hazzard"],
+      ["Gary Cunningham", "Larry Farmer", "Murry Bartow", "Wilbur Johns"],
+      ["Caddy Works"],
+      ["Fred Cozens"]
+    ] },
+  { id: "louhc", d: "easy", p: true, ok: true, g: "coaches-louhc", c: "coach-history", q: "Name a head coach of Louisville men's basketball",
+    t: [
+      ["Rick Pitino", "Denny Crum"],
+      ["Chris Mack", "Kenny Payne", "Pat Kelsey", "Bernard Hickman|Peck Hickman"],
+      ["John Dromo", "David Padgett", "Mike Pegues", "Howard Stacey"],
+      ["Fred Enke", "Tom King", "C. V. Money|CV Money", "Laurie Apitz", "John Heldman Jr.|John Heldman", "Edward Weber", "John O'Rourke", "Jimmie Powers", "Tuley Brucker", "Earl Ford", "Ed Bowman", "Harold Church", "Walter Casey"],
+      ["William Gardiner"]
+    ] },
+  { id: "purduehc", d: "easy", p: true, ok: true, g: "coaches-purduehc", c: "coach-history", q: "Name a head coach of Purdue men's basketball",
+    t: [
+      ["Gene Keady", "Matt Painter"],
+      ["Piggy Lambert|Ward Lambert", "Lee Rose", "Fred Schaus", "George King"],
+      ["Ray Eddy", "Mel Taube"],
+      ["Ralph Jones", "J.J. Maloney|JJ Maloney", "R.E. Vaughn|RE Vaughn", "E. J. Stewart|EJ Stewart", "C.B. Jamison|CB Jamison", "James Nufer", "C.I. Freeman|CI Freeman", "Charles Best", "Alpha Jamison"],
+      ["F. Homer Curtis|Homer Curtis"]
+    ] },
+  { id: "msuhc", d: "easy", p: true, ok: true, g: "coaches-msuhc", c: "coach-history", q: "Name a head coach of Michigan State men's basketball",
+    t: [
+      ["Tom Izzo", "Jud Heathcote"],
+      ["Gus Ganakas", "Pete Newell", "Forddy Anderson"],
+      ["John Benington", "Al Kircher", "Benjamin Van Alstyne|Ben Van Alstyne"],
+      ["John Kobs", "Mysterious Walker", "Lyman Frimodig", "George Gauthier", "John Macklin", "Chester Brewer", "George Denman"],
+      ["Charles Bemies"]
+    ] },
+  { id: "osuhc", d: "easy", p: true, ok: true, g: "coaches-osuhc", c: "coach-history", q: "Name a head coach of Ohio State men's basketball",
+    t: [
+      ["Thad Matta", "Chris Holtmann", "Fred Taylor"],
+      ["Jake Diebler", "Jim O'Brien", "Gary Williams", "Randy Ayers", "Eldon Miller"],
+      ["Floyd Stahl", "Tippy Dye", "Harold Olsen"],
+      ["George Trautman", "Lynn St. John", "Sox Raymond|Stockton Raymond", "Thomas Kibler"],
+      ["D. C. Huddleson|DC Huddleson"]
+    ] },
+  { id: "zonahc", d: "easy", p: true, ok: true, g: "coaches-zonahc", c: "coach-history", q: "Name a head coach of Arizona men's basketball",
+    t: [
+      ["Lute Olson", "Sean Miller", "Tommy Lloyd"],
+      ["Fred Snowden", "Kevin O'Neill", "Russ Pennell"],
+      ["Fred Enke", "Bruce Larson", "Ben Lindsey", "Jim Rosborough", "Pop McKale|J.F. McKale"],
+      ["Walter Davis", "Basil Stanley", "James Pierce", "Raymond L. Quigley|Raymond Quigley", "Frank L. Kleeberger|Frank Kleeberger"],
+      ["Orin A. Kates|Orin Kates"]
+    ] },
+  { id: "uconnhc", d: "easy", p: true, ok: true, g: "coaches-uconnhc", c: "coach-history", q: "Name a head coach of UConn men's basketball",
+    t: [
+      ["Jim Calhoun", "Dan Hurley", "Kevin Ollie"],
+      ["Dom Perno", "Dee Rowe", "Hugh Greer"],
+      ["Fred Shabel", "Burr Carlson", "George Wigton", "Don White"],
+      ["Blair Gullion", "J. O. Christian|JO Christian", "John Heldman Jr.|John Heldman", "Louis Alexander", "Sumner Dole", "Roy J. Guyer|Roy Guyer", "J. Wilder Tasker|Wilder Tasker", "Ross Swartz"],
+      ["John F. Donahue|John Donahue"]
+    ] },
+  { id: "michhc", d: "easy", p: true, ok: true, g: "coaches-michhc", c: "coach-history", q: "Name a head coach of Michigan men's basketball",
+    t: [
+      ["John Beilein", "Juwan Howard", "Dusty May", "Steve Fisher"],
+      ["Mike Boynton", "Tommy Amaker", "Bill Frieder", "Johnny Orr"],
+      ["Brian Ellerbe", "Dave Strack", "Bennie Oosterbaan"],
+      ["William Perigo|Bill Perigo", "Ernest McCoy", "Osborne Cowles|Ozzie Cowles", "Frank Cappon", "George Veenker", "E. J. Mather|EJ Mather", "Elmer Mitchell"],
+      ["George D. Corneal|George Corneal"]
+    ] },
+  { id: "illinihc", d: "medium", p: true, ok: true, g: "coaches-illinihc", c: "coach-history", q: "Name a head coach of Illinois men's basketball",
+    t: [
+      ["Bill Self", "Bruce Weber", "Lou Henson", "Brad Underwood", "Lon Kruger"],
+      ["John Groce", "Gene Bartow", "Harry Combes", "Harv Schmidt"],
+      ["Douglas R. Mills|Doug Mills", "J. Craig Ruby|Craig Ruby", "Jamall Walker", "Ralph Jones"],
+      ["Frank Winters", "Thomas E. Thompson|Thomas Thompson", "Herb Juul", "Fletcher Lane", "Frank L. Pinckney|Frank Pinckney"],
+      ["Elwood Brown"]
+    ] },
+  { id: "ndhc", d: "medium", p: true, ok: true, g: "coaches-ndhc", c: "coach-history", q: "Name a head coach of Notre Dame men's basketball",
+    t: [
+      ["Mike Brey", "Digger Phelps", "Micah Shrewsberry"],
+      ["John MacLeod", "Matt Doherty", "Moose Krause", "George Keogan"],
+      ["John Jordan", "John Dee", "Elmer Ripley", "Jesse Harper", "Gus Dorais"],
+      ["Clem Crowe", "Walter Halas", "Bill Nelson", "Bertram Maris", "J. Fred Powers|Fred Powers"],
+      ["Frank E. Hering|Frank Hering"]
+    ] },
+  { id: "novahc", d: "medium", p: true, ok: true, g: "coaches-novahc", c: "coach-history", q: "Name a head coach of Villanova men's basketball",
+    t: [
+      ["Jay Wright", "Rollie Massimino"],
+      ["Kevin Willard", "Kyle Neptune", "Steve Lappas"],
+      ["Jack Kraft", "Al Severance|Alexander Severance"],
+      ["George Jacobs|Doc Jacobs", "John C. Cashman|John Cashman"],
+      ["Michael Saxe"]
+    ] },
+  { id: "gtownhc", d: "medium", p: true, ok: true, g: "coaches-gtownhc", c: "coach-history", q: "Name a head coach of Georgetown men's basketball",
+    t: [
+      ["John Thompson Jr.|John Thompson", "Patrick Ewing", "John Thompson III|JT3", "Ed Cooley"],
+      ["Craig Esherick", "Elmer Ripley"],
+      ["John Magee", "Tommy O'Keefe", "Tom Nolan", "Buddy Jeannette"],
+      ["Buddy O'Grady", "Ken Engles", "Fred Mesmer", "John Colrick", "Bill Dudack", "Jackie Maloney", "John O'Reilly", "James Colliflower"],
+      ["Maurice Joyce"]
+    ] },
+  { id: "mdhc", d: "medium", p: true, ok: true, g: "coaches-mdhc", c: "coach-history", q: "Name a head coach of Maryland men's basketball",
+    t: [
+      ["Gary Williams", "Lefty Driesell", "Mark Turgeon"],
+      ["Kevin Willard", "Buzz Williams", "Bob Wade"],
+      ["Danny Manning", "Bud Millikan"],
+      ["Frank Fellows", "Flucie Stewart"],
+      ["H. Burton Shipley|Burton Shipley"]
     ] }
 ];

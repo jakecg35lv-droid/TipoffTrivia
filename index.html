@@ -1251,6 +1251,7 @@ const P = id => PROMPTS.find(p=>p.id===id);
    - a prompt, or any prompt in the same topic group (g), can't return for 30 days
    - approved prompts (ok:true) are used first; flagged ones only fill gaps
    - no two prompts in one day share the same Half Court answer
+   - at most 2 prompts from the same category (c) per day, for variety
    If the pool can't satisfy the 30-day rule, the least-recently-used prompt is
    taken and a warning is logged, rather than pretending it's fresh.
    The schedule is rebuilt deterministically from EPOCH so every player matches. */
@@ -1265,8 +1266,9 @@ function dailySetFor(dateStr){
   for (let d=new Date(EPOCH+"T00:00:00"); d<=end; d.setDate(d.getDate()+1), day++){
     const ds=fmtDay(d), r=rng("dch-"+ds), order=shuffle(PROMPTS,r), taken=new Set(), halves=new Set();
     const fresh = p => last[grp(p)]===undefined || day-last[grp(p)] >= DAILY_GAP;
-    const can = p => !taken.has(grp(p)) && !halves.has(halfKey(p));
-    const take = p => { taken.add(grp(p)); halves.add(halfKey(p)); set.push(p); };
+    const cats={};
+    const can = p => !taken.has(grp(p)) && !halves.has(halfKey(p)) && (!p.c || (cats[p.c]||0) < 2);
+    const take = p => { taken.add(grp(p)); halves.add(halfKey(p)); if (p.c) cats[p.c]=(cats[p.c]||0)+1; set.push(p); };
     set=[];
     const fill = (test, diff, n) => { for (const p of order){ if (n<=0) break; if ((!diff||p.d===diff) && can(p) && test(p)){ take(p); n--; } } return n; };
     let short=0;

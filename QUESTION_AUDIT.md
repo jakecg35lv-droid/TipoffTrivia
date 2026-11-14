@@ -1,8 +1,8 @@
 # Tipoff Trivia — question audit
 
-Audited 281 prompts against QUESTION_RULES.md.
+Audited 298 prompts against QUESTION_RULES.md.
 
-**Approved: 20** (easy 8 · medium 10 · hard 2) · **Flagged: 261**
+**Approved: 37** (easy 20 · medium 15 · hard 2) · **Flagged: 261**
 
 Target for a clean 30-day Daily: 90 easy · 90 medium · 30 hard approved.
 
@@ -30,6 +30,23 @@ Target for a clean 30-day Daily: 90 easy · 90 medium · 30 hard approved.
 | pac12ever | easy | conf-pac12 | 12 | Name a school that has been a member of the Pac-12 (including its Pac-8 and Pac-10 eras) in men's basketball |
 | multititle | medium | title-schools | 16 | Name a school that has won multiple men's national titles |
 | multicoach | hard | title-coaches | 17 | Name a head coach who won more than one men's national title |
+| iuhc | easy | coaches-iuhc | 31 | Name a head coach of Indiana men's basketball |
+| ukhc | easy | coaches-ukhc | 23 | Name a head coach of Kentucky men's basketball |
+| dukehc | easy | coaches-dukehc | 21 | Name a head coach of Duke men's basketball |
+| unchc | easy | coaches-unchc | 20 | Name a head coach of North Carolina men's basketball |
+| uclahc | easy | coaches-uclahc | 15 | Name a head coach of UCLA men's basketball |
+| louhc | easy | coaches-louhc | 24 | Name a head coach of Louisville men's basketball |
+| purduehc | easy | coaches-purduehc | 18 | Name a head coach of Purdue men's basketball |
+| msuhc | easy | coaches-msuhc | 16 | Name a head coach of Michigan State men's basketball |
+| osuhc | easy | coaches-osuhc | 16 | Name a head coach of Ohio State men's basketball |
+| zonahc | easy | coaches-zonahc | 17 | Name a head coach of Arizona men's basketball |
+| uconnhc | easy | coaches-uconnhc | 19 | Name a head coach of UConn men's basketball |
+| michhc | easy | coaches-michhc | 19 | Name a head coach of Michigan men's basketball |
+| illinihc | medium | coaches-illinihc | 19 | Name a head coach of Illinois men's basketball |
+| ndhc | medium | coaches-ndhc | 18 | Name a head coach of Notre Dame men's basketball |
+| novahc | medium | coaches-novahc | 10 | Name a head coach of Villanova men's basketball |
+| gtownhc | medium | coaches-gtownhc | 19 | Name a head coach of Georgetown men's basketball |
+| mdhc | medium | coaches-mdhc | 11 | Name a head coach of Maryland men's basketball |
 
 ## Flagged
 
