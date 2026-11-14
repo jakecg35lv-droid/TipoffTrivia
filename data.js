@@ -6,7 +6,7 @@
 // Each answer: "Primary|alias|alias". See QUESTION_RULES.md before adding prompts.
 
 window.PROMPTS = [
-  { id: "champs", d: "easy", ok: true, g: "title-schools", q: "Name a school that has won the NCAA men's national championship",
+  { id: "champs", d: "easy", ok: true, g: "title-schools", c: "school-titles", q: "Name a school that has won the NCAA men's national championship",
     t: [
       ["Duke", "Kentucky|UK", "North Carolina|UNC|Carolina|Tar Heels", "UCLA|Bruins", "Kansas|KU|Jayhawks"],
       ["UConn|Connecticut|Huskies", "Indiana|IU|Hoosiers", "Villanova|Nova", "Michigan State|MSU|Sparty", "Florida|UF|Gators", "Louisville", "Syracuse|Cuse", "Arizona", "Virginia|UVA", "Baylor", "Michigan"],
@@ -14,7 +14,7 @@ window.PROMPTS = [
       ["Oklahoma State|Oklahoma A&M", "Loyola Chicago|Loyola|Loyola-Chicago", "UTEP|Texas Western", "Oregon", "Stanford", "Utah", "San Francisco|USF", "Holy Cross", "La Salle", "Wyoming", "California|Cal"],
       ["CCNY|City College of New York|City College"]
     ] },
-  { id: "bigten", d: "easy", ok: true, g: "conf-b1g", q: "Name a school that has been a member of the Big Ten in men's basketball",
+  { id: "bigten", d: "easy", ok: true, g: "conf-b1g", c: "conference", q: "Name a school that has been a member of the Big Ten in men's basketball",
     t: [
       ["Indiana|IU", "Michigan", "Michigan State|MSU", "Purdue", "Ohio State|OSU", "UCLA"],
       ["Illinois", "Iowa", "Wisconsin", "Maryland", "Oregon", "USC|Southern California"],
@@ -22,7 +22,7 @@ window.PROMPTS = [
       ["Penn State|PSU", "Rutgers"],
       ["Chicago|University of Chicago|UChicago"]
     ] },
-  { id: "sec", d: "easy", ok: true, g: "conf-sec", q: "Name a school that has been a member of the SEC in men's basketball",
+  { id: "sec", d: "easy", ok: true, g: "conf-sec", c: "conference", q: "Name a school that has been a member of the SEC in men's basketball",
     t: [
       ["Kentucky|UK", "Florida|UF", "Tennessee|Vols", "Alabama|Bama", "Auburn"],
       ["Arkansas", "LSU", "Texas|UT", "Georgia|UGA", "Missouri|Mizzou", "Texas A&M|TAMU|A&M"],
@@ -30,7 +30,7 @@ window.PROMPTS = [
       ["Vanderbilt|Vandy", "Georgia Tech", "Tulane"],
       ["Sewanee|University of the South"]
     ] },
-  { id: "acc", d: "easy", ok: true, g: "conf-acc", q: "Name a school that has been a member of the ACC in men's basketball",
+  { id: "acc", d: "easy", ok: true, g: "conf-acc", c: "conference", q: "Name a school that has been a member of the ACC in men's basketball",
     t: [
       ["Duke", "North Carolina|UNC", "Virginia|UVA", "Syracuse", "Louisville"],
       ["NC State|North Carolina State", "Wake Forest", "Miami", "Notre Dame", "Florida State|FSU", "Clemson", "Maryland"],
@@ -38,7 +38,7 @@ window.PROMPTS = [
       ["Stanford", "California|Cal", "SMU|Southern Methodist"],
       ["South Carolina"]
     ] },
-  { id: "big12", d: "easy", ok: true, g: "conf-b12", q: "Name a school that has been a member of the Big 12 in men's basketball",
+  { id: "big12", d: "easy", ok: true, g: "conf-b12", c: "conference", q: "Name a school that has been a member of the Big 12 in men's basketball",
     t: [
       ["Kansas|KU", "Houston", "Baylor", "Arizona", "Texas|UT", "Oklahoma|OU"],
       ["Iowa State|ISU", "Texas Tech", "West Virginia|WVU", "BYU|Brigham Young", "Kansas State|K-State", "Cincinnati", "Missouri|Mizzou", "Texas A&M|TAMU|A&M"],
@@ -46,7 +46,7 @@ window.PROMPTS = [
       ["TCU|Texas Christian"],
       ["UCF|Central Florida"]
     ] },
-  { id: "bigeast", d: "easy", ok: true, g: "conf-be", q: "Name a school that has been a member of the Big East in men's basketball",
+  { id: "bigeast", d: "easy", ok: true, g: "conf-be", c: "conference", q: "Name a school that has been a member of the Big East in men's basketball",
     t: [
       ["UConn|Connecticut", "Villanova|Nova", "Georgetown", "Syracuse"],
       ["Marquette", "Creighton", "St. John's|St Johns|Saint Johns", "Xavier", "Butler", "Providence", "Louisville", "Pittsburgh|Pitt", "Notre Dame", "West Virginia|WVU", "Seton Hall"],
@@ -86,7 +86,7 @@ window.PROMPTS = [
       ["Tennessee State", "Texas Southern"],
       ["Pacific"]
     ] },
-  { id: "wooden", d: "medium", p: true, ok: true, g: "npoy", q: "Name a winner of the men's Wooden Award",
+  { id: "wooden", d: "medium", p: true, ok: true, g: "npoy", c: "player-award", q: "Name a winner of the men's Wooden Award",
     t: [
       ["Larry Bird", "Michael Jordan", "Kevin Durant", "Zion Williamson|Zion", "Cooper Flagg", "Tim Duncan", "Anthony Davis", "Blake Griffin", "Cameron Boozer"],
       ["David Robinson", "Christian Laettner", "Shane Battier", "JJ Redick|J.J. Redick", "Tyler Hansbrough", "Jimmer Fredette|Jimmer", "Zach Edey", "Jalen Brunson", "Doug McDermott", "Buddy Hield", "Danny Manning", "Ralph Sampson", "Larry Johnson", "Kenyon Martin"],
@@ -94,7 +94,7 @@ window.PROMPTS = [
       ["Danny Ainge", "Darrell Griffith", "Lionel Simmons", "Calbert Cheaney", "TJ Ford|T.J. Ford", "Jameer Nelson", "Frank Mason III|Frank Mason", "Obi Toppin", "Oscar Tshiebwe", "Walter Berry", "Marques Johnson"],
       ["Phil Ford"]
     ] },
-  { id: "titlecoach", d: "medium", p: true, ok: true, g: "title-coaches", q: "Name a head coach who won an NCAA men's national title",
+  { id: "titlecoach", d: "medium", p: true, ok: true, g: "title-coaches", c: "coach-accomplishment", q: "Name a head coach who won an NCAA men's national title",
     t: [
       ["Mike Krzyzewski|Coach K", "John Wooden", "Dean Smith", "Bob Knight|Bobby Knight", "Roy Williams", "Tom Izzo", "Bill Self", "John Calipari", "Rick Pitino", "Jim Calhoun", "Dan Hurley", "Jim Boeheim", "Jay Wright", "Adolph Rupp"],
       ["Billy Donovan", "Tony Bennett", "Scott Drew", "Todd Golden", "Jim Valvano|Jimmy V", "Jerry Tarkanian|Tark", "John Thompson", "Lute Olson", "Gary Williams", "Kevin Ollie", "Tubby Smith", "Nolan Richardson", "Dusty May", "Denny Crum", "Larry Brown"],
@@ -110,7 +110,7 @@ window.PROMPTS = [
       ["Anthony Bennett"],
       ["Andrew Bogut"]
     ] },
-  { id: "mop", d: "medium", p: true, ok: true, g: "mop", q: "Name a men's Final Four Most Outstanding Player",
+  { id: "mop", d: "medium", p: true, ok: true, g: "mop", c: "player-award", q: "Name a men's Final Four Most Outstanding Player",
     t: [
       ["Carmelo Anthony", "Anthony Davis", "Kemba Walker", "Magic Johnson", "Christian Laettner", "Lew Alcindor|Kareem Abdul-Jabbar|Kareem", "Bill Walton", "Patrick Ewing", "Hakeem Olajuwon|Akeem Olajuwon", "Isiah Thomas", "Jerry West", "Wilt Chamberlain"],
       ["Shane Battier", "Joakim Noah", "Shabazz Napier", "Mario Chalmers", "Tyus Jones", "Donte DiVincenzo", "Kyle Guy", "Juan Dixon", "Emeka Okafor", "Sean May", "Walter Clayton Jr.|Walter Clayton", "James Worthy", "Bill Russell", "Bill Bradley", "David Thompson", "Danny Manning", "Bobby Hurley", "Ed O'Bannon", "Elgin Baylor", "Jerry Lucas", "Glen Rice", "Richard Hamilton|Rip Hamilton", "Tony Delk", "Darrell Griffith", "Bob Kurland", "Clyde Lovellette", "Tom Gola"],
@@ -134,7 +134,7 @@ window.PROMPTS = [
       ["IU Indianapolis|IU Indy|IUPUI"],
       ["Southern Indiana|USI"]
     ] },
-  { id: "arenas", d: "medium", ok: true, g: "arenas", q: "Name the home arena of a power-conference or Big East men's basketball program",
+  { id: "arenas", d: "medium", ok: true, g: "arenas", c: "arenas", q: "Name the home arena of a power-conference or Big East men's basketball program",
     t: [
       ["Cameron Indoor Stadium|Cameron Indoor|Cameron", "Allen Fieldhouse|Phog", "Rupp Arena|Rupp", "Pauley Pavilion|Pauley", "Dean Smith Center|Dean Dome|Smith Center", "Madison Square Garden|MSG|The Garden"],
       ["Assembly Hall|Simon Skjodt Assembly Hall", "Hinkle Fieldhouse|Hinkle", "Mackey Arena|Mackey", "Breslin Center|Breslin", "JMA Wireless Dome|Carrier Dome|JMA Dome", "KFC Yum! Center|Yum Center|KFC Yum Center", "McKale Center|McKale", "Kohl Center", "Gampel Pavilion|Gampel"],
@@ -1102,7 +1102,7 @@ window.PROMPTS = [
       ["George Washington|GW", "Fordham"],
       ["La Salle"]
     ] },
-  { id: "patriot", d: "hard", ok: true, g: "conf-patriot", q: "Name a school that has been a member of the Patriot League in men's basketball",
+  { id: "patriot", d: "hard", ok: true, g: "conf-patriot", c: "conference", q: "Name a school that has been a member of the Patriot League in men's basketball",
     t: [
       ["Navy", "Army"],
       ["Bucknell", "Colgate", "Lehigh"],
@@ -2182,7 +2182,7 @@ window.PROMPTS = [
       [],
       ["Mississippi Valley State|MVSU"]
     ] },
-  { id: "ffschools", d: "easy", ok: true, g: "ff-schools", q: "Name a school that has reached the men's Final Four (vacated trips count)",
+  { id: "ffschools", d: "easy", ok: true, g: "ff-schools", c: "school-tournament", q: "Name a school that has reached the men's Final Four (vacated trips count)",
     t: [
       ["North Carolina|UNC", "Kentucky|UK", "Duke", "UCLA", "Kansas|KU", "Michigan State|MSU", "UConn|Connecticut", "Villanova|Nova", "Indiana|IU", "Louisville", "Michigan", "Gonzaga|Zags", "Florida|UF"],
       ["Ohio State|OSU", "Syracuse", "Arizona", "Houston", "Georgetown", "Illinois", "Oklahoma|OU", "Wisconsin", "Virginia|UVA", "Arkansas", "Cincinnati", "Oklahoma State|Oklahoma A&M", "Kansas State|K-State", "LSU", "UNLV", "Purdue", "Butler", "Baylor", "Auburn", "Texas Tech", "Memphis|Memphis State", "Maryland", "Texas|UT", "Marquette", "NC State|North Carolina State", "Oregon", "Alabama|Bama", "Loyola Chicago|Loyola"],
@@ -2190,7 +2190,7 @@ window.PROMPTS = [
       ["Dartmouth", "NYU|New York University", "Charlotte|UNC Charlotte", "Dayton", "Drake", "Duquesne", "Jacksonville", "New Mexico State", "Penn|Pennsylvania", "Princeton", "Rutgers", "Santa Clara", "SMU|Southern Methodist", "St. Bonaventure|St Bonaventure|Saint Bonaventure", "Washington|UW", "Washington State", "Wyoming", "Minnesota", "UMass|Massachusetts", "Saint Joseph's|St Josephs|Saint Josephs", "Western Kentucky|WKU"],
       ["Seattle|Seattle U|Seattle University"]
     ] },
-  { id: "ffstate", d: "medium", ok: true, g: "ff-schools", q: "Name a school with 'State' in its name that has reached the men's Final Four",
+  { id: "ffstate", d: "medium", ok: true, g: "ff-schools", c: "school-tournament", q: "Name a school with 'State' in its name that has reached the men's Final Four",
     t: [
       ["Michigan State|MSU", "Ohio State|OSU", "NC State|North Carolina State"],
       ["Oklahoma State|Oklahoma A&M", "Kansas State|K-State", "San Diego State|SDSU", "Florida State|FSU", "Wichita State"],
@@ -2198,7 +2198,7 @@ window.PROMPTS = [
       ["New Mexico State"],
       ["Washington State"]
     ] },
-  { id: "titlegame", d: "medium", ok: true, g: "title-game", q: "Name a school that has played in the men's national championship game",
+  { id: "titlegame", d: "medium", ok: true, g: "title-game", c: "school-tournament", q: "Name a school that has played in the men's national championship game",
     t: [
       ["Duke", "North Carolina|UNC", "Kentucky|UK", "UCLA", "Kansas|KU", "UConn|Connecticut", "Michigan", "Villanova|Nova", "Gonzaga|Zags"],
       ["Indiana|IU", "Michigan State|MSU", "Ohio State|OSU", "Louisville", "Syracuse", "Arizona", "Florida|UF", "Georgetown", "Houston", "Virginia|UVA", "Baylor", "Butler", "Purdue", "Arkansas", "Marquette", "Maryland", "Wisconsin", "Illinois", "Texas Tech", "Cincinnati", "NC State|North Carolina State", "UNLV", "Memphis|Memphis State"],
@@ -2206,7 +2206,7 @@ window.PROMPTS = [
       ["Dartmouth", "NYU|New York University", "Wyoming", "CCNY|City College of New York|City College", "Iowa", "Dayton", "Jacksonville", "Washington State"],
       ["Seattle|Seattle U|Seattle University"]
     ] },
-  { id: "naismith", d: "medium", p: true, ok: true, g: "npoy", q: "Name a winner of the men's Naismith Player of the Year award",
+  { id: "naismith", d: "medium", p: true, ok: true, g: "npoy", c: "player-award", q: "Name a winner of the men's Naismith Player of the Year award",
     t: [
       ["Michael Jordan|MJ", "Larry Bird", "Kevin Durant", "Zion Williamson", "Cooper Flagg", "Tim Duncan", "Anthony Davis", "Blake Griffin", "Lew Alcindor|Kareem Abdul-Jabbar|Kareem", "Bill Walton", "Patrick Ewing", "Pete Maravich|Pistol Pete"],
       ["David Robinson", "Christian Laettner", "Shane Battier", "JJ Redick|J.J. Redick", "Tyler Hansbrough", "Jimmer Fredette", "Zach Edey", "Jalen Brunson", "Doug McDermott", "Buddy Hield", "Danny Manning", "Ralph Sampson", "Larry Johnson", "Kenyon Martin", "David Thompson", "Cameron Boozer"],
@@ -2214,7 +2214,7 @@ window.PROMPTS = [
       ["Lionel Simmons", "Calbert Cheaney", "TJ Ford|T.J. Ford", "Jameer Nelson", "Frank Mason III|Frank Mason", "Obi Toppin", "Oscar Tshiebwe", "Joe Smith", "Marques Johnson"],
       ["Butch Lee"]
     ] },
-  { id: "nit", d: "medium", ok: true, g: "nit", q: "Name a school that has won the NIT",
+  { id: "nit", d: "medium", ok: true, g: "nit", c: "school-tournament", q: "Name a school that has won the NIT",
     t: [
       ["Kentucky|UK", "North Carolina|UNC", "UCLA", "Indiana|IU", "Michigan", "UConn|Connecticut", "Ohio State|OSU", "Villanova|Nova"],
       ["St. John's|St Johns|Saint Johns", "Bradley", "Dayton", "Memphis", "Stanford", "Virginia|UVA", "Minnesota", "Penn State", "South Carolina", "Xavier", "Seton Hall", "Texas|UT", "Baylor", "Purdue", "Maryland", "Marquette", "Louisville", "Wake Forest", "West Virginia|WVU", "Auburn", "Providence", "Temple"],
@@ -2222,7 +2222,7 @@ window.PROMPTS = [
       ["Chattanooga|UTC", "CCNY|City College of New York|City College"],
       ["LIU|Long Island|Long Island University"]
     ] },
-  { id: "ffhost", d: "medium", ok: true, g: "ff-hosts", q: "Name a city that has hosted the men's Final Four or national championship game",
+  { id: "ffhost", d: "medium", ok: true, g: "ff-hosts", c: "tournament-sites", q: "Name a city that has hosted the men's Final Four or national championship game",
     t: [
       ["Indianapolis", "New Orleans", "San Antonio", "Houston", "Atlanta", "Kansas City", "New York|New York City|NYC"],
       ["Seattle", "Minneapolis", "Louisville", "St. Louis|Saint Louis", "Glendale", "Arlington", "Detroit", "Philadelphia", "Los Angeles|LA"],
@@ -2230,7 +2230,7 @@ window.PROMPTS = [
       ["Portland", "College Park", "Evanston"],
       ["Daly City"]
     ] },
-  { id: "pac12ever", d: "easy", ok: true, g: "conf-pac12", q: "Name a school that has been a member of the Pac-12 (including its Pac-8 and Pac-10 eras) in men's basketball",
+  { id: "pac12ever", d: "easy", ok: true, g: "conf-pac12", c: "conference", q: "Name a school that has been a member of the Pac-12 (including its Pac-8 and Pac-10 eras) in men's basketball",
     t: [
       ["UCLA", "Arizona", "USC|Southern California", "Oregon"],
       ["Stanford", "California|Cal", "Washington|UW", "Arizona State|ASU", "Colorado", "Utah"],
@@ -2238,7 +2238,7 @@ window.PROMPTS = [
       [],
       ["Washington State|Wazzu"]
     ] },
-  { id: "multititle", d: "medium", ok: true, g: "title-schools", q: "Name a school that has won multiple men's national titles",
+  { id: "multititle", d: "medium", ok: true, g: "title-schools", c: "school-titles", q: "Name a school that has won multiple men's national titles",
     t: [
       ["Kentucky|UK", "North Carolina|UNC", "Duke", "UCLA", "UConn|Connecticut", "Kansas|KU"],
       ["Indiana|IU", "Villanova|Nova", "Florida|UF", "Michigan State|MSU", "Louisville", "Michigan"],
@@ -2246,7 +2246,7 @@ window.PROMPTS = [
       ["Oklahoma State|Oklahoma A&M"],
       ["San Francisco|USF"]
     ] },
-  { id: "multicoach", d: "hard", p: true, ok: true, g: "title-coaches", q: "Name a head coach who won more than one men's national title",
+  { id: "multicoach", d: "hard", p: true, ok: true, g: "title-coaches", c: "coach-accomplishment", q: "Name a head coach who won more than one men's national title",
     t: [
       ["John Wooden", "Mike Krzyzewski|Coach K", "Roy Williams", "Dean Smith", "Bob Knight|Bobby Knight", "Bill Self", "Dan Hurley", "Jay Wright"],
       ["Adolph Rupp", "Jim Calhoun", "Billy Donovan", "Rick Pitino"],
@@ -2389,5 +2389,141 @@ window.PROMPTS = [
       ["Danny Manning", "Bud Millikan"],
       ["Frank Fellows", "Flucie Stewart"],
       ["H. Burton Shipley|Burton Shipley"]
+    ] },
+  { id: "ufhc", d: "easy", p: true, ok: true, g: "coaches-ufhc", c: "coach-history", q: "Name a head coach of Florida men's basketball",
+    t: [
+      ["Billy Donovan", "Todd Golden", "Lon Kruger"],
+      ["Mike White", "Norm Sloan"],
+      ["Tommy Bartlett", "John Lotz", "Don DeVoe", "John Mauer", "Al Pinkins"],
+      ["Ed Visscher", "Spurgeon Cherry", "Sam J. McAllister|Sam McAllister", "Josh Cody", "Ben Clemons", "Brady Cowell", "James L. White|James White", "Check Byrd", "William G. Kline|William Kline"],
+      ["C. J. McCoy|CJ McCoy"]
+    ] },
+  { id: "texashc", d: "easy", p: true, ok: true, g: "coaches-texashc", c: "coach-history", q: "Name a head coach of Texas men's basketball",
+    t: [
+      ["Rick Barnes", "Shaka Smart", "Chris Beard", "Sean Miller"],
+      ["Rodney Terry", "Tom Penders", "Abe Lemons"],
+      ["Bob Weltlich", "Leon Black", "Harold Bradley", "Marshall Hughes", "Thurman Hull", "Jack Gray"],
+      ["Bully Gilstrap", "Marty Karow", "Ed Olle", "Fred Walker", "E. J. Stewart|EJ Stewart", "Milton Romney", "Berry Whitaker", "Eugene Van Gent", "Roy Henderson", "L. Theo Bellmont|Theo Bellmont", "Carl C. Taylor|Carl Taylor", "J. Burton Rix|Burton Rix", "W. E. Metzenthin|Metzenthin"],
+      ["Magnus Mainland"]
+    ] },
+  { id: "bamahc", d: "easy", p: true, ok: true, g: "coaches-bamahc", c: "coach-history", q: "Name a head coach of Alabama men's basketball",
+    t: [
+      ["Nate Oats", "Avery Johnson", "Mark Gottfried", "Anthony Grant"],
+      ["Wimp Sanderson", "C. M. Newton|CM Newton", "David Hobbs"],
+      ["John Brannen", "Hayden Riley", "Eugene Lambert", "John Dee", "Floyd Burdette", "Hank Crisp"],
+      ["Malcolm Laney", "Paul Burnum", "Charles A. Bernier|Charles Bernier", "Bill Moore", "Yancey Goodall", "B. L. Noojin|BL Noojin", "Thomas Kelley", "Griff Harsh"],
+      ["D. V. Graves|DV Graves"]
+    ] },
+  { id: "tennhc", d: "easy", p: true, ok: true, g: "coaches-tennhc", c: "coach-history", q: "Name a head coach of Tennessee men's basketball",
+    t: [
+      ["Rick Barnes", "Bruce Pearl", "Cuonzo Martin"],
+      ["Buzz Peterson", "Kevin O'Neill", "Ray Mears", "Jerry Green", "Donnie Tyndall"],
+      ["Don DeVoe", "Wade Houston", "Cliff Wettig", "John Sines", "Emmett Lowery", "John Mauer"],
+      ["Blair Gullion", "W.H. Britton|WH Britton", "Mark Banks", "R.H. Fitzgerald|RH Fitzgerald", "John R. Bender|John Bender", "Zora Clevenger", "Alex Stone"],
+      ["Robert C. Whitaker|Robert Whitaker"]
+    ] },
+  { id: "arkhc", d: "easy", p: true, ok: true, g: "coaches-arkhc", c: "coach-history", q: "Name a head coach of Arkansas men's basketball",
+    t: [
+      ["John Calipari", "Nolan Richardson", "Eddie Sutton", "Eric Musselman", "Mike Anderson"],
+      ["Stan Heath", "John Pelphrey"],
+      ["Lanny Van Eman", "Duddy Waller", "Glen Rose"],
+      ["Presley Askew", "Eugene Lambert", "Charles Bassett"],
+      ["Francis Schmidt"]
+    ] },
+  { id: "zagshc", d: "medium", p: true, ok: true, g: "coaches-zagshc", c: "coach-history", q: "Name a head coach of Gonzaga men's basketball",
+    t: [
+      ["Mark Few", "Dan Monson"],
+      ["Dan Fitzgerald", "Jay Hillock", "Hank Anderson"],
+      ["Adrian Buoncristiani", "L. T. Underwood|LT Underwood", "Claude McGrath", "Gus Dorais"],
+      ["Gordon C. White|Gordon White", "Eugene Wozny", "Charles Henry", "Bill Frazier", "Perry Ten Eyck", "Sam Dagly", "Clipper Smith|Maurice Smith", "Edward Geheves", "Jimmy Condon", "John F. McGough|John McGough", "William S. Higgins|William Higgins", "Robert E. Harmon|Robert Harmon", "Ed Mulholland", "Fred Burns", "Frank McKevitt", "William Mulligan"],
+      ["George Varnell"]
+    ] },
+  { id: "wischc", d: "medium", p: true, ok: true, g: "coaches-wischc", c: "coach-history", q: "Name a head coach of Wisconsin men's basketball",
+    t: [
+      ["Bo Ryan", "Greg Gard", "Dick Bennett"],
+      ["Stan Van Gundy", "Stu Jackson", "Steve Yoder", "Bud Foster"],
+      ["Brad Soderberg", "Bill Cofield", "John Powless", "John Erickson", "Walter Meanwell|Doc Meanwell"],
+      ["Guy Lowman", "Haskell Noyes", "Emmett Angell"],
+      ["James C. Elsom|James Elsom"]
+    ] },
+  { id: "iowahc", d: "medium", p: true, ok: true, g: "coaches-iowahc", c: "coach-history", q: "Name a head coach of Iowa men's basketball",
+    t: [
+      ["Lute Olson", "Fran McCaffery", "Steve Alford", "Tom Davis"],
+      ["Ben McCollum", "George Raveling", "Ralph Miller", "Todd Lickliter"],
+      ["Dick Schultz", "Sharm Scheuerman", "Bucky O'Connor", "Pops Harrison", "Rollie Williams", "Sam Barry"],
+      ["James Ashmore", "Edwin Bannick", "Maury Kent", "Floyd Thomas", "Walter Stewart", "John Griffith", "John Chalmers", "Fred Bailey"],
+      ["Ed Rule"]
+    ] },
+  { id: "memhc", d: "medium", p: true, ok: true, g: "coaches-memhc", c: "coach-history", q: "Name a head coach of Memphis men's basketball",
+    t: [
+      ["Penny Hardaway", "John Calipari", "Josh Pastner", "Larry Finch"],
+      ["Tubby Smith", "Dana Kirk", "Gene Bartow", "Tic Price"],
+      ["Johnny Jones", "Wayne Yates", "Moe Iba", "Dean Ehlers", "Bob Vanatta"],
+      ["Eugene Lambert", "McCoy Tarry", "Zach Curlin", "Lester Barnard", "W. H. DePriest|WH DePriest"],
+      ["H. Kirk Grantham|Kirk Grantham"]
+    ] },
+  { id: "cincyhc", d: "medium", p: true, ok: true, g: "coaches-cincyhc", c: "coach-history", q: "Name a head coach of Cincinnati men's basketball",
+    t: [
+      ["Bob Huggins", "Mick Cronin", "Ed Jucker"],
+      ["Wes Miller", "Jerrod Calhoun", "John Brannen", "Andy Kennedy"],
+      ["Tony Yates", "Ed Badger", "Gale Catlett", "Tay Baker", "George Smith"],
+      ["John Wiethe", "Ray Farnham", "Bob Reuss", "Clark Ballard", "Rip Van Winkle", "Tay Brown", "John Halliday", "Frank E. Rice|Frank Rice", "Boyd Chambers", "Whitelaw Morrison", "Ion Cortright", "George Little", "Russ Easton", "C. A. Shroetter|CA Shroetter", "Amos Foster", "Anthony Chez"],
+      ["Henry S. Pratt|Henry Pratt"]
+    ] },
+  { id: "butlerhc", d: "medium", p: true, ok: true, g: "coaches-butlerhc", c: "coach-history", q: "Name a head coach of Butler men's basketball",
+    t: [
+      ["Brad Stevens", "Thad Matta", "Chris Holtmann"],
+      ["LaVall Jordan", "Tony Hinkle", "Todd Lickliter", "Barry Collier", "Ronald Nored"],
+      ["Brandon Miller", "Joe Sexson", "George Theofanis", "Frank Hedden"],
+      ["Harlan Page", "F. E. Ellis|FE Ellis", "Joe Mullane", "G. Cullen Thomas|Cullen Thomas", "Bill Diddle", "Walter Gipe", "Joe McCrea", "Jack McKay", "Art Guedel", "Edgar Wingard", "Ralph Jones", "Walter F. Kelly|Walter Kelly"],
+      ["James L. Zink|James Zink"]
+    ] },
+  { id: "xavierhc", d: "medium", p: true, ok: true, g: "coaches-xavierhc", c: "coach-history", q: "Name a head coach of Xavier men's basketball",
+    t: [
+      ["Sean Miller", "Chris Mack", "Thad Matta", "Skip Prosser"],
+      ["Travis Steele", "Richard Pitino", "Pete Gillen"],
+      ["Bob Staak", "Tay Baker", "Dick Campbell", "George Krajack", "Don Ruberg", "Jim McCafferty", "Ned Wulk"],
+      ["Lew Hirt", "Ed Burns", "Clem Crowe", "Joe Meyer"],
+      ["Harry Gilligan"]
+    ] },
+  { id: "creightonhc", d: "medium", p: true, ok: true, g: "coaches-creightonhc", c: "coach-history", q: "Name a head coach of Creighton men's basketball",
+    t: [
+      ["Greg McDermott", "Dana Altman"],
+      ["Alan Huss", "Willis Reed", "Eddie Sutton", "Tony Barone"],
+      ["Rick Johnson", "Tom Apke", "Red McManus", "Tommy Thomsen", "Subby Salerno"],
+      ["Duce Belford", "Eddie Hickey", "Arthur A. Schabinger|Arthur Schabinger", "Charles Kearney", "Eddie Mulholland"],
+      ["Thomas E. Millis|Thomas Millis"]
+    ] },
+  { id: "twoschoolff", d: "hard", p: true, ok: true, g: "coach-ff", c: "coach-accomplishment", q: "Name a head coach who took two different schools to the men's Final Four",
+    t: [
+      ["Rick Pitino", "John Calipari", "Roy Williams"],
+      ["Larry Brown", "Lute Olson", "Eddie Sutton", "Bob Huggins", "Kelvin Sampson", "Jim Larranaga|Jim Larrañaga", "Dusty May"],
+      ["Lon Kruger", "Frank McGuire", "Gene Bartow", "Lou Henson"],
+      ["Hugh Durham", "Lee Rose", "Jack Gardner"],
+      ["Forddy Anderson"]
+    ] },
+  { id: "ffonce", d: "hard", ok: true, g: "ff-schools", c: "school-tournament", q: "Name a school that has reached the men's Final Four exactly once (vacated trips count)",
+    t: [
+      ["Notre Dame", "Texas Tech", "Alabama|Bama", "Miami", "San Diego State|SDSU", "Florida Atlantic|FAU", "South Carolina", "VCU|Virginia Commonwealth", "George Mason"],
+      ["Florida State|FSU", "Georgia|UGA", "Iowa State", "Penn State", "Pittsburgh|Pitt", "Seton Hall", "Wake Forest", "Indiana State", "Mississippi State", "Rutgers", "UMass|Massachusetts", "Minnesota", "Washington|UW"],
+      ["UTEP|Texas Western", "Princeton", "Penn|Pennsylvania", "Dayton", "Charlotte|UNC Charlotte", "Western Kentucky|WKU", "Saint Joseph's|St Josephs|Saint Josephs", "SMU|Southern Methodist", "Drake"],
+      ["Duquesne", "Jacksonville", "New Mexico State", "Santa Clara", "St. Bonaventure|St Bonaventure|Saint Bonaventure", "Washington State", "Wyoming"],
+      ["Seattle|Seattle U|Seattle University"]
+    ] },
+  { id: "neverwon", d: "hard", ok: true, g: "title-game", c: "school-tournament", q: "Name a school that has played in the men's national title game but never won it",
+    t: [
+      ["Gonzaga|Zags", "Purdue", "Houston", "Illinois", "Butler"],
+      ["Texas Tech", "San Diego State|SDSU", "Oklahoma|OU", "Georgia Tech", "Memphis|Memphis State", "West Virginia|WVU", "Iowa", "Kansas State|K-State"],
+      ["Florida State|FSU", "Seton Hall", "Indiana State", "St. John's|St Johns|Saint Johns", "Bradley", "Dayton"],
+      ["Jacksonville", "Washington State", "Dartmouth", "NYU|New York University"],
+      ["Seattle|Seattle U|Seattle University"]
+    ] },
+  { id: "mopnotchamp", d: "hard", p: true, ok: true, g: "mop", c: "player-award", q: "Name a Final Four Most Outstanding Player whose team did not win the title",
+    t: [
+      ["Hakeem Olajuwon|Akeem Olajuwon", "Jerry West", "Wilt Chamberlain"],
+      ["Elgin Baylor", "Bill Bradley", "Jerry Lucas"],
+      ["Art Heyman", "Howard Porter"],
+      ["Jerry Chambers", "Hal Lear", "B.H. Born|BH Born"],
+      ["Jimmy Hull"]
     ] }
 ];

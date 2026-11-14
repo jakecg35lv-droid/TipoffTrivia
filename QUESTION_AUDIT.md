@@ -1,8 +1,8 @@
 # Tipoff Trivia — question audit
 
-Audited 298 prompts against QUESTION_RULES.md.
+Audited 315 prompts against QUESTION_RULES.md.
 
-**Approved: 37** (easy 20 · medium 15 · hard 2) · **Flagged: 261**
+**Approved: 54** (easy 25 · medium 23 · hard 6) · **Flagged: 261**
 
 Target for a clean 30-day Daily: 90 easy · 90 medium · 30 hard approved.
 
@@ -47,6 +47,23 @@ Target for a clean 30-day Daily: 90 easy · 90 medium · 30 hard approved.
 | novahc | medium | coaches-novahc | 10 | Name a head coach of Villanova men's basketball |
 | gtownhc | medium | coaches-gtownhc | 19 | Name a head coach of Georgetown men's basketball |
 | mdhc | medium | coaches-mdhc | 11 | Name a head coach of Maryland men's basketball |
+| ufhc | easy | coaches-ufhc | 20 | Name a head coach of Florida men's basketball |
+| texashc | easy | coaches-texashc | 27 | Name a head coach of Texas men's basketball |
+| bamahc | easy | coaches-bamahc | 22 | Name a head coach of Alabama men's basketball |
+| tennhc | easy | coaches-tennhc | 22 | Name a head coach of Tennessee men's basketball |
+| arkhc | easy | coaches-arkhc | 14 | Name a head coach of Arkansas men's basketball |
+| zagshc | medium | coaches-zagshc | 26 | Name a head coach of Gonzaga men's basketball |
+| wischc | medium | coaches-wischc | 16 | Name a head coach of Wisconsin men's basketball |
+| iowahc | medium | coaches-iowahc | 23 | Name a head coach of Iowa men's basketball |
+| memhc | medium | coaches-memhc | 19 | Name a head coach of Memphis men's basketball |
+| cincyhc | medium | coaches-cincyhc | 29 | Name a head coach of Cincinnati men's basketball |
+| butlerhc | medium | coaches-butlerhc | 25 | Name a head coach of Butler men's basketball |
+| xavierhc | medium | coaches-xavierhc | 19 | Name a head coach of Xavier men's basketball |
+| creightonhc | medium | coaches-creightonhc | 17 | Name a head coach of Creighton men's basketball |
+| twoschoolff | hard | coach-ff | 18 | Name a head coach who took two different schools to the men's Final Four |
+| ffonce | hard | ff-schools | 39 | Name a school that has reached the men's Final Four exactly once (vacated trips count) |
+| neverwon | hard | title-game | 24 | Name a school that has played in the men's national title game but never won it |
+| mopnotchamp | hard | mop | 12 | Name a Final Four Most Outstanding Player whose team did not win the title |
 
 ## Flagged
 
