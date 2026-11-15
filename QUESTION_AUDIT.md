@@ -1,8 +1,8 @@
 # Tipoff Trivia — question audit
 
-Audited 315 prompts against QUESTION_RULES.md.
+Audited 324 prompts against QUESTION_RULES.md.
 
-**Approved: 54** (easy 25 · medium 23 · hard 6) · **Flagged: 261**
+**Approved: 63** (easy 25 · medium 31 · hard 7) · **Flagged: 261**
 
 Target for a clean 30-day Daily: 90 easy · 90 medium · 30 hard approved.
 
@@ -64,6 +64,15 @@ Target for a clean 30-day Daily: 90 easy · 90 medium · 30 hard approved.
 | ffonce | hard | ff-schools | 39 | Name a school that has reached the men's Final Four exactly once (vacated trips count) |
 | neverwon | hard | title-game | 24 | Name a school that has played in the men's national title game but never won it |
 | mopnotchamp | hard | mop | 12 | Name a Final Four Most Outstanding Player whose team did not win the title |
+| a10ever | medium | conf-a10ever | 25 | Name a school that has been a member of the Atlantic 10 in men's basketball |
+| wccever | medium | conf-wccever | 19 | Name a school that has played men's basketball in the West Coast Conference |
+| mwcever | medium | conf-mwcever | 18 | Name a school that has been a member of the Mountain West in men's basketball |
+| aacever | medium | conf-aacever | 20 | Name a school that has been a member of the American Athletic Conference in men's basketball |
+| mvcever | hard | conf-mvcever | 37 | Name a school that has been a member of the Missouri Valley Conference in men's basketball |
+| macever | medium | conf-macever | 18 | Name a school that has been a member of the Mid-American Conference in men's basketball |
+| cusaever | medium | conf-cusaever | 35 | Name a school that has been a member of the Conference USA in men's basketball |
+| naismithcoy | medium | coach-awards | 33 | Name a winner of the men's Naismith Coach of the Year award |
+| cousy | medium | cousy | 23 | Name a winner of the Bob Cousy Award (top college point guard) |
 
 ## Flagged
 

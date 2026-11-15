@@ -1078,7 +1078,7 @@ window.PROMPTS = [
       [],
       ["Brian Dutcher"]
     ] },
-  { id: "wcc", d: "medium", q: "Name a West Coast Conference member in the 2025–26 season",
+  { id: "wcc", d: "medium", g: "conf-wccever", c: "conference", q: "Name a West Coast Conference member in the 2025–26 season",
     t: [
       ["Gonzaga|Zags", "Saint Mary's|St Marys|Saint Marys"],
       ["San Francisco|USF", "Santa Clara", "Pepperdine", "Loyola Marymount|LMU"],
@@ -1086,7 +1086,7 @@ window.PROMPTS = [
       ["Washington State|Wazzu", "Oregon State"],
       ["Seattle U|Seattle|Seattle University"]
     ] },
-  { id: "mwc", d: "hard", q: "Name a Mountain West member in the 2025–26 season",
+  { id: "mwc", d: "hard", g: "conf-mwcever", c: "conference", q: "Name a Mountain West member in the 2025–26 season",
     t: [
       ["San Diego State|SDSU"],
       ["Boise State", "Utah State", "New Mexico", "UNLV", "Nevada"],
@@ -1094,7 +1094,7 @@ window.PROMPTS = [
       ["Air Force", "San Jose State"],
       ["Grand Canyon|GCU"]
     ] },
-  { id: "a10", d: "hard", q: "Name an Atlantic 10 member in the 2025–26 season",
+  { id: "a10", d: "hard", g: "conf-a10ever", c: "conference", q: "Name an Atlantic 10 member in the 2025–26 season",
     t: [
       ["Dayton", "VCU|Virginia Commonwealth"],
       ["Saint Louis|SLU", "Saint Joseph's|St Josephs|Saint Josephs", "Loyola Chicago|Loyola", "Davidson"],
@@ -2525,5 +2525,77 @@ window.PROMPTS = [
       ["Art Heyman", "Howard Porter"],
       ["Jerry Chambers", "Hal Lear", "B.H. Born|BH Born"],
       ["Jimmy Hull"]
+    ] },
+  { id: "a10ever", d: "medium", ok: true, g: "conf-a10ever", c: "conference", q: "Name a school that has been a member of the Atlantic 10 in men's basketball",
+    t: [
+      ["Dayton", "VCU|Virginia Commonwealth", "Xavier", "Villanova|Nova", "Saint Louis|SLU"],
+      ["Saint Joseph's|St Josephs|Saint Josephs", "Davidson", "Temple", "Rhode Island|URI", "Richmond", "George Mason", "West Virginia|WVU", "Butler", "Loyola Chicago|Loyola", "UMass|Massachusetts", "Pittsburgh|Pitt", "Rutgers"],
+      ["St. Bonaventure|St Bonaventure|Saint Bonaventure", "George Washington|GW", "La Salle", "Penn State", "Virginia Tech"],
+      ["Duquesne", "Fordham"],
+      ["Charlotte|UNC Charlotte"]
+    ] },
+  { id: "wccever", d: "medium", ok: true, g: "conf-wccever", c: "conference", q: "Name a school that has played men's basketball in the West Coast Conference",
+    t: [
+      ["Gonzaga|Zags", "Saint Mary's|St Marys|Saint Marys", "BYU|Brigham Young"],
+      ["San Francisco|USF", "Santa Clara", "Pepperdine", "Loyola Marymount|LMU", "Portland", "San Diego|USD", "UNLV"],
+      ["Pacific", "Seattle|Seattle U", "San Jose State", "Nevada", "Washington State|Wazzu", "Oregon State"],
+      ["Fresno State", "Denver"],
+      ["UC Santa Barbara|UCSB"]
+    ] },
+  { id: "mwcever", d: "medium", ok: true, g: "conf-mwcever", c: "conference", q: "Name a school that has been a member of the Mountain West in men's basketball",
+    t: [
+      ["San Diego State|SDSU", "UNLV", "BYU|Brigham Young", "Utah", "New Mexico"],
+      ["Boise State", "Utah State", "Colorado State", "Nevada", "Fresno State", "Wyoming", "TCU|Texas Christian"],
+      ["Air Force", "San Jose State", "Grand Canyon|GCU", "UTEP", "Hawaii|Hawaiʻi"],
+      [],
+      ["UC Davis"]
+    ] },
+  { id: "aacever", d: "medium", ok: true, g: "conf-aacever", c: "conference", q: "Name a school that has been a member of the American Athletic Conference in men's basketball",
+    t: [
+      ["Memphis", "Houston", "UConn|Connecticut", "Cincinnati", "Louisville", "Wichita State"],
+      ["Temple", "SMU|Southern Methodist", "UCF|Central Florida", "Florida Atlantic|FAU", "Tulsa", "South Florida|USF", "Rutgers", "Charlotte|UNC Charlotte", "UAB|Alabama-Birmingham"],
+      ["Tulane", "East Carolina|ECU", "North Texas"],
+      ["Rice"],
+      ["UTSA|Texas-San Antonio"]
+    ] },
+  { id: "mvcever", d: "hard", ok: true, g: "conf-mvcever", c: "conference", q: "Name a school that has been a member of the Missouri Valley Conference in men's basketball",
+    t: [
+      ["Creighton", "Wichita State", "Kansas|KU", "Drake", "Bradley", "Indiana State", "Loyola Chicago|Loyola", "Missouri State", "Cincinnati", "Louisville"],
+      ["Northern Iowa|UNI", "Illinois State", "Southern Illinois|SIU", "Evansville", "Valparaiso|Valpo", "Belmont", "Murray State", "UIC|Illinois-Chicago", "Saint Louis|SLU", "Memphis|Memphis State", "Houston", "Tulsa", "Oklahoma State|Oklahoma A&M", "Missouri|Mizzou", "Iowa", "Iowa State", "Kansas State|K-State", "Nebraska", "Oklahoma|OU", "New Mexico State"],
+      ["North Texas|North Texas State", "Butler", "Detroit|Detroit Mercy", "West Texas State|West Texas A&M", "Washington University|WashU|Washington University in St. Louis"],
+      ["Washburn"],
+      ["Grinnell"]
+    ] },
+  { id: "macever", d: "medium", ok: true, g: "conf-macever", c: "conference", q: "Name a school that has been a member of the Mid-American Conference in men's basketball",
+    t: [
+      ["Ohio", "Kent State", "Toledo", "Miami (OH)|Miami Ohio|Miami of Ohio|Miami", "Ball State"],
+      ["Akron", "Buffalo", "Bowling Green", "Central Michigan", "Eastern Michigan", "Western Michigan", "Northern Illinois|NIU", "UMass|Massachusetts", "Marshall", "Butler", "Cincinnati"],
+      ["Wayne State|Wayne"],
+      [],
+      ["Western Reserve|Case Western|Case Western Reserve"]
+    ] },
+  { id: "cusaever", d: "medium", ok: true, g: "conf-cusaever", c: "conference", q: "Name a school that has been a member of the Conference USA in men's basketball",
+    t: [
+      ["Memphis", "Louisville", "Cincinnati", "Houston", "Marquette", "UAB|Alabama-Birmingham", "Saint Louis|SLU"],
+      ["DePaul", "Charlotte|UNC Charlotte", "Southern Miss|Southern Mississippi", "Tulane", "Tulsa", "UTEP", "SMU|Southern Methodist", "UCF|Central Florida", "Western Kentucky|WKU", "Middle Tennessee|MTSU", "Marshall", "Old Dominion|ODU", "Florida Atlantic|FAU", "South Florida|USF", "East Carolina|ECU", "TCU|Texas Christian", "Rice", "North Texas", "Liberty", "Louisiana Tech", "New Mexico State"],
+      ["UTSA|Texas-San Antonio", "Jacksonville State", "Sam Houston|Sam Houston State", "Kennesaw State", "Missouri State"],
+      ["FIU|Florida International"],
+      ["Delaware"]
+    ] },
+  { id: "naismithcoy", d: "medium", p: true, ok: true, g: "coach-awards", c: "coach-accomplishment", q: "Name a winner of the men's Naismith Coach of the Year award",
+    t: [
+      ["Mike Krzyzewski|Coach K", "Bob Knight|Bobby Knight", "Dean Smith", "Roy Williams", "John Calipari", "Bill Self", "Jay Wright", "Rick Pitino", "Dan Hurley"],
+      ["Mark Few", "Tony Bennett", "Jim Boeheim", "Tubby Smith", "Larry Brown", "Nolan Richardson", "Ben Howland", "Rick Barnes", "Jim Larranaga|Jim Larrañaga", "Tommy Lloyd", "Ed Cooley"],
+      ["Bruce Weber", "Jamie Dixon", "Steve Fisher", "Gregg Marshall", "Anthony Grant", "Jerome Tang", "Jim Harrick", "Bobby Cremins", "Mike Montgomery", "Bill Guthridge", "Phil Martelli"],
+      ["Randy Ayers"],
+      ["Rod Barnes"]
+    ] },
+  { id: "cousy", d: "medium", p: true, ok: true, g: "cousy", c: "player-award", q: "Name a winner of the Bob Cousy Award (top college point guard)",
+    t: [
+      ["Ja Morant", "Jalen Brunson", "Kemba Walker", "Trey Burke"],
+      ["Shabazz Napier", "Tyler Ulis", "Frank Mason III|Frank Mason", "Payton Pritchard", "Ty Lawson", "Raymond Felton", "Jameer Nelson", "Braden Smith", "Collin Gillespie", "Ayo Dosunmu"],
+      ["Kendall Marshall", "Tristen Newton", "Markquis Nowell", "Delon Wright", "Greivis Vasquez", "D.J. Augustin|DJ Augustin", "Darius Acuff"],
+      ["Acie Law"],
+      ["Dee Brown"]
     ] }
 ];
