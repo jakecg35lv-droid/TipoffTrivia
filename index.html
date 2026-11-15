@@ -1340,7 +1340,7 @@ function nav(where){
     goHome(); setTimeout(()=>$("modes").scrollIntoView({behavior:reduceMotion?"auto":"smooth",block:"center"}),80);
   }
 }
-function confirmLeave(){ return window.confirm("Leave this game? Your progress will be lost."); }
+function confirmLeave(){ return window.confirm(G && G.mode==="daily" ? "Leave today's Daily? You can come back and finish, but this question will count as a miss." : "Leave this game? Your progress will be lost."); }
 $$("[data-nav]").forEach(b=>b.addEventListener("click",()=>nav(b.dataset.nav)));
 $("home").addEventListener("click",()=>nav("home"));
 $("home").addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); nav("home"); } });
@@ -1355,12 +1355,59 @@ $("howto").addEventListener("click",e=>{ if(e.target===$("howto")) closeHowTo();
 /* =====================================================================
    GAME FLOW
    ===================================================================== */
-function start(mode){
+/* ---- One Daily per player ----
+   Locked on this device the moment the game starts (not when it ends), so
+   refreshing or leaving can't re-roll it: you resume, and the question you
+   walked away from counts as a miss. Signed-in players are also locked
+   server-side (dailyPlays/{uid}_{date}) so a second device can't replay it.
+   Set DAILY_REQUIRE_LOGIN = true to make sign-in mandatory for the Daily,
+   which closes the private-window / cleared-storage loophole too. */
+const DAILY_REQUIRE_LOGIN = false;
+const dailyKey = () => "dch-daily-"+todayStr();
+function saveDailyLocal(){ if (G && G.mode==="daily") store.set("dch-daily-"+G.date, G); }
+function dailyRef(){ return (Pay.user && Pay.db) ? Pay.db.collection("dailyPlays").doc(Pay.user.uid+"_"+todayStr()) : null; }
+async function dailyServerCheck(){
+  const ref=dailyRef(); if (!ref) return {ok:true};
+  try{
+    const d=await ref.get();
+    if (d.exists) return {ok:false, rec:d.data()};
+    await ref.set({ uid:Pay.user.uid, date:todayStr(), finished:false, startedAt: firebase.firestore.FieldValue.serverTimestamp() });
+    return {ok:true};
+  }catch(e){ console.warn("[daily] server lock unavailable:", e.code||e.message); return {ok:true}; }
+}
+function dailyServerFinish(){
+  const ref=dailyRef(); if (!ref) return;
+  const st=statsOf(G.res);
+  ref.update({ finished:true, score:st.score, tiers:G.res.map(r=>r.tier) }).catch(e=>console.warn("[daily] finish not saved:", e.code||e.message));
+}
+function dailyBlocked(rec){
+  const msg = rec && rec.finished ? `You already played today's Daily (${rec.score}/700). Next one at midnight.` : "You already started today's Daily on another device. Next one at midnight.";
+  $("dailyStatus").textContent="✓ "+msg; $("dailyStatus").className="status done";
+  show("menu"); setTimeout(()=>$("modes").scrollIntoView({behavior:reduceMotion?"auto":"smooth",block:"center"}),60);
+}
+function resumeDaily(saved){
+  G=saved; G.abandoned=false; G.done=false;
+  if (G.res.length < G.i+1) G.res.push({ id:G.ids[G.i], ans:null, tier:-1 });   // walked away mid-question
+  G.i = G.res.length;
+  saveDailyLocal();
+  if (G.i>=PER_GAME){ G.finished=true; saveDailyLocal(); saveGame(); dailyServerFinish(); return showResults(true); }
+  $("score").textContent=total(); $("bsScore").textContent=total();
+  show("game"); renderBoxscore(); prepPrompt(); loadPrompt();
+}
+async function start(mode){
   if (mode==="unlimited" && !Pay.entitled){ if (PAYWALL.live) Pay.open(); return; }
   stopGameLoops(); Sound.init();
-  if (mode==="daily"){ const saved = store.get("dch-daily-"+todayStr()); if (saved){ G=saved; G.finished=true; lastGameTs=saved.ts||null; return showResults(false); } }
+  if (mode==="daily"){
+    const saved = store.get(dailyKey());
+    if (saved && saved.finished){ G=saved; lastGameTs=saved.ts||null; return showResults(false); }
+    if (saved){ return resumeDaily(saved); }
+    if (DAILY_REQUIRE_LOGIN && !Pay.user){ Pay.authMode="signin"; Pay.open("auth"); return; }
+    const chk = await dailyServerCheck();
+    if (!chk.ok) return dailyBlocked(chk.rec);
+  }
   const list = mode==="daily" ? dailySet() : unlimitedSet(diff);
   G = { mode, diff, date: todayStr(), ids: list.map(p=>p.id), i:0, res:[], ts: Date.now() };
+  saveDailyLocal();
   $("score").textContent="0"; $("bsScore").textContent="0";
   show("game"); renderBoxscore(); prepPrompt();
   tipoff(()=>loadPrompt());
@@ -1499,6 +1546,7 @@ function finishPrompt(ans, missText){
   $("guess").disabled=true; $("clock").classList.remove("warn");
   const tier = ans ? ans.tier : -1;
   G.res.push({ id:G.ids[G.i], ans: ans?ans.name:null, tier });
+  saveDailyLocal();
   const landAt = ans ? shoot(tier) : miss();
   $("toastName").textContent = ans ? TIERS[tier].name : missText;
   $("toastName").style.color = ans ? TIERS[tier].color : "var(--c-bad)";
@@ -1536,10 +1584,11 @@ $("next").onclick = ()=>{
     G.i++;
     if (G.i>=PER_GAME){
       G.finished=true;
-      if (G.mode==="daily") store.set("dch-daily-"+G.date, G);
+      if (G.mode==="daily"){ saveDailyLocal(); dailyServerFinish(); }
       saveGame();
       return showResults(true);
     }
+    saveDailyLocal();   // the next question counts as seen once it's shown
     loadPrompt();
   };
   if (reduceMotion) return go();
@@ -2241,7 +2290,12 @@ function refreshMenu(){
   $("daypill").innerHTML = `<i></i>Daily <b>#${dayNum()}</b>`;
   $("dailyTitle").textContent = `Daily #${dayNum()}`;
   try{ $("dailyDate").textContent = new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"}); }catch(e){}
-  if (saved){
+  if (saved && !saved.finished){
+    const left=PER_GAME-saved.res.length;
+    $("dailyStatus").textContent = `In progress: ${left} question${left===1?"":"s"} left. Your one attempt is still running.`; $("dailyStatus").className="status";
+    $("playDaily").innerHTML = `Finish today's game <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg>`;
+    $("playDaily2").innerHTML = `Finish today's game <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg>`;
+  } else if (saved){
     const s=saved.res.reduce((a,r)=>a+ptsOf(r),0);
     $("dailyStatus").textContent = `✓ Final: ${s}/700. Next one at midnight.`; $("dailyStatus").className="status done";
     $("playDaily").innerHTML = `View today's result <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg>`;
