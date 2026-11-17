@@ -1,6 +1,6 @@
 // Tipoff Trivia — prompt + answer database
 // Each prompt: id, d (easy|medium|hard), q (question), p (true = people, enables last-name matching),
-// c (category, max 2 per Daily), ok (true = meets QUESTION_RULES.md), g (topic group: prompts sharing a group count as the same question),
+// conf (leagues this prompt belongs to, for Unlimited packs: b1g sec acc b12 be mid), c (category, max 2 per Daily), ok (true = meets QUESTION_RULES.md), g (topic group: prompts sharing a group count as the same question),
 // t: five tiers [Layup 10, Mid-Range 30, Three Ball 60, Deep Cut 85, Half Court 100].
 // RULE: Half Court (last tier) holds exactly ONE super-niche answer per prompt.
 // Each answer: "Primary|alias|alias". See QUESTION_RULES.md before adding prompts.
@@ -14,7 +14,7 @@ window.PROMPTS = [
       ["Oklahoma State|Oklahoma A&M", "Loyola Chicago|Loyola|Loyola-Chicago", "UTEP|Texas Western", "Oregon", "Stanford", "Utah", "San Francisco|USF", "Holy Cross", "La Salle", "Wyoming", "California|Cal"],
       ["CCNY|City College of New York|City College"]
     ] },
-  { id: "bigten", d: "easy", ok: true, g: "conf-b1g", c: "conference", q: "Name a school that has been a member of the Big Ten in men's basketball",
+  { id: "bigten", d: "easy", ok: true, g: "conf-b1g", c: "conference", conf: ["b1g"], q: "Name a school that has been a member of the Big Ten in men's basketball",
     t: [
       ["Indiana|IU", "Michigan", "Michigan State|MSU", "Purdue", "Ohio State|OSU", "UCLA"],
       ["Illinois", "Iowa", "Wisconsin", "Maryland", "Oregon", "USC|Southern California"],
@@ -22,7 +22,7 @@ window.PROMPTS = [
       ["Penn State|PSU", "Rutgers"],
       ["Chicago|University of Chicago|UChicago"]
     ] },
-  { id: "sec", d: "easy", ok: true, g: "conf-sec", c: "conference", q: "Name a school that has been a member of the SEC in men's basketball",
+  { id: "sec", d: "easy", ok: true, g: "conf-sec", c: "conference", conf: ["sec"], q: "Name a school that has been a member of the SEC in men's basketball",
     t: [
       ["Kentucky|UK", "Florida|UF", "Tennessee|Vols", "Alabama|Bama", "Auburn"],
       ["Arkansas", "LSU", "Texas|UT", "Georgia|UGA", "Missouri|Mizzou", "Texas A&M|TAMU|A&M"],
@@ -30,7 +30,7 @@ window.PROMPTS = [
       ["Vanderbilt|Vandy", "Georgia Tech", "Tulane"],
       ["Sewanee|University of the South"]
     ] },
-  { id: "acc", d: "easy", ok: true, g: "conf-acc", c: "conference", q: "Name a school that has been a member of the ACC in men's basketball",
+  { id: "acc", d: "easy", ok: true, g: "conf-acc", c: "conference", conf: ["acc"], q: "Name a school that has been a member of the ACC in men's basketball",
     t: [
       ["Duke", "North Carolina|UNC", "Virginia|UVA", "Syracuse", "Louisville"],
       ["NC State|North Carolina State", "Wake Forest", "Miami", "Notre Dame", "Florida State|FSU", "Clemson", "Maryland"],
@@ -38,7 +38,7 @@ window.PROMPTS = [
       ["Stanford", "California|Cal", "SMU|Southern Methodist"],
       ["South Carolina"]
     ] },
-  { id: "big12", d: "easy", ok: true, g: "conf-b12", c: "conference", q: "Name a school that has been a member of the Big 12 in men's basketball",
+  { id: "big12", d: "easy", ok: true, g: "conf-b12", c: "conference", conf: ["b12"], q: "Name a school that has been a member of the Big 12 in men's basketball",
     t: [
       ["Kansas|KU", "Houston", "Baylor", "Arizona", "Texas|UT", "Oklahoma|OU"],
       ["Iowa State|ISU", "Texas Tech", "West Virginia|WVU", "BYU|Brigham Young", "Kansas State|K-State", "Cincinnati", "Missouri|Mizzou", "Texas A&M|TAMU|A&M"],
@@ -46,7 +46,7 @@ window.PROMPTS = [
       ["TCU|Texas Christian"],
       ["UCF|Central Florida"]
     ] },
-  { id: "bigeast", d: "easy", ok: true, g: "conf-be", c: "conference", q: "Name a school that has been a member of the Big East in men's basketball",
+  { id: "bigeast", d: "easy", ok: true, g: "conf-be", c: "conference", conf: ["be"], q: "Name a school that has been a member of the Big East in men's basketball",
     t: [
       ["UConn|Connecticut", "Villanova|Nova", "Georgetown", "Syracuse"],
       ["Marquette", "Creighton", "St. John's|St Johns|Saint Johns", "Xavier", "Butler", "Providence", "Louisville", "Pittsburgh|Pitt", "Notre Dame", "West Virginia|WVU", "Seton Hall"],
@@ -142,7 +142,7 @@ window.PROMPTS = [
       ["Bramlage Coliseum|Bramlage", "Gallagher-Iba Arena|Gallagher Iba", "United Supermarkets Arena", "WVU Coliseum", "Huntsman Center", "Lloyd Noble Center", "Stegeman Coliseum", "Coleman Coliseum", "Neville Arena|Auburn Arena", "Humphrey Coliseum|The Hump", "Mizzou Arena", "Memorial Gymnasium|Memorial Gym", "Joel Coliseum|LJVM Coliseum|Lawrence Joel Coliseum", "Cassell Coliseum", "Petersen Events Center|The Pete", "Purcell Pavilion|Joyce Center", "Conte Forum", "Watsco Center", "Moody Coliseum", "Ferrell Center|Foster Pavilion", "Fifth Third Arena", "Cintas Center", "CHI Health Center", "Xfinity Center", "Pinnacle Bank Arena", "Welsh-Ryan Arena|Welsh Ryan", "Bryce Jordan Center", "Jersey Mike's Arena|RAC|Louis Brown Athletic Center", "Hec Edmundson Pavilion|Alaska Airlines Arena|Hec Ed", "Matthew Knight Arena", "Galen Center", "Moody Center", "Reed Arena", "O'Connell Center|Exactech Arena|O-Dome", "Colonial Life Arena", "McCamish Pavilion", "Tucker Center|Donald L. Tucker Center", "Haas Pavilion", "Maples Pavilion", "Prudential Center|The Rock", "Capital One Arena", "Wintrust Arena", "Amica Mutual Pavilion|Dunkin Donuts Center|The Dunk", "State Farm Center", "Addition Financial Arena", "Desert Financial Arena|Wells Fargo Arena", "Schollmaier Arena", "CU Events Center|Coors Events Center", "Carnesecca Arena|Alumni Hall", "Beasley Coliseum", "Rose Hill Gymnasium|Rose Hill Gym", "The Palestra|Palestra"],
       ["Gill Coliseum"]
     ] },
-  { id: "gonzaga", d: "medium", p: true, q: "Name a former Gonzaga player who reached the NBA",
+  { id: "gonzaga", d: "medium", p: true, conf: ["mid"], q: "Name a former Gonzaga player who reached the NBA",
     t: [
       ["John Stockton", "Chet Holmgren", "Domantas Sabonis", "Rui Hachimura", "Jalen Suggs", "Adam Morrison"],
       ["Kelly Olynyk", "Drew Timme", "Brandon Clarke", "Zach Collins", "Corey Kispert", "Andrew Nembhard"],
@@ -174,7 +174,7 @@ window.PROMPTS = [
       ["Mississippi Valley State|MVSU", "Arkansas-Pine Bluff|UAPB|Arkansas Pine Bluff"],
       ["Maryland Eastern Shore|UMES"]
     ] },
-  { id: "upsets", d: "hard", q: "Name a 15 or 16 seed that won an NCAA tournament game (through 2025)",
+  { id: "upsets", d: "hard", conf: ["mid"], q: "Name a 15 or 16 seed that won an NCAA tournament game (through 2025)",
     t: [
       ["UMBC", "Fairleigh Dickinson|FDU", "Saint Peter's|St Peters|Saint Peters", "Florida Gulf Coast|FGCU|Dunk City"],
       ["Oral Roberts|ORU", "Princeton", "Middle Tennessee|MTSU|Middle Tennessee State", "Norfolk State", "Lehigh"],
@@ -182,7 +182,7 @@ window.PROMPTS = [
       ["Coppin State", "Richmond"],
       ["Santa Clara"]
     ] },
-  { id: "duke15", d: "hard", p: true, q: "Name a player from Duke's 2015 national championship team",
+  { id: "duke15", d: "hard", p: true, conf: ["acc"], q: "Name a player from Duke's 2015 national championship team",
     t: [
       ["Jahlil Okafor", "Tyus Jones", "Justise Winslow"],
       ["Grayson Allen", "Quinn Cook"],
@@ -190,7 +190,7 @@ window.PROMPTS = [
       ["Amile Jefferson"],
       ["Marshall Plumlee"]
     ] },
-  { id: "uconn", d: "hard", p: true, q: "Name a player from UConn's 2023 or 2024 national title team",
+  { id: "uconn", d: "hard", p: true, conf: ["be"], q: "Name a player from UConn's 2023 or 2024 national title team",
     t: [
       ["Donovan Clingan", "Tristen Newton", "Stephon Castle", "Jordan Hawkins", "Adama Sanogo"],
       ["Alex Karaban", "Cam Spencer", "Andre Jackson Jr.|Andre Jackson"],
@@ -198,7 +198,7 @@ window.PROMPTS = [
       ["Solo Ball"],
       ["Jaylin Stewart"]
     ] },
-  { id: "uk2010", d: "hard", p: true, q: "Name a Kentucky player picked in the 1st round of the 2010 NBA Draft",
+  { id: "uk2010", d: "hard", p: true, conf: ["sec"], q: "Name a Kentucky player picked in the 1st round of the 2010 NBA Draft",
     t: [
       ["John Wall", "DeMarcus Cousins|Boogie Cousins|Boogie"],
       ["Eric Bledsoe"],
@@ -206,7 +206,7 @@ window.PROMPTS = [
       ["Patrick Patterson"],
       ["Daniel Orton"]
     ] },
-  { id: "gators25", d: "hard", p: true, q: "Name a player from Florida's 2025 national championship team",
+  { id: "gators25", d: "hard", p: true, conf: ["sec"], q: "Name a player from Florida's 2025 national championship team",
     t: [
       ["Walter Clayton Jr.|Walter Clayton"],
       ["Alijah Martin", "Will Richard", "Alex Condon"],
@@ -214,7 +214,7 @@ window.PROMPTS = [
       ["Micah Handlogten"],
       ["Urban Klavzar"]
     ] },
-  { id: "b1gchamps", d: "easy", q: "Name a current Big Ten school that has won a men's national title",
+  { id: "b1gchamps", d: "easy", conf: ["b1g"], q: "Name a current Big Ten school that has won a men's national title",
     t: [
       ["Indiana|IU", "Michigan State|MSU", "UCLA"],
       ["Michigan", "Maryland"],
@@ -222,7 +222,7 @@ window.PROMPTS = [
       [],
       ["Oregon"]
     ] },
-  { id: "accchamps", d: "easy", q: "Name a current ACC school that has won a men's national title",
+  { id: "accchamps", d: "easy", conf: ["acc"], q: "Name a current ACC school that has won a men's national title",
     t: [
       ["Duke", "North Carolina|UNC"],
       ["Louisville", "Syracuse", "Virginia|UVA"],
@@ -230,7 +230,7 @@ window.PROMPTS = [
       ["Stanford"],
       ["California|Cal"]
     ] },
-  { id: "b12champs", d: "easy", q: "Name a current Big 12 school that has won a men's national title",
+  { id: "b12champs", d: "easy", conf: ["b12"], q: "Name a current Big 12 school that has won a men's national title",
     t: [
       ["Kansas|KU"],
       ["Arizona", "Baylor"],
@@ -238,7 +238,7 @@ window.PROMPTS = [
       ["Oklahoma State|Oklahoma A&M"],
       ["Utah"]
     ] },
-  { id: "bechamps", d: "easy", q: "Name a current Big East school that has won a men's national title",
+  { id: "bechamps", d: "easy", conf: ["be"], q: "Name a current Big East school that has won a men's national title",
     t: [
       ["UConn|Connecticut", "Villanova"],
       ["Georgetown"],
@@ -374,7 +374,7 @@ window.PROMPTS = [
       [],
       ["Brian Dutcher"]
     ] },
-  { id: "eleven", d: "medium", q: "Name an 11 seed that reached the men's Final Four",
+  { id: "eleven", d: "medium", conf: ["mid"], q: "Name an 11 seed that reached the men's Final Four",
     t: [
       ["George Mason|GMU", "VCU|Virginia Commonwealth", "Loyola Chicago|Loyola"],
       ["UCLA", "NC State|North Carolina State"],
@@ -398,7 +398,7 @@ window.PROMPTS = [
       ["Cleveland State"],
       ["Youngstown State|YSU"]
     ] },
-  { id: "uk12", d: "medium", p: true, q: "Name a player from Kentucky's 2012 national championship team",
+  { id: "uk12", d: "medium", p: true, conf: ["sec"], q: "Name a player from Kentucky's 2012 national championship team",
     t: [
       ["Anthony Davis", "Michael Kidd-Gilchrist|MKG|Kidd-Gilchrist"],
       ["Terrence Jones", "Marquis Teague", "Doron Lamb"],
@@ -406,7 +406,7 @@ window.PROMPTS = [
       [],
       ["Eloy Vargas"]
     ] },
-  { id: "nova18", d: "medium", p: true, q: "Name a player from Villanova's 2018 national championship team",
+  { id: "nova18", d: "medium", p: true, conf: ["be"], q: "Name a player from Villanova's 2018 national championship team",
     t: [
       ["Jalen Brunson", "Mikal Bridges", "Donte DiVincenzo"],
       ["Collin Gillespie", "Eric Paschall", "Omari Spellman"],
@@ -414,7 +414,7 @@ window.PROMPTS = [
       [],
       ["Dhamir Cosby-Roundtree|Cosby-Roundtree"]
     ] },
-  { id: "mich26", d: "medium", p: true, q: "Name a player from Michigan's 2026 national championship team",
+  { id: "mich26", d: "medium", p: true, conf: ["b1g"], q: "Name a player from Michigan's 2026 national championship team",
     t: [
       ["Yaxel Lendeborg", "Elliot Cadeau"],
       ["Aday Mara", "Morez Johnson Jr.|Morez Johnson"],
@@ -422,7 +422,7 @@ window.PROMPTS = [
       ["Trey McKenney"],
       ["Will Tschetter"]
     ] },
-  { id: "loyola18", d: "medium", p: true, q: "Name a player or coach from Loyola Chicago's 2018 Final Four run",
+  { id: "loyola18", d: "medium", p: true, conf: ["mid"], q: "Name a player or coach from Loyola Chicago's 2018 Final Four run",
     t: [
       ["Sister Jean|Sister Jean Dolores-Schmidt", "Porter Moser"],
       ["Clayton Custer", "Marques Townes", "Donte Ingram"],
@@ -430,7 +430,7 @@ window.PROMPTS = [
       ["Aundre Jackson"],
       ["Lucas Williamson"]
     ] },
-  { id: "umbc18", d: "medium", p: true, q: "Name a player or coach from UMBC's 2018 team that beat No. 1 Virginia",
+  { id: "umbc18", d: "medium", p: true, conf: ["acc","mid"], q: "Name a player or coach from UMBC's 2018 team that beat No. 1 Virginia",
     t: [
       ["Ryan Odom"],
       ["Jairus Lyles"],
@@ -438,7 +438,7 @@ window.PROMPTS = [
       ["Arkel Lamar", "Jourdan Grant"],
       ["Daniel Akin"]
     ] },
-  { id: "fgcu13", d: "medium", p: true, q: "Name a player or coach from Florida Gulf Coast's 2013 'Dunk City' team",
+  { id: "fgcu13", d: "medium", p: true, conf: ["mid"], q: "Name a player or coach from Florida Gulf Coast's 2013 'Dunk City' team",
     t: [
       ["Andy Enfield"],
       ["Sherwood Brown", "Brett Comer"],
@@ -446,7 +446,7 @@ window.PROMPTS = [
       ["Eric McKnight"],
       ["Christophe Varidel"]
     ] },
-  { id: "speters22", d: "medium", p: true, q: "Name a player or coach from Saint Peter's 2022 Elite Eight team",
+  { id: "speters22", d: "medium", p: true, conf: ["mid"], q: "Name a player or coach from Saint Peter's 2022 Elite Eight team",
     t: [
       ["Shaheen Holloway", "Doug Edert"],
       ["Daryl Banks III|Daryl Banks", "KC Ndefo|K.C. Ndefo"],
@@ -454,7 +454,7 @@ window.PROMPTS = [
       ["Hassan Drame"],
       ["Clarence Rupert"]
     ] },
-  { id: "butler10", d: "medium", p: true, q: "Name a player or coach from Butler's 2010 national runner-up team",
+  { id: "butler10", d: "medium", p: true, conf: ["be"], q: "Name a player or coach from Butler's 2010 national runner-up team",
     t: [
       ["Gordon Hayward", "Brad Stevens"],
       ["Shelvin Mack", "Matt Howard"],
@@ -486,7 +486,7 @@ window.PROMPTS = [
       ["Albany|UAlbany", "Binghamton", "Niagara", "Canisius", "Colgate", "LIU|Long Island", "Wagner"],
       ["Le Moyne"]
     ] },
-  { id: "unc17", d: "hard", p: true, q: "Name a player from North Carolina's 2017 national championship team",
+  { id: "unc17", d: "hard", p: true, conf: ["acc"], q: "Name a player from North Carolina's 2017 national championship team",
     t: [
       ["Joel Berry II|Joel Berry", "Justin Jackson"],
       ["Kennedy Meeks", "Isaiah Hicks", "Theo Pinson"],
@@ -494,7 +494,7 @@ window.PROMPTS = [
       ["Seventh Woods"],
       ["Nate Britt"]
     ] },
-  { id: "duke10", d: "hard", p: true, q: "Name a player from Duke's 2010 national championship team",
+  { id: "duke10", d: "hard", p: true, conf: ["acc"], q: "Name a player from Duke's 2010 national championship team",
     t: [
       ["Jon Scheyer", "Kyle Singler", "Nolan Smith"],
       ["Brian Zoubek", "Mason Plumlee"],
@@ -502,7 +502,7 @@ window.PROMPTS = [
       [],
       ["Andre Dawkins"]
     ] },
-  { id: "uconn11", d: "hard", p: true, q: "Name a player from UConn's 2011 national championship team",
+  { id: "uconn11", d: "hard", p: true, conf: ["be"], q: "Name a player from UConn's 2011 national championship team",
     t: [
       ["Kemba Walker"],
       ["Jeremy Lamb", "Shabazz Napier"],
@@ -510,7 +510,7 @@ window.PROMPTS = [
       ["Niels Giffey", "Tyler Olander", "Jamal Coombs-McDaniel", "Donnell Beverly"],
       ["Charles Okwandu"]
     ] },
-  { id: "uconn14", d: "hard", p: true, q: "Name a player from UConn's 2014 national championship team",
+  { id: "uconn14", d: "hard", p: true, conf: ["be"], q: "Name a player from UConn's 2014 national championship team",
     t: [
       ["Shabazz Napier"],
       ["Ryan Boatright", "DeAndre Daniels"],
@@ -518,7 +518,7 @@ window.PROMPTS = [
       ["Lasan Kromah", "Omar Calhoun", "Kentan Facey"],
       ["Terrence Samuel"]
     ] },
-  { id: "lou13", d: "hard", p: true, q: "Name a player from Louisville's 2013 title team (later vacated)",
+  { id: "lou13", d: "hard", p: true, conf: ["acc"], q: "Name a player from Louisville's 2013 title team (later vacated)",
     t: [
       ["Russ Smith|Russdiculous", "Peyton Siva"],
       ["Gorgui Dieng", "Luke Hancock", "Kevin Ware"],
@@ -526,7 +526,7 @@ window.PROMPTS = [
       [],
       ["Stephan Van Treese|Van Treese"]
     ] },
-  { id: "ku22", d: "hard", p: true, q: "Name a player from Kansas's 2022 national championship team",
+  { id: "ku22", d: "hard", p: true, conf: ["b12"], q: "Name a player from Kansas's 2022 national championship team",
     t: [
       ["Ochai Agbaji"],
       ["Christian Braun", "Jalen Wilson", "David McCormack"],
@@ -534,7 +534,7 @@ window.PROMPTS = [
       ["Mitch Lightfoot", "KJ Adams|K.J. Adams", "Joseph Yesufu"],
       ["Jalen Coleman-Lands|Coleman-Lands"]
     ] },
-  { id: "nova16", d: "hard", p: true, q: "Name a player from Villanova's 2016 national championship team",
+  { id: "nova16", d: "hard", p: true, conf: ["be"], q: "Name a player from Villanova's 2016 national championship team",
     t: [
       ["Kris Jenkins", "Ryan Arcidiacono", "Josh Hart"],
       ["Jalen Brunson", "Mikal Bridges"],
@@ -542,7 +542,7 @@ window.PROMPTS = [
       [],
       ["Darryl Reynolds"]
     ] },
-  { id: "uva19", d: "hard", p: true, q: "Name a player from Virginia's 2019 national championship team",
+  { id: "uva19", d: "hard", p: true, conf: ["acc"], q: "Name a player from Virginia's 2019 national championship team",
     t: [
       ["Kyle Guy", "De'Andre Hunter|DeAndre Hunter", "Ty Jerome"],
       ["Mamadi Diakite"],
@@ -550,7 +550,7 @@ window.PROMPTS = [
       ["Jay Huff"],
       ["Jack Salt"]
     ] },
-  { id: "baylor21", d: "hard", p: true, q: "Name a player from Baylor's 2021 national championship team",
+  { id: "baylor21", d: "hard", p: true, conf: ["b12"], q: "Name a player from Baylor's 2021 national championship team",
     t: [
       ["Jared Butler", "Davion Mitchell"],
       ["MaCio Teague", "Mark Vital"],
@@ -558,7 +558,7 @@ window.PROMPTS = [
       ["Jonathan Tchamwa Tchatchoua|Tchamwa Tchatchoua"],
       ["Flo Thamba"]
     ] },
-  { id: "prince23", d: "hard", p: true, q: "Name a player or coach from Princeton's 2023 Sweet 16 team",
+  { id: "prince23", d: "hard", p: true, conf: ["mid"], q: "Name a player or coach from Princeton's 2023 Sweet 16 team",
     t: [
       ["Mitch Henderson"],
       ["Tosan Evbuomwan", "Ryan Langborg"],
@@ -566,7 +566,7 @@ window.PROMPTS = [
       ["Xaivian Lee"],
       ["Keeshawn Kellman"]
     ] },
-  { id: "wvu10", d: "hard", p: true, q: "Name a player or coach from West Virginia's 2010 Final Four team",
+  { id: "wvu10", d: "hard", p: true, conf: ["b12"], q: "Name a player or coach from West Virginia's 2010 Final Four team",
     t: [
       ["Da'Sean Butler|Da Sean Butler|Dasean Butler", "Bob Huggins"],
       ["Devin Ebanks", "Kevin Jones", "Joe Mazzulla", "Truck Bryant|Darryl Bryant"],
@@ -574,7 +574,7 @@ window.PROMPTS = [
       ["Cam Thoroughman", "Dalton Pepper"],
       ["Casey Mitchell"]
     ] },
-  { id: "msu10", d: "hard", p: true, q: "Name a player or coach from Michigan State's 2010 Final Four team",
+  { id: "msu10", d: "hard", p: true, conf: ["b1g"], q: "Name a player or coach from Michigan State's 2010 Final Four team",
     t: [
       ["Tom Izzo", "Draymond Green", "Kalin Lucas"],
       ["Durrell Summers", "Raymar Morgan", "Korie Lucious"],
@@ -582,7 +582,7 @@ window.PROMPTS = [
       ["Austin Thornton", "Garrick Sherman"],
       ["Mike Kebler"]
     ] },
-  { id: "uk11", d: "hard", p: true, q: "Name a player from Kentucky's 2011 Final Four team",
+  { id: "uk11", d: "hard", p: true, conf: ["sec"], q: "Name a player from Kentucky's 2011 Final Four team",
     t: [
       ["Brandon Knight", "Terrence Jones"],
       ["Doron Lamb", "DeAndre Liggins", "Darius Miller", "Josh Harrellson"],
@@ -590,7 +590,7 @@ window.PROMPTS = [
       ["Jon Hood", "Jarrod Polson"],
       ["Twany Beckham"]
     ] },
-  { id: "butler11", d: "hard", p: true, q: "Name a player or coach from Butler's 2011 national runner-up team",
+  { id: "butler11", d: "hard", p: true, conf: ["be"], q: "Name a player or coach from Butler's 2011 national runner-up team",
     t: [
       ["Brad Stevens", "Shelvin Mack", "Matt Howard"],
       ["Ronald Nored", "Andrew Smith", "Shawn Vanzant"],
@@ -598,7 +598,7 @@ window.PROMPTS = [
       ["Garrett Butcher", "Chrishawn Hopkins"],
       ["Emerson Kampen"]
     ] },
-  { id: "vcu11", d: "hard", p: true, q: "Name a player or coach from VCU's 2011 First Four-to-Final Four team",
+  { id: "vcu11", d: "hard", p: true, conf: ["mid"], q: "Name a player or coach from VCU's 2011 First Four-to-Final Four team",
     t: [
       ["Shaka Smart"],
       ["Jamie Skeen", "Joey Rodriguez", "Bradford Burgess", "Brandon Rozzell"],
@@ -606,7 +606,7 @@ window.PROMPTS = [
       ["Rob Brandenberg", "Toby Veal"],
       ["D.J. Haley|DJ Haley"]
     ] },
-  { id: "osu12", d: "hard", p: true, q: "Name a player from Ohio State's 2012 Final Four team",
+  { id: "osu12", d: "hard", p: true, conf: ["b1g"], q: "Name a player from Ohio State's 2012 Final Four team",
     t: [
       ["Jared Sullinger", "Aaron Craft"],
       ["Deshaun Thomas", "William Buford", "Lenzelle Smith Jr.|Lenzelle Smith"],
@@ -614,7 +614,7 @@ window.PROMPTS = [
       ["LaQuinton Ross", "Jordan Sibert"],
       ["J.D. Weatherspoon|JD Weatherspoon"]
     ] },
-  { id: "ku12", d: "hard", p: true, q: "Name a player or coach from Kansas's 2012 national runner-up team",
+  { id: "ku12", d: "hard", p: true, conf: ["b12"], q: "Name a player or coach from Kansas's 2012 national runner-up team",
     t: [
       ["Thomas Robinson", "Tyshawn Taylor", "Bill Self"],
       ["Jeff Withey", "Elijah Johnson", "Travis Releford"],
@@ -622,7 +622,7 @@ window.PROMPTS = [
       ["Naadir Tharpe", "Justin Wesley"],
       ["Jordan Juenemann"]
     ] },
-  { id: "lou12", d: "hard", p: true, q: "Name a player or coach from Louisville's 2012 Final Four team",
+  { id: "lou12", d: "hard", p: true, conf: ["acc"], q: "Name a player or coach from Louisville's 2012 Final Four team",
     t: [
       ["Rick Pitino", "Peyton Siva", "Russ Smith", "Gorgui Dieng"],
       ["Chane Behanan", "Kyle Kuric", "Chris Smith"],
@@ -630,7 +630,7 @@ window.PROMPTS = [
       [],
       ["Stephan Van Treese"]
     ] },
-  { id: "mich13", d: "medium", p: true, q: "Name a player from Michigan's 2013 national runner-up team",
+  { id: "mich13", d: "medium", p: true, conf: ["b1g"], q: "Name a player from Michigan's 2013 national runner-up team",
     t: [
       ["Trey Burke", "Tim Hardaway Jr.|Tim Hardaway"],
       ["Mitch McGary", "Glenn Robinson III|Glenn Robinson", "Nik Stauskas"],
@@ -638,7 +638,7 @@ window.PROMPTS = [
       ["Jon Horford", "Max Bielfeldt"],
       ["Josh Bartelstein"]
     ] },
-  { id: "wichita13", d: "hard", p: true, q: "Name a player or coach from Wichita State's 2013 Final Four team",
+  { id: "wichita13", d: "hard", p: true, conf: ["mid"], q: "Name a player or coach from Wichita State's 2013 Final Four team",
     t: [
       ["Gregg Marshall", "Fred VanVleet", "Cleanthony Early"],
       ["Ron Baker", "Malcolm Armstead", "Carl Hall"],
@@ -646,7 +646,7 @@ window.PROMPTS = [
       ["Chadrack Lufile", "Jake White"],
       ["Nick Wiggins"]
     ] },
-  { id: "uk14", d: "medium", p: true, q: "Name a player from Kentucky's 2014 national runner-up team",
+  { id: "uk14", d: "medium", p: true, conf: ["sec"], q: "Name a player from Kentucky's 2014 national runner-up team",
     t: [
       ["Julius Randle", "Aaron Harrison", "Andrew Harrison"],
       ["James Young", "Willie Cauley-Stein|Cauley-Stein", "Alex Poythress"],
@@ -654,7 +654,7 @@ window.PROMPTS = [
       ["Dominique Hawkins", "Derek Willis"],
       ["Jon Hood"]
     ] },
-  { id: "uf14", d: "hard", p: true, q: "Name a player or coach from Florida's 2014 Final Four team",
+  { id: "uf14", d: "hard", p: true, conf: ["sec"], q: "Name a player or coach from Florida's 2014 Final Four team",
     t: [
       ["Billy Donovan", "Scottie Wilbekin", "Patric Young"],
       ["Casey Prather", "Michael Frazier II|Michael Frazier", "Dorian Finney-Smith|Finney-Smith", "Will Yeguete"],
@@ -662,7 +662,7 @@ window.PROMPTS = [
       ["DeVon Walker"],
       ["Jacob Kurtz"]
     ] },
-  { id: "uk15", d: "medium", p: true, q: "Name a player from Kentucky's 38-1 team (2014–15)",
+  { id: "uk15", d: "medium", p: true, conf: ["sec"], q: "Name a player from Kentucky's 38-1 team (2014–15)",
     t: [
       ["Karl-Anthony Towns|Karl Anthony Towns|KAT", "Devin Booker", "Willie Cauley-Stein|Cauley-Stein"],
       ["Andrew Harrison", "Aaron Harrison", "Trey Lyles", "Tyler Ulis"],
@@ -670,7 +670,7 @@ window.PROMPTS = [
       ["Dominique Hawkins"],
       ["Derek Willis"]
     ] },
-  { id: "wisc15", d: "medium", p: true, q: "Name a player or coach from Wisconsin's 2015 national runner-up team",
+  { id: "wisc15", d: "medium", p: true, conf: ["b1g"], q: "Name a player or coach from Wisconsin's 2015 national runner-up team",
     t: [
       ["Frank Kaminsky", "Sam Dekker", "Bo Ryan"],
       ["Nigel Hayes", "Bronson Koenig", "Josh Gasser"],
@@ -678,7 +678,7 @@ window.PROMPTS = [
       ["Zak Showalter", "Vitto Brown"],
       ["Jordan Hill"]
     ] },
-  { id: "msu15", d: "hard", p: true, q: "Name a player or coach from Michigan State's 2015 Final Four team",
+  { id: "msu15", d: "hard", p: true, conf: ["b1g"], q: "Name a player or coach from Michigan State's 2015 Final Four team",
     t: [
       ["Tom Izzo", "Denzel Valentine", "Travis Trice"],
       ["Branden Dawson", "Matt Costello", "Lourawls Nairn|Tum Tum Nairn"],
@@ -686,7 +686,7 @@ window.PROMPTS = [
       ["Alvin Ellis III|Alvin Ellis"],
       ["Colby Wollenman"]
     ] },
-  { id: "cuse16", d: "hard", p: true, q: "Name a player or coach from Syracuse's 2016 Final Four team (a 10 seed)",
+  { id: "cuse16", d: "hard", p: true, conf: ["acc"], q: "Name a player or coach from Syracuse's 2016 Final Four team (a 10 seed)",
     t: [
       ["Jim Boeheim", "Malachi Richardson", "Michael Gbinije"],
       ["Tyler Lydon", "Trevor Cooney", "Tyler Roberson"],
@@ -694,7 +694,7 @@ window.PROMPTS = [
       ["Mike Hopkins"],
       ["Chinonso Obokoh"]
     ] },
-  { id: "ou16", d: "hard", p: true, q: "Name a player or coach from Oklahoma's 2016 Final Four team",
+  { id: "ou16", d: "hard", p: true, conf: ["sec"], q: "Name a player or coach from Oklahoma's 2016 Final Four team",
     t: [
       ["Buddy Hield", "Lon Kruger"],
       ["Isaiah Cousins", "Jordan Woodard", "Ryan Spangler"],
@@ -702,7 +702,7 @@ window.PROMPTS = [
       ["Rashard Odomes", "Akolda Manyang"],
       ["Dinjiyl Walker"]
     ] },
-  { id: "ku17", d: "medium", p: true, q: "Name a player or coach from Kansas's 2016–17 team (Frank Mason's Player of the Year season)",
+  { id: "ku17", d: "medium", p: true, conf: ["b12"], q: "Name a player or coach from Kansas's 2016–17 team (Frank Mason's Player of the Year season)",
     t: [
       ["Frank Mason III|Frank Mason", "Josh Jackson", "Bill Self"],
       ["Devonte' Graham|Devonte Graham", "Landen Lucas", "Svi Mykhailiuk|Sviatoslav Mykhailiuk"],
@@ -710,7 +710,7 @@ window.PROMPTS = [
       ["Mitch Lightfoot", "Dwight Coleby"],
       ["Tyler Self"]
     ] },
-  { id: "uk17", d: "medium", p: true, q: "Name a player from Kentucky's 2016–17 team (Fox, Monk & Bam)",
+  { id: "uk17", d: "medium", p: true, conf: ["sec"], q: "Name a player from Kentucky's 2016–17 team (Fox, Monk & Bam)",
     t: [
       ["De'Aaron Fox|DeAaron Fox", "Malik Monk", "Bam Adebayo|Edrice Adebayo"],
       ["Isaiah Briscoe", "Derek Willis", "Wenyen Gabriel"],
@@ -718,7 +718,7 @@ window.PROMPTS = [
       ["Isaac Humphries", "Tai Wynyard"],
       ["Brad Calipari"]
     ] },
-  { id: "gonzaga17", d: "medium", p: true, q: "Name a player or coach from Gonzaga's 2017 national runner-up team",
+  { id: "gonzaga17", d: "medium", p: true, conf: ["mid"], q: "Name a player or coach from Gonzaga's 2017 national runner-up team",
     t: [
       ["Mark Few", "Nigel Williams-Goss|Williams-Goss", "Przemek Karnowski"],
       ["Zach Collins", "Jordan Mathews", "Johnathan Williams", "Josh Perkins"],
@@ -726,7 +726,7 @@ window.PROMPTS = [
       ["Rui Hachimura", "Jeremy Jones"],
       ["Ryan Edwards"]
     ] },
-  { id: "oregon17", d: "hard", p: true, q: "Name a player or coach from Oregon's 2017 Final Four team",
+  { id: "oregon17", d: "hard", p: true, conf: ["b1g"], q: "Name a player or coach from Oregon's 2017 Final Four team",
     t: [
       ["Dana Altman", "Dillon Brooks", "Tyler Dorsey", "Jordan Bell"],
       ["Chris Boucher", "Payton Pritchard"],
@@ -734,7 +734,7 @@ window.PROMPTS = [
       ["Keith Smith", "Kavell Bigby-Williams"],
       ["Roman Sorkin"]
     ] },
-  { id: "sc17", d: "hard", p: true, q: "Name a player or coach from South Carolina's 2017 Final Four team",
+  { id: "sc17", d: "hard", p: true, conf: ["sec"], q: "Name a player or coach from South Carolina's 2017 Final Four team",
     t: [
       ["Frank Martin", "Sindarius Thornwell"],
       ["PJ Dozier|P.J. Dozier", "Chris Silva", "Duane Notice"],
@@ -742,7 +742,7 @@ window.PROMPTS = [
       ["Hassani Gravett", "Justin McKie"],
       ["Sedee Keita"]
     ] },
-  { id: "ku18", d: "hard", p: true, q: "Name a player from Kansas's 2018 Final Four team",
+  { id: "ku18", d: "hard", p: true, conf: ["b12"], q: "Name a player from Kansas's 2018 Final Four team",
     t: [
       ["Devonte' Graham|Devonte Graham", "Svi Mykhailiuk|Sviatoslav Mykhailiuk"],
       ["Malik Newman", "Udoka Azubuike", "Lagerald Vick"],
@@ -750,7 +750,7 @@ window.PROMPTS = [
       ["Clay Young", "Sam Cunliffe"],
       ["Chris Teahan"]
     ] },
-  { id: "mich18", d: "medium", p: true, q: "Name a player from Michigan's 2018 national runner-up team",
+  { id: "mich18", d: "medium", p: true, conf: ["b1g"], q: "Name a player from Michigan's 2018 national runner-up team",
     t: [
       ["Moritz Wagner", "Charles Matthews"],
       ["Muhammad-Ali Abdur-Rahkman|Abdur-Rahkman", "Zavier Simpson", "Duncan Robinson"],
@@ -758,7 +758,7 @@ window.PROMPTS = [
       ["Eli Brooks", "Ibi Watson"],
       ["Jaaron Simmons"]
     ] },
-  { id: "uva18", d: "hard", p: true, q: "Name a player or coach from the 2017–18 Virginia team that lost to UMBC",
+  { id: "uva18", d: "hard", p: true, conf: ["acc","mid"], q: "Name a player or coach from the 2017–18 Virginia team that lost to UMBC",
     t: [
       ["Tony Bennett", "Kyle Guy", "De'Andre Hunter|DeAndre Hunter"],
       ["Ty Jerome", "Devon Hall", "Isaiah Wilkins"],
@@ -766,7 +766,7 @@ window.PROMPTS = [
       ["Jay Huff", "Marco Anthony"],
       ["Francesco Badocchi"]
     ] },
-  { id: "duke19", d: "medium", p: true, q: "Name a Duke teammate of Zion Williamson (2018–19)",
+  { id: "duke19", d: "medium", p: true, conf: ["acc"], q: "Name a Duke teammate of Zion Williamson (2018–19)",
     t: [
       ["RJ Barrett|R.J. Barrett", "Cam Reddish"],
       ["Tre Jones", "Marques Bolden", "Javin DeLaurier"],
@@ -774,7 +774,7 @@ window.PROMPTS = [
       ["Joey Baker", "Antonio Vrankovic"],
       ["Mike Buckmire"]
     ] },
-  { id: "ttu19", d: "hard", p: true, q: "Name a player or coach from Texas Tech's 2019 national runner-up team",
+  { id: "ttu19", d: "hard", p: true, conf: ["b12"], q: "Name a player or coach from Texas Tech's 2019 national runner-up team",
     t: [
       ["Jarrett Culver", "Chris Beard"],
       ["Matt Mooney", "Davide Moretti", "Tariq Owens"],
@@ -782,7 +782,7 @@ window.PROMPTS = [
       ["Deshawn Corprew", "Avery Benson"],
       ["Andrei Savrasov"]
     ] },
-  { id: "auburn19", d: "hard", p: true, q: "Name a player or coach from Auburn's 2019 Final Four team",
+  { id: "auburn19", d: "hard", p: true, conf: ["sec"], q: "Name a player or coach from Auburn's 2019 Final Four team",
     t: [
       ["Bruce Pearl", "Bryce Brown", "Jared Harper"],
       ["Chuma Okeke", "Anfernee McLemore", "Samir Doughty"],
@@ -790,7 +790,7 @@ window.PROMPTS = [
       ["Danjel Purifoy"],
       ["J'Von McCormick|JVon McCormick"]
     ] },
-  { id: "msu19", d: "hard", p: true, q: "Name a player or coach from Michigan State's 2019 Final Four team",
+  { id: "msu19", d: "hard", p: true, conf: ["b1g"], q: "Name a player or coach from Michigan State's 2019 Final Four team",
     t: [
       ["Tom Izzo", "Cassius Winston"],
       ["Nick Ward", "Xavier Tillman", "Matt McQuaid", "Kenny Goins"],
@@ -798,7 +798,7 @@ window.PROMPTS = [
       ["Kyle Ahrens", "Foster Loyer"],
       ["Thomas Kithier"]
     ] },
-  { id: "tenn19", d: "hard", p: true, q: "Name a player or coach from Tennessee's 2018–19 team (Grant Williams era)",
+  { id: "tenn19", d: "hard", p: true, conf: ["sec"], q: "Name a player or coach from Tennessee's 2018–19 team (Grant Williams era)",
     t: [
       ["Grant Williams", "Admiral Schofield", "Rick Barnes"],
       ["Jordan Bone", "Lamonte Turner", "Jordan Bowden", "Kyle Alexander"],
@@ -806,7 +806,7 @@ window.PROMPTS = [
       ["Jalen Johnson"],
       ["Derrick Walker"]
     ] },
-  { id: "zags21", d: "medium", p: true, q: "Name a player or coach from Gonzaga's 2021 team (31–0 before the title game)",
+  { id: "zags21", d: "medium", p: true, conf: ["mid"], q: "Name a player or coach from Gonzaga's 2021 team (31–0 before the title game)",
     t: [
       ["Jalen Suggs", "Drew Timme", "Corey Kispert", "Mark Few"],
       ["Joel Ayayi", "Andrew Nembhard"],
@@ -814,7 +814,7 @@ window.PROMPTS = [
       ["Julian Strawther", "Dominick Harris"],
       ["Oumar Ballo"]
     ] },
-  { id: "hou21", d: "hard", p: true, q: "Name a player or coach from Houston's 2021 Final Four team",
+  { id: "hou21", d: "hard", p: true, conf: ["b12"], q: "Name a player or coach from Houston's 2021 Final Four team",
     t: [
       ["Kelvin Sampson", "Quentin Grimes", "Marcus Sasser"],
       ["DeJon Jarreau", "Justin Gorham", "Fabian White Jr.|Fabian White"],
@@ -822,7 +822,7 @@ window.PROMPTS = [
       ["J'Wan Roberts|JWan Roberts", "Jamal Shead"],
       ["Cameron Tyson"]
     ] },
-  { id: "ucla21", d: "hard", p: true, q: "Name a player or coach from UCLA's 2021 First Four-to-Final Four team",
+  { id: "ucla21", d: "hard", p: true, conf: ["b1g"], q: "Name a player or coach from UCLA's 2021 First Four-to-Final Four team",
     t: [
       ["Johnny Juzang", "Mick Cronin", "Jaime Jaquez Jr.|Jaime Jaquez"],
       ["Tyger Campbell", "Jules Bernard", "Cody Riley"],
@@ -830,7 +830,7 @@ window.PROMPTS = [
       ["David Singleton"],
       ["Jake Kyman"]
     ] },
-  { id: "iowa21", d: "hard", p: true, q: "Name a player or coach from Iowa's 2020–21 team (Luka Garza's Player of the Year season)",
+  { id: "iowa21", d: "hard", p: true, conf: ["b1g"], q: "Name a player or coach from Iowa's 2020–21 team (Luka Garza's Player of the Year season)",
     t: [
       ["Luka Garza", "Fran McCaffery"],
       ["Joe Wieskamp", "Jordan Bohannon", "CJ Fredrick|C.J. Fredrick", "Keegan Murray"],
@@ -838,7 +838,7 @@ window.PROMPTS = [
       ["Ahron Ulis", "Tony Perkins"],
       ["Josh Ogundele"]
     ] },
-  { id: "oru21", d: "hard", p: true, q: "Name a player or coach from Oral Roberts' 2021 Sweet 16 team (a 15 seed)",
+  { id: "oru21", d: "hard", p: true, conf: ["mid"], q: "Name a player or coach from Oral Roberts' 2021 Sweet 16 team (a 15 seed)",
     t: [
       ["Max Abmas"],
       ["Kevin Obanor", "Paul Mills"],
@@ -846,7 +846,7 @@ window.PROMPTS = [
       ["R.J. Glasper|RJ Glasper", "Carlos Jurgens"],
       ["Francis Lacis"]
     ] },
-  { id: "duke22", d: "medium", p: true, q: "Name a player or coach from Duke's 2022 Final Four team (Coach K's last)",
+  { id: "duke22", d: "medium", p: true, conf: ["acc"], q: "Name a player or coach from Duke's 2022 Final Four team (Coach K's last)",
     t: [
       ["Paolo Banchero", "Mike Krzyzewski|Coach K"],
       ["Mark Williams", "AJ Griffin|A.J. Griffin", "Wendell Moore Jr.|Wendell Moore", "Jeremy Roach", "Trevor Keels"],
@@ -854,7 +854,7 @@ window.PROMPTS = [
       ["Bates Jones", "Jaylen Blakes"],
       ["Keenan Worthington"]
     ] },
-  { id: "unc22", d: "medium", p: true, q: "Name a player or coach from North Carolina's 2022 national runner-up team",
+  { id: "unc22", d: "medium", p: true, conf: ["acc"], q: "Name a player or coach from North Carolina's 2022 national runner-up team",
     t: [
       ["Armando Bacot", "Caleb Love", "Hubert Davis"],
       ["RJ Davis|R.J. Davis", "Brady Manek", "Leaky Black"],
@@ -862,7 +862,7 @@ window.PROMPTS = [
       ["Kerwin Walton", "Justin McKoy"],
       ["D'Marco Dunn|DMarco Dunn"]
     ] },
-  { id: "nova22", d: "hard", p: true, q: "Name a player or coach from Villanova's 2022 Final Four team",
+  { id: "nova22", d: "hard", p: true, conf: ["be"], q: "Name a player or coach from Villanova's 2022 Final Four team",
     t: [
       ["Collin Gillespie", "Jay Wright"],
       ["Justin Moore", "Jermaine Samuels", "Eric Dixon", "Caleb Daniels"],
@@ -870,7 +870,7 @@ window.PROMPTS = [
       ["Chris Arcidiacono", "Bryan Antoine"],
       ["Trey Patterson"]
     ] },
-  { id: "sdsu23", d: "hard", p: true, q: "Name a player or coach from San Diego State's 2023 national runner-up team",
+  { id: "sdsu23", d: "hard", p: true, conf: ["mid"], q: "Name a player or coach from San Diego State's 2023 national runner-up team",
     t: [
       ["Lamont Butler", "Brian Dutcher", "Matt Bradley"],
       ["Darrion Trammell", "Jaedon LeDee", "Nathan Mensah", "Keshad Johnson"],
@@ -878,7 +878,7 @@ window.PROMPTS = [
       ["Elijah Saunders"],
       ["Jay Pal"]
     ] },
-  { id: "fau23", d: "hard", p: true, q: "Name a player or coach from Florida Atlantic's 2023 Final Four team",
+  { id: "fau23", d: "hard", p: true, conf: ["mid"], q: "Name a player or coach from Florida Atlantic's 2023 Final Four team",
     t: [
       ["Dusty May", "Johnell Davis"],
       ["Alijah Martin", "Vladislav Goldin", "Michael Forrest"],
@@ -886,7 +886,7 @@ window.PROMPTS = [
       ["Jalen Gaffney"],
       ["Brenen Lorient"]
     ] },
-  { id: "miami23", d: "hard", p: true, q: "Name a player or coach from Miami's 2023 Final Four team",
+  { id: "miami23", d: "hard", p: true, conf: ["acc"], q: "Name a player or coach from Miami's 2023 Final Four team",
     t: [
       ["Jim Larranaga|Jim Larrañaga", "Isaiah Wong", "Nijel Pack"],
       ["Jordan Miller", "Norchad Omier", "Wooga Poplar"],
@@ -894,7 +894,7 @@ window.PROMPTS = [
       ["A.J. Casey|AJ Casey"],
       ["Harlond Beverly"]
     ] },
-  { id: "fdu23", d: "hard", p: true, q: "Name a player or coach from Fairleigh Dickinson's 2023 team that beat No. 1 Purdue",
+  { id: "fdu23", d: "hard", p: true, conf: ["mid","b1g"], q: "Name a player or coach from Fairleigh Dickinson's 2023 team that beat No. 1 Purdue",
     t: [
       ["Tobin Anderson"],
       ["Grant Singleton", "Demetre Roberts", "Sean Moore"],
@@ -902,7 +902,7 @@ window.PROMPTS = [
       ["Heru Bligen"],
       ["Cameron Tweedy"]
     ] },
-  { id: "ncst24", d: "medium", p: true, q: "Name a player or coach from NC State's 2024 Final Four team (an 11 seed)",
+  { id: "ncst24", d: "medium", p: true, conf: ["acc","mid"], q: "Name a player or coach from NC State's 2024 Final Four team (an 11 seed)",
     t: [
       ["DJ Burns|D.J. Burns", "Kevin Keatts", "DJ Horne|D.J. Horne"],
       ["Michael O'Connell", "Mohamed Diarra", "Jayden Taylor"],
@@ -910,7 +910,7 @@ window.PROMPTS = [
       ["Dennis Parker Jr.|Dennis Parker", "MJ Rice|M.J. Rice"],
       ["Breon Pass"]
     ] },
-  { id: "purdue24", d: "medium", p: true, q: "Name a player or coach from Purdue's 2024 national runner-up team",
+  { id: "purdue24", d: "medium", p: true, conf: ["b1g"], q: "Name a player or coach from Purdue's 2024 national runner-up team",
     t: [
       ["Zach Edey", "Braden Smith", "Matt Painter"],
       ["Fletcher Loyer", "Lance Jones", "Trey Kaufman-Renn|Kaufman-Renn"],
@@ -918,7 +918,7 @@ window.PROMPTS = [
       ["Myles Colvin", "Ethan Morton"],
       ["Will Berg"]
     ] },
-  { id: "bama24", d: "hard", p: true, q: "Name a player or coach from Alabama's 2024 Final Four team",
+  { id: "bama24", d: "hard", p: true, conf: ["sec"], q: "Name a player or coach from Alabama's 2024 Final Four team",
     t: [
       ["Mark Sears", "Nate Oats", "Grant Nelson"],
       ["Rylan Griffen", "Aaron Estrada", "Jarin Stevenson"],
@@ -926,7 +926,7 @@ window.PROMPTS = [
       ["Davin Cosby", "Sam Walters"],
       ["Mouhamed Dioubate"]
     ] },
-  { id: "duke25", d: "medium", p: true, q: "Name a player or coach from Duke's 2025 Final Four team",
+  { id: "duke25", d: "medium", p: true, conf: ["acc"], q: "Name a player or coach from Duke's 2025 Final Four team",
     t: [
       ["Cooper Flagg", "Jon Scheyer", "Kon Knueppel"],
       ["Khaman Maluach", "Tyrese Proctor", "Sion James"],
@@ -934,7 +934,7 @@ window.PROMPTS = [
       ["Caleb Foster", "Patrick Ngongba II|Patrick Ngongba"],
       ["Darren Harris"]
     ] },
-  { id: "hou25", d: "hard", p: true, q: "Name a player or coach from Houston's 2025 national runner-up team",
+  { id: "hou25", d: "hard", p: true, conf: ["b12"], q: "Name a player or coach from Houston's 2025 national runner-up team",
     t: [
       ["Kelvin Sampson", "LJ Cryer|L.J. Cryer", "J'Wan Roberts|JWan Roberts"],
       ["Emanuel Sharp", "Milos Uzan", "Joseph Tugler"],
@@ -942,7 +942,7 @@ window.PROMPTS = [
       ["Mylik Wilson", "Terrance Arceneaux"],
       ["Mercy Miller"]
     ] },
-  { id: "auburn25", d: "hard", p: true, q: "Name a player or coach from Auburn's 2025 Final Four team",
+  { id: "auburn25", d: "hard", p: true, conf: ["sec"], q: "Name a player or coach from Auburn's 2025 Final Four team",
     t: [
       ["Johni Broome", "Bruce Pearl"],
       ["Chad Baker-Mazara|Baker-Mazara", "Denver Jones", "Tahaad Pettiford", "Miles Kelly"],
@@ -950,7 +950,7 @@ window.PROMPTS = [
       ["Jahki Howard"],
       ["Ja'Heim Hudson|JaHeim Hudson"]
     ] },
-  { id: "ukoad", d: "medium", p: true, q: "Name a Kentucky freshman taken in the 1st round of the NBA Draft under Calipari (2010–2024)",
+  { id: "ukoad", d: "medium", p: true, conf: ["sec"], q: "Name a Kentucky freshman taken in the 1st round of the NBA Draft under Calipari (2010–2024)",
     t: [
       ["Anthony Davis", "John Wall", "Karl-Anthony Towns|Karl Anthony Towns|KAT", "Devin Booker", "De'Aaron Fox|DeAaron Fox"],
       ["Jamal Murray", "Bam Adebayo", "Shai Gilgeous-Alexander|Gilgeous-Alexander|SGA", "Tyrese Maxey", "DeMarcus Cousins", "Julius Randle", "Brandon Knight", "Reed Sheppard"],
@@ -958,7 +958,7 @@ window.PROMPTS = [
       ["Eric Bledsoe", "Marquis Teague", "Archie Goodwin", "TyTy Washington"],
       ["Daniel Orton"]
     ] },
-  { id: "dukeoad", d: "medium", p: true, q: "Name a Duke freshman taken in the 1st round of the NBA Draft (2011–2025)",
+  { id: "dukeoad", d: "medium", p: true, conf: ["acc"], q: "Name a Duke freshman taken in the 1st round of the NBA Draft (2011–2025)",
     t: [
       ["Zion Williamson", "Kyrie Irving", "Jayson Tatum", "Paolo Banchero", "Cooper Flagg"],
       ["RJ Barrett|R.J. Barrett", "Brandon Ingram", "Jabari Parker", "Marvin Bagley III|Marvin Bagley", "Wendell Carter Jr.|Wendell Carter", "Jahlil Okafor", "Kon Knueppel"],
@@ -1014,7 +1014,7 @@ window.PROMPTS = [
       [],
       ["Wichita State"]
     ] },
-  { id: "betourney", d: "hard", q: "Name a Big East tournament champion from 2010 to 2025",
+  { id: "betourney", d: "hard", conf: ["be"], q: "Name a Big East tournament champion from 2010 to 2025",
     t: [
       ["Villanova|Nova", "UConn|Connecticut"],
       ["Louisville", "Marquette", "St. John's|Saint Johns|St Johns"],
@@ -1022,7 +1022,7 @@ window.PROMPTS = [
       ["Georgetown"],
       ["West Virginia|WVU"]
     ] },
-  { id: "sectourney", d: "medium", q: "Name an SEC tournament champion from 2010 to 2025",
+  { id: "sectourney", d: "medium", conf: ["sec"], q: "Name an SEC tournament champion from 2010 to 2025",
     t: [
       ["Kentucky|UK"],
       ["Alabama|Bama", "Auburn", "Florida|UF"],
@@ -1030,7 +1030,7 @@ window.PROMPTS = [
       ["Vanderbilt|Vandy"],
       ["Ole Miss|Mississippi"]
     ] },
-  { id: "acctourney", d: "medium", q: "Name an ACC tournament champion from 2010 to 2025",
+  { id: "acctourney", d: "medium", conf: ["acc"], q: "Name an ACC tournament champion from 2010 to 2025",
     t: [
       ["Duke"],
       ["Virginia|UVA", "North Carolina|UNC"],
@@ -1038,7 +1038,7 @@ window.PROMPTS = [
       ["NC State|North Carolina State", "Virginia Tech"],
       ["Georgia Tech"]
     ] },
-  { id: "b1gtourney", d: "medium", q: "Name a Big Ten tournament champion from 2010 to 2025",
+  { id: "b1gtourney", d: "medium", conf: ["b1g"], q: "Name a Big Ten tournament champion from 2010 to 2025",
     t: [
       ["Michigan State|MSU", "Michigan"],
       ["Ohio State|OSU", "Wisconsin", "Purdue"],
@@ -1046,7 +1046,7 @@ window.PROMPTS = [
       [],
       ["Iowa"]
     ] },
-  { id: "b12tourney", d: "medium", q: "Name a Big 12 tournament champion from 2010 to 2025",
+  { id: "b12tourney", d: "medium", conf: ["b12"], q: "Name a Big 12 tournament champion from 2010 to 2025",
     t: [
       ["Kansas|KU"],
       ["Iowa State|ISU", "Texas|UT"],
@@ -1054,7 +1054,7 @@ window.PROMPTS = [
       [],
       ["Missouri|Mizzou"]
     ] },
-  { id: "pac12tourney", d: "hard", q: "Name a Pac-12 tournament champion from 2012 to 2024",
+  { id: "pac12tourney", d: "hard", conf: ["mid"], q: "Name a Pac-12 tournament champion from 2012 to 2024",
     t: [
       ["Arizona", "Oregon"],
       ["UCLA"],
@@ -1078,7 +1078,7 @@ window.PROMPTS = [
       [],
       ["Brian Dutcher"]
     ] },
-  { id: "wcc", d: "medium", g: "conf-wccever", c: "conference", q: "Name a West Coast Conference member in the 2025–26 season",
+  { id: "wcc", d: "medium", g: "conf-wccever", c: "conference", conf: ["mid"], q: "Name a West Coast Conference member in the 2025–26 season",
     t: [
       ["Gonzaga|Zags", "Saint Mary's|St Marys|Saint Marys"],
       ["San Francisco|USF", "Santa Clara", "Pepperdine", "Loyola Marymount|LMU"],
@@ -1086,7 +1086,7 @@ window.PROMPTS = [
       ["Washington State|Wazzu", "Oregon State"],
       ["Seattle U|Seattle|Seattle University"]
     ] },
-  { id: "mwc", d: "hard", g: "conf-mwcever", c: "conference", q: "Name a Mountain West member in the 2025–26 season",
+  { id: "mwc", d: "hard", g: "conf-mwcever", c: "conference", conf: ["mid"], q: "Name a Mountain West member in the 2025–26 season",
     t: [
       ["San Diego State|SDSU"],
       ["Boise State", "Utah State", "New Mexico", "UNLV", "Nevada"],
@@ -1094,7 +1094,7 @@ window.PROMPTS = [
       ["Air Force", "San Jose State"],
       ["Grand Canyon|GCU"]
     ] },
-  { id: "a10", d: "hard", g: "conf-a10ever", c: "conference", q: "Name an Atlantic 10 member in the 2025–26 season",
+  { id: "a10", d: "hard", g: "conf-a10ever", c: "conference", conf: ["mid"], q: "Name an Atlantic 10 member in the 2025–26 season",
     t: [
       ["Dayton", "VCU|Virginia Commonwealth"],
       ["Saint Louis|SLU", "Saint Joseph's|St Josephs|Saint Josephs", "Loyola Chicago|Loyola", "Davidson"],
@@ -1102,7 +1102,7 @@ window.PROMPTS = [
       ["George Washington|GW", "Fordham"],
       ["La Salle"]
     ] },
-  { id: "patriot", d: "hard", ok: true, g: "conf-patriot", c: "conference", q: "Name a school that has been a member of the Patriot League in men's basketball",
+  { id: "patriot", d: "hard", ok: true, g: "conf-patriot", c: "conference", conf: ["mid"], q: "Name a school that has been a member of the Patriot League in men's basketball",
     t: [
       ["Navy", "Army"],
       ["Bucknell", "Colgate", "Lehigh"],
@@ -1110,7 +1110,7 @@ window.PROMPTS = [
       ["Lafayette", "Loyola Maryland|Loyola MD"],
       ["Fordham"]
     ] },
-  { id: "horizon", d: "hard", q: "Name a Horizon League member in the 2025–26 season",
+  { id: "horizon", d: "hard", conf: ["mid"], q: "Name a Horizon League member in the 2025–26 season",
     t: [
       ["Wright State", "Milwaukee|UW-Milwaukee"],
       ["Oakland", "Northern Kentucky|NKU", "Green Bay|UW-Green Bay", "Cleveland State"],
@@ -1478,7 +1478,7 @@ window.PROMPTS = [
       [],
       ["Little Rock|Arkansas-Little Rock|UALR"]
     ] },
-  { id: "ukallstar", d: "easy", p: true, q: "Name a Kentucky player (2010 or later) who became an NBA All-Star",
+  { id: "ukallstar", d: "easy", p: true, conf: ["sec"], q: "Name a Kentucky player (2010 or later) who became an NBA All-Star",
     t: [
       ["Anthony Davis", "Devin Booker", "Karl-Anthony Towns|Karl Anthony Towns|KAT", "Shai Gilgeous-Alexander|Gilgeous-Alexander|SGA"],
       ["De'Aaron Fox|DeAaron Fox", "Bam Adebayo|Edrice Adebayo", "John Wall", "Tyrese Maxey"],
@@ -1486,7 +1486,7 @@ window.PROMPTS = [
       [],
       ["Tyler Herro"]
     ] },
-  { id: "uncnba", d: "easy", p: true, q: "Name a North Carolina player (2010 or later) who reached the NBA",
+  { id: "uncnba", d: "easy", p: true, conf: ["acc"], q: "Name a North Carolina player (2010 or later) who reached the NBA",
     t: [
       ["Harrison Barnes", "Coby White", "Cam Johnson"],
       ["Cole Anthony", "Justin Jackson", "Tyler Zeller", "John Henson"],
@@ -1494,7 +1494,7 @@ window.PROMPTS = [
       ["James Michael McAdoo"],
       ["Brice Johnson"]
     ] },
-  { id: "kunba", d: "easy", p: true, q: "Name a Kansas player (2010 or later) who reached the NBA",
+  { id: "kunba", d: "easy", p: true, conf: ["b12"], q: "Name a Kansas player (2010 or later) who reached the NBA",
     t: [
       ["Joel Embiid", "Andrew Wiggins"],
       ["Kelly Oubre Jr.|Kelly Oubre", "Christian Braun", "Marcus Morris", "Markieff Morris", "Devonte' Graham|Devonte Graham", "Ochai Agbaji"],
@@ -1502,7 +1502,7 @@ window.PROMPTS = [
       ["Frank Mason III|Frank Mason", "Cheick Diallo", "Wayne Selden", "Udoka Azubuike"],
       ["Kevin McCullar Jr.|Kevin McCullar"]
     ] },
-  { id: "duke2yr", d: "medium", p: true, q: "Name a Duke player (2010 or later) who stayed 2+ seasons and reached the NBA",
+  { id: "duke2yr", d: "medium", p: true, conf: ["acc"], q: "Name a Duke player (2010 or later) who stayed 2+ seasons and reached the NBA",
     t: [
       ["Grayson Allen", "Luke Kennard", "Mason Plumlee"],
       ["Seth Curry", "Tre Jones", "Mark Williams", "Kyle Filipowski"],
@@ -1510,7 +1510,7 @@ window.PROMPTS = [
       ["Ryan Kelly"],
       ["Marques Bolden"]
     ] },
-  { id: "novanba", d: "easy", p: true, q: "Name a Villanova player (2010 or later) who reached the NBA",
+  { id: "novanba", d: "easy", p: true, conf: ["be"], q: "Name a Villanova player (2010 or later) who reached the NBA",
     t: [
       ["Jalen Brunson", "Mikal Bridges"],
       ["Josh Hart", "Donte DiVincenzo", "Saddiq Bey"],
@@ -1518,7 +1518,7 @@ window.PROMPTS = [
       [],
       ["Ryan Arcidiacono"]
     ] },
-  { id: "msunba", d: "easy", p: true, q: "Name a Michigan State player (2010 or later) who reached the NBA",
+  { id: "msunba", d: "easy", p: true, conf: ["b1g"], q: "Name a Michigan State player (2010 or later) who reached the NBA",
     t: [
       ["Draymond Green", "Jaren Jackson Jr.|Jaren Jackson"],
       ["Miles Bridges", "Gary Harris", "Xavier Tillman", "Max Christie"],
@@ -1526,7 +1526,7 @@ window.PROMPTS = [
       ["Cassius Winston"],
       ["Matt Costello"]
     ] },
-  { id: "zonanba", d: "easy", p: true, q: "Name a Arizona player (2010 or later) who reached the NBA",
+  { id: "zonanba", d: "easy", p: true, conf: ["b12"], q: "Name a Arizona player (2010 or later) who reached the NBA",
     t: [
       ["Deandre Ayton", "Aaron Gordon", "Lauri Markkanen"],
       ["Bennedict Mathurin", "T.J. McConnell|TJ McConnell", "Derrick Williams", "Stanley Johnson"],
@@ -1534,7 +1534,7 @@ window.PROMPTS = [
       ["Christian Koloko", "Dalen Terry", "Nick Johnson"],
       ["Kadeem Allen"]
     ] },
-  { id: "uconnnba", d: "easy", p: true, q: "Name a UConn player (2010 or later) who reached the NBA",
+  { id: "uconnnba", d: "easy", p: true, conf: ["be"], q: "Name a UConn player (2010 or later) who reached the NBA",
     t: [
       ["Kemba Walker", "Andre Drummond", "Stephon Castle", "Donovan Clingan"],
       ["Shabazz Napier", "Jeremy Lamb", "Jordan Hawkins", "James Bouknight"],
@@ -1542,7 +1542,7 @@ window.PROMPTS = [
       ["Adama Sanogo"],
       ["Daniel Hamilton"]
     ] },
-  { id: "baylornba", d: "medium", p: true, q: "Name a Baylor player (2010 or later) who reached the NBA",
+  { id: "baylornba", d: "medium", p: true, conf: ["b12"], q: "Name a Baylor player (2010 or later) who reached the NBA",
     t: [
       ["Davion Mitchell", "Jared Butler", "Keyonte George", "VJ Edgecombe|V.J. Edgecombe"],
       ["Jeremy Sochan", "Taurean Prince"],
@@ -1550,7 +1550,7 @@ window.PROMPTS = [
       ["Quincy Miller"],
       ["Johnathan Motley"]
     ] },
-  { id: "texasnba", d: "easy", p: true, q: "Name a Texas player (2010 or later) who reached the NBA",
+  { id: "texasnba", d: "easy", p: true, conf: ["sec"], q: "Name a Texas player (2010 or later) who reached the NBA",
     t: [
       ["Myles Turner", "Jarrett Allen", "Tristan Thompson"],
       ["Mo Bamba", "Avery Bradley", "Jaxson Hayes", "Cory Joseph"],
@@ -1558,7 +1558,7 @@ window.PROMPTS = [
       ["Isaiah Taylor"],
       ["Dexter Pittman"]
     ] },
-  { id: "iunba", d: "easy", p: true, q: "Name a Indiana player (2010 or later) who reached the NBA",
+  { id: "iunba", d: "easy", p: true, conf: ["b1g"], q: "Name a Indiana player (2010 or later) who reached the NBA",
     t: [
       ["Victor Oladipo", "OG Anunoby|O.G. Anunoby", "Cody Zeller"],
       ["Trayce Jackson-Davis|Jackson-Davis", "Romeo Langford", "Thomas Bryant", "Noah Vonleh", "Yogi Ferrell"],
@@ -1566,7 +1566,7 @@ window.PROMPTS = [
       ["Troy Williams"],
       ["Juwan Morgan"]
     ] },
-  { id: "purduenba", d: "easy", p: true, q: "Name a Purdue player (2010 or later) who reached the NBA",
+  { id: "purduenba", d: "easy", p: true, conf: ["b1g"], q: "Name a Purdue player (2010 or later) who reached the NBA",
     t: [
       ["Zach Edey", "Jaden Ivey"],
       ["Carsen Edwards", "Caleb Swanigan"],
@@ -1574,7 +1574,7 @@ window.PROMPTS = [
       ["A.J. Hammons|AJ Hammons"],
       ["JaJuan Johnson"]
     ] },
-  { id: "ufnba", d: "easy", p: true, q: "Name a Florida player (2010 or later) who reached the NBA",
+  { id: "ufnba", d: "easy", p: true, conf: ["sec"], q: "Name a Florida player (2010 or later) who reached the NBA",
     t: [
       ["Bradley Beal"],
       ["Chandler Parsons", "Dorian Finney-Smith|Finney-Smith", "Walter Clayton Jr.|Walter Clayton", "Andrew Nembhard", "Tre Mann"],
@@ -1582,7 +1582,7 @@ window.PROMPTS = [
       ["Colin Castleton"],
       ["Erik Murphy"]
     ] },
-  { id: "lounba", d: "easy", p: true, q: "Name a Louisville player (2010 or later) who reached the NBA",
+  { id: "lounba", d: "easy", p: true, conf: ["acc"], q: "Name a Louisville player (2010 or later) who reached the NBA",
     t: [
       ["Donovan Mitchell"],
       ["Terry Rozier", "Montrezl Harrell"],
@@ -1590,7 +1590,7 @@ window.PROMPTS = [
       ["Peyton Siva", "Russ Smith"],
       ["Ray Spalding"]
     ] },
-  { id: "cusenba", d: "easy", p: true, q: "Name a Syracuse player (2010 or later) who reached the NBA",
+  { id: "cusenba", d: "easy", p: true, conf: ["acc"], q: "Name a Syracuse player (2010 or later) who reached the NBA",
     t: [
       ["Dion Waiters", "Michael Carter-Williams|Carter-Williams|MCW", "Jerami Grant"],
       ["Wesley Johnson", "Tyler Ennis", "Oshae Brissett"],
@@ -1598,7 +1598,7 @@ window.PROMPTS = [
       ["Fab Melo", "Kris Joseph"],
       ["Rakeem Christmas"]
     ] },
-  { id: "osunba", d: "easy", p: true, q: "Name a Ohio State player (2010 or later) who reached the NBA",
+  { id: "osunba", d: "easy", p: true, conf: ["b1g"], q: "Name a Ohio State player (2010 or later) who reached the NBA",
     t: [
       ["D'Angelo Russell|DAngelo Russell", "Evan Turner", "Jared Sullinger"],
       ["Keita Bates-Diop|Bates-Diop", "E.J. Liddell|EJ Liddell", "Malaki Branham", "Jae'Sean Tate|JaeSean Tate"],
@@ -1606,7 +1606,7 @@ window.PROMPTS = [
       [],
       ["Duane Washington Jr.|Duane Washington"]
     ] },
-  { id: "michnba", d: "easy", p: true, q: "Name a Michigan player (2010 or later) who reached the NBA",
+  { id: "michnba", d: "easy", p: true, conf: ["b1g"], q: "Name a Michigan player (2010 or later) who reached the NBA",
     t: [
       ["Franz Wagner", "Jordan Poole", "Caris LeVert", "Tim Hardaway Jr.|Tim Hardaway"],
       ["Trey Burke", "Duncan Robinson", "Nik Stauskas", "Moritz Wagner", "Glenn Robinson III|Glenn Robinson"],
@@ -1614,7 +1614,7 @@ window.PROMPTS = [
       ["Ignas Brazdeikis", "Darius Morris"],
       ["Zavier Simpson"]
     ] },
-  { id: "wiscnba", d: "medium", p: true, q: "Name a Wisconsin player (2010 or later) who reached the NBA",
+  { id: "wiscnba", d: "medium", p: true, conf: ["b1g"], q: "Name a Wisconsin player (2010 or later) who reached the NBA",
     t: [
       ["Frank Kaminsky"],
       ["Sam Dekker", "Johnny Davis", "Jon Leuer"],
@@ -1622,7 +1622,7 @@ window.PROMPTS = [
       ["Bronson Koenig"],
       ["Micah Potter"]
     ] },
-  { id: "tennnba", d: "easy", p: true, q: "Name a Tennessee player (2010 or later) who reached the NBA",
+  { id: "tennnba", d: "easy", p: true, conf: ["sec"], q: "Name a Tennessee player (2010 or later) who reached the NBA",
     t: [
       ["Tobias Harris", "Josh Richardson", "Dalton Knecht"],
       ["Grant Williams", "Jaden Springer", "Keon Johnson", "Kennedy Chandler"],
@@ -1630,7 +1630,7 @@ window.PROMPTS = [
       ["Jordan Bone", "Yves Pons"],
       ["Scotty Hopson"]
     ] },
-  { id: "aubnba", d: "easy", p: true, q: "Name a Auburn player (2010 or later) who reached the NBA",
+  { id: "aubnba", d: "easy", p: true, conf: ["sec"], q: "Name a Auburn player (2010 or later) who reached the NBA",
     t: [
       ["Jabari Smith Jr.|Jabari Smith", "Walker Kessler"],
       ["Isaac Okoro", "Chuma Okeke", "Sharife Cooper"],
@@ -1638,7 +1638,7 @@ window.PROMPTS = [
       [],
       ["Jared Harper"]
     ] },
-  { id: "bamanba", d: "easy", p: true, q: "Name a Alabama player (2010 or later) who reached the NBA",
+  { id: "bamanba", d: "easy", p: true, conf: ["sec"], q: "Name a Alabama player (2010 or later) who reached the NBA",
     t: [
       ["Brandon Miller", "Collin Sexton"],
       ["Herb Jones|Herbert Jones", "Kira Lewis Jr.|Kira Lewis", "Keon Ellis"],
@@ -1646,7 +1646,7 @@ window.PROMPTS = [
       [],
       ["Donta Hall"]
     ] },
-  { id: "arknba", d: "easy", p: true, q: "Name a Arkansas player (2010 or later) who reached the NBA",
+  { id: "arknba", d: "easy", p: true, conf: ["sec"], q: "Name a Arkansas player (2010 or later) who reached the NBA",
     t: [
       ["Bobby Portis", "Daniel Gafford", "Anthony Black"],
       ["Moses Moody", "Isaiah Joe", "Jaylin Williams", "Nick Smith Jr.|Nick Smith"],
@@ -1654,7 +1654,7 @@ window.PROMPTS = [
       [],
       ["Mason Jones"]
     ] },
-  { id: "lsunba", d: "easy", p: true, q: "Name a LSU player (2010 or later) who reached the NBA",
+  { id: "lsunba", d: "easy", p: true, conf: ["sec"], q: "Name a LSU player (2010 or later) who reached the NBA",
     t: [
       ["Ben Simmons", "Naz Reid", "Cam Thomas"],
       ["Tari Eason", "Trendon Watford", "Jarell Martin"],
@@ -1662,7 +1662,7 @@ window.PROMPTS = [
       ["Darius Days", "Antonio Blakeney"],
       ["Tim Quarterman"]
     ] },
-  { id: "oregonnba", d: "medium", p: true, q: "Name a Oregon player (2010 or later) who reached the NBA",
+  { id: "oregonnba", d: "medium", p: true, conf: ["b1g"], q: "Name a Oregon player (2010 or later) who reached the NBA",
     t: [
       ["Payton Pritchard", "Dillon Brooks"],
       ["Chris Boucher", "Bol Bol", "Troy Brown Jr.|Troy Brown", "Jordan Bell"],
@@ -1670,7 +1670,7 @@ window.PROMPTS = [
       [],
       ["Joseph Young"]
     ] },
-  { id: "uclanba", d: "easy", p: true, q: "Name a UCLA player (2010 or later) who reached the NBA",
+  { id: "uclanba", d: "easy", p: true, conf: ["b1g"], q: "Name a UCLA player (2010 or later) who reached the NBA",
     t: [
       ["Zach LaVine", "Lonzo Ball", "Jaime Jaquez Jr.|Jaime Jaquez"],
       ["Kyle Anderson", "Norman Powell", "Kevon Looney", "Aaron Holiday", "Peyton Watson"],
@@ -1678,7 +1678,7 @@ window.PROMPTS = [
       ["Jordan Adams", "Ike Anigbogu", "Travis Wear", "Thomas Welsh"],
       ["Malcolm Lee"]
     ] },
-  { id: "uscnba", d: "easy", p: true, q: "Name a USC player (2010 or later) who reached the NBA",
+  { id: "uscnba", d: "easy", p: true, conf: ["b1g"], q: "Name a USC player (2010 or later) who reached the NBA",
     t: [
       ["Evan Mobley", "Nikola Vucevic|Nikola Vučević", "Bronny James"],
       ["Onyeka Okongwu", "De'Anthony Melton|DeAnthony Melton", "Kevin Porter Jr.|Kevin Porter"],
@@ -1686,7 +1686,7 @@ window.PROMPTS = [
       ["Chimezie Metu"],
       ["Jordan McLaughlin"]
     ] },
-  { id: "uwnba", d: "medium", p: true, q: "Name a Washington player (2010 or later) who reached the NBA",
+  { id: "uwnba", d: "medium", p: true, conf: ["b1g"], q: "Name a Washington player (2010 or later) who reached the NBA",
     t: [
       ["Dejounte Murray", "Isaiah Thomas", "Markelle Fultz"],
       ["Jaden McDaniels", "Matisse Thybulle", "Terrence Ross"],
@@ -1694,7 +1694,7 @@ window.PROMPTS = [
       [],
       ["C.J. Wilcox|CJ Wilcox"]
     ] },
-  { id: "memnba", d: "medium", p: true, q: "Name a Memphis player (2010 or later) who reached the NBA",
+  { id: "memnba", d: "medium", p: true, conf: ["mid"], q: "Name a Memphis player (2010 or later) who reached the NBA",
     t: [
       ["Jalen Duren", "James Wiseman"],
       ["Precious Achiuwa", "Will Barton"],
@@ -1702,7 +1702,7 @@ window.PROMPTS = [
       ["Elliot Williams", "Dedric Lawson"],
       ["Lester Quinones"]
     ] },
-  { id: "uvanba", d: "easy", p: true, q: "Name a Virginia player (2010 or later) who reached the NBA",
+  { id: "uvanba", d: "easy", p: true, conf: ["acc"], q: "Name a Virginia player (2010 or later) who reached the NBA",
     t: [
       ["Malcolm Brogdon", "De'Andre Hunter|DeAndre Hunter", "Joe Harris"],
       ["Ty Jerome", "Trey Murphy III|Trey Murphy", "Kyle Guy", "Sam Hauser"],
@@ -1710,7 +1710,7 @@ window.PROMPTS = [
       ["Mamadi Diakite", "London Perrantes", "Reece Beekman"],
       ["Devon Hall"]
     ] },
-  { id: "mdnba", d: "medium", p: true, q: "Name a Maryland player (2010 or later) who reached the NBA",
+  { id: "mdnba", d: "medium", p: true, conf: ["b1g"], q: "Name a Maryland player (2010 or later) who reached the NBA",
     t: [
       ["Kevin Huerter", "Alex Len"],
       ["Jalen Smith", "Bruno Fernando", "Aaron Wiggins", "Derik Queen"],
@@ -1718,7 +1718,7 @@ window.PROMPTS = [
       ["Jordan Williams"],
       ["Robert Carter"]
     ] },
-  { id: "isunba", d: "medium", p: true, q: "Name a Iowa State player (2010 or later) who reached the NBA",
+  { id: "isunba", d: "medium", p: true, conf: ["b12"], q: "Name a Iowa State player (2010 or later) who reached the NBA",
     t: [
       ["Tyrese Haliburton", "Talen Horton-Tucker|Horton-Tucker"],
       ["Monte Morris", "Georges Niang"],
@@ -1726,7 +1726,7 @@ window.PROMPTS = [
       ["Naz Mitrou-Long", "Lindell Wigginton"],
       ["Craig Brackins"]
     ] },
-  { id: "ttunba", d: "medium", p: true, q: "Name a Texas Tech player (2010 or later) who reached the NBA",
+  { id: "ttunba", d: "medium", p: true, conf: ["b12"], q: "Name a Texas Tech player (2010 or later) who reached the NBA",
     t: [
       ["Jarrett Culver"],
       ["Zhaire Smith", "Mac McClung"],
@@ -1734,7 +1734,7 @@ window.PROMPTS = [
       [],
       ["Kevin McCullar Jr.|Kevin McCullar"]
     ] },
-  { id: "uhnba", d: "medium", p: true, q: "Name a Houston player (2010 or later) who reached the NBA",
+  { id: "uhnba", d: "medium", p: true, conf: ["b12"], q: "Name a Houston player (2010 or later) who reached the NBA",
     t: [
       ["Jarace Walker", "Quentin Grimes", "Marcus Sasser"],
       ["Jamal Shead"],
@@ -1742,7 +1742,7 @@ window.PROMPTS = [
       ["Armoni Brooks"],
       ["Nate Hinton"]
     ] },
-  { id: "creightonnba", d: "medium", p: true, q: "Name a Creighton player (2010 or later) who reached the NBA",
+  { id: "creightonnba", d: "medium", p: true, conf: ["be"], q: "Name a Creighton player (2010 or later) who reached the NBA",
     t: [
       ["Doug McDermott"],
       ["Baylor Scheierman", "Justin Patton", "Khyri Thomas"],
@@ -1750,7 +1750,7 @@ window.PROMPTS = [
       [],
       ["Ty-Shon Alexander|TyShon Alexander"]
     ] },
-  { id: "marqnba", d: "medium", p: true, q: "Name a Marquette player (2010 or later) who reached the NBA",
+  { id: "marqnba", d: "medium", p: true, conf: ["be"], q: "Name a Marquette player (2010 or later) who reached the NBA",
     t: [
       ["Jimmy Butler", "Jae Crowder"],
       ["Tyler Kolek", "Olivier-Maxence Prosper|Prosper", "Henry Ellenson"],
@@ -1758,7 +1758,7 @@ window.PROMPTS = [
       ["Vander Blue", "Darius Johnson-Odom"],
       ["Justin Lewis"]
     ] },
-  { id: "gtownnba", d: "medium", p: true, q: "Name a Georgetown player (2010 or later) who reached the NBA",
+  { id: "gtownnba", d: "medium", p: true, conf: ["be"], q: "Name a Georgetown player (2010 or later) who reached the NBA",
     t: [
       ["Otto Porter Jr.|Otto Porter", "Greg Monroe"],
       ["Omer Yurtseven", "Mac McClung"],
@@ -1766,7 +1766,7 @@ window.PROMPTS = [
       ["Marcus Derrickson"],
       ["Chris Wright"]
     ] },
-  { id: "ndnba", d: "medium", p: true, q: "Name a Notre Dame player (2010 or later) who reached the NBA",
+  { id: "ndnba", d: "medium", p: true, conf: ["acc"], q: "Name a Notre Dame player (2010 or later) who reached the NBA",
     t: [
       ["Pat Connaughton", "Jerian Grant"],
       ["Blake Wesley", "Demetrius Jackson"],
@@ -1774,7 +1774,7 @@ window.PROMPTS = [
       [],
       ["Luke Harangody"]
     ] },
-  { id: "ncstnba", d: "medium", p: true, q: "Name a NC State player (2010 or later) who reached the NBA",
+  { id: "ncstnba", d: "medium", p: true, conf: ["acc"], q: "Name a NC State player (2010 or later) who reached the NBA",
     t: [
       ["Dennis Smith Jr.|Dennis Smith", "T.J. Warren|TJ Warren"],
       ["Omer Yurtseven"],
@@ -1782,7 +1782,7 @@ window.PROMPTS = [
       [],
       ["Cat Barber|Anthony Barber"]
     ] },
-  { id: "wakenba", d: "medium", p: true, q: "Name a Wake Forest player (2010 or later) who reached the NBA",
+  { id: "wakenba", d: "medium", p: true, conf: ["acc"], q: "Name a Wake Forest player (2010 or later) who reached the NBA",
     t: [
       ["John Collins"],
       ["Al-Farouq Aminu|Aminu", "Jake LaRavia", "Ish Smith"],
@@ -1790,7 +1790,7 @@ window.PROMPTS = [
       [],
       ["Alondes Williams"]
     ] },
-  { id: "okstnba", d: "medium", p: true, q: "Name a Oklahoma State player (2010 or later) who reached the NBA",
+  { id: "okstnba", d: "medium", p: true, conf: ["b12"], q: "Name a Oklahoma State player (2010 or later) who reached the NBA",
     t: [
       ["Cade Cunningham", "Marcus Smart"],
       ["Lindy Waters III|Lindy Waters"],
@@ -1798,7 +1798,7 @@ window.PROMPTS = [
       [],
       ["James Anderson"]
     ] },
-  { id: "ounba", d: "easy", p: true, q: "Name a Oklahoma player (2010 or later) who reached the NBA",
+  { id: "ounba", d: "easy", p: true, conf: ["sec"], q: "Name a Oklahoma player (2010 or later) who reached the NBA",
     t: [
       ["Trae Young", "Buddy Hield", "Austin Reaves"],
       ["Jeremiah Fears"],
@@ -1806,7 +1806,7 @@ window.PROMPTS = [
       ["Willie Warren"],
       ["Tiny Gallon"]
     ] },
-  { id: "illininba", d: "medium", p: true, q: "Name a Illinois player (2010 or later) who reached the NBA",
+  { id: "illininba", d: "medium", p: true, conf: ["b1g"], q: "Name a Illinois player (2010 or later) who reached the NBA",
     t: [
       ["Ayo Dosunmu"],
       ["Terrence Shannon Jr.|Terrence Shannon", "Meyers Leonard"],
@@ -1814,7 +1814,7 @@ window.PROMPTS = [
       [],
       ["Brandon Paul"]
     ] },
-  { id: "iowanba", d: "medium", p: true, q: "Name a Iowa player (2010 or later) who reached the NBA",
+  { id: "iowanba", d: "medium", p: true, conf: ["b1g"], q: "Name a Iowa player (2010 or later) who reached the NBA",
     t: [
       ["Keegan Murray"],
       ["Kris Murray", "Luka Garza"],
@@ -1822,7 +1822,7 @@ window.PROMPTS = [
       ["Tyler Cook"],
       ["Jarrod Uthoff"]
     ] },
-  { id: "fsunba", d: "easy", p: true, q: "Name a Florida State player (2010 or later) who reached the NBA",
+  { id: "fsunba", d: "easy", p: true, conf: ["acc"], q: "Name a Florida State player (2010 or later) who reached the NBA",
     t: [
       ["Scottie Barnes", "Jonathan Isaac", "Devin Vassell"],
       ["Malik Beasley", "Terance Mann", "Patrick Williams", "Dwayne Bacon"],
@@ -1830,7 +1830,7 @@ window.PROMPTS = [
       ["Bernard James", "Okaro White"],
       ["RaiQuan Gray"]
     ] },
-  { id: "miaminba", d: "medium", p: true, q: "Name a Miami player (2010 or later) who reached the NBA",
+  { id: "miaminba", d: "medium", p: true, conf: ["acc"], q: "Name a Miami player (2010 or later) who reached the NBA",
     t: [
       ["Bruce Brown", "Lonnie Walker IV|Lonnie Walker"],
       ["Shane Larkin", "Kyshawn George"],
@@ -1838,7 +1838,7 @@ window.PROMPTS = [
       ["Isaiah Wong"],
       ["Sheldon McClellan"]
     ] },
-  { id: "pittnba", d: "medium", p: true, q: "Name a Pitt player (2010 or later) who reached the NBA",
+  { id: "pittnba", d: "medium", p: true, conf: ["acc"], q: "Name a Pitt player (2010 or later) who reached the NBA",
     t: [
       ["Steven Adams"],
       ["Bub Carrington|Carlton Carrington"],
@@ -1846,7 +1846,7 @@ window.PROMPTS = [
       [],
       ["Lamar Patterson"]
     ] },
-  { id: "stanfordnba", d: "medium", p: true, q: "Name a Stanford player (2010 or later) who reached the NBA",
+  { id: "stanfordnba", d: "medium", p: true, conf: ["acc"], q: "Name a Stanford player (2010 or later) who reached the NBA",
     t: [
       ["Ziaire Williams", "Dwight Powell"],
       ["Landry Fields", "KZ Okpala|K.Z. Okpala", "Josh Huestis"],
@@ -1854,7 +1854,7 @@ window.PROMPTS = [
       ["Chasson Randle"],
       ["Spencer Jones"]
     ] },
-  { id: "colonba", d: "medium", p: true, q: "Name a Colorado player (2010 or later) who reached the NBA",
+  { id: "colonba", d: "medium", p: true, conf: ["b12"], q: "Name a Colorado player (2010 or later) who reached the NBA",
     t: [
       ["Derrick White", "Spencer Dinwiddie"],
       ["Alec Burks", "Andre Roberson", "Tristan da Silva|Tristan Da Silva"],
@@ -1862,7 +1862,7 @@ window.PROMPTS = [
       [],
       ["McKinley Wright IV|McKinley Wright"]
     ] },
-  { id: "xaviernba", d: "medium", p: true, q: "Name a Xavier player (2010 or later) who reached the NBA",
+  { id: "xaviernba", d: "medium", p: true, conf: ["be"], q: "Name a Xavier player (2010 or later) who reached the NBA",
     t: [
       ["Naji Marshall"],
       ["Edmond Sumner", "Colby Jones", "Jordan Crawford"],
@@ -1870,7 +1870,7 @@ window.PROMPTS = [
       ["J.P. Macura|JP Macura"],
       ["Semaj Christon"]
     ] },
-  { id: "sjunba", d: "medium", p: true, q: "Name a St. John's player (2010 or later) who reached the NBA",
+  { id: "sjunba", d: "medium", p: true, conf: ["be"], q: "Name a St. John's player (2010 or later) who reached the NBA",
     t: [
       ["Mo Harkless|Maurice Harkless"],
       ["Julian Champagnie", "JaKarr Sampson"],
@@ -1878,7 +1878,7 @@ window.PROMPTS = [
       [],
       ["Daniss Jenkins"]
     ] },
-  { id: "cincynba", d: "medium", p: true, q: "Name a Cincinnati player (2010 or later) who reached the NBA",
+  { id: "cincynba", d: "medium", p: true, conf: ["b12"], q: "Name a Cincinnati player (2010 or later) who reached the NBA",
     t: [
       ["Lance Stephenson"],
       ["Jacob Evans", "Gary Clark"],
@@ -1894,7 +1894,7 @@ window.PROMPTS = [
       ["Patrick Williams"],
       ["Isaac Okoro"]
     ] },
-  { id: "dukeffc", d: "easy", p: true, g: "coaches-dukehc", c: "coach-history", q: "Name a head coach who took Duke to a Final Four",
+  { id: "dukeffc", d: "easy", p: true, g: "coaches-dukehc", c: "coach-history", conf: ["acc"], q: "Name a head coach who took Duke to a Final Four",
     t: [
       ["Mike Krzyzewski|Coach K"],
       ["Jon Scheyer"],
@@ -1902,7 +1902,7 @@ window.PROMPTS = [
       [],
       ["Bill Foster"]
     ] },
-  { id: "uncffc", d: "easy", p: true, g: "coaches-unchc", c: "coach-history", q: "Name a head coach who took North Carolina to a Final Four",
+  { id: "uncffc", d: "easy", p: true, g: "coaches-unchc", c: "coach-history", conf: ["acc"], q: "Name a head coach who took North Carolina to a Final Four",
     t: [
       ["Roy Williams", "Dean Smith"],
       ["Hubert Davis"],
@@ -1910,7 +1910,7 @@ window.PROMPTS = [
       [],
       ["Frank McGuire"]
     ] },
-  { id: "iucoach", d: "easy", p: true, g: "coaches-iuhc", c: "coach-history", q: "Name an Indiana head coach since 2000 (interims count)",
+  { id: "iucoach", d: "easy", p: true, g: "coaches-iuhc", c: "coach-history", conf: ["b1g"], q: "Name an Indiana head coach since 2000 (interims count)",
     t: [
       ["Tom Crean", "Mike Woodson"],
       ["Archie Miller", "Kelvin Sampson", "Bob Knight"],
@@ -1918,7 +1918,7 @@ window.PROMPTS = [
       [],
       ["Dan Dakich"]
     ] },
-  { id: "ukcoach", d: "easy", p: true, g: "coaches-ukhc", c: "coach-history", q: "Name a Kentucky head coach since 2000",
+  { id: "ukcoach", d: "easy", p: true, g: "coaches-ukhc", c: "coach-history", conf: ["sec"], q: "Name a Kentucky head coach since 2000",
     t: [
       ["John Calipari", "Mark Pope"],
       ["Tubby Smith"],
@@ -1926,7 +1926,7 @@ window.PROMPTS = [
       [],
       ["Billy Gillispie"]
     ] },
-  { id: "loucoach", d: "medium", p: true, g: "coaches-louhc", c: "coach-history", q: "Name a Louisville head coach since 2000 (interims count)",
+  { id: "loucoach", d: "medium", p: true, g: "coaches-louhc", c: "coach-history", conf: ["acc"], q: "Name a Louisville head coach since 2000 (interims count)",
     t: [
       ["Rick Pitino"],
       ["Chris Mack", "Kenny Payne", "Pat Kelsey"],
@@ -1934,7 +1934,7 @@ window.PROMPTS = [
       [],
       ["David Padgett"]
     ] },
-  { id: "michcoach", d: "medium", p: true, g: "coaches-michhc", c: "coach-history", q: "Name a Michigan head coach since 2000 (interims count)",
+  { id: "michcoach", d: "medium", p: true, g: "coaches-michhc", c: "coach-history", conf: ["b1g"], q: "Name a Michigan head coach since 2000 (interims count)",
     t: [
       ["John Beilein", "Juwan Howard", "Dusty May"],
       ["Tommy Amaker"],
@@ -1942,7 +1942,7 @@ window.PROMPTS = [
       [],
       ["Phil Martelli"]
     ] },
-  { id: "osucoach", d: "medium", p: true, g: "coaches-osuhc", c: "coach-history", q: "Name an Ohio State head coach since 2000",
+  { id: "osucoach", d: "medium", p: true, g: "coaches-osuhc", c: "coach-history", conf: ["b1g"], q: "Name an Ohio State head coach since 2000",
     t: [
       ["Thad Matta", "Chris Holtmann"],
       ["Jake Diebler"],
@@ -1950,7 +1950,7 @@ window.PROMPTS = [
       [],
       ["Jim O'Brien|Jim OBrien"]
     ] },
-  { id: "zonacoach", d: "medium", p: true, g: "coaches-zonahc", c: "coach-history", q: "Name an Arizona head coach since 2000 (interims count)",
+  { id: "zonacoach", d: "medium", p: true, g: "coaches-zonahc", c: "coach-history", conf: ["b12"], q: "Name an Arizona head coach since 2000 (interims count)",
     t: [
       ["Sean Miller", "Tommy Lloyd", "Lute Olson"],
       [],
@@ -1958,7 +1958,7 @@ window.PROMPTS = [
       [],
       ["Kevin O'Neill|Kevin ONeill"]
     ] },
-  { id: "uclacoach", d: "medium", p: true, g: "coaches-uclahc", c: "coach-history", q: "Name a UCLA head coach since 2000",
+  { id: "uclacoach", d: "medium", p: true, g: "coaches-uclahc", c: "coach-history", conf: ["b1g"], q: "Name a UCLA head coach since 2000",
     t: [
       ["Mick Cronin", "Ben Howland", "Steve Alford"],
       [],
@@ -1966,7 +1966,7 @@ window.PROMPTS = [
       [],
       ["Murry Bartow"]
     ] },
-  { id: "unccoach", d: "easy", p: true, g: "coaches-unchc", c: "coach-history", q: "Name a North Carolina head coach since 2000",
+  { id: "unccoach", d: "easy", p: true, g: "coaches-unchc", c: "coach-history", conf: ["acc"], q: "Name a North Carolina head coach since 2000",
     t: [
       ["Roy Williams", "Hubert Davis"],
       [],
@@ -1974,7 +1974,7 @@ window.PROMPTS = [
       [],
       ["Bill Guthridge"]
     ] },
-  { id: "mdcoach", d: "medium", p: true, g: "coaches-mdhc", c: "coach-history", q: "Name a Maryland head coach since 2000 (interims count)",
+  { id: "mdcoach", d: "medium", p: true, g: "coaches-mdhc", c: "coach-history", conf: ["b1g"], q: "Name a Maryland head coach since 2000 (interims count)",
     t: [
       ["Gary Williams", "Mark Turgeon", "Kevin Willard"],
       ["Buzz Williams"],
@@ -1982,7 +1982,7 @@ window.PROMPTS = [
       [],
       ["Danny Manning"]
     ] },
-  { id: "gtowncoach", d: "medium", p: true, g: "coaches-gtownhc", c: "coach-history", q: "Name a Georgetown head coach since 2000",
+  { id: "gtowncoach", d: "medium", p: true, g: "coaches-gtownhc", c: "coach-history", conf: ["be"], q: "Name a Georgetown head coach since 2000",
     t: [
       ["John Thompson III", "Patrick Ewing"],
       ["Ed Cooley"],
@@ -1990,7 +1990,7 @@ window.PROMPTS = [
       [],
       ["Craig Esherick"]
     ] },
-  { id: "novacoach", d: "medium", p: true, g: "coaches-novahc", c: "coach-history", q: "Name a Villanova head coach since 2000",
+  { id: "novacoach", d: "medium", p: true, g: "coaches-novahc", c: "coach-history", conf: ["be"], q: "Name a Villanova head coach since 2000",
     t: [
       ["Jay Wright"],
       ["Kyle Neptune", "Kevin Willard"],
@@ -1998,7 +1998,7 @@ window.PROMPTS = [
       [],
       ["Steve Lappas"]
     ] },
-  { id: "uconncoach", d: "medium", p: true, g: "coaches-uconnhc", c: "coach-history", q: "Name a UConn head coach since 2000 (interims count)",
+  { id: "uconncoach", d: "medium", p: true, g: "coaches-uconnhc", c: "coach-history", conf: ["be"], q: "Name a UConn head coach since 2000 (interims count)",
     t: [
       ["Jim Calhoun", "Dan Hurley"],
       ["Kevin Ollie"],
@@ -2054,7 +2054,7 @@ window.PROMPTS = [
       [],
       ["Western Kentucky|WKU"]
     ] },
-  { id: "b1gff", d: "easy", q: "Name a current Big Ten school that made the men's Final Four since 2010",
+  { id: "b1gff", d: "easy", conf: ["b1g"], q: "Name a current Big Ten school that made the men's Final Four since 2010",
     t: [
       ["Michigan State|MSU", "Michigan"],
       ["Wisconsin", "Purdue"],
@@ -2062,7 +2062,7 @@ window.PROMPTS = [
       [],
       ["UCLA"]
     ] },
-  { id: "secff", d: "easy", q: "Name a current SEC school that made the men's Final Four since 2010",
+  { id: "secff", d: "easy", conf: ["sec"], q: "Name a current SEC school that made the men's Final Four since 2010",
     t: [
       ["Kentucky|UK", "Florida|UF"],
       ["Auburn", "Alabama|Bama"],
@@ -2070,7 +2070,7 @@ window.PROMPTS = [
       [],
       ["Oklahoma|OU"]
     ] },
-  { id: "accff", d: "easy", q: "Name a current ACC school that made the men's Final Four since 2010",
+  { id: "accff", d: "easy", conf: ["acc"], q: "Name a current ACC school that made the men's Final Four since 2010",
     t: [
       ["Duke", "North Carolina|UNC"],
       ["Virginia|UVA", "Syracuse"],
@@ -2078,7 +2078,7 @@ window.PROMPTS = [
       [],
       ["Louisville"]
     ] },
-  { id: "b12ff", d: "easy", q: "Name a current Big 12 school that made the men's Final Four since 2010",
+  { id: "b12ff", d: "easy", conf: ["b12"], q: "Name a current Big 12 school that made the men's Final Four since 2010",
     t: [
       ["Kansas|KU", "Baylor"],
       ["Houston", "Texas Tech"],
@@ -2086,7 +2086,7 @@ window.PROMPTS = [
       [],
       ["West Virginia|WVU"]
     ] },
-  { id: "beff", d: "easy", q: "Name a current Big East school that made the men's Final Four since 2010",
+  { id: "beff", d: "easy", conf: ["be"], q: "Name a current Big East school that made the men's Final Four since 2010",
     t: [
       ["UConn|Connecticut", "Villanova|Nova"],
       [],
@@ -2094,7 +2094,7 @@ window.PROMPTS = [
       [],
       ["Butler"]
     ] },
-  { id: "pac12left", d: "easy", q: "Name a school that left the Pac-12 in 2024",
+  { id: "pac12left", d: "easy", conf: ["mid"], q: "Name a school that left the Pac-12 in 2024",
     t: [
       ["UCLA", "USC|Southern California", "Oregon", "Arizona"],
       ["Washington|UW", "Utah", "Colorado", "Arizona State|ASU"],
@@ -2230,7 +2230,7 @@ window.PROMPTS = [
       ["Portland", "College Park", "Evanston"],
       ["Daly City"]
     ] },
-  { id: "pac12ever", d: "easy", ok: true, g: "conf-pac12", c: "conference", q: "Name a school that has been a member of the Pac-12 (including its Pac-8 and Pac-10 eras) in men's basketball",
+  { id: "pac12ever", d: "easy", ok: true, g: "conf-pac12", c: "conference", conf: ["mid"], q: "Name a school that has been a member of the Pac-12 (including its Pac-8 and Pac-10 eras) in men's basketball",
     t: [
       ["UCLA", "Arizona", "USC|Southern California", "Oregon"],
       ["Stanford", "California|Cal", "Washington|UW", "Arizona State|ASU", "Colorado", "Utah"],
@@ -2254,7 +2254,7 @@ window.PROMPTS = [
       ["Hank Iba", "Branch McCracken", "Phil Woolpert"],
       ["Ed Jucker"]
     ] },
-  { id: "iuhc", d: "easy", p: true, ok: true, g: "coaches-iuhc", c: "coach-history", q: "Name a head coach of Indiana men's basketball",
+  { id: "iuhc", d: "easy", p: true, ok: true, g: "coaches-iuhc", c: "coach-history", conf: ["b1g"], q: "Name a head coach of Indiana men's basketball",
     t: [
       ["Bob Knight|Bobby Knight", "Tom Crean", "Mike Woodson"],
       ["Archie Miller", "Kelvin Sampson", "Mike Davis", "Darian DeVries", "Branch McCracken"],
@@ -2262,7 +2262,7 @@ window.PROMPTS = [
       ["Leslie Mann|Les Mann", "George Levis", "Ewald O. Stiehm|Ewald Stiehm|Jumbo Stiehm", "Dana Evans", "Guy Lowman", "Allan Williford", "Arthur Berndt", "Arthur Powell", "James Kase", "Oscar Rackle", "John Georgen", "Robert Harris", "Ed Cook", "James M. Sheldon|James Sheldon", "Zora Clevenger", "Willis Coval", "Phelps Darby"],
       ["James H. Horne|James Horne"]
     ] },
-  { id: "ukhc", d: "easy", p: true, ok: true, g: "coaches-ukhc", c: "coach-history", q: "Name a head coach of Kentucky men's basketball",
+  { id: "ukhc", d: "easy", p: true, ok: true, g: "coaches-ukhc", c: "coach-history", conf: ["sec"], q: "Name a head coach of Kentucky men's basketball",
     t: [
       ["Adolph Rupp", "John Calipari", "Rick Pitino", "Tubby Smith"],
       ["Mark Pope", "Joe B. Hall|Joe Hall", "Eddie Sutton", "Billy Gillispie"],
@@ -2270,7 +2270,7 @@ window.PROMPTS = [
       ["George Buchheit", "Ray Eklund", "Clarence Applegran", "Andrew Gill", "Stanley A. Boles|Stanley Boles", "William P. Tuttle|William Tuttle", "James Park", "Alpha Brumage", "John J. Tigert|John Tigert", "Edwin Sweetland", "Harold Iddings", "R.E. Spahr|RE Spahr"],
       ["W. W. H. Mustaine|WWH Mustaine|Mustaine"]
     ] },
-  { id: "dukehc", d: "easy", p: true, ok: true, g: "coaches-dukehc", c: "coach-history", q: "Name a head coach of Duke men's basketball",
+  { id: "dukehc", d: "easy", p: true, ok: true, g: "coaches-dukehc", c: "coach-history", conf: ["acc"], q: "Name a head coach of Duke men's basketball",
     t: [
       ["Mike Krzyzewski|Coach K", "Jon Scheyer"],
       ["Vic Bubas", "Bill Foster|Bill E. Foster", "Eddie Cameron"],
@@ -2278,7 +2278,7 @@ window.PROMPTS = [
       ["George Buchheit", "Jessie Burbage", "James Baldwin", "Floyd Egan", "Walter Rothensies", "Henry Cole", "Charles Doak|Chick Doak", "Bob Doak", "Noble Clay", "Joseph Brinn"],
       ["Wilbur Wade Card|Cap Card"]
     ] },
-  { id: "unchc", d: "easy", p: true, ok: true, g: "coaches-unchc", c: "coach-history", q: "Name a head coach of North Carolina men's basketball",
+  { id: "unchc", d: "easy", p: true, ok: true, g: "coaches-unchc", c: "coach-history", conf: ["acc"], q: "Name a head coach of North Carolina men's basketball",
     t: [
       ["Dean Smith", "Roy Williams", "Hubert Davis"],
       ["Michael Malone|Mike Malone", "Frank McGuire", "Matt Doherty", "Bill Guthridge"],
@@ -2286,7 +2286,7 @@ window.PROMPTS = [
       ["Walter Skidmore", "Bo Shepard", "James Ashmore", "Harlan Sanborn", "Monk McDonald", "Norman Shepard", "Fred Boye", "Howell Peacock", "Charles Doak|Chick Doak"],
       ["Nat Cartmell"]
     ] },
-  { id: "uclahc", d: "easy", p: true, ok: true, g: "coaches-uclahc", c: "coach-history", q: "Name a head coach of UCLA men's basketball",
+  { id: "uclahc", d: "easy", p: true, ok: true, g: "coaches-uclahc", c: "coach-history", conf: ["b1g"], q: "Name a head coach of UCLA men's basketball",
     t: [
       ["John Wooden", "Mick Cronin", "Ben Howland", "Steve Alford", "Larry Brown"],
       ["Jim Harrick", "Steve Lavin", "Gene Bartow", "Walt Hazzard"],
@@ -2294,7 +2294,7 @@ window.PROMPTS = [
       ["Caddy Works"],
       ["Fred Cozens"]
     ] },
-  { id: "louhc", d: "easy", p: true, ok: true, g: "coaches-louhc", c: "coach-history", q: "Name a head coach of Louisville men's basketball",
+  { id: "louhc", d: "easy", p: true, ok: true, g: "coaches-louhc", c: "coach-history", conf: ["acc"], q: "Name a head coach of Louisville men's basketball",
     t: [
       ["Rick Pitino", "Denny Crum"],
       ["Chris Mack", "Kenny Payne", "Pat Kelsey", "Bernard Hickman|Peck Hickman"],
@@ -2302,7 +2302,7 @@ window.PROMPTS = [
       ["Fred Enke", "Tom King", "C. V. Money|CV Money", "Laurie Apitz", "John Heldman Jr.|John Heldman", "Edward Weber", "John O'Rourke", "Jimmie Powers", "Tuley Brucker", "Earl Ford", "Ed Bowman", "Harold Church", "Walter Casey"],
       ["William Gardiner"]
     ] },
-  { id: "purduehc", d: "easy", p: true, ok: true, g: "coaches-purduehc", c: "coach-history", q: "Name a head coach of Purdue men's basketball",
+  { id: "purduehc", d: "easy", p: true, ok: true, g: "coaches-purduehc", c: "coach-history", conf: ["b1g"], q: "Name a head coach of Purdue men's basketball",
     t: [
       ["Gene Keady", "Matt Painter"],
       ["Piggy Lambert|Ward Lambert", "Lee Rose", "Fred Schaus", "George King"],
@@ -2310,7 +2310,7 @@ window.PROMPTS = [
       ["Ralph Jones", "J.J. Maloney|JJ Maloney", "R.E. Vaughn|RE Vaughn", "E. J. Stewart|EJ Stewart", "C.B. Jamison|CB Jamison", "James Nufer", "C.I. Freeman|CI Freeman", "Charles Best", "Alpha Jamison"],
       ["F. Homer Curtis|Homer Curtis"]
     ] },
-  { id: "msuhc", d: "easy", p: true, ok: true, g: "coaches-msuhc", c: "coach-history", q: "Name a head coach of Michigan State men's basketball",
+  { id: "msuhc", d: "easy", p: true, ok: true, g: "coaches-msuhc", c: "coach-history", conf: ["b1g"], q: "Name a head coach of Michigan State men's basketball",
     t: [
       ["Tom Izzo", "Jud Heathcote"],
       ["Gus Ganakas", "Pete Newell", "Forddy Anderson"],
@@ -2318,7 +2318,7 @@ window.PROMPTS = [
       ["John Kobs", "Mysterious Walker", "Lyman Frimodig", "George Gauthier", "John Macklin", "Chester Brewer", "George Denman"],
       ["Charles Bemies"]
     ] },
-  { id: "osuhc", d: "easy", p: true, ok: true, g: "coaches-osuhc", c: "coach-history", q: "Name a head coach of Ohio State men's basketball",
+  { id: "osuhc", d: "easy", p: true, ok: true, g: "coaches-osuhc", c: "coach-history", conf: ["b1g"], q: "Name a head coach of Ohio State men's basketball",
     t: [
       ["Thad Matta", "Chris Holtmann", "Fred Taylor"],
       ["Jake Diebler", "Jim O'Brien", "Gary Williams", "Randy Ayers", "Eldon Miller"],
@@ -2326,7 +2326,7 @@ window.PROMPTS = [
       ["George Trautman", "Lynn St. John", "Sox Raymond|Stockton Raymond", "Thomas Kibler"],
       ["D. C. Huddleson|DC Huddleson"]
     ] },
-  { id: "zonahc", d: "easy", p: true, ok: true, g: "coaches-zonahc", c: "coach-history", q: "Name a head coach of Arizona men's basketball",
+  { id: "zonahc", d: "easy", p: true, ok: true, g: "coaches-zonahc", c: "coach-history", conf: ["b12"], q: "Name a head coach of Arizona men's basketball",
     t: [
       ["Lute Olson", "Sean Miller", "Tommy Lloyd"],
       ["Fred Snowden", "Kevin O'Neill", "Russ Pennell"],
@@ -2334,7 +2334,7 @@ window.PROMPTS = [
       ["Walter Davis", "Basil Stanley", "James Pierce", "Raymond L. Quigley|Raymond Quigley", "Frank L. Kleeberger|Frank Kleeberger"],
       ["Orin A. Kates|Orin Kates"]
     ] },
-  { id: "uconnhc", d: "easy", p: true, ok: true, g: "coaches-uconnhc", c: "coach-history", q: "Name a head coach of UConn men's basketball",
+  { id: "uconnhc", d: "easy", p: true, ok: true, g: "coaches-uconnhc", c: "coach-history", conf: ["be"], q: "Name a head coach of UConn men's basketball",
     t: [
       ["Jim Calhoun", "Dan Hurley", "Kevin Ollie"],
       ["Dom Perno", "Dee Rowe", "Hugh Greer"],
@@ -2342,7 +2342,7 @@ window.PROMPTS = [
       ["Blair Gullion", "J. O. Christian|JO Christian", "John Heldman Jr.|John Heldman", "Louis Alexander", "Sumner Dole", "Roy J. Guyer|Roy Guyer", "J. Wilder Tasker|Wilder Tasker", "Ross Swartz"],
       ["John F. Donahue|John Donahue"]
     ] },
-  { id: "michhc", d: "easy", p: true, ok: true, g: "coaches-michhc", c: "coach-history", q: "Name a head coach of Michigan men's basketball",
+  { id: "michhc", d: "easy", p: true, ok: true, g: "coaches-michhc", c: "coach-history", conf: ["b1g"], q: "Name a head coach of Michigan men's basketball",
     t: [
       ["John Beilein", "Juwan Howard", "Dusty May", "Steve Fisher"],
       ["Mike Boynton", "Tommy Amaker", "Bill Frieder", "Johnny Orr"],
@@ -2350,7 +2350,7 @@ window.PROMPTS = [
       ["William Perigo|Bill Perigo", "Ernest McCoy", "Osborne Cowles|Ozzie Cowles", "Frank Cappon", "George Veenker", "E. J. Mather|EJ Mather", "Elmer Mitchell"],
       ["George D. Corneal|George Corneal"]
     ] },
-  { id: "illinihc", d: "medium", p: true, ok: true, g: "coaches-illinihc", c: "coach-history", q: "Name a head coach of Illinois men's basketball",
+  { id: "illinihc", d: "medium", p: true, ok: true, g: "coaches-illinihc", c: "coach-history", conf: ["b1g"], q: "Name a head coach of Illinois men's basketball",
     t: [
       ["Bill Self", "Bruce Weber", "Lou Henson", "Brad Underwood", "Lon Kruger"],
       ["John Groce", "Gene Bartow", "Harry Combes", "Harv Schmidt"],
@@ -2358,7 +2358,7 @@ window.PROMPTS = [
       ["Frank Winters", "Thomas E. Thompson|Thomas Thompson", "Herb Juul", "Fletcher Lane", "Frank L. Pinckney|Frank Pinckney"],
       ["Elwood Brown"]
     ] },
-  { id: "ndhc", d: "medium", p: true, ok: true, g: "coaches-ndhc", c: "coach-history", q: "Name a head coach of Notre Dame men's basketball",
+  { id: "ndhc", d: "medium", p: true, ok: true, g: "coaches-ndhc", c: "coach-history", conf: ["acc"], q: "Name a head coach of Notre Dame men's basketball",
     t: [
       ["Mike Brey", "Digger Phelps", "Micah Shrewsberry"],
       ["John MacLeod", "Matt Doherty", "Moose Krause", "George Keogan"],
@@ -2366,7 +2366,7 @@ window.PROMPTS = [
       ["Clem Crowe", "Walter Halas", "Bill Nelson", "Bertram Maris", "J. Fred Powers|Fred Powers"],
       ["Frank E. Hering|Frank Hering"]
     ] },
-  { id: "novahc", d: "medium", p: true, ok: true, g: "coaches-novahc", c: "coach-history", q: "Name a head coach of Villanova men's basketball",
+  { id: "novahc", d: "medium", p: true, ok: true, g: "coaches-novahc", c: "coach-history", conf: ["be"], q: "Name a head coach of Villanova men's basketball",
     t: [
       ["Jay Wright", "Rollie Massimino"],
       ["Kevin Willard", "Kyle Neptune", "Steve Lappas"],
@@ -2374,7 +2374,7 @@ window.PROMPTS = [
       ["George Jacobs|Doc Jacobs", "John C. Cashman|John Cashman"],
       ["Michael Saxe"]
     ] },
-  { id: "gtownhc", d: "medium", p: true, ok: true, g: "coaches-gtownhc", c: "coach-history", q: "Name a head coach of Georgetown men's basketball",
+  { id: "gtownhc", d: "medium", p: true, ok: true, g: "coaches-gtownhc", c: "coach-history", conf: ["be"], q: "Name a head coach of Georgetown men's basketball",
     t: [
       ["John Thompson Jr.|John Thompson", "Patrick Ewing", "John Thompson III|JT3", "Ed Cooley"],
       ["Craig Esherick", "Elmer Ripley"],
@@ -2382,7 +2382,7 @@ window.PROMPTS = [
       ["Buddy O'Grady", "Ken Engles", "Fred Mesmer", "John Colrick", "Bill Dudack", "Jackie Maloney", "John O'Reilly", "James Colliflower"],
       ["Maurice Joyce"]
     ] },
-  { id: "mdhc", d: "medium", p: true, ok: true, g: "coaches-mdhc", c: "coach-history", q: "Name a head coach of Maryland men's basketball",
+  { id: "mdhc", d: "medium", p: true, ok: true, g: "coaches-mdhc", c: "coach-history", conf: ["b1g"], q: "Name a head coach of Maryland men's basketball",
     t: [
       ["Gary Williams", "Lefty Driesell", "Mark Turgeon"],
       ["Kevin Willard", "Buzz Williams", "Bob Wade"],
@@ -2390,7 +2390,7 @@ window.PROMPTS = [
       ["Frank Fellows", "Flucie Stewart"],
       ["H. Burton Shipley|Burton Shipley"]
     ] },
-  { id: "ufhc", d: "easy", p: true, ok: true, g: "coaches-ufhc", c: "coach-history", q: "Name a head coach of Florida men's basketball",
+  { id: "ufhc", d: "easy", p: true, ok: true, g: "coaches-ufhc", c: "coach-history", conf: ["sec"], q: "Name a head coach of Florida men's basketball",
     t: [
       ["Billy Donovan", "Todd Golden", "Lon Kruger"],
       ["Mike White", "Norm Sloan"],
@@ -2398,7 +2398,7 @@ window.PROMPTS = [
       ["Ed Visscher", "Spurgeon Cherry", "Sam J. McAllister|Sam McAllister", "Josh Cody", "Ben Clemons", "Brady Cowell", "James L. White|James White", "Check Byrd", "William G. Kline|William Kline"],
       ["C. J. McCoy|CJ McCoy"]
     ] },
-  { id: "texashc", d: "easy", p: true, ok: true, g: "coaches-texashc", c: "coach-history", q: "Name a head coach of Texas men's basketball",
+  { id: "texashc", d: "easy", p: true, ok: true, g: "coaches-texashc", c: "coach-history", conf: ["sec"], q: "Name a head coach of Texas men's basketball",
     t: [
       ["Rick Barnes", "Shaka Smart", "Chris Beard", "Sean Miller"],
       ["Rodney Terry", "Tom Penders", "Abe Lemons"],
@@ -2406,7 +2406,7 @@ window.PROMPTS = [
       ["Bully Gilstrap", "Marty Karow", "Ed Olle", "Fred Walker", "E. J. Stewart|EJ Stewart", "Milton Romney", "Berry Whitaker", "Eugene Van Gent", "Roy Henderson", "L. Theo Bellmont|Theo Bellmont", "Carl C. Taylor|Carl Taylor", "J. Burton Rix|Burton Rix", "W. E. Metzenthin|Metzenthin"],
       ["Magnus Mainland"]
     ] },
-  { id: "bamahc", d: "easy", p: true, ok: true, g: "coaches-bamahc", c: "coach-history", q: "Name a head coach of Alabama men's basketball",
+  { id: "bamahc", d: "easy", p: true, ok: true, g: "coaches-bamahc", c: "coach-history", conf: ["sec"], q: "Name a head coach of Alabama men's basketball",
     t: [
       ["Nate Oats", "Avery Johnson", "Mark Gottfried", "Anthony Grant"],
       ["Wimp Sanderson", "C. M. Newton|CM Newton", "David Hobbs"],
@@ -2414,7 +2414,7 @@ window.PROMPTS = [
       ["Malcolm Laney", "Paul Burnum", "Charles A. Bernier|Charles Bernier", "Bill Moore", "Yancey Goodall", "B. L. Noojin|BL Noojin", "Thomas Kelley", "Griff Harsh"],
       ["D. V. Graves|DV Graves"]
     ] },
-  { id: "tennhc", d: "easy", p: true, ok: true, g: "coaches-tennhc", c: "coach-history", q: "Name a head coach of Tennessee men's basketball",
+  { id: "tennhc", d: "easy", p: true, ok: true, g: "coaches-tennhc", c: "coach-history", conf: ["sec"], q: "Name a head coach of Tennessee men's basketball",
     t: [
       ["Rick Barnes", "Bruce Pearl", "Cuonzo Martin"],
       ["Buzz Peterson", "Kevin O'Neill", "Ray Mears", "Jerry Green", "Donnie Tyndall"],
@@ -2422,7 +2422,7 @@ window.PROMPTS = [
       ["Blair Gullion", "W.H. Britton|WH Britton", "Mark Banks", "R.H. Fitzgerald|RH Fitzgerald", "John R. Bender|John Bender", "Zora Clevenger", "Alex Stone"],
       ["Robert C. Whitaker|Robert Whitaker"]
     ] },
-  { id: "arkhc", d: "easy", p: true, ok: true, g: "coaches-arkhc", c: "coach-history", q: "Name a head coach of Arkansas men's basketball",
+  { id: "arkhc", d: "easy", p: true, ok: true, g: "coaches-arkhc", c: "coach-history", conf: ["sec"], q: "Name a head coach of Arkansas men's basketball",
     t: [
       ["John Calipari", "Nolan Richardson", "Eddie Sutton", "Eric Musselman", "Mike Anderson"],
       ["Stan Heath", "John Pelphrey"],
@@ -2430,7 +2430,7 @@ window.PROMPTS = [
       ["Presley Askew", "Eugene Lambert", "Charles Bassett"],
       ["Francis Schmidt"]
     ] },
-  { id: "zagshc", d: "medium", p: true, ok: true, g: "coaches-zagshc", c: "coach-history", q: "Name a head coach of Gonzaga men's basketball",
+  { id: "zagshc", d: "medium", p: true, ok: true, g: "coaches-zagshc", c: "coach-history", conf: ["mid"], q: "Name a head coach of Gonzaga men's basketball",
     t: [
       ["Mark Few", "Dan Monson"],
       ["Dan Fitzgerald", "Jay Hillock", "Hank Anderson"],
@@ -2438,7 +2438,7 @@ window.PROMPTS = [
       ["Gordon C. White|Gordon White", "Eugene Wozny", "Charles Henry", "Bill Frazier", "Perry Ten Eyck", "Sam Dagly", "Clipper Smith|Maurice Smith", "Edward Geheves", "Jimmy Condon", "John F. McGough|John McGough", "William S. Higgins|William Higgins", "Robert E. Harmon|Robert Harmon", "Ed Mulholland", "Fred Burns", "Frank McKevitt", "William Mulligan"],
       ["George Varnell"]
     ] },
-  { id: "wischc", d: "medium", p: true, ok: true, g: "coaches-wischc", c: "coach-history", q: "Name a head coach of Wisconsin men's basketball",
+  { id: "wischc", d: "medium", p: true, ok: true, g: "coaches-wischc", c: "coach-history", conf: ["b1g"], q: "Name a head coach of Wisconsin men's basketball",
     t: [
       ["Bo Ryan", "Greg Gard", "Dick Bennett"],
       ["Stan Van Gundy", "Stu Jackson", "Steve Yoder", "Bud Foster"],
@@ -2446,7 +2446,7 @@ window.PROMPTS = [
       ["Guy Lowman", "Haskell Noyes", "Emmett Angell"],
       ["James C. Elsom|James Elsom"]
     ] },
-  { id: "iowahc", d: "medium", p: true, ok: true, g: "coaches-iowahc", c: "coach-history", q: "Name a head coach of Iowa men's basketball",
+  { id: "iowahc", d: "medium", p: true, ok: true, g: "coaches-iowahc", c: "coach-history", conf: ["b1g"], q: "Name a head coach of Iowa men's basketball",
     t: [
       ["Lute Olson", "Fran McCaffery", "Steve Alford", "Tom Davis"],
       ["Ben McCollum", "George Raveling", "Ralph Miller", "Todd Lickliter"],
@@ -2454,7 +2454,7 @@ window.PROMPTS = [
       ["James Ashmore", "Edwin Bannick", "Maury Kent", "Floyd Thomas", "Walter Stewart", "John Griffith", "John Chalmers", "Fred Bailey"],
       ["Ed Rule"]
     ] },
-  { id: "memhc", d: "medium", p: true, ok: true, g: "coaches-memhc", c: "coach-history", q: "Name a head coach of Memphis men's basketball",
+  { id: "memhc", d: "medium", p: true, ok: true, g: "coaches-memhc", c: "coach-history", conf: ["mid"], q: "Name a head coach of Memphis men's basketball",
     t: [
       ["Penny Hardaway", "John Calipari", "Josh Pastner", "Larry Finch"],
       ["Tubby Smith", "Dana Kirk", "Gene Bartow", "Tic Price"],
@@ -2462,7 +2462,7 @@ window.PROMPTS = [
       ["Eugene Lambert", "McCoy Tarry", "Zach Curlin", "Lester Barnard", "W. H. DePriest|WH DePriest"],
       ["H. Kirk Grantham|Kirk Grantham"]
     ] },
-  { id: "cincyhc", d: "medium", p: true, ok: true, g: "coaches-cincyhc", c: "coach-history", q: "Name a head coach of Cincinnati men's basketball",
+  { id: "cincyhc", d: "medium", p: true, ok: true, g: "coaches-cincyhc", c: "coach-history", conf: ["b12"], q: "Name a head coach of Cincinnati men's basketball",
     t: [
       ["Bob Huggins", "Mick Cronin", "Ed Jucker"],
       ["Wes Miller", "Jerrod Calhoun", "John Brannen", "Andy Kennedy"],
@@ -2470,7 +2470,7 @@ window.PROMPTS = [
       ["John Wiethe", "Ray Farnham", "Bob Reuss", "Clark Ballard", "Rip Van Winkle", "Tay Brown", "John Halliday", "Frank E. Rice|Frank Rice", "Boyd Chambers", "Whitelaw Morrison", "Ion Cortright", "George Little", "Russ Easton", "C. A. Shroetter|CA Shroetter", "Amos Foster", "Anthony Chez"],
       ["Henry S. Pratt|Henry Pratt"]
     ] },
-  { id: "butlerhc", d: "medium", p: true, ok: true, g: "coaches-butlerhc", c: "coach-history", q: "Name a head coach of Butler men's basketball",
+  { id: "butlerhc", d: "medium", p: true, ok: true, g: "coaches-butlerhc", c: "coach-history", conf: ["be"], q: "Name a head coach of Butler men's basketball",
     t: [
       ["Brad Stevens", "Thad Matta", "Chris Holtmann"],
       ["LaVall Jordan", "Tony Hinkle", "Todd Lickliter", "Barry Collier", "Ronald Nored"],
@@ -2478,7 +2478,7 @@ window.PROMPTS = [
       ["Harlan Page", "F. E. Ellis|FE Ellis", "Joe Mullane", "G. Cullen Thomas|Cullen Thomas", "Bill Diddle", "Walter Gipe", "Joe McCrea", "Jack McKay", "Art Guedel", "Edgar Wingard", "Ralph Jones", "Walter F. Kelly|Walter Kelly"],
       ["James L. Zink|James Zink"]
     ] },
-  { id: "xavierhc", d: "medium", p: true, ok: true, g: "coaches-xavierhc", c: "coach-history", q: "Name a head coach of Xavier men's basketball",
+  { id: "xavierhc", d: "medium", p: true, ok: true, g: "coaches-xavierhc", c: "coach-history", conf: ["be"], q: "Name a head coach of Xavier men's basketball",
     t: [
       ["Sean Miller", "Chris Mack", "Thad Matta", "Skip Prosser"],
       ["Travis Steele", "Richard Pitino", "Pete Gillen"],
@@ -2486,7 +2486,7 @@ window.PROMPTS = [
       ["Lew Hirt", "Ed Burns", "Clem Crowe", "Joe Meyer"],
       ["Harry Gilligan"]
     ] },
-  { id: "creightonhc", d: "medium", p: true, ok: true, g: "coaches-creightonhc", c: "coach-history", q: "Name a head coach of Creighton men's basketball",
+  { id: "creightonhc", d: "medium", p: true, ok: true, g: "coaches-creightonhc", c: "coach-history", conf: ["be"], q: "Name a head coach of Creighton men's basketball",
     t: [
       ["Greg McDermott", "Dana Altman"],
       ["Alan Huss", "Willis Reed", "Eddie Sutton", "Tony Barone"],
@@ -2526,7 +2526,7 @@ window.PROMPTS = [
       ["Jerry Chambers", "Hal Lear", "B.H. Born|BH Born"],
       ["Jimmy Hull"]
     ] },
-  { id: "a10ever", d: "medium", ok: true, g: "conf-a10ever", c: "conference", q: "Name a school that has been a member of the Atlantic 10 in men's basketball",
+  { id: "a10ever", d: "medium", ok: true, g: "conf-a10ever", c: "conference", conf: ["mid"], q: "Name a school that has been a member of the Atlantic 10 in men's basketball",
     t: [
       ["Dayton", "VCU|Virginia Commonwealth", "Xavier", "Villanova|Nova", "Saint Louis|SLU"],
       ["Saint Joseph's|St Josephs|Saint Josephs", "Davidson", "Temple", "Rhode Island|URI", "Richmond", "George Mason", "West Virginia|WVU", "Butler", "Loyola Chicago|Loyola", "UMass|Massachusetts", "Pittsburgh|Pitt", "Rutgers"],
@@ -2534,7 +2534,7 @@ window.PROMPTS = [
       ["Duquesne", "Fordham"],
       ["Charlotte|UNC Charlotte"]
     ] },
-  { id: "wccever", d: "medium", ok: true, g: "conf-wccever", c: "conference", q: "Name a school that has played men's basketball in the West Coast Conference",
+  { id: "wccever", d: "medium", ok: true, g: "conf-wccever", c: "conference", conf: ["mid"], q: "Name a school that has played men's basketball in the West Coast Conference",
     t: [
       ["Gonzaga|Zags", "Saint Mary's|St Marys|Saint Marys", "BYU|Brigham Young"],
       ["San Francisco|USF", "Santa Clara", "Pepperdine", "Loyola Marymount|LMU", "Portland", "San Diego|USD", "UNLV"],
@@ -2542,7 +2542,7 @@ window.PROMPTS = [
       ["Fresno State", "Denver"],
       ["UC Santa Barbara|UCSB"]
     ] },
-  { id: "mwcever", d: "medium", ok: true, g: "conf-mwcever", c: "conference", q: "Name a school that has been a member of the Mountain West in men's basketball",
+  { id: "mwcever", d: "medium", ok: true, g: "conf-mwcever", c: "conference", conf: ["mid"], q: "Name a school that has been a member of the Mountain West in men's basketball",
     t: [
       ["San Diego State|SDSU", "UNLV", "BYU|Brigham Young", "Utah", "New Mexico"],
       ["Boise State", "Utah State", "Colorado State", "Nevada", "Fresno State", "Wyoming", "TCU|Texas Christian"],
@@ -2550,7 +2550,7 @@ window.PROMPTS = [
       [],
       ["UC Davis"]
     ] },
-  { id: "aacever", d: "medium", ok: true, g: "conf-aacever", c: "conference", q: "Name a school that has been a member of the American Athletic Conference in men's basketball",
+  { id: "aacever", d: "medium", ok: true, g: "conf-aacever", c: "conference", conf: ["mid"], q: "Name a school that has been a member of the American Athletic Conference in men's basketball",
     t: [
       ["Memphis", "Houston", "UConn|Connecticut", "Cincinnati", "Louisville", "Wichita State"],
       ["Temple", "SMU|Southern Methodist", "UCF|Central Florida", "Florida Atlantic|FAU", "Tulsa", "South Florida|USF", "Rutgers", "Charlotte|UNC Charlotte", "UAB|Alabama-Birmingham"],
@@ -2558,7 +2558,7 @@ window.PROMPTS = [
       ["Rice"],
       ["UTSA|Texas-San Antonio"]
     ] },
-  { id: "mvcever", d: "hard", ok: true, g: "conf-mvcever", c: "conference", q: "Name a school that has been a member of the Missouri Valley Conference in men's basketball",
+  { id: "mvcever", d: "hard", ok: true, g: "conf-mvcever", c: "conference", conf: ["mid"], q: "Name a school that has been a member of the Missouri Valley Conference in men's basketball",
     t: [
       ["Creighton", "Wichita State", "Kansas|KU", "Drake", "Bradley", "Indiana State", "Loyola Chicago|Loyola", "Missouri State", "Cincinnati", "Louisville"],
       ["Northern Iowa|UNI", "Illinois State", "Southern Illinois|SIU", "Evansville", "Valparaiso|Valpo", "Belmont", "Murray State", "UIC|Illinois-Chicago", "Saint Louis|SLU", "Memphis|Memphis State", "Houston", "Tulsa", "Oklahoma State|Oklahoma A&M", "Missouri|Mizzou", "Iowa", "Iowa State", "Kansas State|K-State", "Nebraska", "Oklahoma|OU", "New Mexico State"],
@@ -2566,7 +2566,7 @@ window.PROMPTS = [
       ["Washburn"],
       ["Grinnell"]
     ] },
-  { id: "macever", d: "medium", ok: true, g: "conf-macever", c: "conference", q: "Name a school that has been a member of the Mid-American Conference in men's basketball",
+  { id: "macever", d: "medium", ok: true, g: "conf-macever", c: "conference", conf: ["mid"], q: "Name a school that has been a member of the Mid-American Conference in men's basketball",
     t: [
       ["Ohio", "Kent State", "Toledo", "Miami (OH)|Miami Ohio|Miami of Ohio|Miami", "Ball State"],
       ["Akron", "Buffalo", "Bowling Green", "Central Michigan", "Eastern Michigan", "Western Michigan", "Northern Illinois|NIU", "UMass|Massachusetts", "Marshall", "Butler", "Cincinnati"],
@@ -2574,7 +2574,7 @@ window.PROMPTS = [
       [],
       ["Western Reserve|Case Western|Case Western Reserve"]
     ] },
-  { id: "cusaever", d: "medium", ok: true, g: "conf-cusaever", c: "conference", q: "Name a school that has been a member of the Conference USA in men's basketball",
+  { id: "cusaever", d: "medium", ok: true, g: "conf-cusaever", c: "conference", conf: ["mid"], q: "Name a school that has been a member of the Conference USA in men's basketball",
     t: [
       ["Memphis", "Louisville", "Cincinnati", "Houston", "Marquette", "UAB|Alabama-Birmingham", "Saint Louis|SLU"],
       ["DePaul", "Charlotte|UNC Charlotte", "Southern Miss|Southern Mississippi", "Tulane", "Tulsa", "UTEP", "SMU|Southern Methodist", "UCF|Central Florida", "Western Kentucky|WKU", "Middle Tennessee|MTSU", "Marshall", "Old Dominion|ODU", "Florida Atlantic|FAU", "South Florida|USF", "East Carolina|ECU", "TCU|Texas Christian", "Rice", "North Texas", "Liberty", "Louisiana Tech", "New Mexico State"],

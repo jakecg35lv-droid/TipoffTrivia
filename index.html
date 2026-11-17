@@ -789,6 +789,19 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
   .card{border-radius:18px}
 }
 
+/* league packs (Unlimited) */
+.leagues{display:flex;flex-wrap:wrap;gap:6px;margin-top:-4px}
+.leagues button{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 11px;border-radius:999px;font-size:12.5px;font-weight:650;
+  color:var(--c-text-2);background:rgba(255,255,255,.035);border:1px solid var(--c-line);transition:background-color .15s,border-color .15s,color .15s}
+.leagues button:hover{color:var(--c-text);border-color:var(--c-line-2)}
+.leagues button[aria-pressed="true"]{color:#fff;background:var(--c-brand-soft);border-color:var(--c-brand-line)}
+.leagues button[disabled]{opacity:.4;cursor:not-allowed}
+.leagues button small{font-size:11px;font-weight:600;color:var(--c-text-3)}
+.leagues button[aria-pressed="true"] small{color:var(--c-brand-tag)}
+#playUnl.is-soon{opacity:.45;cursor:not-allowed}
+#playUnl.is-soon:active{transform:none}
+#playUnl.nudge{animation:nudgeX .35s ease}
+@keyframes nudgeX{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 </style>
   <!-- PostHog analytics (same project as app.tipofffantasy.com) -->
   <script>
@@ -918,13 +931,14 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
         </div>
         <span class="badge pro" id="unlBadge"><svg class="i"><use href="#i-lock"/></svg>Pro</span>
       </div>
-      <p>Endless random games. Pick your difficulty and run it back as often as you want.</p>
+      <p>Endless games. Pick a difficulty and a league pack, then run it back as often as you want.</p>
       <div class="seg" id="diffs" role="group" aria-label="Difficulty">
         <button data-d="easy" aria-pressed="false">Easy</button>
         <button data-d="mixed" aria-pressed="true">Mixed</button>
         <button data-d="medium" aria-pressed="false">Medium</button>
         <button data-d="hard" aria-pressed="false">Hard</button>
       </div>
+      <div class="leagues" id="leagues" role="group" aria-label="League pack"></div>
       <div class="foot"><button class="btn btn-secondary btn-lg btn-block" id="playUnl">Start unlimited game</button></div>
     </article>
   </section>
@@ -1293,11 +1307,30 @@ function dailySetFor(dateStr){
 }
 function dailySet(){ return dailySetFor(todayStr()); }
 let recent = store.get("dch-recent") || [];
+/* League packs: each prompt carries conf:[...] (b1g sec acc b12 be mid).
+   A pack plays its own prompts, approved (ok) ones first. If the chosen
+   difficulty has fewer than a game's worth in that pack, it plays the
+   whole pack at mixed difficulty instead. */
+const LEAGUES=[["all","All"],["b1g","Big Ten"],["sec","SEC"],["acc","ACC"],["b12","Big 12"],["be","Big East"],["mid","Mid-Majors"]];
+let league = "all";
+const inLeague = (p,l) => l==="all" || (p.conf||[]).includes(l);
+function leaguePool(l){ return PROMPTS.filter(p=>inLeague(p,l)); }
+function renderLeagues(){
+  $("leagues").innerHTML = LEAGUES.map(([k,n])=>{ const c=leaguePool(k).length, off=k!=="all" && c<PER_GAME;
+    return `<button data-l="${k}" aria-pressed="${k===league}" ${off?"disabled":""}>${n}${k==="all"?"":` <small>${c}</small>`}</button>`; }).join("");
+  $$("#leagues button").forEach(b=>b.onclick=()=>{
+    league=b.dataset.l; store.set("dch-league",league); renderLeagues();
+    try{ window.posthog && posthog.capture("league_pick", {league, unlocked: !!(Pay && Pay.entitled)}); }catch(e){}
+  });
+}
 function unlimitedSet(diff){
-  const pool = diff==="mixed" ? PROMPTS : byD(diff);
+  const lp = leaguePool(league);
+  let pool = diff==="mixed" ? lp : lp.filter(p=>p.d===diff);
+  if (pool.length < PER_GAME) pool = lp;
+  const okFirst = arr => [...arr.filter(p=>p.ok), ...arr.filter(p=>!p.ok)];
   let fresh = pool.filter(p=>!recent.includes(p.id));
   if (fresh.length < PER_GAME) fresh = pool;
-  let pick = shuffle(fresh).slice(0,PER_GAME);
+  let pick = okFirst(shuffle(fresh)).slice(0,PER_GAME);
   if (pick.length < PER_GAME) pick = pick.concat(shuffle(pool.filter(p=>!pick.includes(p))).slice(0,PER_GAME-pick.length));
   if (diff==="mixed"){ const o={easy:0,medium:1,hard:2}; pick.sort((a,b)=>o[a.d]-o[b.d]); }
   recent = [...pick.map(p=>p.id), ...recent].slice(0, Math.max(0,pool.length-PER_GAME));
@@ -2224,7 +2257,14 @@ $("again").onclick = ()=>start("unlimited");
 $("toMenu").onclick = goHome;
 $("playDaily").onclick = ()=>start("daily");
 $("playDaily2").onclick = ()=>start("daily");
-$("playUnl").onclick = ()=>start("unlimited");
+$("playUnl").onclick = ()=>{
+  if (!PAYWALL.live && !Pay.entitled){   // "Coming soon": does nothing visible except a nudge, but records demand
+    try{ window.posthog && posthog.capture("unlimited_interest", {source:"coming_soon_button", league, diff, signed_in: !!Pay.user}); }catch(e){}
+    const b=$("playUnl"); b.classList.remove("nudge"); void b.offsetWidth; b.classList.add("nudge");
+    return;
+  }
+  start("unlimited");
+};
 $$("#diffs button").forEach(b=>b.onclick=()=>{
   diff=b.dataset.d; $$("#diffs button").forEach(x=>x.setAttribute("aria-pressed", String(x===b))); store.set("dch-diff",diff);
 });
@@ -2369,7 +2409,7 @@ const Pay = {
     const b=$("unlBadge"), btn=$("playUnl"), a=$("acctBtn");
     if (this.entitled){ b.className="badge pro on"; b.innerHTML=`<svg class="i"><use href="#i-check"/></svg>Unlocked`; btn.textContent="Start unlimited game"; }
     else { b.className="badge pro"; b.innerHTML=`<svg class="i"><use href="#i-lock"/></svg>Pro`; btn.innerHTML= PAYWALL.live ? `<svg class="i"><use href="#i-lock"/></svg>Unlock Unlimited · ${PAYWALL.price}` : `<svg class="i"><use href="#i-lock"/></svg>Unlimited · Coming soon`; if(!PAYWALL.live) b.innerHTML=`<svg class="i"><use href="#i-lock"/></svg>Soon`; }
-    const soon=!PAYWALL.live && !this.entitled; btn.disabled=soon; btn.setAttribute("aria-disabled", soon?"true":"false");
+    const soon=!PAYWALL.live && !this.entitled; btn.disabled=false; btn.classList.toggle("is-soon", soon); btn.setAttribute("aria-disabled", soon?"true":"false");
     a.classList.toggle("on", !!this.user && !this.entitled); a.classList.toggle("pro", this.entitled);
     a.setAttribute("aria-label", this.user ? `Account (${this.user.email})` : "Sign in");
   },
@@ -2477,6 +2517,7 @@ const Pay = {
 
 /* init */
 diff = store.get("dch-diff") || "mixed";
+league = store.get("dch-league") || "all"; if (!LEAGUES.some(([k])=>k===league)) league="all"; renderLeagues();
 $$("#diffs button").forEach(x=>x.setAttribute("aria-pressed", String(x.dataset.d===diff)));
 (function spawnEmbers(){
   const host=$("embers"); if(!host||reduceMotion) return;
