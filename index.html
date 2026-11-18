@@ -1106,7 +1106,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
   <p class="lb-note">A global leaderboard needs an online backend. These rankings only include games played in this browser.</p>
 </main>
 
-<footer class="site"><span>Tipoff Trivia · from the makers of <a href="https://tipofffantasy.com" style="color:var(--c-brand-tag);text-decoration:none">Tipoff Fantasy</a></span><span>Answer tiers hand-curated · Not affiliated with the NCAA</span></footer>
+<footer class="site"><span>Tipoff Trivia · from the makers of <a href="https://tipofffantasy.com" style="color:var(--c-brand-tag);text-decoration:none">Tipoff Fantasy</a></span><span><a href="terms.html" style="color:inherit">Terms</a> · <a href="terms.html#refunds" style="color:inherit">Refunds</a> · <a href="privacy.html" style="color:inherit">Privacy</a> · <a href="mailto:admin@tipofffantasy.com" style="color:inherit">Contact</a> · Not affiliated with the NCAA</span></footer>
 
 <nav class="bottomnav" aria-label="Primary">
   <button data-nav="home"><svg class="i"><use href="#i-home"/></svg>Home</button>
@@ -2357,15 +2357,24 @@ function renderTierStrip(){
    which ONLY the stripeWebhook Cloud Function can write.
    ===================================================================== */
 const PAYWALL = {
-  // ⬇ false = "Coming soon" (no checkout). Flip to true once the LIVE link is in.
+  // ⬇ false = "Coming soon" (no checkout). Flip to true once liveLink is filled in.
   live: false,
-  // ⬇ Paste your Stripe Payment Link (test link first, then live)
-  paymentLink: "https://buy.stripe.com/test_5kQ14o7UR47V1ImbdUabK01",
+  // ⬇ LIVE Stripe Payment Link (buy.stripe.com/...). Empty until Stripe verification is done.
+  liveLink: "",
+  // ⬇ TEST link. Only used when the site is opened with ?paytest=1 (owner testing; card 4242 4242 4242 4242).
+  testLink: "https://buy.stripe.com/test_5kQ14o7UR47V1ImbdUabK01",
   // ⬇ Optional: Stripe customer portal link so subscribers can cancel/manage
   portalLink: "",
   price: "$4.99",
   per: "one-time · yours forever",
 };
+// ?paytest=1 turns on test checkout for this browser tab (?paytest=0 turns it off).
+// Test purchases are flagged test:true by the webhook and only count while this is on.
+const PAYTEST = (()=>{ try{ const q=new URLSearchParams(location.search);
+  if (q.has("paytest")) sessionStorage.setItem("dch-paytest", q.get("paytest")==="0" ? "" : "1");
+  return sessionStorage.getItem("dch-paytest")==="1"; }catch(e){ return false; } })();
+if (PAYTEST){ PAYWALL.live = true; console.info("[paywall] TEST checkout mode (use ?paytest=0 to exit)"); }
+PAYWALL.paymentLink = PAYTEST ? PAYWALL.testLink : PAYWALL.liveLink;
 const FIREBASE_CONFIG = {
   apiKey:            "AIzaSyDWLF8thu07J33Yzmda9Pu7AcEXLsYcq8s",
   authDomain:        "mmapp-6b7ab.firebaseapp.com",
@@ -2397,7 +2406,7 @@ const Pay = {
     if (this.unsub){ this.unsub(); this.unsub=null; }
     if (!u){ this.setEntitled(false); return; }
     this.unsub=this.db.collection("entitlements").doc(u.uid).onSnapshot(d=>{
-      this.setEntitled(!!(d.exists && d.data().triviaUnlimited===true));
+      const e=d.exists ? d.data() : {}; this.setEntitled(e.triviaUnlimited===true && (e.test!==true || PAYTEST));
     }, err=>{ console.warn("[paywall] entitlement read failed:", err.code); this.setEntitled(false); });
   },
   setEntitled(v){
@@ -2418,7 +2427,7 @@ const Pay = {
   checkout(){
     if (!PAYWALL.live){ this.render("pitch"); return; }
     if (!this.user){ this.authMode="signup"; this.render("auth"); return; }
-    if (PAYWALL.paymentLink.includes("REPLACE_WITH")){ this.render("pitch","Checkout isn't set up yet. The Stripe Payment Link still needs to be added."); return; }
+    if (!PAYWALL.paymentLink){ this.render("pitch","Checkout isn't set up yet. The Stripe Payment Link still needs to be added."); return; }
     const url=new URL(PAYWALL.paymentLink);
     url.searchParams.set("client_reference_id", this.user.uid);
     if (this.user.email) url.searchParams.set("prefilled_email", this.user.email);
@@ -2439,7 +2448,7 @@ const Pay = {
       B.innerHTML=`<div class="pw-hero"><div class="pw-flame"><svg class="i"><use href="#i-fire"/></svg></div><div><div class="eyebrow">Tipoff Trivia Pro</div><h2 class="display" id="pwTitle">Unlimited is coming</h2></div></div>
         <p class="sub">The Daily is free forever. Unlimited is for when one game isn't enough, and it's almost here.</p>
         <div class="pw-price"><span class="num">${PAYWALL.price}</span><span>${PAYWALL.per} · launching soon</span></div>
-        <ul class="pw-list">${check("Endless games, every difficulty")}${check("All 90+ prompts, no daily limit")}${check("Your record tracks every Unlimited game")}${check("Same login as Tipoff Fantasy")}</ul>
+        <ul class="pw-list">${check("Endless games, every difficulty")}${check("300+ prompts and 6 conference packs, no daily limit")}${check("Your record tracks every Unlimited game")}${check("Same login as Tipoff Fantasy")}</ul>
         <button class="btn btn-primary btn-lg btn-block" id="pwGo">Play today's Daily <svg class="i arrow"><use href="#i-arrow"/></svg></button>
         <p class="pw-fine">${this.user?`Signed in as ${esc(this.user.email)}. We'll let you know when it drops.`:`Have a Tipoff Fantasy account? <a href="#" id="pwSignin">Sign in</a>`}</p>`;
       $("pwGo").onclick=()=>{ this.close(); start("daily"); };
@@ -2449,10 +2458,11 @@ const Pay = {
       B.innerHTML=`<div class="pw-hero"><div class="pw-flame"><svg class="i"><use href="#i-fire"/></svg></div><div><div class="eyebrow">Tipoff Trivia Pro</div><h2 class="display" id="pwTitle">Unlock Unlimited</h2></div></div>
         <p class="sub">The Daily is free forever. Unlimited is for when one game isn't enough.</p>
         <div class="pw-price"><span class="num">${PAYWALL.price}</span><span>${PAYWALL.per}</span></div>
-        <ul class="pw-list">${check("Endless games, every difficulty")}${check("All 90+ prompts, no daily limit")}${check("Your record tracks every Unlimited game")}${check("Same login as Tipoff Fantasy")}</ul>
+        <ul class="pw-list">${check("Endless games, every difficulty")}${check("300+ prompts and 6 conference packs, no daily limit")}${check("Your record tracks every Unlimited game")}${check("Same login as Tipoff Fantasy")}</ul>
         <div class="auth-err">${msg?esc(msg):""}</div>
         <button class="btn btn-primary btn-lg btn-block" id="pwGo">${this.user?"Continue to checkout":"Create account & unlock"} <svg class="i arrow"><use href="#i-arrow"/></svg></button>
-        <p class="pw-fine">${this.user?`Signed in as ${esc(this.user.email)}`:`Have a Tipoff Fantasy account? <a href="#" id="pwSignin">Sign in</a>`} · Secure checkout by Stripe</p>`;
+        <p class="pw-fine">${this.user?`Signed in as ${esc(this.user.email)}`:`Have a Tipoff Fantasy account? <a href="#" id="pwSignin">Sign in</a>`} · Secure checkout by Stripe</p>
+        <p class="pw-fine">One-time charge, no subscription. 14-day refunds. By buying you agree to the <a href="terms.html" target="_blank">Terms</a>.</p>`;
       $("pwGo").onclick=()=>this.checkout();
       const si=$("pwSignin"); if(si) si.onclick=e=>{ e.preventDefault(); this.authMode="signin"; this.render("auth"); };
     }
