@@ -1,8 +1,8 @@
 # Tipoff Trivia — question audit
 
-Audited 324 prompts against QUESTION_RULES.md.
+Audited 344 prompts against QUESTION_RULES.md.
 
-**Approved: 63** (easy 25 · medium 31 · hard 7) · **Flagged: 261**
+**Approved: 83** (easy 35 · medium 41 · hard 7) · **Flagged: 261**
 
 Target for a clean 30-day Daily: 90 easy · 90 medium · 30 hard approved.
 
@@ -73,6 +73,26 @@ Target for a clean 30-day Daily: 90 easy · 90 medium · 30 hard approved.
 | cusaever | medium | conf-cusaever | 35 | Name a school that has been a member of the Conference USA in men's basketball |
 | naismithcoy | medium | coach-awards | 33 | Name a winner of the men's Naismith Coach of the Year award |
 | cousy | medium | cousy | 23 | Name a winner of the Bob Cousy Award (top college point guard) |
+| kuhc | easy | coaches-kuhc | 11 | Name a head coach of Kansas men's basketball (interims count) |
+| ttuhc | easy | coaches-ttuhc | 19 | Name a head coach of Texas Tech men's basketball |
+| okstatehc | easy | coaches-okstatehc | 21 | Name a head coach of Oklahoma State men's basketball |
+| baylorhc | medium | coaches-baylorhc | 17 | Name a head coach of Baylor men's basketball |
+| isuhc | medium | coaches-isuhc | 22 | Name a head coach of Iowa State men's basketball |
+| ksuhc | medium | coaches-ksuhc | 25 | Name a head coach of Kansas State men's basketball |
+| uvahc | medium | coaches-uvahc | 13 | Name a head coach of Virginia men's basketball |
+| ncsthc | medium | coaches-ncsthc | 22 | Name a head coach of NC State men's basketball |
+| wakehc | medium | coaches-wakehc | 23 | Name a head coach of Wake Forest men's basketball |
+| clemsonhc | medium | coaches-clemsonhc | 22 | Name a head coach of Clemson men's basketball |
+| gthc | medium | coaches-gthc | 16 | Name a head coach of Georgia Tech men's basketball |
+| pitthc | medium | coaches-pitthc | 16 | Name a head coach of Pitt men's basketball |
+| accreg | easy | reg-acc | 11 | Name a school that has won or shared an ACC men's basketball regular-season title |
+| acctourney_all | easy | tourney-acc | 12 | Name a school that has won the ACC men's basketball tournament |
+| b1greg | easy | reg-b1g | 12 | Name a school that has won or shared a Big Ten men's basketball regular-season title |
+| secreg | easy | reg-sec | 14 | Name a school that has won or shared an SEC men's basketball regular-season title |
+| sectourney_all | easy | tourney-sec | 12 | Name a school that has won the SEC men's basketball tournament |
+| bereg | easy | reg-be | 15 | Name a school that has won or shared a Big East men's basketball regular-season title |
+| betourney_all | easy | tourney-be | 12 | Name a school that has won the Big East men's basketball tournament |
+| maui | medium | maui | 26 | Name a school that has won the Maui Invitational |
 
 ## Flagged
 

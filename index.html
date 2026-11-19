@@ -917,7 +917,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
         </div>
         <span class="badge live">Live</span>
       </div>
-      <p>Same seven prompts for every player, every day. One attempt. Three easy, three medium, one hard.</p>
+      <p>Same seven prompts for every player, every day. One attempt. Four easy, three medium.</p>
       <div class="status" id="dailyStatus"></div>
       <div class="foot">
         <button class="btn btn-primary btn-lg" id="playDaily2">Play today's game <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
@@ -1270,7 +1270,21 @@ const P = id => PROMPTS.find(p=>p.id===id);
    taken and a warning is logged, rather than pretending it's fresh.
    The schedule is rebuilt deterministically from EPOCH so every player matches. */
 const fmtDay = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-const DAILY_GAP = 30, DAILY_MIX = [["easy",3],["medium",3],["hard",1]];
+const DAILY_GAP = 30;
+// Daily mix. Changed Nov 19, 2026 to make the Daily easier (no hard prompts).
+// Days before the switch keep the old mix so already-played days don't change.
+const DAILY_MIX_OLD = [["easy",3],["medium",3],["hard",1]], DAILY_MIX = [["easy",4],["medium",3]], DAILY_MIX_FROM = "2026-11-19";
+const mixFor = ds => ds >= DAILY_MIX_FROM ? DAILY_MIX : DAILY_MIX_OLD;
+// Stronger per-day seed from the switch date on. The old seed made days 30 days apart
+// shuffle almost identically, so the same prompts came back together.
+function rngDay(ds){
+  if (ds < DAILY_MIX_FROM) return rng("dch-"+ds);
+  let h1=0xdeadbeef, h2=0x41c6ce57; const s="tipoff-daily-"+ds;
+  for (let i=0;i<s.length;i++){ const c=s.charCodeAt(i); h1=Math.imul(h1^c,2654435761); h2=Math.imul(h2^c,1597334677); }
+  h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
+  let a=h1>>>0;
+  return ()=>{ a=(a+0x6D2B79F5)|0; let t=Math.imul(a^(a>>>15),1|a); t=(t+Math.imul(t^(t>>>7),61|t))^t; return ((t^(t>>>14))>>>0)/4294967296; };
+}
 const grp = p => p.g || p.id;
 const halfKey = p => norm(p.t[4][0].split("|")[0]);
 function dailySetFor(dateStr){
@@ -1278,7 +1292,7 @@ function dailySetFor(dateStr){
   if (cache[dateStr]) return cache[dateStr];
   const end=new Date(dateStr+"T00:00:00"), last={}; let set=null, day=0;
   for (let d=new Date(EPOCH+"T00:00:00"); d<=end; d.setDate(d.getDate()+1), day++){
-    const ds=fmtDay(d), r=rng("dch-"+ds), order=shuffle(PROMPTS,r), taken=new Set(), halves=new Set();
+    const ds=fmtDay(d), r=rngDay(ds), order=shuffle(PROMPTS,r), taken=new Set(), halves=new Set();
     const fresh = p => last[grp(p)]===undefined || day-last[grp(p)] >= DAILY_GAP;
     const cats={};
     const can = p => !taken.has(grp(p)) && !halves.has(halfKey(p)) && (!p.c || (cats[p.c]||0) < 2);
@@ -1286,11 +1300,14 @@ function dailySetFor(dateStr){
     set=[];
     const fill = (test, diff, n) => { for (const p of order){ if (n<=0) break; if ((!diff||p.d===diff) && can(p) && test(p)){ take(p); n--; } } return n; };
     let short=0;
-    DAILY_MIX.forEach(([diff,n])=>{
+    mixFor(ds).forEach(([diff,n])=>{
       n = fill(p=>p.ok && fresh(p), diff, n);
       n = fill(p=>fresh(p), diff, n);
       short += n;
     });
+    const inMix = p => mixFor(ds).some(([d])=>d===p.d);   // top up with allowed difficulties first
+    if (short>0) short = fill(p=>inMix(p) && p.ok && fresh(p), null, short);
+    if (short>0) short = fill(p=>inMix(p) && fresh(p), null, short);
     if (short>0) short = fill(p=>p.ok && fresh(p), null, short);
     if (short>0) short = fill(p=>fresh(p), null, short);
     if (short>0){
@@ -1302,7 +1319,7 @@ function dailySetFor(dateStr){
     set.forEach(p=>last[grp(p)]=day);
     cache[ds]=set;
   }
-  if (!set){ const r=rng("dch-"+dateStr); set=[]; DAILY_MIX.forEach(([diff,n])=>set.push(...shuffle(byD(diff),r).slice(0,n))); }
+  if (!set){ const r=rng("dch-"+dateStr); set=[]; mixFor(dateStr).forEach(([diff,n])=>set.push(...shuffle(byD(diff),r).slice(0,n))); }
   return cache[dateStr]=set;
 }
 function dailySet(){ return dailySetFor(todayStr()); }
@@ -2360,7 +2377,7 @@ const PAYWALL = {
   // ⬇ false = "Coming soon" (no checkout). Flip to true once liveLink is filled in.
   live: false,
   // ⬇ LIVE Stripe Payment Link (buy.stripe.com/...). Empty until Stripe verification is done.
-  liveLink: "",
+  liveLink: "https://buy.stripe.com/5kQfZi5MJdIvfzc0zgabK00",
   // ⬇ TEST link. Only used when the site is opened with ?paytest=1 (owner testing; card 4242 4242 4242 4242).
   testLink: "https://buy.stripe.com/test_5kQ14o7UR47V1ImbdUabK01",
   // ⬇ Optional: Stripe customer portal link so subscribers can cancel/manage
