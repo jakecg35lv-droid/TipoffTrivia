@@ -2379,7 +2379,7 @@ const PAYWALL = {
   // ⬇ LIVE Stripe Payment Link (buy.stripe.com/...). Empty until Stripe verification is done.
   liveLink: "https://buy.stripe.com/5kQfZi5MJdIvfzc0zgabK00",
   // ⬇ TEST link. Only used when the site is opened with ?paytest=1 (owner testing; card 4242 4242 4242 4242).
-  testLink: "https://buy.stripe.com/test_5kQ14o7UR47V1ImbdUabK01",
+  testLink: "",   // removed Nov 19, 2026 so ?paytest=1 can't unlock for free. Put the test link back here to test again.
   // ⬇ Optional: Stripe customer portal link so subscribers can cancel/manage
   portalLink: "",
   price: "$4.99",
@@ -2516,6 +2516,7 @@ const Pay = {
           <span class="badge pro ${this.entitled?"on":""}" style="margin-left:auto">${this.entitled?"Pro":"Free"}</span></div>
         <div class="stack" style="display:grid;gap:10px">
           ${this.entitled?`<button class="btn btn-primary btn-lg btn-block" id="acPlay">Play Unlimited <svg class="i arrow"><use href="#i-arrow"/></svg></button>`:`<button class="btn btn-primary btn-lg btn-block" id="acUp">${PAYWALL.live?`Unlock Unlimited · ${PAYWALL.price}`:"Unlimited · Coming soon"}</button>`}
+          ${this.entitled?`<a class="btn btn-ghost btn-block" id="acRefund" href="mailto:admin@tipofffantasy.com?subject=${encodeURIComponent("Tipoff Trivia refund request")}&body=${encodeURIComponent("Please refund my Tipoff Trivia Unlimited purchase.\n\nAccount email: "+(u.email||"")+"\nAccount ID: "+u.uid+"\n\n(Optional) Why it wasn't for you:\n")}">Request a refund</a><p class="pw-fine" style="text-align:center;margin-top:-4px">14-day refunds, no questions asked. Refunding removes Unlimited. <a href="terms.html#refunds" target="_blank">Refund policy</a></p>`:""}
           ${this.entitled&&PAYWALL.portalLink?`<a class="btn btn-secondary btn-lg btn-block" href="${PAYWALL.portalLink}" target="_blank" rel="noopener">Manage subscription</a>`:""}
           <button class="btn btn-ghost btn-block" id="acOut">Sign out</button>
         </div>`;
