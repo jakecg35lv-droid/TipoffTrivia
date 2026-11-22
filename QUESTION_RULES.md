@@ -33,3 +33,14 @@ drafted in 2010" (year + pro) · "Name an NBA All-Star who attended Duke" (pro).
 
 Pool math: the 30-day rule with a 3 easy / 3 medium / 1 hard Daily needs at least
 90 easy, 90 medium and 30 hard approved prompts (210 total).
+
+## High school (HS Daily, `hs-data.js`)
+
+The HS Daily is a separate game with its own rules. Rules 1, 3, 6, 7 and 8 above apply unchanged. Instead of rules 2 and 4:
+
+- **Boys' high school basketball only**, and only the **last 10 graduating classes** (currently 2017–2026). Roll the window forward each spring once the new McDonald's All American roster is official.
+- **School prompts use the commitment on the official roster** (the college listed when the player was named), not where he ended up.
+- **Current-class rankings (ESPN / 247 top 100) are not used yet.** They change monthly, so answer pools go stale. If added, each prompt must name the ranking and the date it was taken ("2027 ESPN 100 as of Nov 2026") and be refreshed or retired when the ranking updates.
+- **No category (`c`) tags** while the pool is one kind of prompt; the Daily's 2-per-category cap would leave fewer than 7 prompts.
+
+Pool math: same as College. A clean 30-day HS Daily needs about 120 easy and 90 medium prompts; the beta launches with 15, so prompts repeat every few days.

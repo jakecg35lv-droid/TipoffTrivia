@@ -798,6 +798,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
 .leagues button[disabled]{opacity:.4;cursor:not-allowed}
 .leagues button small{font-size:11px;font-weight:600;color:var(--c-text-3)}
 .leagues button[aria-pressed="true"] small{color:var(--c-brand-tag)}
+.sport-tabs{margin:2px 0 12px}
 #playUnl.is-soon{opacity:.45;cursor:not-allowed}
 #playUnl.is-soon:active{transform:none}
 #playUnl.nudge{animation:nudgeX .35s ease}
@@ -915,9 +916,13 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
           <div class="eyebrow" id="dailyDate">Today</div>
           <h3 class="display" id="dailyTitle">Daily #1</h3>
         </div>
-        <span class="badge live">Live</span>
+        <span class="badge live" id="dailyBadge">Live</span>
       </div>
-      <p>Same seven prompts for every player, every day. One attempt. Four easy, three medium.</p>
+      <div class="seg sport-tabs" id="sportTabs" role="group" aria-label="Which Daily">
+        <button data-s="cbb" aria-pressed="true">College</button>
+        <button data-s="hs" aria-pressed="false">High School</button>
+      </div>
+      <p id="dailyBlurb">Same seven prompts for every player, every day. One attempt. Four easy, three medium.</p>
       <div class="status" id="dailyStatus"></div>
       <div class="foot">
         <button class="btn btn-primary btn-lg" id="playDaily2">Play today's game <svg class="i arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
@@ -1148,6 +1153,7 @@ footer.site{max-width:var(--w-max);margin:0 auto;padding:var(--s5) var(--s4) var
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="data.js"></script>
+<script src="hs-data.js"></script>
 <script>
 (() => {
 "use strict";
@@ -1161,7 +1167,22 @@ const TIERS = [
   { name: "Deep Cut",   short:"DEEP",  pts: 85,  emoji: "🟪", color:"#b77bff", desc:"Real sicko territory" },
   { name: "Half Court", short:"HALF",  pts: 100, emoji: "🔥", color:"#f6c54e", desc:"One hidden answer per prompt" }
 ];
-const SECONDS = 25, PER_GAME = 7, EPOCH = "2026-11-05";
+const SECONDS = 25, PER_GAME = 7;
+/* Two Dailies: College (data.js) and High School (hs-data.js). `PROMPTS` always points at the
+   active one; it's College except while an HS Daily is being played. Each Daily has its own
+   numbering, schedule, saved game and one-play lock. */
+const CBB_PROMPTS = window.PROMPTS;
+const SPORTS = {
+  cbb: { label:"College",     title:"Daily",    epoch:"2026-11-05", key:"dch-daily-",   coll:"dailyPlays",
+         blurb:"Same seven prompts for every player, every day. One attempt. Four easy, three medium." },
+  hs:  { label:"High School", title:"HS Daily", epoch:"2026-11-21", key:"dch-hsdaily-", coll:"hsDailyPlays",
+         blurb:"Boys' high school hoops from the last 10 classes: McDonald's All Americans and where they signed. Seven prompts, one attempt." },
+};
+function store_get_safe(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
+let dailySport = store_get_safe("dch-sport")==="hs" ? "hs" : "cbb";   // which Daily the home card shows
+let activeSport = "cbb";                                               // which prompt set PROMPTS points at
+function useSport(s){ activeSport = s; window.PROMPTS = s==="hs" ? (window.HS_PROMPTS||[]) : CBB_PROMPTS; }
+const SP = () => SPORTS[activeSport];
 const SVGNS = "http://www.w3.org/2000/svg";
 const $ = id => document.getElementById(id);
 const $$ = sel => document.querySelectorAll(sel);
@@ -1255,7 +1276,8 @@ function match(idx, raw){
    PROMPT SELECTION
    ===================================================================== */
 function todayStr(){ const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
-function dayNum(){ const a=new Date(EPOCH+"T00:00:00"), b=new Date(todayStr()+"T00:00:00"); return Math.round((b-a)/864e5)+1; }
+function dayNumFor(s){ const a=new Date(SPORTS[s].epoch+"T00:00:00"), b=new Date(todayStr()+"T00:00:00"); return Math.round((b-a)/864e5)+1; }
+function dayNum(){ return dayNumFor(activeSport); }
 function rng(seedStr){ let h=1779033703^seedStr.length; for(let i=0;i<seedStr.length;i++){h=Math.imul(h^seedStr.charCodeAt(i),3432918353);h=h<<13|h>>>19;}
   return ()=>{ h=Math.imul(h^h>>>16,2246822507); h=Math.imul(h^h>>>13,3266489909); h^=h>>>16; return (h>>>0)/4294967296; }; }
 function shuffle(arr,r=Math.random){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
@@ -1274,12 +1296,12 @@ const DAILY_GAP = 30;
 // Daily mix. Changed Nov 19, 2026 to make the Daily easier (no hard prompts).
 // Days before the switch keep the old mix so already-played days don't change.
 const DAILY_MIX_OLD = [["easy",3],["medium",3],["hard",1]], DAILY_MIX = [["easy",4],["medium",3]], DAILY_MIX_FROM = "2026-11-19";
-const mixFor = ds => ds >= DAILY_MIX_FROM ? DAILY_MIX : DAILY_MIX_OLD;
+const mixFor = ds => (activeSport==="hs" || ds >= DAILY_MIX_FROM) ? DAILY_MIX : DAILY_MIX_OLD;
 // Stronger per-day seed from the switch date on. The old seed made days 30 days apart
 // shuffle almost identically, so the same prompts came back together.
 function rngDay(ds){
-  if (ds < DAILY_MIX_FROM) return rng("dch-"+ds);
-  let h1=0xdeadbeef, h2=0x41c6ce57; const s="tipoff-daily-"+ds;
+  if (activeSport==="cbb" && ds < DAILY_MIX_FROM) return rng("dch-"+ds);
+  let h1=0xdeadbeef, h2=0x41c6ce57; const s=(activeSport==="hs"?"tipoff-hsdaily-":"tipoff-daily-")+ds;
   for (let i=0;i<s.length;i++){ const c=s.charCodeAt(i); h1=Math.imul(h1^c,2654435761); h2=Math.imul(h2^c,1597334677); }
   h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
   let a=h1>>>0;
@@ -1288,10 +1310,11 @@ function rngDay(ds){
 const grp = p => p.g || p.id;
 const halfKey = p => norm(p.t[4][0].split("|")[0]);
 function dailySetFor(dateStr){
-  const cache = dailySetFor.c || (dailySetFor.c = {});
+  const caches = dailySetFor.c || (dailySetFor.c = {});
+  const cache = caches[activeSport] || (caches[activeSport] = {});
   if (cache[dateStr]) return cache[dateStr];
   const end=new Date(dateStr+"T00:00:00"), last={}; let set=null, day=0;
-  for (let d=new Date(EPOCH+"T00:00:00"); d<=end; d.setDate(d.getDate()+1), day++){
+  for (let d=new Date(SP().epoch+"T00:00:00"); d<=end; d.setDate(d.getDate()+1), day++){
     const ds=fmtDay(d), r=rngDay(ds), order=shuffle(PROMPTS,r), taken=new Set(), halves=new Set();
     const fresh = p => last[grp(p)]===undefined || day-last[grp(p)] >= DAILY_GAP;
     const cats={};
@@ -1413,9 +1436,9 @@ $("howto").addEventListener("click",e=>{ if(e.target===$("howto")) closeHowTo();
    Set DAILY_REQUIRE_LOGIN = true to make sign-in mandatory for the Daily,
    which closes the private-window / cleared-storage loophole too. */
 const DAILY_REQUIRE_LOGIN = false;
-const dailyKey = () => "dch-daily-"+todayStr();
-function saveDailyLocal(){ if (G && G.mode==="daily") store.set("dch-daily-"+G.date, G); }
-function dailyRef(){ return (Pay.user && Pay.db) ? Pay.db.collection("dailyPlays").doc(Pay.user.uid+"_"+todayStr()) : null; }
+const dailyKey = (s=activeSport) => SPORTS[s].key+todayStr();
+function saveDailyLocal(){ if (G && G.mode==="daily") store.set(SPORTS[G.sport||"cbb"].key+G.date, G); }
+function dailyRef(){ return (Pay.user && Pay.db) ? Pay.db.collection(SP().coll).doc(Pay.user.uid+"_"+todayStr()) : null; }
 async function dailyServerCheck(){
   const ref=dailyRef(); if (!ref) return {ok:true};
   try{
@@ -1431,11 +1454,13 @@ function dailyServerFinish(){
   ref.update({ finished:true, score:st.score, tiers:G.res.map(r=>r.tier) }).catch(e=>console.warn("[daily] finish not saved:", e.code||e.message));
 }
 function dailyBlocked(rec){
-  const msg = rec && rec.finished ? `You already played today's Daily (${rec.score}/700). Next one at midnight.` : "You already started today's Daily on another device. Next one at midnight.";
+  const nm = SP().title;
+  const msg = rec && rec.finished ? `You already played today's ${nm} (${rec.score}/700). Next one at midnight.` : `You already started today's ${nm} on another device. Next one at midnight.`;
   $("dailyStatus").textContent="✓ "+msg; $("dailyStatus").className="status done";
   show("menu"); setTimeout(()=>$("modes").scrollIntoView({behavior:reduceMotion?"auto":"smooth",block:"center"}),60);
 }
 function resumeDaily(saved){
+  useSport(saved.sport||"cbb");
   G=saved; G.abandoned=false; G.done=false;
   if (G.res.length < G.i+1) G.res.push({ id:G.ids[G.i], ans:null, tier:-1 });   // walked away mid-question
   G.i = G.res.length;
@@ -1447,6 +1472,7 @@ function resumeDaily(saved){
 async function start(mode){
   if (mode==="unlimited" && !Pay.entitled){ if (PAYWALL.live) Pay.open(); return; }
   stopGameLoops(); Sound.init();
+  useSport(mode==="daily" ? dailySport : "cbb");
   if (mode==="daily"){
     const saved = store.get(dailyKey());
     if (saved && saved.finished){ G=saved; lastGameTs=saved.ts||null; return showResults(false); }
@@ -1456,7 +1482,7 @@ async function start(mode){
     if (!chk.ok) return dailyBlocked(chk.rec);
   }
   const list = mode==="daily" ? dailySet() : unlimitedSet(diff);
-  G = { mode, diff, date: todayStr(), ids: list.map(p=>p.id), i:0, res:[], ts: Date.now() };
+  G = { mode, sport: activeSport, diff, date: todayStr(), ids: list.map(p=>p.id), i:0, res:[], ts: Date.now() };
   saveDailyLocal();
   $("score").textContent="0"; $("bsScore").textContent="0";
   show("game"); renderBoxscore(); prepPrompt();
@@ -1497,7 +1523,7 @@ function tipoff(done){
 
 function prepPrompt(){
   const p = P(G.ids[G.i]);
-  $("modeLbl").textContent = G.mode==="daily" ? `Daily #${dayNum()}` : `Unlimited`;
+  $("modeLbl").textContent = G.mode==="daily" ? `${SP().title} #${dayNum()}` : `Unlimited`;
   $("qn").textContent = `${G.i+1}/${PER_GAME}`;
   $("qLabel").textContent = `Question ${G.i+1} of ${PER_GAME}`;
   $("qDiff").textContent = p.d; $("qDiff").className = "badge "+p.d;
@@ -1527,7 +1553,7 @@ function renderBoxscore(){
   tweenNum($("bsScore"), s); tweenNum($("score"), s);
   const heat = s>=450?3 : s>=250?2 : s>=100?1 : 0;
   $("score").dataset.heat=heat; $("bsScore").dataset.heat=heat;
-  $("bsMode").textContent = G.mode==="daily" ? `Daily #${dayNum()}` : `Unlimited · ${G.diff}`;
+  $("bsMode").textContent = G.mode==="daily" ? `${SP().title} #${dayNum()}` : `Unlimited · ${G.diff}`;
   $("bsQ").innerHTML = `${Math.min(G.i+1,PER_GAME)}<small>/${PER_GAME}</small>`;
   $("bsList").innerHTML = G.ids.map((id,i)=>{
     const r=G.res[i], p=P(id);
@@ -2245,7 +2271,7 @@ function showResults(fresh){
   show("results");
   const st=statsOf(G.res), s=st.score;
   const [rank,msg]=rankFor(s);
-  $("rtitle").textContent = G.mode==="daily" ? `Daily #${dayNum()} · Final` : `Unlimited · ${G.diff} · Final`;
+  $("rtitle").textContent = G.mode==="daily" ? `${SP().title} #${dayNum()} · Final` : `Unlimited · ${G.diff} · Final`;
   countUp($("rscore"), s);
   $("rrank").innerHTML = `<svg class="i" style="width:16px;height:16px"><use href="#i-trophy"/></svg>${rank}`;
   $("rmsg").textContent = msg;
@@ -2264,7 +2290,7 @@ function showResults(fresh){
   updateCountdown();
 }
 $("share").onclick = async ()=>{
-  const txt = `Tipoff Trivia ${G.mode==="daily"?"Daily #"+dayNum():"Unlimited ("+G.diff+")"} 🏀\n${total()}/700\n${G.res.map(r=>r.tier>=0?TIERS[r.tier].emoji:"❌").join("")}\ntrivia.tipofffantasy.com`;
+  const txt = `Tipoff Trivia ${G.mode==="daily"?SP().title+" #"+dayNum():"Unlimited ("+G.diff+")"} 🏀\n${total()}/700\n${G.res.map(r=>r.tier>=0?TIERS[r.tier].emoji:"❌").join("")}\ntrivia.tipofffantasy.com`;
   const b=$("share");
   try { await navigator.clipboard.writeText(txt); b.innerHTML=`<svg class="i"><use href="#i-check"/></svg>Copied`; }
   catch(e){ window.prompt("Copy your result:", txt); }
@@ -2282,6 +2308,10 @@ $("playUnl").onclick = ()=>{
   }
   start("unlimited");
 };
+$$("#sportTabs button").forEach(b=>b.onclick=()=>{
+  dailySport=b.dataset.s; store.set("dch-sport", dailySport); refreshMenu();
+  try{ window.posthog && posthog.capture("daily_switch", {to: dailySport}); }catch(e){}
+});
 $$("#diffs button").forEach(b=>b.onclick=()=>{
   diff=b.dataset.d; $$("#diffs button").forEach(x=>x.setAttribute("aria-pressed", String(x===b))); store.set("dch-diff",diff);
 });
@@ -2299,7 +2329,7 @@ function updateCountdown(){
 function saveGame(){
   const st=statsOf(G.res);
   const games=store.get("dch-games")||[];
-  games.push({ ts:G.ts, mode:G.mode, diff:G.diff, day: G.mode==="daily"?dayNum():null, date:G.date, score:st.score, made:st.made, half:st.half, tiers:G.res.map(r=>r.tier) });
+  games.push({ ts:G.ts, mode:G.mode, sport:G.sport||"cbb", diff:G.diff, day: G.mode==="daily"?dayNum():null, date:G.date, score:st.score, made:st.made, half:st.half, tiers:G.res.map(r=>r.tier) });
   store.set("dch-games", games.slice(-200));
   lastGameTs=G.ts;
 }
@@ -2315,7 +2345,7 @@ function boardHTML(list, hiTs, compact){
     const dots=(g.tiers||[]).map(t=>`<i style="background:${t>=0?TIERS[t].color:"var(--c-bad)"};${t<0?"opacity:.6":""}"></i>`).join("");
     return `<tr class="${me?"me":""}">
       <td class="r"><span class="rank ${i<3?"r"+(i+1):""}">${i+1}</span></td>
-      <td><div class="lb-game"><b>${g.mode==="daily"?`Daily #${g.day}`:`Unlimited · ${g.diff}`}${me?`<span class="me-tag">LATEST</span>`:""}</b><span>${fmtDate(g.ts)}</span></div></td>
+      <td><div class="lb-game"><b>${g.mode==="daily"?`${g.sport==="hs"?"HS Daily":"Daily"} #${g.day}`:`Unlimited · ${g.diff}`}${me?`<span class="me-tag">LATEST</span>`:""}</b><span>${fmtDate(g.ts)}</span></div></td>
       ${compact?"":`<td class="hide-sm"><div class="lb-dots">${dots}</div></td>`}
       <td class="num-col ${compact?"":"hide-sm"}">${Math.round(g.made/7*100)}%</td>
       ${compact?"":`<td class="num-col hide-sm k5">${g.half}</td>`}
@@ -2343,9 +2373,13 @@ $$("#lbFilter button").forEach(b=>b.onclick=()=>{
    HOME
    ===================================================================== */
 function refreshMenu(){
-  const saved=store.get("dch-daily-"+todayStr());
-  $("daypill").innerHTML = `<i></i>Daily <b>#${dayNum()}</b>`;
-  $("dailyTitle").textContent = `Daily #${dayNum()}`;
+  useSport("cbb");
+  const ds=dailySport, saved=store.get(SPORTS[ds].key+todayStr());
+  $("daypill").innerHTML = `<i></i>${SPORTS[ds].title} <b>#${dayNumFor(ds)}</b>`;
+  $("dailyTitle").textContent = `${SPORTS[ds].title} #${dayNumFor(ds)}`;
+  $("dailyBlurb").textContent = SPORTS[ds].blurb;
+  $("dailyBadge").textContent = ds==="hs" ? "Beta" : "Live";
+  $$("#sportTabs button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.s===ds)));
   try{ $("dailyDate").textContent = new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"}); }catch(e){}
   if (saved && !saved.finished){
     const left=PER_GAME-saved.res.length;
