@@ -1,8 +1,8 @@
 # Tipoff Trivia — question audit
 
-Audited 344 prompts against QUESTION_RULES.md.
+Audited 357 prompts against QUESTION_RULES.md.
 
-**Approved: 83** (easy 35 · medium 41 · hard 7) · **Flagged: 261**
+**Approved: 96** (easy 41 · medium 48 · hard 7) · **Flagged: 261**
 
 Target for a clean 30-day Daily: 90 easy · 90 medium · 30 hard approved.
 
@@ -93,6 +93,19 @@ Target for a clean 30-day Daily: 90 easy · 90 medium · 30 hard approved.
 | bereg | easy | reg-be | 15 | Name a school that has won or shared a Big East men's basketball regular-season title |
 | betourney_all | easy | tourney-be | 12 | Name a school that has won the Big East men's basketball tournament |
 | maui | medium | maui | 26 | Name a school that has won the Maui Invitational |
+| accpoy | easy | poy-acc | 63 | Name an ACC Player of the Year (men's basketball) |
+| b1gpoy | easy | poy-b1g | 41 | Name a Big Ten Player of the Year (men's basketball) |
+| bepoy | easy | poy-be | 47 | Name a Big East Player of the Year (men's basketball) |
+| b12poy | easy | poy-b12 | 28 | Name a Big 12 Player of the Year (men's basketball) |
+| pac12poy | easy | poy-pac12 | 48 | Name a Pac-12 (or Pac-10) Player of the Year (men's basketball) |
+| wccpoy | medium | poy-wcc | 63 | Name a West Coast Conference Player of the Year (men's basketball) |
+| a10poy | medium | poy-a10 | 48 | Name an Atlantic 10 Player of the Year (men's basketball) |
+| mwcpoy | medium | poy-mwc | 29 | Name a Mountain West Player of the Year (men's basketball) |
+| frosh | easy | frosh-usbwa | 35 | Name a USBWA National Freshman of the Year (men's basketball) |
+| westaward | medium | award-west | 12 | Name a winner of the Jerry West Award (top college shooting guard) |
+| ervingaward | medium | award-erving | 12 | Name a winner of the Julius Erving Award (top college small forward) |
+| maloneaward | medium | award-malone | 12 | Name a winner of the Karl Malone Award (top college power forward) |
+| kareemaward | medium | award-kareem | 10 | Name a winner of the Kareem Abdul-Jabbar Award (top college center) |
 
 ## Flagged
 

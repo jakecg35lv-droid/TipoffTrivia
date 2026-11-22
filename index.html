@@ -1315,11 +1315,15 @@ function dailySetFor(dateStr){
   if (cache[dateStr]) return cache[dateStr];
   const end=new Date(dateStr+"T00:00:00"), last={}; let set=null, day=0;
   for (let d=new Date(SP().epoch+"T00:00:00"); d<=end; d.setDate(d.getDate()+1), day++){
-    const ds=fmtDay(d), r=rngDay(ds), order=shuffle(PROMPTS,r), taken=new Set(), halves=new Set();
+    const ds=fmtDay(d), r=rngDay(ds), order=shuffle(PROMPTS.filter(p=>!p.added || p.added<=ds),r), taken=new Set(), halves=new Set();
     const fresh = p => last[grp(p)]===undefined || day-last[grp(p)] >= DAILY_GAP;
     const cats={};
-    const can = p => !taken.has(grp(p)) && !halves.has(halfKey(p)) && (!p.c || (cats[p.c]||0) < 2);
-    const take = p => { taken.add(grp(p)); halves.add(halfKey(p)); if (p.c) cats[p.c]=(cats[p.c]||0)+1; set.push(p); };
+    // Variety: max 2 prompts per category, and at most 1 coach prompt per day (the Daily leans on players).
+    const strict = ds >= "2026-11-22";   // player-first rules start Nov 22; earlier days keep their original picks
+    const bucket = p => strict && (/coach/.test(p.c||"") || /coach/i.test(p.q)) ? "coach" : p.c;
+    const capOf = b => b==="coach" ? 1 : 2;
+    const can = p => !taken.has(grp(p)) && !halves.has(halfKey(p)) && (!bucket(p) || (cats[bucket(p)]||0) < capOf(bucket(p)));
+    const take = p => { taken.add(grp(p)); halves.add(halfKey(p)); const b=bucket(p); if (b) cats[b]=(cats[b]||0)+1; set.push(p); };
     set=[];
     const fill = (test, diff, n) => { for (const p of order){ if (n<=0) break; if ((!diff||p.d===diff) && can(p) && test(p)){ take(p); n--; } } return n; };
     let short=0;
@@ -1331,10 +1335,11 @@ function dailySetFor(dateStr){
     const inMix = p => mixFor(ds).some(([d])=>d===p.d);   // top up with allowed difficulties first
     if (short>0) short = fill(p=>inMix(p) && p.ok && fresh(p), null, short);
     if (short>0) short = fill(p=>inMix(p) && fresh(p), null, short);
-    if (short>0) short = fill(p=>p.ok && fresh(p), null, short);
-    if (short>0) short = fill(p=>fresh(p), null, short);
+    // From Nov 22 a repeat easy/medium prompt beats a fresh hard one (the LRU step below), so skip these there.
+    if (short>0 && !strict) short = fill(p=>p.ok && fresh(p), null, short);
+    if (short>0 && !strict) short = fill(p=>fresh(p), null, short);
     if (short>0){
-      const lru = PROMPTS.filter(can).sort((a,b)=>(last[grp(a)]??-1e9)-(last[grp(b)]??-1e9));
+      const lru = PROMPTS.filter(p=>(!p.added || p.added<=ds) && can(p)).sort((a,b)=>(inMix(a)?0:1)-(inMix(b)?0:1) || (last[grp(a)]??-1e9)-(last[grp(b)]??-1e9));
       for (const p of lru){ if (short<=0) break; if (can(p)){ take(p); short--; } }
       if (ds===dateStr) console.warn("[daily] not enough prompts for a 30-day gap; reused the least-recently-used ones");
     }
