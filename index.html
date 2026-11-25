@@ -404,19 +404,28 @@ main{max-width:var(--w-max);margin:0 auto;padding:var(--s7) var(--s4) var(--s8)}
 .bs-foot{display:flex;justify-content:space-between;padding-top:var(--s3);border-top:1px solid var(--c-line);font-size:var(--fs-xs);font-weight:600;color:var(--c-text-3)}
 
 /* ---------- overlays ---------- */
-.tipoff{position:fixed;inset:0;z-index:60;display:grid;place-items:center;opacity:0;transition:opacity .3s var(--ease);
-  background:radial-gradient(circle at 50% 45%,rgba(242,107,33,.16),rgba(4,6,12,.92) 60%);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.tipoff.show{opacity:1}
-.tipoff.out{opacity:0;transition:opacity .35s var(--ease)}
-.tipoff .ring{position:relative;width:min(220px,58vw);aspect-ratio:1;display:grid;place-items:center}
-.tipoff svg{position:absolute;inset:0;transform:rotate(-90deg)}
-.tipoff .ring .prog{filter:drop-shadow(0 0 10px rgba(255,122,42,.6))}
-.tipoff .cnum{position:absolute;font-family:var(--f-display);font-weight:900;font-size:min(120px,30vw);line-height:1;will-change:transform,opacity}
-.tipoff .cnum.tick{animation:tick 1s cubic-bezier(.2,.8,.2,1) both}
-.tipoff .cnum.go{font-size:min(54px,14vw);white-space:nowrap;letter-spacing:.02em;background:var(--fire);-webkit-background-clip:text;background-clip:text;color:transparent;animation:goPop .6s cubic-bezier(.2,1.4,.4,1) both}
-@keyframes tick{0%{opacity:0;transform:scale(1.5);filter:blur(8px)}16%{opacity:1;transform:scale(1);filter:blur(0)}78%{opacity:1;transform:scale(.97)}100%{opacity:0;transform:scale(.8);filter:blur(3px)}}
-@keyframes goPop{0%{opacity:0;transform:scale(.6)}100%{opacity:1;transform:scale(1)}}
-.tipoff .lbl{position:absolute;bottom:-48px;left:50%;transform:translateX(-50%);white-space:nowrap}
+.tipoff{position:fixed;inset:0;z-index:60;overflow:hidden;contain:strict;cursor:pointer}
+.tipoff .tip-iris{position:absolute;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;will-change:transform;
+  background:radial-gradient(circle,#1a1208 0%,#0b0e17 35%,#06080e 70%);transform:scale(0)}
+.tipoff .tip-stage{position:absolute;inset:0;display:grid;place-items:center;opacity:0;will-change:opacity;
+  background:radial-gradient(60% 50% at 50% 46%,rgba(242,107,33,.18),transparent 70%)}
+.tipoff .tip-ring{position:relative;width:min(260px,66vw);aspect-ratio:1;will-change:transform,opacity}
+.tipoff .tip-ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.tipoff .seg{filter:drop-shadow(0 0 8px rgba(255,122,42,.55))}
+.tipoff .tip-num{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-stretch:72%;
+  font-size:min(132px,34vw);line-height:1;color:#fff;opacity:0;will-change:transform,opacity;font-variant-numeric:tabular-nums}
+.tipoff .tip-go{font-size:min(68px,17vw);letter-spacing:.01em;text-transform:uppercase;background:var(--fire);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 4px 0 #6b2a05) drop-shadow(0 0 24px rgba(255,140,50,.5))}
+.tipoff .tip-ball{position:absolute;left:50%;top:50%;width:min(64px,16vw);aspect-ratio:1;margin:calc(min(64px,16vw)/-2) 0 0 calc(min(64px,16vw)/-2);opacity:0;will-change:transform,opacity}
+.tipoff .tip-wave{position:absolute;left:50%;top:50%;width:min(260px,66vw);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%) scale(.6);
+  border:2px solid rgba(255,170,90,.8);opacity:0;will-change:transform,opacity}
+.tipoff .tip-lbl{position:absolute;left:0;right:0;top:calc(50% + min(130px,33vw) + 22px);text-align:center;font-size:12px;font-weight:800;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--c-text-3);opacity:0;will-change:opacity}
+.tipoff .tip-skip{position:absolute;left:0;right:0;bottom:max(22px,env(safe-area-inset-bottom));text-align:center;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.28)}
+.countdown .cd{display:inline-flex;gap:2px;align-items:baseline;font-family:var(--f-display);font-weight:800;font-stretch:80%;font-size:1.25em;color:var(--c-text);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.countdown .cd i{font-style:normal;opacity:.45;padding:0 1px}
+.countdown .cd b{display:inline-block;min-width:2ch;text-align:center;padding:3px 5px;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid var(--c-line)}
 
 #celebrate{position:fixed;inset:0;z-index:70;pointer-events:none;display:flex;align-items:center;justify-content:center}
 #celebrate canvas{position:absolute;inset:0;width:100%;height:100%}
@@ -1403,8 +1412,9 @@ function show(id){
   if (document.startViewTransition){ try{ const vt=document.startViewTransition(swap); vt.ready.catch(()=>{}); vt.finished.catch(()=>{}); }catch(e){ swap(); } return; }
   swap(); const el=$(id); el.classList.remove("screen"); void el.offsetWidth; el.classList.add("screen");
 }
-let tipTimers=[], tipRaf=null;
-function stopGameLoops(){ cancelAnimationFrame(timerId); cancelAnimationFrame(animId); clearInterval(typeId); tipTimers.forEach(clearTimeout); tipTimers=[]; cancelAnimationFrame(tipRaf); $("tipoff").classList.add("hidden"); $("tipoff").innerHTML=""; if(G && !G.finished) G.abandoned=true; }
+let tipTimers=[], tipRaf=null, lastTap=null, cdId=null;
+document.addEventListener("pointerdown", e=>{ lastTap={x:e.clientX, y:e.clientY, t:performance.now()}; }, true);
+function stopGameLoops(){ clearInterval(cdId); cancelAnimationFrame(timerId); cancelAnimationFrame(animId); clearInterval(typeId); tipTimers.forEach(clearTimeout); tipTimers=[]; cancelAnimationFrame(tipRaf); $("tipoff").classList.add("hidden"); $("tipoff").innerHTML=""; if(G && !G.finished) G.abandoned=true; }
 function goHome(){ stopGameLoops(); show("menu"); refreshMenu(); }
 function nav(where){
   if (where==="howto") return openHowTo();
@@ -1493,35 +1503,87 @@ async function start(mode){
   show("game"); renderBoxscore(); prepPrompt();
   tipoff(()=>loadPrompt());
 }
+/* Launch sequence after Play: the screen opens from the tap point, a segmented shot-clock ring counts
+   3-2-1 (numbers roll up), then the ball goes up for the tip and the overlay fades into the game.
+   One requestAnimationFrame timeline, transform/opacity only, so it stays smooth on phones. Tap/Enter skips. */
 function tipoff(done){
   if (reduceMotion){ done(); return; }
-  const el=$("tipoff"), STEP=1000, N=3, TOTAL=STEP*N, R=88, C=2*Math.PI*R;
-  el.innerHTML = `<div class="ring">
-    <svg viewBox="0 0 200 200" aria-hidden="true">
-      <defs><linearGradient id="tipGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f26b21"/><stop offset="1" stop-color="#f6a84e"/></linearGradient></defs>
-      <circle cx="100" cy="100" r="${R}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="7"/>
-      <circle class="prog" id="tipProg" cx="100" cy="100" r="${R}" fill="none" stroke="url(#tipGrad)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="0"/>
-    </svg>
-    <div class="cnum" id="tipNum"></div>
-    <div class="eyebrow lbl" id="tipLbl">Get ready</div></div>`;
-  el.classList.remove("hidden","out"); void el.offsetWidth; el.classList.add("show");
-  const prog=$("tipProg"), num=$("tipNum"), lbl=$("tipLbl");
-  let shown=-1, t0=null;
+  const el=$("tipoff");
+  const IRIS=420, STEP=900, N=3, CD0=IRIS-60, CD1=CD0+STEP*N, GO=720, OUT=360, END=CD1+GO+OUT;
+  const R=92, C=2*Math.PI*R, GAP=10, SEG=C/N-GAP;
+  const segs=[0,1,2].map(i=>`<circle class="seg" data-i="${i}" cx="100" cy="100" r="${R}" fill="none" stroke="url(#tipGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 ${C}" stroke-dashoffset="${-(i*C/N+GAP/2)}"/>`).join("");
+  el.innerHTML = `<div class="tip-iris"></div>
+    <div class="tip-stage">
+      <div class="tip-wave"></div>
+      <div class="tip-ring">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <defs><linearGradient id="tipGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#ee6315"/></linearGradient></defs>
+          ${[0,1,2].map(i=>`<circle cx="100" cy="100" r="${R}" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="8" stroke-linecap="round" stroke-dasharray="${SEG} ${C}" stroke-dashoffset="${-(i*C/N+GAP/2)}"/>`).join("")}
+          ${segs}
+        </svg>
+        ${[3,2,1].map(n=>`<div class="tip-num">${n}</div>`).join("")}
+        <div class="tip-num tip-go">Tip-off</div>
+      </div>
+      <svg class="tip-ball" viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="tbG" cx="38%" cy="32%" r="70%"><stop offset="0" stop-color="#ffa257"/><stop offset=".55" stop-color="#f26b21"/><stop offset="1" stop-color="#a8400c"/></radialGradient></defs>
+        <circle cx="32" cy="32" r="30" fill="url(#tbG)"/><g fill="none" stroke="#3b1604" stroke-width="2.2" opacity=".85"><path d="M2 32h60M32 2v60"/><path d="M11 10c8 7 8 37 0 44M53 10c-8 7-8 37 0 44"/></g></svg>
+      <div class="tip-lbl">Get ready</div>
+      <div class="tip-skip">Tap to skip</div>
+    </div>`;
+  el.classList.remove("hidden","out","show"); el.style.opacity="1";
+  const iris=el.querySelector(".tip-iris"), stage=el.querySelector(".tip-stage"), ring=el.querySelector(".tip-ring"),
+        nums=[...el.querySelectorAll(".tip-num")], arcs=[...el.querySelectorAll(".seg")], ball=el.querySelector(".tip-ball"),
+        wave=el.querySelector(".tip-wave"), lbl=el.querySelector(".tip-lbl");
+  // open from the tap if it was the click that started this, else from the centre
+  const W=innerWidth, H=innerHeight, tap=(lastTap && performance.now()-lastTap.t<1500) ? lastTap : {x:W/2,y:H/2};
+  iris.style.left=tap.x+"px"; iris.style.top=tap.y+"px";
+  const irisScale=Math.hypot(Math.max(tap.x,W-tap.x), Math.max(tap.y,H-tap.y))/10*1.04;
+  const cl=v=>v<0?0:v>1?1:v, out3=v=>1-Math.pow(1-v,3), inOut=v=>v<.5?4*v*v*v:1-Math.pow(-2*v+2,3)/2,
+        back=v=>{ const c=1.9; return 1+(c+1)*Math.pow(v-1,3)+c*Math.pow(v-1,2); };
+  let t0=null, beeped=-1, ended=false;
+  const skip=()=>{ if (t0!==null && performance.now()-t0 < CD1) t0=performance.now()-CD1; };
+  el.onclick=skip;
+  const onKey=e=>{ if (e.key==="Enter"||e.key===" "||e.key==="Escape"){ e.preventDefault(); skip(); } };
+  addEventListener("keydown", onKey);
   const frame=now=>{
     if (t0===null) t0=now;
-    const t=now-t0, p=Math.min(1,t/TOTAL);
-    prog.style.strokeDashoffset = (C*p).toFixed(2);            // ring drains smoothly over 3s
-    if (p>=1) prog.style.opacity="0";                         // no leftover round-cap dot
-    const idx=Math.min(N, Math.floor(t/STEP));
-    if (idx!==shown){
-      shown=idx;
-      num.className="cnum"; void num.offsetWidth;
-      if (idx<N){ num.textContent=N-idx; num.classList.add("tick"); Sound.beep(false); }
-      else { num.textContent="Tip-off"; num.classList.add("go"); lbl.textContent=""; Sound.beep(true); }
+    const t=now-t0;
+    iris.style.transform=`scale(${(out3(cl(t/IRIS))*irisScale).toFixed(3)})`;
+    stage.style.opacity=cl((t-IRIS*.55)/260).toFixed(3);
+    lbl.style.opacity=(cl((t-IRIS)/300)*(1-cl((t-CD1+250)/250))).toFixed(3);
+    for (let i=0;i<N;i++){
+      const loc=(t-CD0-i*STEP)/STEP;                        // 0..1 while this number is up
+      const f=out3(cl(loc*1.05));
+      arcs[i].setAttribute("stroke-dasharray", `${(SEG*f).toFixed(2)} ${C}`);
+      arcs[i].style.opacity = f>.01 ? "1" : "0";            // hide the round-cap dot before a segment starts
+      const n=nums[i];
+      if (loc<0||loc>=1){ n.style.opacity="0"; continue; }
+      const enter=out3(cl(loc/.22)), exit=inOut(cl((loc-.78)/.22));
+      n.style.opacity=(enter*(1-exit)).toFixed(3);
+      n.style.transform=`translateY(${((1-enter)*38-exit*38).toFixed(1)}%) scale(${(1.12-.12*enter-.06*exit).toFixed(3)})`;
+      if (beeped<i && loc>=0){ beeped=i; Sound.beep(false); }
     }
-    if (t<TOTAL){ tipRaf=requestAnimationFrame(frame); return; }
-    tipTimers.push(setTimeout(()=>{ el.classList.add("out"); el.classList.remove("show"); }, 450));
-    tipTimers.push(setTimeout(()=>{ el.classList.add("hidden"); el.classList.remove("out"); el.innerHTML=""; done(); }, 800));
+    const g=(t-CD1)/GO;
+    if (g>=0){
+      if (beeped<N){ beeped=N; Sound.beep(true); try{ navigator.vibrate && navigator.vibrate(18); }catch(e){} }
+      const go=nums[N], gg=cl(g/.55);
+      go.style.opacity=(cl(g/.25)*(1-cl((t-CD1-GO)/OUT))).toFixed(3);
+      go.style.transform=`scale(${(.72+.28*back(gg)).toFixed(3)})`;
+      ring.style.transform=`scale(${(1+.32*out3(cl(g/.7))).toFixed(3)})`;
+      arcs.forEach(a=>a.style.opacity=(1-cl(g/.45)).toFixed(3));
+      ring.querySelectorAll("circle:not(.seg)").forEach(a=>a.style.opacity=(1-cl(g/.45)).toFixed(3));
+      const bt=cl(g/.9);
+      ball.style.opacity=(cl(g/.12)*(1-cl((g-.7)/.3))).toFixed(3);
+      ball.style.transform=`translateY(${(40-260*out3(bt)).toFixed(1)}px) rotate(${(bt*300).toFixed(0)}deg) scale(${(1-.25*bt).toFixed(3)})`;
+      wave.style.opacity=(.7*(1-cl(g/.6))).toFixed(3);
+      wave.style.transform=`translate(-50%,-50%) scale(${(.6+1.4*out3(cl(g/.6))).toFixed(3)})`;
+    }
+    const o=cl((t-CD1-GO)/OUT);
+    if (o>0) el.style.opacity=(1-inOut(o)).toFixed(3);
+    if (t<END){ tipRaf=requestAnimationFrame(frame); return; }
+    if (ended) return; ended=true;
+    removeEventListener("keydown", onKey); el.onclick=null;
+    el.classList.add("hidden"); el.style.opacity=""; el.innerHTML="";
+    done();
   };
   tipRaf=requestAnimationFrame(frame);
 }
@@ -2321,11 +2383,18 @@ $$("#diffs button").forEach(b=>b.onclick=()=>{
   diff=b.dataset.d; $$("#diffs button").forEach(x=>x.setAttribute("aria-pressed", String(x===b))); store.set("dch-diff",diff);
 });
 function updateCountdown(){
-  if (G && G.mode==="daily"){
+  clearInterval(cdId);
+  if (!(G && G.mode==="daily")){ $("countdown").textContent=""; return; }
+  const name=SPORTS[G.sport||"cbb"].title, el=$("countdown"), two=n=>String(n).padStart(2,"0");
+  el.innerHTML = `Next ${name} tips off in <span class="cd"><b id="cdH">00</b><i>:</i><b id="cdM">00</b><i>:</i><b id="cdS">00</b></span>`;
+  const paint=()=>{
     const now=new Date(), mid=new Date(now); mid.setHours(24,0,0,0);
-    const ms=mid-now, h=Math.floor(ms/36e5), m=Math.floor(ms%36e5/6e4);
-    $("countdown").innerHTML = `Next Daily tips off in <b>${h}h ${String(m).padStart(2,"0")}m</b>`;
-  } else $("countdown").textContent="";
+    const s=Math.max(0,Math.floor((mid-now)/1000));
+    $("cdH").textContent=two(Math.floor(s/3600)); $("cdM").textContent=two(Math.floor(s%3600/60)); $("cdS").textContent=two(s%60);
+  };
+  paint();
+  // start ticking exactly on the next whole second so it never stutters or skips
+  cdId=setTimeout(()=>{ paint(); cdId=setInterval(paint,1000); }, 1000-(Date.now()%1000)+5);
 }
 
 /* =====================================================================
